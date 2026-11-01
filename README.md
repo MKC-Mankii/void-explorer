@@ -1,5 +1,7 @@
 # VOID EXPLORER
 
+**[在线试玩](https://mkc-mankii.github.io/void-explorer/)** · [交付 PR #1](https://github.com/MKC-Mankii/void-explorer/pull/1)
+
 一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。驾驶 **KESTREL MK. IV**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。
 
 ![实际浏览器画面](docs/screenshots/orbit.png)
