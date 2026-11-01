@@ -1,0 +1,48 @@
+{
+  "url": "https://mkc-mankii.github.io/void-explorer/",
+  "checked_at": "2026-11-01T09:42:56.906784+00:00",
+  "tls": "Verified using the existing system CA configuration; browser trust was not changed.",
+  "source_commit": "7afa8db150d8adadb7c9e230de583c67b8358366",
+  "production_assets": [
+    {
+      "path": "assets/index-DQMXEUmx.js",
+      "status": 200,
+      "sha256": "7f48739d743d6b7d388a682e04ddea4019bffbe3489d68bd6acfe0ea0118b216"
+    },
+    {
+      "path": "assets/index-DobdI18s.css",
+      "status": 200,
+      "sha256": "9b0b306f306ccedb8030e8fc489190a112ce89f17deb775b9b537381283e3f0c"
+    },
+    {
+      "path": "assets/three-core-8-cy0a2c.js",
+      "status": 200,
+      "sha256": "8fbfe4d44c570320b2f913463bb205780b3d56c5cb2393a76101bf6abb09b36e"
+    },
+    {
+      "path": "assets/three-effects-BBNGUOTG.js",
+      "status": 200,
+      "sha256": "adcdcda9db65b473e1e678e515518eba6d579e0d8a5a5614a321d38e8a8f27ca"
+    },
+    {
+      "path": "favicon.svg",
+      "status": 200,
+      "sha256": "1703c717251a5fbe973222b7100130059cac3e3f648013dbf8c5ae6ec1296758"
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "32ecdec22719590e4e99c8db4aca14ce4c567b446dffffa71b0fb53cad047ba4"
+    },
+    {
+      "path": "third-party-notices.txt",
+      "status": 200,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    }
+  ],
+  "browser_verification": "Production build tested on local cloud HTTP; full Chromium/SwiftShader regression also passed in GitHub Actions. Remote Chromium smoke check blocked by its proxy certificate trust; persistent trust-store change rejected by automatic approval review and not performed.",
+  "ci": [
+    "https://github.com/MKC-Mankii/void-explorer/actions/runs/41293924268",
+    "https://github.com/MKC-Mankii/void-explorer/actions/runs/41293962146"
+  ]
+}

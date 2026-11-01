@@ -1,0 +1,34 @@
+name: Verify game
+on:
+  push:
+    branches: [main, work, 'feat/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Start development verification server
+        run: |
+          npm run dev -- --port 5173 > /tmp/void-vite.log 2>&1 &
+          node --input-type=module -e 'for(let i=0;i<50;i++){try{const r=await fetch("http://127.0.0.1:5173");if(r.ok)process.exit(0);}catch{}await new Promise(r=>setTimeout(r,200));}process.exit(1);'
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: test-results/
+          if-no-files-found: ignore

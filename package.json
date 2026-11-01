@@ -1,0 +1,26 @@
+{
+  "name": "void-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "test:e2e": "node tests/e2e.mjs",
+    "format": "prettier --write src tests index.html vite.config.ts README.md docs .github package.json tsconfig.json",
+    "format:check": "prettier --check src tests index.html vite.config.ts README.md docs .github package.json tsconfig.json"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/three": "^0.180.0",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.12",
+    "vitest": "^3.2.4"
+  }
+}
