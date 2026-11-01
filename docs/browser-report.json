@@ -1,0 +1,35 @@
+{
+  "browser": "154.0.8037.57",
+  "renderer": "Chromium headless / SwiftShader",
+  "checks": [
+    "WebGL scene boots",
+    "Keyboard orbital scan awards discovery once",
+    "Throttle and inertial brake respond to real keyboard input",
+    "Landing reaches the shared terrain surface",
+    "Disembark and surface sampling complete the discovery loop",
+    "WASD walks on curved ground at astronaut eye height",
+    "Pointer lock rotates view and Escape releases into pause",
+    "Reboarding and takeoff return to free flight",
+    "Star chart selects and aligns local destinations",
+    "Hyperspace transfers into a separately generated system",
+    "Journal retains discoveries across systems",
+    "Quality settings and photo mode are interactive",
+    "Reload restores location, discoveries and preferences",
+    "Desktop HUD fits 1280 × 720",
+    "No JavaScript or browser console errors"
+  ],
+  "errors": [],
+  "final": {
+    "mode": "flight",
+    "system": 1,
+    "altitude": 3705.4456993771555,
+    "score": 500,
+    "position": [0, 700, 5200],
+    "patches": 72,
+    "drawCalls": 88,
+    "triangles": 32637,
+    "quality": "low",
+    "cockpit": false,
+    "modal": null
+  }
+}
