@@ -492,18 +492,32 @@ export class SpaceDust {
     this.positions[i * 6 + 1] = (this.rng() - 0.5) * 100;
     this.positions[i * 6 + 2] = -this.rng() * 350 - 25;
   }
-  update(camera: T.Camera, speed: number, dt: number) {
+  update(camera: T.Camera, velocity: T.Vector3, dt: number) {
+    const speed = velocity.length(),
+      relative = velocity.clone().applyQuaternion(camera.quaternion.clone().invert()).negate();
+    const streak = relative
+      .clone()
+      .normalize()
+      .multiplyScalar(Math.min(18, speed * 0.01));
     this.mesh.position.copy(camera.position);
     this.mesh.quaternion.copy(camera.quaternion);
-    const opacity = Math.min(0.6, Math.abs(speed) / 500);
+    const opacity = Math.min(0.25, speed / 3000);
     (this.mesh.material as T.LineBasicMaterial).opacity = opacity;
     for (let i = 0; i < 180; i++) {
       const j = i * 6;
-      this.positions[j + 2] += Math.abs(speed) * dt * 0.6;
-      if (this.positions[j + 2] > 15) this.reset(i);
-      this.positions[j + 3] = this.positions[j];
-      this.positions[j + 4] = this.positions[j + 1];
-      this.positions[j + 5] = this.positions[j + 2] + Math.min(32, Math.abs(speed) * 0.05);
+      this.positions[j] += relative.x * dt * 0.6;
+      this.positions[j + 1] += relative.y * dt * 0.6;
+      this.positions[j + 2] += relative.z * dt * 0.6;
+      if (
+        this.positions[j + 2] > 15 ||
+        this.positions[j + 2] < -400 ||
+        Math.abs(this.positions[j]) > 100 ||
+        Math.abs(this.positions[j + 1]) > 70
+      )
+        this.reset(i);
+      this.positions[j + 3] = this.positions[j] + streak.x;
+      this.positions[j + 4] = this.positions[j + 1] + streak.y;
+      this.positions[j + 5] = this.positions[j + 2] + streak.z;
     }
     this.mesh.geometry.attributes.position.needsUpdate = true;
   }

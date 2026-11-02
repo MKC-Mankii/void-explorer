@@ -1,0 +1,63 @@
+{
+  "base_commit": "082973602aa40030320f6294d4a61b21e105f1e2",
+  "local_branch": "feat/flight-navigation-round2",
+  "source_sha256": {
+    "src/audio.ts": "05347b5bee15ed90bfb292763b8a5b6c9a0d5e936449a42db03db3651aba15d4",
+    "src/diagnostics.ts": "5a9a220135cfacbf311096ec4cd074bf1f3b2ab43307090cf7e3cedc7732dcc9",
+    "src/main.ts": "d3ecd4870694d1765bce9cb4b1a0dd8182219bd3386fb488ad2b0ade2a89eb2d",
+    "src/navigation.ts": "9e32753f4e17b5cb1926cf16c0a6a0c7e32f48cb87efb84e87e06f79ff362f0b",
+    "src/simulation.ts": "cd5551be55e6f253833f57e2a53260eb69261b739a28457e3f3bdedea91a5962",
+    "src/style.css": "0e003b812e50d74fea0ece8bd04d005c809f0ffcd69f6b6053687d3ccc75a049",
+    "src/terrain.ts": "8223ca411198b6882a6eeab260e9e9384c20d62e3ef55abb9a01a6c59efaeddd",
+    "src/ui.ts": "54084eaf786f7116f09f9ec8157ac5337ad9b6c02609dfaf3e8d15c8efe26c61",
+    "src/universe.ts": "a6d176a0b975cda4a759b9d241ebbcc253954e6de9696f8840eed9ef00bb2781",
+    "src/visuals.ts": "c98f222b0dad28795da06dbb6e676e3b31bfdcfca62713c902526a0ead4c9b11",
+    "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+  },
+  "commands": {
+    "npm test": {
+      "passed": 28,
+      "files": 3
+    },
+    "npm run test:e2e": {
+      "passed": 15,
+      "report": "exploration-report.json"
+    },
+    "npm run test:navigation": {
+      "passed": 16,
+      "report": "navigation-report.json"
+    },
+    "npm run test:production": {
+      "passed": 7,
+      "report": "production-report.json"
+    },
+    "npm run build": "passed",
+    "npm run format:check": "passed"
+  },
+  "player_journey": {
+    "setup": "Normal player spawn; no fixture and no simulated time advancement",
+    "distance_start_km": 311.043,
+    "distance_arrival_km": 9.288,
+    "simulation_seconds": 30.949,
+    "wall_seconds": 32.88,
+    "max_speed_mps": 21975.217,
+    "arrival_observed_speed_mps": 4.899,
+    "samples": 60,
+    "max_camera_distance_engine_units": 17.298554852935204,
+    "ship_on_screen_at_all_samples": true
+  },
+  "publication": {
+    "pushed": false,
+    "pr_1_modified": false,
+    "merged": false,
+    "online_updated": false,
+    "current_live_source": "7afa8db150d8adadb7c9e230de583c67b8358366"
+  },
+  "limits": [
+    "Cloud Chromium 154 with SwiftShader; not Windows/macOS or hardware GPU acceptance",
+    "Production smoke check used local cloud HTTP, not remote HTTPS",
+    "Direct-course guidance requires manual detours when blocked; no multi-waypoint planner",
+    "Scripted paths and fixtures do not cover arbitrary player inputs, long sessions or all obstacle configurations"
+  ],
+  "tested_source_commit": "8388824a11c1472f223ef96e8953c2aeefaf4db6"
+}

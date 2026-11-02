@@ -1,10 +1,12 @@
 # VOID EXPLORER
 
-**[在线试玩](https://mkc-mankii.github.io/void-explorer/)** · [交付 PR #1](https://github.com/MKC-Mankii/void-explorer/pull/1)
+**[第二轮在线试玩](https://mkc-mankii.github.io/void-explorer/)** · [第二轮 Draft PR #2](https://github.com/MKC-Mankii/void-explorer/pull/2) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
 
 一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。驾驶 **KESTREL MK. IV**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。
 
 ![实际浏览器画面](docs/screenshots/orbit.png)
+
+第二轮以独立分支和叠加 Draft PR 保留完整历史，未合并 PR #1 或 PR #2。游戏改动与测试证据见 [第二轮开发记录](docs/ROUND2.md)，发布方式、入口和源码来源见 [第二轮发布记录](docs/ROUND2-DELIVERY.md)。线上实际源码 SHA 可在 [build-info.json](https://mkc-mankii.github.io/void-explorer/build-info.json) 核对。
 
 ## 当前可玩内容
 
@@ -46,7 +48,7 @@ npm run preview -- --port 4173
 3. 行星足够近时按 **L** 开始自动着陆，约 13 个模拟秒后抵达地表。
 4. 按 **E** 离舱，使用 **WASD** 步行，按 **F** 采集地表样本。
 5. 返回飞船附近，按 **E** 登舱、**Space** 起飞。
-6. 按 **M** 打开星图，点击当前星系的行星对准航向，或选择另一星系跃迁。
+6. 按 **M** 打开星图，点击当前星系的行星选择并渐进对准，按 **G** 远航至其近空区域；也可继续手动驾驶。另一星系使用星图中的跃迁。
 
 | 输入         | 飞行                           | 地表         |
 | ------------ | ------------------------------ | ------------ |
@@ -65,7 +67,7 @@ npm run preview -- --port 4173
 | M / H        | 星图 / 操作指南                | 同左         |
 | P / Esc      | 摄影模式 / 暂停并释放鼠标      | 同左         |
 
-松开 W 后飞船保持惯性巡航。按 S 可以减速至倒退，按 X 快速制动。深水不支持步行；恒星是可接近的实体，但其高温边界会阻止进一步进入。
+松开 W 后飞船保持惯性巡航。按 S 可以减速至倒退，按 X 制动全部运动。T 只辅助转向，G 会推进并在近空自动减速；鼠标、方向键、W/S、平移或 X 可接管远航。航路被天体遮挡时需先手动绕行。F 始终扫描所选行星，L 为最近行星寻找着陆点。深水不支持步行；恒星是可接近的实体，但其高温边界会阻止进一步进入。
 
 ## 存档与设置
 
@@ -79,11 +81,14 @@ npm run build             # TypeScript + 生产构建
 npm run format:check
 npx playwright install chromium   # 云端已有 Chromium 时不需要
 npm run dev -- --port 5173         # 保持此进程运行
-npm run test:e2e                    # 另一云端终端运行
+npm run test:e2e                    # 保留的完整探索循环回归
+npm run test:navigation             # 真实飞行路径 + 明确标注的导航场景
+# build 后启动 npm run preview -- --port 4173，再运行：
+npm run test:production             # 生产接口隔离与基本交互
 ```
 
 浏览器测试可通过 `CHROMIUM_PATH` 指定 Chromium，默认优先使用 `/usr/bin/chromium`，否则使用 Playwright 安装的浏览器。`VOID_URL` 可以覆盖测试服务器地址。截图和报告输出到被 git 忽略的 `test-results/`；交付时精选截图与验收报告保存在 `docs/`。
 
-浏览器测试在开发模式 `?test=1` 暴露可观测接口。键盘、鼠标锁定、导航和菜单走真实浏览器事件；13 秒着陆和 5 秒起飞通过同一模拟器推进时间，并非依靠等待云端软件渲染帧。生产构建不提供此接口。
+浏览器测试在开发模式 `?test=1` 复用 `window.__VOID__`，以 `snapshot()` 返回脱离内部对象的状态副本。`?test=1&scenario=approach` 等命名场景用于定位问题，场景模式不保存玩家进度。详见 [测试接口与场景说明](docs/ROUND2.md)。键盘、鼠标锁定、导航和菜单走真实浏览器事件；13 秒着陆和 5 秒起飞通过同一模拟器推进时间，并非依靠等待云端软件渲染帧。生产构建不提供此接口。
 
 更多架构、已知限制和下一步见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。参考体验来自 [OpenAI Showcase / Void Explorer](https://developers.openai.com/showcase/void-explorer)；本项目代码、模型与流程独立实现。

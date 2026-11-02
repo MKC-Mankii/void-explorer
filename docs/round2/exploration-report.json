@@ -1,0 +1,104 @@
+{
+  "browser": "154.0.8037.57",
+  "renderer": "Chromium headless / SwiftShader",
+  "checks": [
+    "WebGL scene boots",
+    "Keyboard orbital scan awards discovery once",
+    "Throttle and inertial brake respond to real keyboard input",
+    "Landing reaches the shared terrain surface",
+    "Disembark and surface sampling complete the discovery loop",
+    "WASD walks on curved ground at astronaut eye height",
+    "Pointer lock rotates view and Escape releases into pause",
+    "Reboarding and takeoff return to free flight",
+    "Star chart selects and aligns local destinations",
+    "Hyperspace transfers into a separately generated system",
+    "Journal retains discoveries across systems",
+    "Quality settings and photo mode are interactive",
+    "Reload restores location, discoveries and preferences",
+    "Desktop HUD fits 1280 × 720",
+    "No JavaScript or browser console errors"
+  ],
+  "errors": [],
+  "final": {
+    "schemaVersion": 2,
+    "mode": "flight",
+    "system": 1,
+    "score": 500,
+    "altitude": 3705.4456993771555,
+    "playTime": 29.033500000000924,
+    "position": [0, 700, 5200],
+    "rotation": [-0.06685558457278488, 0, 0, 0.9977626625663196],
+    "forward": [0, -0.13341201214153922, -0.9910606616228624],
+    "angularVelocity": [0, 0, 0],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "actualSpeed": 0,
+    "speedLimit": 320,
+    "target": 0,
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": true,
+        "sample": true
+      }
+    },
+    "nearest": {
+      "id": "1-0",
+      "name": "PYRA B"
+    },
+    "navigation": {
+      "targetId": "1-0",
+      "targetName": "PYRA B",
+      "targetPosition": [0, 0, 0],
+      "distance": 3705.4456993771555,
+      "arrivalClearance": 975,
+      "centerDistance": 5246.903848937962,
+      "arrivalGap": 2730.4456993771555,
+      "headingError": 0,
+      "closingSpeed": 0,
+      "eta": null,
+      "stoppingDistance": 0,
+      "guidance": "off",
+      "status": "idle",
+      "blockedBy": null
+    },
+    "limits": {
+      "normal": 320,
+      "boost": 1100,
+      "cruise": 2200,
+      "deceleration": 160
+    },
+    "scenario": "player",
+    "quality": "low",
+    "cockpit": false,
+    "modal": null,
+    "paused": false,
+    "input": {
+      "keys": [],
+      "pointerLocked": false
+    },
+    "camera": {
+      "position": [0, 705.4393983235993, 5216.421112808735],
+      "rotation": [-0.09426532135842652, 0, 0, 0.9955471104820669],
+      "shipDistance": 17.298554852934668,
+      "shipProjection": {
+        "x": 0,
+        "y": -0.23779826569444226,
+        "z": 0.9953354325641386,
+        "onScreen": true
+      }
+    },
+    "rendering": {
+      "ready": true,
+      "renderedScene": 1,
+      "simulationTime": 29.033500000000924,
+      "frames": 18,
+      "sceneGeneration": 1,
+      "lastFrameMs": 150,
+      "patches": 72,
+      "drawCalls": 88,
+      "triangles": 32637
+    },
+    "patches": 72
+  }
+}

@@ -18,6 +18,8 @@ import {
   SpaceDust,
 } from './visuals';
 import { UI } from './ui';
+import { pickPlanet, projectContact, raySphereDistance } from './navigation';
+import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
 import { AudioEngine } from './audio';
 import './style.css';
 const SAVE_KEY = 'void-explorer-save-v1',
@@ -60,6 +62,13 @@ class Game {
   private keys = new Set<string>();
   private mouse = new T.Vector2();
   private cockpit = false;
+  private cameraRig = new T.Quaternion();
+  private diagnosticScenario: string = 'player';
+  private renderedFrames = 0;
+  private sceneGeneration = 0;
+  private renderedScene = -1;
+  private renderedSimulationTime = -1;
+  private lastFrameMs = 0;
   private walkPitch = 0;
   private lastTime = 0;
   private elapsed = 0;
@@ -73,7 +82,12 @@ class Game {
   private settings: Settings = { quality: 'medium', sensitivity: 1, audio: true };
   private disposed = false;
   constructor() {
-    const hasSave = this.sim.restore(readStorage(SAVE_KEY));
+    const fixture =
+      import.meta.env.DEV && new URLSearchParams(location.search).has('test')
+        ? new URLSearchParams(location.search).get('scenario')
+        : null;
+    const hasSave = fixture ? false : this.sim.restore(readStorage(SAVE_KEY));
+    if (fixture) this.diagnosticScenario = applyScenario(this.sim, fixture);
     const settings = readStorage(SETTINGS_KEY) as Partial<Settings> | null;
     if (settings && ['low', 'medium', 'high'].includes(settings.quality ?? ''))
       this.settings.quality = settings.quality!;
@@ -126,34 +140,83 @@ class Game {
     requestAnimationFrame((t) => this.frame(t));
     // Explicit development-only observation hook for deterministic browser verification.
     if (import.meta.env.DEV && new URLSearchParams(location.search).has('test')) {
+      // Observations are copies. Test scripts cannot reach the live game or mutate its vectors.
       (window as unknown as { __VOID__: unknown }).__VOID__ = {
-        game: this,
-        sim: this.sim,
-        action: (a: string, v?: string) => this.action(a, v),
+        snapshot: () => this.snapshot(),
+        scenarios: [...scenarioNames],
+        scenario: (name: string) => {
+          this.releaseMouse();
+          this.diagnosticScenario = applyScenario(this.sim, name);
+          this.walkPitch = 0;
+          this.loadSystem();
+          this.updateCamera(1, true);
+          this.ui.update();
+          return this.snapshot();
+        },
         step: (seconds: number) => {
-          for (let t = 0; t < seconds; t += 1 / 60) this.sim.tick(1 / 60, NO_INPUT);
+          if (!Number.isFinite(seconds) || seconds < 0 || seconds > 120)
+            throw new Error('Step must be 0–120 simulated seconds');
+          for (let elapsed = 0; elapsed < seconds; elapsed += 1 / 60)
+            this.sim.tick(Math.min(1 / 60, seconds - elapsed), NO_INPUT);
           this.sync(1 / 60);
           this.updateCamera(1, true);
           for (const terrain of this.terrains) terrain.update(this.camera.position, true);
           this.ui.update();
+          return this.snapshot();
         },
-        snapshot: () => ({
-          mode: this.sim.mode,
-          system: this.sim.system.id,
-          altitude: this.sim.height,
-          score: this.sim.score,
-          position: this.sim.position.toArray(),
-          patches: this.terrains.reduce((a, t) => a + t.patchCount, 0),
-          drawCalls: this.renderer.info.render.calls,
-          triangles: this.renderer.info.render.triangles,
-          quality: this.settings.quality,
-          cockpit: this.cockpit,
-          modal: this.ui.modal,
-        }),
       };
     }
   }
+  private snapshot() {
+    const shipProjection = this.ship.group.position.clone().project(this.camera);
+    return {
+      schemaVersion: 2,
+      ...observeSimulation(this.sim),
+      scenario: this.diagnosticScenario,
+      quality: this.settings.quality,
+      cockpit: this.cockpit,
+      modal: this.ui.modal,
+      paused: !this.ui.started || !!this.ui.modal || this.jumping || document.hidden,
+      input: {
+        keys: [...this.keys],
+        pointerLocked: document.pointerLockElement === this.renderer.domElement,
+      },
+      camera: {
+        position: this.camera.position.toArray(),
+        rotation: this.camera.quaternion.toArray(),
+        shipDistance: this.camera.position.distanceTo(this.sim.position),
+        shipProjection: {
+          x: shipProjection.x,
+          y: shipProjection.y,
+          z: shipProjection.z,
+          onScreen:
+            Math.abs(shipProjection.x) < 1 &&
+            Math.abs(shipProjection.y) < 1 &&
+            shipProjection.z > -1 &&
+            shipProjection.z < 1,
+        },
+      },
+      rendering: {
+        ready:
+          this.renderedFrames > 0 &&
+          this.renderedScene === this.sceneGeneration &&
+          this.renderedSimulationTime === this.sim.playTime &&
+          !this.jumping &&
+          !this.disposed,
+        renderedScene: this.renderedScene,
+        simulationTime: this.renderedSimulationTime,
+        frames: this.renderedFrames,
+        sceneGeneration: this.sceneGeneration,
+        lastFrameMs: this.lastFrameMs,
+        patches: this.terrains.reduce((n, t) => n + t.patchCount, 0),
+        drawCalls: this.renderer.info.render.calls,
+        triangles: this.renderer.info.render.triangles,
+      },
+      patches: this.terrains.reduce((n, t) => n + t.patchCount, 0),
+    };
+  }
   private loadSystem() {
+    this.sceneGeneration++;
     for (const terrain of this.terrains) terrain.dispose();
     this.terrains = [];
     this.systemGroup.traverse((obj) => {
@@ -239,7 +302,10 @@ class Game {
           this.action('cycle');
           break;
         case 'KeyT':
-          this.sim.navigate(this.sim.target);
+          this.sim.toggleAlignment();
+          break;
+        case 'KeyG':
+          this.sim.toggleCruise();
           break;
         case 'KeyP':
           this.action('photo');
@@ -273,6 +339,24 @@ class Game {
       if (document.pointerLockElement === this.renderer.domElement && !this.ui.modal) {
         this.mouse.x += e.movementX;
         this.mouse.y += e.movementY;
+      }
+    });
+    this.renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+    this.renderer.domElement.addEventListener('mousedown', (e) => {
+      if (
+        e.button === 2 &&
+        this.ui.started &&
+        !this.ui.modal &&
+        !this.jumping &&
+        this.sim.mode === 'flight'
+      ) {
+        e.preventDefault();
+        const direction = this.camera.getWorldDirection(new T.Vector3());
+        const index = pickPlanet(this.sim.system, this.camera.position, direction);
+        if (index !== null) {
+          this.sim.selectTarget(index);
+          this.ui.toast(`已锁定 ${this.sim.selected.name} · T 航向辅助，G 远航引导`);
+        } else this.ui.toast('准星下没有可锁定行星');
       }
     });
     this.renderer.domElement.addEventListener('click', () => {
@@ -342,9 +426,19 @@ class Game {
       case 'jump':
         this.jump(Number(value));
         break;
+      case 'align':
+        this.sim.toggleAlignment();
+        break;
+      case 'cruise':
+        this.sim.toggleCruise();
+        break;
+      case 'lock':
+        if (this.sim.selectTarget(Number(value)))
+          this.ui.toast(`已锁定 ${this.sim.selected.name} · T 航向辅助，G 远航引导`);
+        break;
       case 'cycle':
         if (this.sim.mode === 'flight') {
-          this.sim.target = (this.sim.target + 1) % this.sim.system.planets.length;
+          this.sim.selectTarget((this.sim.target + 1) % this.sim.system.planets.length);
           this.ui.toast(`目的地已切换 · ${this.sim.selected.name} · 按 T 对准航向`);
         }
         break;
@@ -427,7 +521,7 @@ class Game {
     }, 1900);
   }
   private save() {
-    if (!this.ui?.started) return;
+    if (!this.ui?.started || this.diagnosticScenario !== 'player') return;
     if (!writeStorage(SAVE_KEY, this.sim.save()) && !this.saveWarning) {
       this.saveWarning = true;
       this.ui.toast('浏览器存储不可用 · 本次可继续游戏，但无法保存进度');
@@ -463,10 +557,12 @@ class Game {
     const s = this.sim;
     const walking = s.mode === 'walking';
     const target = s.position.clone();
+    if (snap) this.cameraRig.copy(s.rotation);
+    else this.cameraRig.slerp(s.rotation, 1 - Math.exp(-dt * (walking ? 24 : 10)));
     let desired: T.Vector3, rotation: T.Quaternion;
     if (walking) {
       desired = target;
-      rotation = s.rotation
+      rotation = this.cameraRig
         .clone()
         .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), this.walkPitch));
       if (s.speed > 0.1 && !this.ui.modal) {
@@ -474,11 +570,11 @@ class Game {
         desired.addScaledVector(new T.Vector3(0, 1, 0).applyQuaternion(s.rotation), bob);
       }
     } else if (this.cockpit) {
-      desired = target.add(new T.Vector3(0, 0.45, -0.6).applyQuaternion(s.rotation));
-      rotation = s.rotation.clone();
+      desired = target.add(new T.Vector3(0, 0.45, -0.6).applyQuaternion(this.cameraRig));
+      rotation = this.cameraRig.clone();
     } else {
-      desired = target.add(new T.Vector3(0, 3.2, 17).applyQuaternion(s.rotation));
-      rotation = s.rotation
+      desired = target.add(new T.Vector3(0, 3.2, 17).applyQuaternion(this.cameraRig));
+      rotation = this.cameraRig
         .clone()
         .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), -0.055));
     }
@@ -489,9 +585,8 @@ class Game {
       if (radial.length() < floor)
         desired.copy(planet.position).addScaledVector(radial.normalize(), floor);
     }
-    const factor = snap ? 1 : 1 - Math.exp(-dt * 6);
-    this.camera.position.lerp(desired, factor);
-    this.camera.quaternion.slerp(rotation, factor);
+    this.camera.position.copy(desired);
+    this.camera.quaternion.copy(rotation);
     const fov = this.cockpit ? 68 : 58 + Math.min(Math.abs(s.speed) / 1100, 1) * 14;
     if (Math.abs(this.camera.fov - fov) > 0.01) {
       this.camera.fov = T.MathUtils.damp(this.camera.fov, fov, 3, dt);
@@ -512,7 +607,7 @@ class Game {
     );
     this.updateCamera(dt);
     this.sky.position.copy(this.camera.position);
-    this.dust.update(this.camera, s.mode === 'flight' ? s.speed : 0, dt);
+    this.dust.update(this.camera, s.mode === 'flight' ? s.velocity : new T.Vector3(), dt);
     const nearest = s.nearest,
       h = s.height;
     for (const terrain of this.terrains) terrain.tick(dt, this.camera.position);
@@ -539,18 +634,38 @@ class Game {
     skyMaterial.uniforms.up.value.copy(s.position).sub(nearest.position).normalize();
     ((this.sky.children[1] as T.Points).material as T.PointsMaterial).opacity =
       0.85 * (1 - atmosphereAmount * 0.93);
-    const target = s.selected.position.clone().project(this.camera);
-    const onScreen =
-      target.z < 1 &&
-      target.z > -1 &&
-      Math.abs(target.x) < 0.85 &&
-      Math.abs(target.y) < 0.8 &&
-      s.mode !== 'walking';
-    this.ui.marker(
-      (target.x * 0.5 + 0.5) * innerWidth,
-      (-target.y * 0.5 + 0.5) * innerHeight,
-      onScreen,
-    );
+    const contacts = s.system.planets.map((planet, index) => {
+      const projection = projectContact(this.camera, planet.position, innerWidth, innerHeight);
+      const direction = planet.position.clone().sub(this.camera.position).normalize(),
+        distance = this.camera.position.distanceTo(planet.position) - planet.radius;
+      const starHit = raySphereDistance(this.camera.position, direction, s.system.star, 2300);
+      const occluded =
+        (starHit !== null && starHit < distance) ||
+        s.system.planets.some((other) => {
+          if (other.id === planet.id) return false;
+          const hit = raySphereDistance(
+            this.camera.position,
+            direction,
+            other.position,
+            other.radius,
+          );
+          return hit !== null && hit < distance;
+        });
+      return { index, name: planet.name, ...projection, occluded };
+    });
+    this.ui.contacts(contacts);
+    const motion =
+      this.sim.velocity.length() > 1
+        ? projectContact(
+            this.camera,
+            this.camera.position
+              .clone()
+              .addScaledVector(this.sim.velocity.clone().normalize(), 100),
+            innerWidth,
+            innerHeight,
+          )
+        : null;
+    this.ui.motionMarker(motion);
   }
   private frame(time: number) {
     if (this.disposed) return;
@@ -558,6 +673,7 @@ class Game {
     const raw = this.lastTime ? (time - this.lastTime) / 1000 : 1 / 60,
       dt = Math.min(raw, 0.25);
     this.lastTime = time;
+    this.lastFrameMs = raw * 1000;
     this.elapsed += dt;
     const active = this.ui.started && !this.ui.modal && !this.jumping && !document.hidden;
     if (active) {
@@ -590,6 +706,9 @@ class Game {
     }
     this.renderer.info.reset();
     this.composer.render();
+    this.renderedFrames++;
+    this.renderedScene = this.sceneGeneration;
+    this.renderedSimulationTime = this.sim.playTime;
   }
 }
 try {
