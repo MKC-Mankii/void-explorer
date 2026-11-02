@@ -1,12 +1,12 @@
 # VOID EXPLORER
 
-**[在线首版（本轮尚未发布）](https://mkc-mankii.github.io/void-explorer/)** · [第一轮 Draft PR #1](https://github.com/MKC-Mankii/void-explorer/pull/1)
+**[第二轮在线试玩](https://mkc-mankii.github.io/void-explorer/)** · [第二轮 Draft PR #2](https://github.com/MKC-Mankii/void-explorer/pull/2) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
 
 一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。驾驶 **KESTREL MK. IV**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。
 
 ![实际浏览器画面](docs/screenshots/orbit.png)
 
-当前分支为第 2 轮飞行导航改进，尚未推送或部署；上述线上入口仍是首版。改动、测试方法和证据见 [第 2 轮交付记录](docs/ROUND2.md)。
+第二轮以独立分支和叠加 Draft PR 保留完整历史，未合并 PR #1 或 PR #2。游戏改动与测试证据见 [第二轮开发记录](docs/ROUND2.md)，发布方式、入口和源码来源见 [第二轮发布记录](docs/ROUND2-DELIVERY.md)。线上实际源码 SHA 可在 [build-info.json](https://mkc-mankii.github.io/void-explorer/build-info.json) 核对。
 
 ## 当前可玩内容
 
