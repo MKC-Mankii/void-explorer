@@ -1,0 +1,143 @@
+{
+  "source": "0829736",
+  "method": "real UI, keyboard and readonly observations; no state placement/time stepping",
+  "selected": {
+    "position": [0, 700, 5200],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "forward": [0.7217108930793918, 0.09679678906436275, -0.6853931488112321],
+    "target": "PYRA",
+    "nearest": "VESPER",
+    "discoveries": {},
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 0
+  },
+  "scanned": {
+    "position": [0, 700, 5200],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "forward": [0.7217108930793918, 0.09679678906436275, -0.6853931488112321],
+    "target": "PYRA",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 0
+  },
+  "boost": {
+    "position": [378.82840733803306, 750.8089510471812, 4840.234895365511],
+    "speed": 524.076,
+    "velocity": [331.353242734133, 44.441521182915224, -314.67897268023773],
+    "forward": [0.7217108930793918, 0.09679678906436275, -0.6853931488112321],
+    "target": "PYRA",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 2.4956
+  },
+  "release": {
+    "position": [424.7412245532417, 756.9668368792333, 4796.632490768766],
+    "speed": 320,
+    "velocity": [294.94981942032433, 39.55904743682503, -280.10743278550206],
+    "forward": [0.7217108930793918, 0.09679678906436275, -0.6853931488112321],
+    "target": "PYRA",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 2.645699999999998
+  },
+  "beforeAlign": {
+    "position": [424.7412245532417, 756.9668368792333, 4796.632490768766],
+    "speed": 320,
+    "velocity": [294.94981942032433, 39.55904743682503, -280.10743278550206],
+    "forward": [0.7217108930793918, 0.09679678906436275, -0.6853931488112321],
+    "target": "NIVALIS",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 2.645699999999998
+  },
+  "afterAlign": {
+    "position": [424.7412245532417, 756.9668368792333, 4796.632490768766],
+    "speed": 320,
+    "velocity": [294.94981942032433, 39.55904743682503, -280.10743278550206],
+    "forward": [-0.9161249035065845, 0.037630079564368, -0.399122961362824],
+    "target": "NIVALIS",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 2.645699999999998
+  },
+  "beforeReload": {
+    "position": [322.15504822447724, 776.209820291514, 4633.0977972200735],
+    "speed": 320,
+    "velocity": [-257.40412793374037, 13.71462698049046, -136.98422347689754],
+    "forward": [-0.9161249035065849, 0.03763007956436802, -0.39912296136282377],
+    "target": "NIVALIS",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 3.579099999999994
+  },
+  "afterReload": {
+    "position": [322.15504822447724, 776.209820291514, 4633.0977972200735],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "forward": [-0.9161249035065849, 0.03763007956436802, -0.39912296136282377],
+    "target": "VESPER",
+    "nearest": "VESPER",
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": false,
+        "sample": false
+      }
+    },
+    "offscreen": "◇ 目标在后方 · 按 T 对准",
+    "offscreenVisible": false,
+    "playTime": 3.579099999999994
+  },
+  "errors": []
+}
