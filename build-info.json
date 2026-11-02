@@ -1,6 +1,14 @@
 {
+  "round": 2,
   "source_repository": "https://github.com/MKC-Mankii/void-explorer",
-  "source_commit": "7afa8db150d8adadb7c9e230de583c67b8358366",
-  "source_branch": "feat/playable-universe",
-  "built_at": "2026-11-01T09:37:58.047256+00:00"
+  "source_commit": "45cd89ce0a190c9f8973e281e78127970eaf5edd",
+  "source_branch": "feat/flight-navigation-round2",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/2",
+  "gameplay_commit": "8388824a11c1472f223ef96e8953c2aeefaf4db6",
+  "evidence_commit": "73e1a6b634acc64541d3eaf750db7590ada8d34e",
+  "previous_source_commit": "7afa8db150d8adadb7c9e230de583c67b8358366",
+  "first_round_archive": "./round1/",
+  "asset_manifest": "./asset-manifest.json",
+  "built_at": "2026-11-02T08:41:43.888328+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/41414771780"
 }
