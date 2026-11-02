@@ -1,0 +1,13 @@
+{
+  "source_commit": "df41ba5ea52fbbf9fbfaac734101b19d89a2f655",
+  "algorithm": "SHA-256",
+  "files": {
+    "assets/index-BKRzg-7a.css": "9a50954764241f243dbf5b40241abbf3bf8c0e3ccca1021f800e3ec2315dd357",
+    "assets/index-X41wHWmW.js": "0cef20cba7c1cd7623a36c7c1c02abc5ed59eb712787df9df487d17fdf9903f8",
+    "assets/three-core-BkYkr0GE.js": "5170d69cfb4dd0206f05c0b1dc16f4055e169886f74653135ba72b1b8b5a03a0",
+    "assets/three-effects-DyM-CVbr.js": "2511be702de92e175de344635f486627ec7c0cb673e23cb86674fe272ab0cad0",
+    "favicon.svg": "1703c717251a5fbe973222b7100130059cac3e3f648013dbf8c5ae6ec1296758",
+    "index.html": "5d78629231d14e336a3bf57d17d1db8c34581619aaf714a792682c642f87ff4c",
+    "third-party-notices.txt": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  }
+}

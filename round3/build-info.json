@@ -1,0 +1,15 @@
+{
+  "round": 3,
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_commit": "df41ba5ea52fbbf9fbfaac734101b19d89a2f655",
+  "source_branch": "feat/rendering-round3",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/3",
+  "baseline_source_commit": "45cd89ce0a190c9f8973e281e78127970eaf5edd",
+  "renderer": "Three.js / WebGL2",
+  "webgpu_implemented": false,
+  "preview_path": "/round3/",
+  "default_site_still_round": 2,
+  "asset_manifest": "./asset-manifest.json",
+  "built_at": "2026-11-02T12:01:29.451055+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/41441287698"
+}
