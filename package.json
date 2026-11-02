@@ -12,7 +12,9 @@
     "format": "prettier --write src tests index.html vite.config.ts README.md docs .github package.json tsconfig.json",
     "format:check": "prettier --check src tests index.html vite.config.ts README.md docs .github package.json tsconfig.json",
     "test:navigation": "node tests/flight-navigation.mjs",
-    "test:production": "node tests/production.mjs"
+    "test:production": "node tests/production.mjs",
+    "test:rendering": "node tests/rendering.mjs",
+    "test:render-flight": "node tests/render-flight.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

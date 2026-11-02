@@ -9,7 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,6 +32,8 @@ jobs:
           npm run preview -- --port 4173 > /tmp/void-preview.log 2>&1 &
           node --input-type=module -e 'for(let i=0;i<50;i++){try{const r=await fetch("http://127.0.0.1:4173");if(r.ok)process.exit(0);}catch{}await new Promise(r=>setTimeout(r,200));}process.exit(1);'
       - run: npm run test:production
+      - run: npm run test:rendering
+      - run: npm run test:render-flight
       - uses: actions/upload-artifact@v4
         if: always()
         with:

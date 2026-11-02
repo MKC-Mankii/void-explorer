@@ -17,6 +17,7 @@ import {
   SurfaceDetails,
   SpaceDust,
 } from './visuals';
+import { CelestialLighting, airState, stellarColor, disposeMaterialResources } from './rendering';
 import { UI } from './ui';
 import { pickPlanet, projectContact, raySphereDistance } from './navigation';
 import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
@@ -52,6 +53,8 @@ class Game {
   readonly ui: UI;
   readonly audio = new AudioEngine();
   readonly ship = new Spacecraft();
+  readonly lighting = new CelestialLighting();
+  private airFog = new T.FogExp2(0, 0);
   readonly sky = makeSky();
   readonly dust = new SpaceDust();
   readonly details = new SurfaceDetails();
@@ -64,6 +67,10 @@ class Game {
   private cockpit = false;
   private cameraRig = new T.Quaternion();
   private diagnosticScenario: string = 'player';
+  private captureFrozen = false;
+  private performanceSamples: { frameMs: number; updateMs: number; submissionMs: number }[] = [];
+  private readonly diagnosticsEnabled =
+    import.meta.env.DEV && new URLSearchParams(location.search).has('test');
   private renderedFrames = 0;
   private sceneGeneration = 0;
   private renderedScene = -1;
@@ -119,7 +126,8 @@ class Game {
     this.applyQuality();
     this.scene.add(this.sky, this.ship.group, this.dust.mesh, this.details.group);
     this.ship.group.scale.setScalar(0.3);
-    this.scene.add(new T.HemisphereLight('#c0d3e9', '#212337', 1.1));
+    this.scene.add(this.lighting.group);
+    this.lighting.bindGroup(this.ship.group);
     this.ui = new UI(this.sim, hasSave);
     this.ui.onAction = (a, v) => this.action(a, v);
     this.sim.onEvent = (message) => {
@@ -144,10 +152,34 @@ class Game {
       (window as unknown as { __VOID__: unknown }).__VOID__ = {
         snapshot: () => this.snapshot(),
         scenarios: [...scenarioNames],
+        probeTerrain: () => {
+          const planet = this.sim.nearest,
+            up = this.sim.position.clone().sub(planet.position).normalize(),
+            origin = this.sim.position.clone().addScaledVector(up, 20);
+          const ray = new T.Raycaster(origin, up.clone().negate(), 0, 100);
+          const terrain = this.terrains.find((t) => t.data.id === planet.id)!;
+          terrain.group.updateMatrixWorld(true);
+          const hits = ray.intersectObject(terrain.group, true).filter((h) => h.object.visible);
+          return {
+            planet: planet.id,
+            renderedRadius: hits[0]?.point.distanceTo(planet.position) ?? null,
+            collisionRadius: surfaceRadius(planet, up),
+            queued: terrain.diagnostics.queued,
+          };
+        },
+        freeze: (frozen: boolean) => {
+          this.captureFrozen = frozen;
+          this.keys.clear();
+          this.mouse.set(0, 0);
+          return this.snapshot();
+        },
         scenario: (name: string) => {
           this.releaseMouse();
           this.diagnosticScenario = applyScenario(this.sim, name);
           this.walkPitch = 0;
+          this.elapsed = 0;
+          this.dust.resetAll();
+          this.performanceSamples = [];
           this.loadSystem();
           this.updateCamera(1, true);
           this.ui.update();
@@ -176,7 +208,12 @@ class Game {
       quality: this.settings.quality,
       cockpit: this.cockpit,
       modal: this.ui.modal,
-      paused: !this.ui.started || !!this.ui.modal || this.jumping || document.hidden,
+      paused:
+        !this.ui.started ||
+        !!this.ui.modal ||
+        this.jumping ||
+        document.hidden ||
+        this.captureFrozen,
       input: {
         keys: [...this.keys],
         pointerLocked: document.pointerLockElement === this.renderer.domElement,
@@ -208,6 +245,14 @@ class Game {
         frames: this.renderedFrames,
         sceneGeneration: this.sceneGeneration,
         lastFrameMs: this.lastFrameMs,
+        backend: 'WebGL2',
+        pixelRatio: this.renderer.getPixelRatio(),
+        viewport: [innerWidth, innerHeight],
+        fov: this.camera.fov,
+        performanceSamples: this.performanceSamples.map((s) => ({ ...s })),
+        textures: this.renderer.info.memory.textures,
+        geometries: this.renderer.info.memory.geometries,
+        terrain: this.terrains.map((t) => t.diagnostics),
         patches: this.terrains.reduce((n, t) => n + t.patchCount, 0),
         drawCalls: this.renderer.info.render.calls,
         triangles: this.renderer.info.render.triangles,
@@ -224,8 +269,7 @@ class Game {
         obj.geometry?.dispose();
         const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
         for (const m of mats) {
-          for (const v of Object.values(m)) if (v instanceof T.Texture) v.dispose();
-          m.dispose();
+          disposeMaterialResources(m);
         }
       }
     });
@@ -233,18 +277,18 @@ class Game {
     this.systemGroup = new T.Group();
     this.scene.add(this.systemGroup);
     const system = this.sim.system;
-    const light = new T.DirectionalLight(system.color, 2.4);
-    light.position.copy(system.star);
-    this.systemGroup.add(light);
+    this.lighting.configure(system);
     this.systemGroup.add(makeStar(system));
     for (const p of system.planets) {
       const terrain = new Terrain(p);
       this.terrains.push(terrain);
-      this.systemGroup.add(terrain.group, makeAtmosphere(p, system.star));
-      if (p.ocean) this.systemGroup.add(makeOcean(p), makeClouds(p));
-      if (p.rings) this.systemGroup.add(makeRings(p));
+      this.systemGroup.add(terrain.group, makeAtmosphere(p, system.star, stellarColor(system)));
+      if (p.ocean) this.systemGroup.add(makeOcean(p), makeClouds(p, this.lighting));
+      if (p.rings) this.systemGroup.add(makeRings(p, this.lighting));
     }
+    this.lighting.bindGroup(this.systemGroup);
     this.details.clear();
+    this.applyQuality();
   }
   private listen() {
     addEventListener('resize', () => {
@@ -498,6 +542,29 @@ class Game {
     this.renderer.setPixelRatio(ratio);
     this.composer.setPixelRatio(ratio);
     this.bloom.enabled = this.settings.quality !== 'low';
+    this.systemGroup.traverse((o) => {
+      if (
+        o instanceof T.Mesh &&
+        o.userData.oceanPlanet &&
+        o.material instanceof T.MeshStandardMaterial
+      ) {
+        const p = o.userData.oceanPlanet;
+        o.material.userData.detail.value =
+          1 -
+          T.MathUtils.smoothstep(
+            this.camera.position.distanceTo(p.position) - p.radius,
+            p.radius * 0.04,
+            p.radius * 0.16,
+          );
+      }
+      if (
+        o instanceof T.Mesh &&
+        o.material instanceof T.ShaderMaterial &&
+        o.material.userData.kind === 'atmosphere'
+      )
+        o.material.uniforms.airSteps.value =
+          this.settings.quality === 'high' ? 6 : this.settings.quality === 'low' ? 2 : 3;
+    });
   }
   private jump(id: number) {
     if (this.jumping || !UNIVERSE[id] || id === this.sim.system.id) return;
@@ -588,10 +655,14 @@ class Game {
     this.camera.position.copy(desired);
     this.camera.quaternion.copy(rotation);
     const fov = this.cockpit ? 68 : 58 + Math.min(Math.abs(s.speed) / 1100, 1) * 14;
-    if (Math.abs(this.camera.fov - fov) > 0.01) {
+    if (snap) {
+      this.camera.fov = fov;
+      this.camera.updateProjectionMatrix();
+    } else if (Math.abs(this.camera.fov - fov) > 0.01) {
       this.camera.fov = T.MathUtils.damp(this.camera.fov, fov, 3, dt);
       this.camera.updateProjectionMatrix();
     }
+    this.camera.updateMatrixWorld();
     this.ship.group.visible = walking || !this.cockpit;
     this.ui?.view(this.cockpit && !walking);
   }
@@ -603,37 +674,45 @@ class Game {
       s.mode === 'landed' || s.mode === 'walking'
         ? 0
         : Math.max(0.12, Math.min(1, Math.abs(s.speed) / 320)),
-      this.elapsed,
+      this.captureFrozen ? 0 : this.elapsed,
     );
     this.updateCamera(dt);
     this.sky.position.copy(this.camera.position);
-    this.dust.update(this.camera, s.mode === 'flight' ? s.velocity : new T.Vector3(), dt);
+    this.dust.update(
+      this.camera,
+      s.mode === 'flight' ? s.velocity : new T.Vector3(),
+      this.captureFrozen ? 0 : dt,
+    );
     const nearest = s.nearest,
       h = s.height;
     for (const terrain of this.terrains) terrain.tick(dt, this.camera.position);
     this.details.group.visible = h < 120;
     if (h < 120) this.details.update(nearest, s.position);
-    const atmosphereAmount = T.MathUtils.clamp(1 - h / (nearest.radius * 0.13), 0, 1);
-    if (atmosphereAmount > 0) {
-      const up = s.position.clone().sub(nearest.position).normalize(),
-        day = T.MathUtils.clamp(
-          up.dot(s.system.star.clone().sub(nearest.position).normalize()) + 0.3,
-          0.05,
-          1,
-        );
-      const color = new T.Color(nearest.atmosphere).multiplyScalar(0.24 * day);
-      this.scene.fog = new T.FogExp2(color, atmosphereAmount * 0.00072);
-      this.renderer.setClearColor(color);
-    } else {
-      this.scene.fog = null;
-      this.renderer.setClearColor('#050911');
-    }
-    const skyMaterial = (this.sky.children[0] as T.Mesh).material as T.ShaderMaterial;
-    skyMaterial.uniforms.air.value.set(nearest.atmosphere);
-    skyMaterial.uniforms.amount.value = atmosphereAmount;
-    skyMaterial.uniforms.up.value.copy(s.position).sub(nearest.position).normalize();
+    this.lighting.bindGroup(this.details.group);
+    const air = airState(nearest, this.camera.position, s.system.star);
+    this.airFog.color.copy(air.fogColor);
+    this.airFog.density = air.fogDensity;
+    this.scene.fog = air.density > 0.0001 ? this.airFog : null;
     ((this.sky.children[1] as T.Points).material as T.PointsMaterial).opacity =
-      0.85 * (1 - atmosphereAmount * 0.93);
+      0.85 * (1 - air.density * air.daylight * 0.98);
+    this.systemGroup.traverse((o) => {
+      if (
+        o instanceof T.Mesh &&
+        o.userData.oceanPlanet &&
+        o.material instanceof T.MeshStandardMaterial
+      ) {
+        const p = o.userData.oceanPlanet;
+        o.material.userData.detail.value =
+          1 -
+          T.MathUtils.smoothstep(
+            this.camera.position.distanceTo(p.position) - p.radius,
+            p.radius * 0.04,
+            p.radius * 0.16,
+          );
+      }
+      if (o instanceof T.Mesh && o.material instanceof T.ShaderMaterial && o.material.uniforms.time)
+        o.material.uniforms.time.value = this.captureFrozen ? 0 : s.playTime;
+    });
     const contacts = s.system.planets.map((planet, index) => {
       const projection = projectContact(this.camera, planet.position, innerWidth, innerHeight);
       const direction = planet.position.clone().sub(this.camera.position).normalize(),
@@ -674,8 +753,10 @@ class Game {
       dt = Math.min(raw, 0.25);
     this.lastTime = time;
     this.lastFrameMs = raw * 1000;
-    this.elapsed += dt;
-    const active = this.ui.started && !this.ui.modal && !this.jumping && !document.hidden;
+    if (!this.captureFrozen) this.elapsed += dt;
+    const updateStart = performance.now();
+    const active =
+      this.ui.started && !this.ui.modal && !this.jumping && !document.hidden && !this.captureFrozen;
     if (active) {
       const input = this.input(dt);
       // Integrate slow render frames in stable physics steps instead of slowing game time.
@@ -704,8 +785,17 @@ class Game {
       this.frameCount = 0;
       this.frameTime = 0;
     }
+    const submitStart = performance.now();
     this.renderer.info.reset();
     this.composer.render();
+    if (this.diagnosticsEnabled) {
+      this.performanceSamples.push({
+        frameMs: raw * 1000,
+        updateMs: submitStart - updateStart,
+        submissionMs: performance.now() - submitStart,
+      });
+      if (this.performanceSamples.length > 60) this.performanceSamples.shift();
+    }
     this.renderedFrames++;
     this.renderedScene = this.sceneGeneration;
     this.renderedSimulationTime = this.sim.playTime;

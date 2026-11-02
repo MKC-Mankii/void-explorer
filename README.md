@@ -8,6 +8,8 @@
 
 第二轮以独立分支和叠加 Draft PR 保留完整历史，未合并 PR #1 或 PR #2。游戏改动与测试证据见 [第二轮开发记录](docs/ROUND2.md)，发布方式、入口和源码来源见 [第二轮发布记录](docs/ROUND2-DELIVERY.md)。线上实际源码 SHA 可在 [build-info.json](https://mkc-mankii.github.io/void-explorer/build-info.json) 核对。
 
+**[第三轮渲染预览](https://mkc-mankii.github.io/void-explorer/round3/)** 在独立分支交付；改动、性能限制和八组同机位证据见 [第三轮渲染报告](docs/ROUND3.md)。默认入口仍为第二轮，前两轮分支、PR 和可试玩历史保留。
+
 ## 当前可玩内容
 
 - 5 个星系、15 颗行星，确定性程序化生成地形、半径、配色与环境参数。

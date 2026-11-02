@@ -1,0 +1,182 @@
+--- a/src/main.ts
++++ b/src/main.ts
+@@ -64,6 +64,9 @@
+   private cockpit = false;
+   private cameraRig = new T.Quaternion();
+   private diagnosticScenario: string = 'player';
++  private captureFrozen=false;
++  private performanceSamples:{frameMs:number;updateMs:number;submissionMs:number}[]=[];
++  private readonly diagnosticsEnabled=import.meta.env.DEV&&new URLSearchParams(location.search).has("test");
+   private renderedFrames = 0;
+   private sceneGeneration = 0;
+   private renderedScene = -1;
+@@ -144,10 +147,12 @@
+       (window as unknown as { __VOID__: unknown }).__VOID__ = {
+         snapshot: () => this.snapshot(),
+         scenarios: [...scenarioNames],
++        freeze:(frozen:boolean)=>{this.captureFrozen=frozen;this.keys.clear();this.mouse.set(0,0);return this.snapshot();},
+         scenario: (name: string) => {
+           this.releaseMouse();
+           this.diagnosticScenario = applyScenario(this.sim, name);
+           this.walkPitch = 0;
++          this.elapsed=0;this.dust.resetAll();this.performanceSamples=[];
+           this.loadSystem();
+           this.updateCamera(1, true);
+           this.ui.update();
+@@ -176,7 +181,7 @@
+       quality: this.settings.quality,
+       cockpit: this.cockpit,
+       modal: this.ui.modal,
+-      paused: !this.ui.started || !!this.ui.modal || this.jumping || document.hidden,
++      paused: !this.ui.started || !!this.ui.modal || this.jumping || document.hidden ||this.captureFrozen,
+       input: {
+         keys: [...this.keys],
+         pointerLocked: document.pointerLockElement === this.renderer.domElement,
+@@ -207,7 +212,8 @@
+         simulationTime: this.renderedSimulationTime,
+         frames: this.renderedFrames,
+         sceneGeneration: this.sceneGeneration,
+-        lastFrameMs: this.lastFrameMs,
++        lastFrameMs:this.lastFrameMs,backend:"WebGL2",pixelRatio:this.renderer.getPixelRatio(),viewport:[innerWidth,innerHeight],fov:this.camera.fov,
++        performanceSamples:this.performanceSamples.map(s=>({...s})),textures:this.renderer.info.memory.textures,geometries:this.renderer.info.memory.geometries,
+         patches: this.terrains.reduce((n, t) => n + t.patchCount, 0),
+         drawCalls: this.renderer.info.render.calls,
+         triangles: this.renderer.info.render.triangles,
+@@ -588,7 +594,8 @@
+     this.camera.position.copy(desired);
+     this.camera.quaternion.copy(rotation);
+     const fov = this.cockpit ? 68 : 58 + Math.min(Math.abs(s.speed) / 1100, 1) * 14;
+-    if (Math.abs(this.camera.fov - fov) > 0.01) {
++    if(snap){this.camera.fov=fov;this.camera.updateProjectionMatrix();}
++    else if (Math.abs(this.camera.fov - fov) > 0.01) {
+       this.camera.fov = T.MathUtils.damp(this.camera.fov, fov, 3, dt);
+       this.camera.updateProjectionMatrix();
+     }
+@@ -603,11 +610,11 @@
+       s.mode === 'landed' || s.mode === 'walking'
+         ? 0
+         : Math.max(0.12, Math.min(1, Math.abs(s.speed) / 320)),
+-      this.elapsed,
++      this.captureFrozen?0:this.elapsed,
+     );
+     this.updateCamera(dt);
+     this.sky.position.copy(this.camera.position);
+-    this.dust.update(this.camera, s.mode === 'flight' ? s.velocity : new T.Vector3(), dt);
++    this.dust.update(this.camera, s.mode === 'flight' ? s.velocity : new T.Vector3(), this.captureFrozen?0:dt);
+     const nearest = s.nearest,
+       h = s.height;
+     for (const terrain of this.terrains) terrain.tick(dt, this.camera.position);
+@@ -674,8 +681,9 @@
+       dt = Math.min(raw, 0.25);
+     this.lastTime = time;
+     this.lastFrameMs = raw * 1000;
+-    this.elapsed += dt;
+-    const active = this.ui.started && !this.ui.modal && !this.jumping && !document.hidden;
++    if(!this.captureFrozen)this.elapsed += dt;
++    const updateStart=performance.now();
++    const active = this.ui.started && !this.ui.modal && !this.jumping && !document.hidden&&!this.captureFrozen;
+     if (active) {
+       const input = this.input(dt);
+       // Integrate slow render frames in stable physics steps instead of slowing game time.
+@@ -704,8 +712,10 @@
+       this.frameCount = 0;
+       this.frameTime = 0;
+     }
++    const submitStart=performance.now();
+     this.renderer.info.reset();
+     this.composer.render();
++    if(this.diagnosticsEnabled){this.performanceSamples.push({frameMs:raw*1000,updateMs:submitStart-updateStart,submissionMs:performance.now()-submitStart});if(this.performanceSamples.length>60)this.performanceSamples.shift();}
+     this.renderedFrames++;
+     this.renderedScene = this.sceneGeneration;
+     this.renderedSimulationTime = this.sim.playTime;
+--- a/src/diagnostics.ts
++++ b/src/diagnostics.ts
+@@ -1,5 +1,6 @@
+ import { Vector3 } from 'three';
+ import { Simulation } from './simulation';
++import { surfaceRadius, terrainHeight } from './universe';
+ import { FLIGHT, arrivalClearance } from './navigation';
+ 
+ export const scenarioNames = [
+@@ -9,6 +10,14 @@
+   'high-speed',
+   'occluded',
+   'behind',
++  'render-orbit',
++  'render-terminator',
++  'render-night',
++  'render-near',
++  'render-atmosphere',
++  'render-surface',
++  'render-cruise',
++  'render-desert',
+ ] as const;
+ export type ScenarioName = (typeof scenarioNames)[number];
+ /** Explicit fixtures, never a claim that the player flew to this location. Dev/test only. */
+@@ -16,7 +25,55 @@
+   if (!scenarioNames.includes(name as ScenarioName))
+     throw new Error(`Unknown flight scenario: ${name}`);
+   const fixture = new Simulation();
+-  if (name === 'transfer' || name === 'high-speed') {
++  if (name.startsWith('render-')) {
++    if (name === 'render-desert') fixture.selectTarget(1);
++    const p = fixture.selected,
++      sun = fixture.system.star.clone().sub(p.position).normalize();
++    let dir = new Vector3(0.1, 0.25, 1).normalize();
++    if (name === 'render-terminator')
++      dir = sun
++        .clone()
++        .cross(new Vector3(0, 1, 0))
++        .normalize();
++    if (name === 'render-night') dir = sun.clone().negate();
++    if (name === 'render-desert')
++      dir = sun
++        .clone()
++        .add(new Vector3(0.3, 0.2, 0.3))
++        .normalize();
++    if (name === 'render-atmosphere' || name === 'render-surface') {
++      // A stable dry location shared by both renderer versions and the flight terrain function.
++      let best = -Infinity;
++      for (let i = 0; i < 80; i++) {
++        const d = new Vector3(Math.sin(i * 2.399963) * 0.3, 0.1 + (i % 7) * 0.04, 1).normalize();
++        const h = terrainHeight(p, d);
++        if (h > best) {
++          best = h;
++          dir = d;
++        }
++      }
++      fixture.position
++        .copy(p.position)
++        .addScaledVector(dir, surfaceRadius(p, dir) + (name === 'render-surface' ? 0.61 : 45));
++      const tangent = new Vector3(-1, 0.1, 0.2).projectOnPlane(dir).normalize();
++      fixture.lookAt(
++        fixture.position.clone().addScaledVector(tangent, 100).addScaledVector(dir, -12),
++        dir,
++      );
++      if (name === 'render-surface') {
++        fixture.mode = 'landed';
++        fixture.landedPlanet = p;
++      }
++    } else {
++      const height = name === 'render-near' ? p.radius * 0.3 : p.radius * 2.5;
++      fixture.position.copy(p.position).addScaledVector(dir, surfaceRadius(p, dir) + height);
++      fixture.lookAt(p.position);
++      if (name === 'render-cruise') {
++        fixture.speed = 900;
++        fixture.velocity.copy(fixture.forward).multiplyScalar(900);
++      }
++    }
++  } else if (name === 'transfer' || name === 'high-speed') {
+     fixture.position.set(0, 18000, 24000);
+     fixture.selectTarget(1);
+     fixture.lookAt(fixture.selected.position);
+--- a/src/visuals.ts
++++ b/src/visuals.ts
+@@ -487,6 +487,7 @@
+     this.mesh.frustumCulled = false;
+     for (let i = 0; i < 180; i++) this.reset(i);
+   }
++  resetAll(){this.rng=random(5);for(let i=0;i<180;i++)this.reset(i);}
+   private reset(i: number) {
+     this.positions[i * 6] = (this.rng() - 0.5) * 170;
+     this.positions[i * 6 + 1] = (this.rng() - 0.5) * 100;

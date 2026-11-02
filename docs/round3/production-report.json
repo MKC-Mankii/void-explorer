@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:4173/",
+  "browser": "154.0.8037.57",
+  "checks": [
+    "Production WebGL scene renders",
+    "Development API absent",
+    "Scenario query ignored by production",
+    "Selected-body scan awards score",
+    "G cruise engages and real X takes over",
+    "Star map opens",
+    "No failed requests or JavaScript/console errors"
+  ],
+  "errors": []
+}

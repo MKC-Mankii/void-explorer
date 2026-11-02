@@ -32,9 +32,9 @@ it('keeps rendered highland terrain within astronaut clearance of the collision 
       0,
       60,
     );
-    const hits = ray.intersectObject(terrain.group, true);
+    const hits = ray.intersectObject(terrain.group, true).filter((hit) => hit.object.visible);
     expect(hits.length).toBeGreaterThan(0);
     expect(hits[0].point.distanceTo(surface)).toBeLessThan(0.09);
     terrain.dispose();
   }
-});
+}, 15000);
