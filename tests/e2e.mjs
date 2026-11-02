@@ -48,16 +48,22 @@ try {
   assert.equal((await snapshot()).score, 100);
   check('Keyboard orbital scan awards discovery once');
   await page.keyboard.down('KeyW');
-  await page.waitForFunction(() => window.__VOID__.sim.speed > 20, undefined, { timeout: 20000 });
-  await page.keyboard.up('KeyW');
-  const accelerated = await page.evaluate(() => window.__VOID__.sim.speed);
-  assert(accelerated > 0);
-  await page.keyboard.down('KeyX');
-  await page.waitForFunction((speed) => window.__VOID__.sim.speed < speed * 0.3, accelerated, {
+  await page.waitForFunction(() => window.__VOID__.snapshot().speed > 20, undefined, {
     timeout: 20000,
   });
+  await page.keyboard.up('KeyW');
+  const accelerated = await page.evaluate(() => window.__VOID__.snapshot().speed);
+  assert(accelerated > 0);
+  await page.keyboard.down('KeyX');
+  await page.waitForFunction(
+    (speed) => window.__VOID__.snapshot().speed < speed * 0.3,
+    accelerated,
+    {
+      timeout: 20000,
+    },
+  );
   await page.keyboard.up('KeyX');
-  assert((await page.evaluate(() => window.__VOID__.sim.speed)) < accelerated);
+  assert((await page.evaluate(() => window.__VOID__.snapshot().speed)) < accelerated);
   check('Throttle and inertial brake respond to real keyboard input');
   await page.keyboard.press('KeyL');
   assert.equal((await snapshot()).mode, 'landing');
@@ -87,10 +93,10 @@ try {
   await page.waitForTimeout(300);
   const locked = await page.evaluate(() => !!document.pointerLockElement);
   assert(locked);
-  const quat = await page.evaluate(() => window.__VOID__.sim.rotation.toArray());
+  const quat = await page.evaluate(() => window.__VOID__.snapshot().rotation);
   await page.mouse.move(760, 450);
   await page.waitForTimeout(600);
-  assert.notDeepEqual(await page.evaluate(() => window.__VOID__.sim.rotation.toArray()), quat);
+  assert.notDeepEqual(await page.evaluate(() => window.__VOID__.snapshot().rotation), quat);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(400);
   assert.equal((await snapshot()).modal, 'pause');
@@ -115,7 +121,7 @@ try {
   await shot('06-map');
   await page.locator('[data-action="navigate"][data-value="1"]').click();
   assert.equal((await snapshot()).modal, null);
-  assert.equal(await page.evaluate(() => window.__VOID__.sim.target), 1);
+  assert.equal(await page.evaluate(() => window.__VOID__.snapshot().target), 1);
   check('Star chart selects and aligns local destinations');
   await page.keyboard.press('KeyM');
   await page.locator('[data-action="map-select"][data-value="1"]').click();

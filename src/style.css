@@ -1581,3 +1581,158 @@ dt {
     transition: none !important;
   }
 }
+/* Navigation uses real ship-relative contacts; the radar is a direction display. */
+.navigation-data {
+  margin-top: 15px;
+  border-top: 1px solid var(--line);
+  padding-top: 5px;
+}
+.navigation-data > div {
+  margin: 10px 0;
+}
+.navigation-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 18px;
+}
+.navigation-actions button {
+  flex: 1;
+  border: 1px solid var(--line);
+  padding: 9px 5px;
+  font-size: 9px;
+  white-space: nowrap;
+  background: #0a1722aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.navigation-actions kbd {
+  font-size: 8px;
+  min-width: 17px;
+  padding: 3px;
+}
+.navigation-actions button.engaged {
+  color: #c5ebd8;
+  border-color: #a6d1bd88;
+  background: #9dd2b91a;
+}
+.target-panel {
+  top: 25%;
+  width: 220px;
+  padding-top: 10px;
+}
+.target-panel .planet-name {
+  font-size: 25px;
+  margin-top: 12px;
+}
+.target-panel .target-range {
+  margin-top: 18px;
+}
+.target-panel .text-button {
+  margin-top: 12px;
+  padding-top: 12px;
+}
+.edge-target {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #0a172166;
+}
+.edge-target:before,
+.edge-target:after {
+  display: none;
+}
+.edge-target > i {
+  width: 0;
+  height: 0;
+  border: none;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 11px solid #c5e3d3;
+  background: none;
+  transform-origin: center;
+}
+.edge-target > span {
+  top: 32px;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.edge-target > small {
+  top: 47px;
+  white-space: nowrap;
+}
+.target-marker.occluded {
+  opacity: 0.5;
+}
+.contact-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #9ab7c2a8;
+  font-size: 15px;
+  padding: 12px;
+  pointer-events: auto;
+}
+.contact-marker small {
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+.contact-marker:hover {
+  color: #ddf3e6;
+}
+.contact-marker i {
+  font-style: normal;
+}
+#velocity-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #ddb78d90;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+#velocity-marker i {
+  font-size: 23px;
+  font-style: normal;
+}
+#velocity-marker small {
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+.map-planets button.active {
+  background: #a5d6be0a;
+  border-left: 2px solid #b8dcca;
+  padding-left: 10px;
+}
+@media (max-height: 750px) {
+  .target-panel {
+    top: 24%;
+    width: 207px;
+  }
+  .target-panel .planet-name {
+    font-size: 22px;
+    margin-top: 9px;
+  }
+  .target-panel .target-range {
+    margin-top: 10px;
+  }
+  .navigation-data {
+    margin-top: 11px;
+  }
+  .navigation-data > div {
+    margin: 8px 0;
+  }
+  .navigation-actions {
+    margin-top: 12px;
+  }
+  .target-panel .text-button {
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+}

@@ -121,7 +121,8 @@ describe('expedition loop', () => {
     expect(s.system.id).toBe(3);
     expect(s.navigate(2)).toBe(true);
     const direction = s.selected.position.clone().sub(s.position).normalize();
-    expect(s.forward.dot(direction)).toBeCloseTo(1, 6);
+    advance(s, 8);
+    expect(s.forward.dot(direction)).toBeGreaterThan(0.9999);
   });
 });
 describe('save validation', () => {

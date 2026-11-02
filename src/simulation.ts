@@ -7,6 +7,16 @@ import {
   surfaceRadius,
   terrainHeight,
 } from './universe';
+import {
+  FLIGHT,
+  Guidance,
+  NavigationStatus,
+  approach,
+  navigationMetrics,
+  routeObstacle,
+  flightSpeedLimit,
+  arrivalClearance,
+} from './navigation';
 export type Mode = 'flight' | 'landing' | 'landed' | 'walking' | 'takeoff';
 export interface FlightInput {
   throttle: number;
@@ -41,6 +51,9 @@ export interface SaveData {
   shipRotation: number[];
   discoveries: Record<string, { scan: boolean; land: boolean; sample: boolean }>;
   playTime: number;
+  target?: number;
+  velocity?: number[];
+  speed?: number;
 }
 export class Simulation {
   system: SystemData = UNIVERSE[0];
@@ -52,6 +65,15 @@ export class Simulation {
   mode: Mode = 'flight';
   speed = 0;
   target = 0;
+  angularVelocity = new Vector3();
+  guidance: Guidance = 'off';
+  navigationStatus: NavigationStatus = 'idle';
+  blockedBy: string | null = null;
+  speedLimit = FLIGHT.normal;
+  get navigation() {
+    return navigationMetrics(this.position, this.forward, this.velocity, this.selected);
+  }
+
   landedPlanet: PlanetData | null = null;
   discoveries: SaveData['discoveries'] = {};
   playTime = 0;
@@ -110,7 +132,7 @@ export class Simulation {
           this.onEvent('着陆完成 · 按 E 离舱，探索这片世界');
         } else {
           this.mode = 'flight';
-          this.speed = 12;
+          this.speed = 0;
           this.onEvent('起飞完成 · 星海在前方');
         }
         this.speed = 0;
@@ -130,33 +152,115 @@ export class Simulation {
     const near = this.nearest,
       h = altitude(near, this.position),
       up = this.position.clone().sub(near.position).normalize();
-    // Mouse and keys rotate in the craft's local frame, preserving six-axis flight.
-    this.rotation
-      .multiply(
-        new Quaternion().setFromEuler(
-          new Euler(input.pitch * dt, input.yaw * dt, input.roll * dt, 'YXZ'),
+    const rotating = Math.abs(input.pitch) + Math.abs(input.yaw) + Math.abs(input.roll) > 0.001;
+    const translating = input.throttle !== 0 || input.strafe !== 0 || input.lift !== 0;
+    if (
+      rotating ||
+      input.brake ||
+      ((this.guidance === 'cruise' || this.navigationStatus === 'blocked') && translating)
+    )
+      this.cancelGuidance('manual');
+    if (this.guidance !== 'off') {
+      const blocked =
+        this.guidance === 'cruise'
+          ? routeObstacle(this.system, this.position, this.selected)
+          : null;
+      if (blocked) {
+        this.blockedBy = blocked;
+        this.cancelGuidance('blocked');
+        this.onEvent(`航路被 ${blocked} 遮挡 · 已退出巡航，请先制动并绕行`);
+      }
+    }
+    if (this.guidance !== 'off') {
+      const desired = new Quaternion().setFromRotationMatrix(
+        new Matrix4().lookAt(
+          this.position,
+          this.selected.position,
+          UP.clone().applyQuaternion(this.rotation),
         ),
-      )
-      .normalize();
-    const max =
-      h < near.radius * 0.06 ? 24 : h < near.radius * 0.3 ? 100 : input.boost ? 1100 : 320;
-    if (input.throttle !== 0)
-      this.speed = MathUtils.clamp(
-        this.speed + input.throttle * (input.boost ? 210 : 85) * dt,
-        -35,
-        max,
       );
-    else if (Math.abs(this.speed) > max)
-      this.speed = MathUtils.damp(this.speed, Math.sign(this.speed) * max, 2, dt);
-    if (input.brake) this.speed = MathUtils.damp(this.speed, 0, 7, dt);
+      this.rotation.rotateTowards(desired, FLIGHT.guideTurnRate * dt);
+      this.angularVelocity.set(0, 0, 0);
+      if (this.guidance === 'align' && this.navigation.headingError < 0.3) {
+        this.guidance = 'off';
+        this.navigationStatus = 'idle';
+      }
+    } else {
+      const response = 1 - Math.exp(-8 * dt);
+      this.angularVelocity.lerp(
+        new Vector3(
+          MathUtils.clamp(input.pitch, -1.4, 1.4),
+          MathUtils.clamp(input.yaw, -1.4, 1.4),
+          MathUtils.clamp(input.roll, -1.4, 1.4),
+        ),
+        response,
+      );
+      this.rotation
+        .multiply(
+          new Quaternion().setFromEuler(
+            new Euler(
+              this.angularVelocity.x * dt,
+              this.angularVelocity.y * dt,
+              this.angularVelocity.z * dt,
+              'YXZ',
+            ),
+          ),
+        )
+        .normalize();
+    }
+    const cruise = this.guidance === 'cruise';
+    this.speedLimit = flightSpeedLimit(
+      near,
+      h,
+      cruise ? FLIGHT.cruise : input.boost ? FLIGHT.boost : FLIGHT.normal,
+    );
+    if (cruise) {
+      const nav = this.navigation;
+      let wanted = Math.min(
+        this.speedLimit,
+        Math.sqrt(
+          2 *
+            FLIGHT.deceleration *
+            Math.max(0, nav.gap - 45 - Math.max(0, nav.closingSpeed) * 0.75),
+        ),
+      );
+      if (nav.headingError > 15) wanted = Math.min(wanted, nav.headingError > 40 ? 0 : 80);
+      this.navigationStatus =
+        wanted < this.speed - 2 ? 'braking' : nav.headingError > 2 ? 'aligning' : 'cruising';
+      this.speed = approach(
+        this.speed,
+        wanted,
+        (wanted < this.speed ? FLIGHT.deceleration : FLIGHT.boostAcceleration) * dt,
+      );
+      if (nav.gap < 55 && this.velocity.length() < 3) {
+        this.cancelGuidance('arrived');
+        this.speed = 0;
+        this.onEvent(`已抵达 ${this.selected.name} 近空 · F 扫描，L 着陆`);
+      }
+    } else {
+      const accelerate = input.boost ? FLIGHT.boostAcceleration : FLIGHT.acceleration;
+      if (input.brake || this.navigationStatus === 'blocked')
+        this.speed = approach(this.speed, 0, FLIGHT.deceleration * dt);
+      else if (this.speed > this.speedLimit)
+        this.speed = approach(this.speed, this.speedLimit, FLIGHT.deceleration * dt);
+      else
+        this.speed = MathUtils.clamp(
+          this.speed +
+            input.throttle * (input.throttle < 0 ? FLIGHT.deceleration : accelerate) * dt,
+          -35,
+          this.speedLimit,
+        );
+    }
     const forward = this.forward,
       right = new Vector3(1, 0, 0).applyQuaternion(this.rotation),
       localUp = UP.clone().applyQuaternion(this.rotation);
+    const braking = input.brake || this.navigationStatus === 'blocked';
     const desired = forward
       .multiplyScalar(this.speed)
-      .addScaledVector(right, input.strafe * (h < 100 ? 6 : 55))
-      .addScaledVector(localUp, input.lift * (h < 100 ? 10 : 55));
-    this.velocity.lerp(desired, 1 - Math.exp(-dt * 3));
+      .addScaledVector(right, braking ? 0 : input.strafe * (h < 100 ? 6 : 55))
+      .addScaledVector(localUp, braking ? 0 : input.lift * (h < 100 ? 10 : 55));
+    this.velocity.lerp(desired, 1 - Math.exp(-dt * (braking ? 6 : 3)));
+    if (this.speed === 0 && this.velocity.length() < 0.03) this.velocity.set(0, 0, 0);
     this.position.addScaledVector(this.velocity, dt);
     for (const p of this.system.planets) {
       const d = this.position.clone().sub(p.position),
@@ -164,6 +268,7 @@ export class Simulation {
       if (d.length() < floor) {
         const impact = this.velocity.length();
         this.position.copy(p.position).addScaledVector(d.normalize(), floor);
+        this.cancelGuidance('blocked');
         this.speed = 0;
         this.velocity.set(0, 0, 0);
         if (impact > 15) this.onEvent('近地防撞已介入 · 按 L 启动着陆程序');
@@ -176,11 +281,20 @@ export class Simulation {
       this.velocity.set(0, 0, 0);
       this.onEvent('恒星高温区 · 防护系统已阻止继续接近');
     }
-    // A little atmospheric leveling is optional; no forced horizon in space.
-    if (h < near.radius * 0.15 && input.roll === 0) {
-      const craftUp = UP.clone().applyQuaternion(this.rotation);
-      const correction = new Quaternion().setFromUnitVectors(craftUp, up);
-      this.rotation.premultiply(new Quaternion().slerp(correction, dt * 0.09));
+    // Correct only roll near the ground; leveling must never steer the nose away from input.
+    if (h < near.radius * 0.15 && input.roll === 0 && this.guidance === 'off') {
+      const f = this.forward,
+        craftUp = UP.clone().applyQuaternion(this.rotation).projectOnPlane(f).normalize(),
+        surfaceUp = up.clone().projectOnPlane(f).normalize();
+      if (surfaceUp.lengthSq() > 0.01) {
+        const angle = Math.atan2(
+          new Vector3().crossVectors(craftUp, surfaceUp).dot(f),
+          craftUp.dot(surfaceUp),
+        );
+        this.rotation.premultiply(
+          new Quaternion().setFromAxisAngle(f, angle * (1 - Math.exp(-dt * 0.3))),
+        );
+      }
     }
     this.shipPosition.copy(this.position);
     this.shipRotation.copy(this.rotation);
@@ -218,7 +332,7 @@ export class Simulation {
       this.onEvent('请先接近行星 · 进入 2.5 倍半径范围后可着陆');
       return false;
     }
-    if (Math.abs(this.speed) > 400) {
+    if (Math.max(Math.abs(this.speed), this.velocity.length()) > 400) {
       this.onEvent('速度过高 · 松开推进并按 X 制动后着陆');
       return false;
     }
@@ -261,11 +375,14 @@ export class Simulation {
     this.endRot.setFromRotationMatrix(
       new Matrix4().lookAt(this.endPos, this.endPos.clone().add(tangent), dir),
     );
+    this.cancelGuidance();
+    this.target = this.system.planets.indexOf(p);
     this.begin('landing');
     this.onEvent('着陆引导启动 · 正在下降至安全地表');
     return true;
   }
   private begin(mode: 'landing' | 'takeoff') {
+    this.angularVelocity.set(0, 0, 0);
     this.mode = mode;
     this.transition = 0;
     this.startPos.copy(this.position);
@@ -316,10 +433,10 @@ export class Simulation {
     return true;
   }
   scan() {
-    const p = this.mode === 'walking' ? this.landedPlanet! : this.nearest;
+    const p = this.mode === 'walking' ? this.landedPlanet! : this.selected;
     const type = this.mode === 'walking' ? 'sample' : 'scan';
     if (this.mode !== 'walking' && altitude(p, this.position) > p.radius * 3) {
-      this.onEvent('信号太弱 · 靠近行星后按 F 扫描');
+      this.onEvent(`目标 ${p.name} 信号太弱 · 靠近所选行星后按 F 扫描`);
       return false;
     }
     if (this.discoveries[p.id]?.[type]) {
@@ -352,6 +469,8 @@ export class Simulation {
       this.onEvent('你已位于这个星系');
       return false;
     }
+    this.cancelGuidance();
+    this.angularVelocity.set(0, 0, 0);
     this.system = UNIVERSE[id];
     this.target = 0;
     this.position.copy(this.system.planets[0].position).add(new Vector3(0, 700, 5200));
@@ -364,13 +483,57 @@ export class Simulation {
     this.onEvent(`跃迁完成 · 欢迎来到${this.system.name}星系`);
     return true;
   }
-  navigate(index: number) {
-    if (!Number.isInteger(index) || !this.system.planets[index]) return false;
-    if (this.mode !== 'flight') return false;
+  selectTarget(index: number) {
+    if (this.mode !== 'flight' || !Number.isInteger(index) || !this.system.planets[index])
+      return false;
+    this.cancelGuidance();
     this.target = index;
-    this.lookAt(this.selected.position);
-    this.onEvent(`航向已对准 ${this.selected.name} · W 推进，Shift 加速`);
+    this.blockedBy = null;
     return true;
+  }
+  navigate(index: number) {
+    if (!this.selectTarget(index)) return false;
+    this.guidance = 'align';
+    this.navigationStatus = 'aligning';
+    this.onEvent(`航向辅助 · 正在转向 ${this.selected.name} · G 开始远航引导`);
+    return true;
+  }
+  toggleAlignment() {
+    if (this.guidance === 'align') {
+      this.cancelGuidance();
+      return true;
+    }
+    return this.navigate(this.target);
+  }
+  toggleCruise() {
+    if (this.mode !== 'flight') return false;
+    if (this.guidance === 'cruise') {
+      this.cancelGuidance('manual');
+      this.onEvent('远航引导已关闭 · 当前速度保留，按 X 制动');
+      return true;
+    }
+    const blocked = routeObstacle(this.system, this.position, this.selected);
+    if (blocked) {
+      this.blockedBy = blocked;
+      this.cancelGuidance('blocked');
+      this.onEvent(`航路被 ${blocked} 遮挡 · 请先绕行`);
+      return false;
+    }
+    if (this.navigation.distance <= arrivalClearance(this.selected) + 55) {
+      this.onEvent('已在目标近空 · F 扫描，L 着陆');
+      return false;
+    }
+    this.blockedBy = null;
+    this.guidance = 'cruise';
+    this.navigationStatus = 'aligning';
+    this.angularVelocity.set(0, 0, 0);
+    this.onEvent(`远航引导启动 · ${this.selected.name} · 接近时自动减速，手动操作可接管`);
+    return true;
+  }
+  cancelGuidance(status: NavigationStatus = 'idle') {
+    this.guidance = 'off';
+    this.navigationStatus = status;
+    if (status !== 'blocked') this.blockedBy = null;
   }
   get score() {
     return Object.values(this.discoveries).reduce(
@@ -390,6 +553,9 @@ export class Simulation {
       shipRotation: this.shipRotation.toArray(),
       discoveries: this.discoveries,
       playTime: this.playTime,
+      target: this.target,
+      velocity: this.velocity.toArray(),
+      speed: this.speed,
     };
   }
   restore(value: unknown) {
@@ -420,7 +586,20 @@ export class Simulation {
             sample: d.sample === true,
           };
       }
+      if (s.velocity !== undefined && !finite(s.velocity, 3)) return false;
+      if (s.speed !== undefined && (!Number.isFinite(s.speed) || Math.abs(s.speed) > FLIGHT.cruise))
+        return false;
+      if (
+        s.target !== undefined &&
+        (!Number.isInteger(s.target) || !UNIVERSE[s.system].planets[s.target])
+      )
+        return false;
       this.system = UNIVERSE[s.system];
+      this.target = s.target ?? 0;
+      this.velocity.fromArray(s.velocity ?? [0, 0, 0]);
+      this.speed = s.speed ?? 0;
+      this.cancelGuidance();
+      this.angularVelocity.set(0, 0, 0);
       this.position.fromArray(s.position);
       this.rotation.fromArray(s.rotation).normalize();
       this.mode = s.mode;
