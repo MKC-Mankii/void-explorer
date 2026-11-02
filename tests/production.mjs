@@ -36,10 +36,13 @@ try {
   await page.waitForFunction(() => document.querySelector('#score').textContent === '0100');
   await page.keyboard.press('KeyG');
   await page.waitForSelector('#cruise-button.engaged');
-  await page.keyboard.press('KeyX');
+  // Braking is sampled by the flight update. A zero-duration press can fall
+  // entirely between rendered frames on software graphics; hold until observed.
+  await page.keyboard.down('KeyX');
   await page.waitForFunction(
     () => !document.querySelector('#cruise-button').classList.contains('engaged'),
   );
+  await page.keyboard.up('KeyX');
   await page.keyboard.press('KeyM');
   await page.waitForSelector('.map-modal');
   await mkdir('test-results/round2', { recursive: true });
