@@ -1,0 +1,45 @@
+{
+  "base_commit": "45cd89ce0a190c9f8973e281e78127970eaf5edd",
+  "branch": "feat/rendering-round3",
+  "backend": "WebGL2",
+  "webgpu_implemented": false,
+  "logic_tests": 33,
+  "exploration_browser_checks": 15,
+  "navigation_browser_checks": 16,
+  "production_browser_checks": 7,
+  "matched_static_scenes": 8,
+  "static_console_errors": [],
+  "source_sha256": {
+    "src/audio.ts": "05347b5bee15ed90bfb292763b8a5b6c9a0d5e936449a42db03db3651aba15d4",
+    "src/diagnostics.ts": "6e718b0dff7fa1a1fdfdb406bc6855b2222146c6f3dbee3b37144f701b27a115",
+    "src/main.ts": "6a2f67fe5cb93a174ec9b254461d1cb8f4402b4322e3af658d86f8a00e19c0f5",
+    "src/navigation.ts": "9e32753f4e17b5cb1926cf16c0a6a0c7e32f48cb87efb84e87e06f79ff362f0b",
+    "src/planet-materials.ts": "a307978bcfbab37fa8b87c225c6d61cf2dd9d693af5832eb4964fd0bca5261b7",
+    "src/rendering.ts": "8593a41f9c16a0b36688f92480106f87be9c0ff24011bc6e220433d9bfe1c585",
+    "src/simulation.ts": "cd5551be55e6f253833f57e2a53260eb69261b739a28457e3f3bdedea91a5962",
+    "src/style.css": "0e003b812e50d74fea0ece8bd04d005c809f0ffcd69f6b6053687d3ccc75a049",
+    "src/terrain.ts": "fbf6376115cbebed5ee540431be816631550978bfd92d32244641055b2bddf41",
+    "src/ui.ts": "54084eaf786f7116f09f9ec8157ac5337ad9b6c02609dfaf3e8d15c8efe26c61",
+    "src/universe.ts": "a6d176a0b975cda4a759b9d241ebbcc253954e6de9696f8840eed9ef00bb2781",
+    "src/visuals.ts": "e07c7a12335ffe23cf2b47847273bcc276f9bd5bb624c9cc162abc5cc578cfda",
+    "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+  },
+  "unchanged_core": {
+    "src/simulation.ts": true,
+    "src/navigation.ts": true,
+    "src/universe.ts": true
+  },
+  "performance_conclusion": "Software rasterization costs increased in several scenes; no desktop hardware performance acceptance is claimed. See comparison.json.",
+  "regression_errors": {
+    "exploration-report.json": [],
+    "navigation-report.json": [],
+    "production-report.json": []
+  },
+  "real_flight": {
+    "samples": 93,
+    "surface_error_m": 0.002221724073478981,
+    "max_generated_per_frame": 8,
+    "peak_observed_update_wall_ms": 47,
+    "errors": []
+  }
+}

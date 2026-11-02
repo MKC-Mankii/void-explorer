@@ -1,4 +1,6 @@
 import * as T from 'three';
+import { atmosphereParameters, stellarColor, eclipseGLSL, CelestialLighting } from './rendering';
+import { createOceanMaterial } from './planet-materials';
 import { PlanetData, SystemData, random, terrainHeight, noise } from './universe';
 /** Custom shaders must share Three.js logarithmic depth with terrain and spacecraft. */
 function makeShader(parameters: T.ShaderMaterialParameters) {
@@ -59,16 +61,13 @@ export function makeSky() {
     makeShader({
       uniforms: {
         sky: { value: texture },
-        air: { value: new T.Color('#69c9e7') },
-        amount: { value: 0 },
-        up: { value: new T.Vector3(0, 1, 0) },
       },
       side: T.BackSide,
       depthWrite: false,
       vertexShader:
         'varying vec3 v;varying vec2 vUv;void main(){v=position;vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
       fragmentShader:
-        'varying vec3 v;varying vec2 vUv;uniform sampler2D sky;uniform vec3 air;uniform float amount;uniform vec3 up;void main(){vec3 d=normalize(v);vec3 c=texture2D(sky,vUv).rgb;float horizon=pow(1.-max(0.,dot(d,up)),3.);vec3 haze=air*(.085+horizon*.21);c=mix(c,haze,amount);gl_FragColor=vec4(c,1.);}',
+        'varying vec3 v;varying vec2 vUv;uniform sampler2D sky;void main(){gl_FragColor=vec4(texture2D(sky,vUv).rgb*.58,1.);}',
     }),
   );
   group.add(sphere);
@@ -128,7 +127,7 @@ const glow = () =>
 export function makeStar(system: SystemData) {
   const group = new T.Group();
   group.position.copy(system.star);
-  const color = new T.Color(system.color);
+  const color = stellarColor(system);
   const mesh = new T.Mesh(
     new T.SphereGeometry(1600, 64, 32),
     makeShader({
@@ -141,79 +140,157 @@ export function makeStar(system: SystemData) {
   group.add(mesh);
   const halo = new T.Sprite(glow());
   halo.material.color.copy(color);
-  halo.scale.setScalar(10500);
+  halo.scale.setScalar(8000);
+  halo.material.opacity = 0.5;
   group.add(halo);
   return group;
 }
-export function makeAtmosphere(p: PlanetData, star: T.Vector3) {
-  const mesh = new T.Mesh(
-    new T.SphereGeometry(p.radius * 1.065, 64, 48),
-    makeShader({
-      uniforms: {
-        color: { value: new T.Color(p.atmosphere) },
-        sun: { value: star.clone().sub(p.position).normalize() },
-      },
-      vertexShader:
-        'varying vec3 vNormal;varying vec3 vWorld;void main(){vNormal=normalize(mat3(modelMatrix)*normal);vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
-      fragmentShader: `varying vec3 vNormal;varying vec3 vWorld;uniform vec3 color;uniform vec3 sun;void main(){vec3 n=normalize(vNormal);float edge=pow(1.-abs(dot(n,normalize(cameraPosition-vWorld))),3.2);float day=.2+.8*smoothstep(-.4,.8,dot(n,sun));gl_FragColor=vec4(color*1.05,edge*day*.28);}`,
-      side: T.BackSide,
-      blending: T.AdditiveBlending,
-      transparent: true,
-      depthWrite: false,
-    }),
-  );
-  mesh.position.copy(p.position);
-  return mesh;
-}
-export function makeOcean(p: PlanetData) {
-  const material = new T.MeshStandardMaterial({
-    color: '#123c4d',
-    metalness: 0.48,
-    roughness: 0.3,
-    transparent: true,
-    opacity: 0.91,
-  });
-  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + 0.1, 128, 80), material);
-  mesh.position.copy(p.position);
-  return mesh;
-}
-export function makeClouds(p: PlanetData) {
-  const mesh = new T.Mesh(
-    new T.SphereGeometry(p.radius * 1.015, 64, 48),
-    makeShader({
-      uniforms: { tint: { value: new T.Color(p.atmosphere) } },
-      vertexShader:
-        'varying vec3 v;varying vec3 n;void main(){v=normalize(position);n=normal;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-      fragmentShader: `varying vec3 v;varying vec3 n;uniform vec3 tint;${glslNoise}void main(){float c=fbm(v*20.+vec3(11.,3.,6.));float a=smoothstep(.55,.76,c)*.24;gl_FragColor=vec4(mix(tint,vec3(1.),.65),a);}`,
-      transparent: true,
-      depthWrite: false,
-    }),
-  );
-  mesh.position.copy(p.position);
-  return mesh;
-}
-export function makeRings(p: PlanetData) {
-  const group = new T.Group();
-  group.position.copy(p.position);
-  group.rotation.set(0.39, 0, -0.38);
+export function makeAtmosphere(p: PlanetData, star: T.Vector3, color: T.Color) {
+  const air = atmosphereParameters(p);
   const material = makeShader({
-    uniforms: { color: { value: new T.Color('#b7a5af') } },
+    uniforms: {
+      center: { value: p.position.clone() },
+      star: { value: star.clone() },
+      sunColor: { value: color.clone() },
+      airColor: { value: new T.Color(p.atmosphere) },
+      bodyRadius: { value: p.radius },
+      outerRadius: { value: p.radius + air.height },
+      scaleHeight: { value: air.scale },
+      airSteps: { value: 3 },
+      sunDirection: { value: star.clone().sub(p.position).normalize() },
+    },
     vertexShader:
-      'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-    fragmentShader: `varying vec2 vUv;uniform vec3 color;void main(){float r=length(vUv-.5)*2.;float str=.55+.12*sin(r*180.)+.07*sin(r*450.);float gap=1.-smoothstep(.006,.012,abs(r-.73));float alpha=(.07+str*.16)*(1.-gap*.95);gl_FragColor=vec4(color*(.7+str*.5),alpha);}`,
+      'varying vec3 vWorld;void main(){vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
+    fragmentShader: `varying vec3 vWorld;uniform vec3 center,star,sunColor,airColor,sunDirection;uniform float bodyRadius,outerRadius,scaleHeight;uniform int airSteps;
+ vec2 sphere(vec3 ro,vec3 rd,float r){float b=dot(ro,rd),d=b*b-dot(ro,ro)+r*r;if(d<0.)return vec2(-1.);float root=sqrt(d);return vec2(-b-root,-b+root);}
+ void main(){vec3 ro=cameraPosition-center,rd=normalize(vWorld-cameraPosition);bool inside=length(ro)<outerRadius;if((!inside&&!gl_FrontFacing)||(inside&&gl_FrontFacing))discard;
+ vec2 shell=sphere(ro,rd,outerRadius);float begin=max(0.,shell.x),end=shell.y;vec2 ground=sphere(ro,rd,min(bodyRadius,length(ro)-.01));if(ground.x>0.)end=min(end,ground.x);if(end<=begin)discard;
+ float ds=(end-begin)/float(airSteps),column=0.,litColumn=0.;
+ for(int i=0;i<8;i++){if(i>=airSteps)break;vec3 samplePosition=ro+rd*(begin+(float(i)+.5)*ds);float density=exp(-max(0.,length(samplePosition)-bodyRadius)/scaleHeight);vec3 sunlight=sunDirection;float day=smoothstep(-.13,.18,dot(normalize(samplePosition),sunlight));column+=density*ds/scaleHeight;litColumn+=density*day*ds/scaleHeight;}
+ float opacity=1.-exp(-column*.12);float day=litColumn/max(column,.001);vec3 sunlight=normalize(star-cameraPosition);float mu=dot(rd,sunlight);float rayleigh=.65+.35*mu*mu;float mie=.48/pow(max(.08,1.52-1.44*mu),1.5);
+ vec3 scatter=(airColor*rayleigh+sunColor*mie*.035)*day;
+ scatter+=sunColor*vec3(.28,.085,.025)*pow(1.-day,2.)*day*.6;
+ scatter+=vec3(.002,.003,.008)*(1.-day);gl_FragColor=vec4(scatter,clamp(opacity,0.,.94));}`,
     side: T.DoubleSide,
     transparent: true,
     depthWrite: false,
   });
-  const geo = new T.RingGeometry(p.radius * 1.3, p.radius * 1.9, 180, 1);
+  material.userData.kind = 'atmosphere';
+  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + air.height, 64, 48), material);
+  mesh.position.copy(p.position);
+  mesh.renderOrder = 30;
+  return mesh;
+}
+export function makeOcean(p: PlanetData) {
+  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + 0.1, 192, 128), createOceanMaterial());
+  mesh.position.copy(p.position);
+  mesh.userData.oceanPlanet = p;
+  return mesh;
+}
+export function makeClouds(p: PlanetData, lighting: CelestialLighting) {
+  const w = 512,
+    h = 256,
+    data = new Uint8Array(w * h * 4);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const phi = (x / w) * Math.PI * 2,
+        theta = (y / h) * Math.PI;
+      const d = new T.Vector3(
+        -Math.cos(phi) * Math.sin(theta),
+        -Math.cos(theta),
+        Math.sin(phi) * Math.sin(theta),
+      );
+      let n = 0;
+      for (let octave = 0; octave < 3; octave++) {
+        const f = 18 * 2 ** octave;
+        n +=
+          (noise(d.x * f + 11, d.y * f + 3, d.z * f + 6, p.seed + 82) + 1) *
+          0.5 *
+          [0.57, 0.28, 0.15][octave];
+      }
+      const i = (y * w + x) * 4;
+      data[i] = data[i + 1] = data[i + 2] = 255;
+      data[i + 3] = T.MathUtils.smoothstep(n, 0.49, 0.72) * 150;
+    }
+  const texture = new T.DataTexture(data, w, h);
+  texture.wrapS = T.RepeatWrapping;
+  texture.minFilter = T.LinearMipmapLinearFilter;
+  texture.magFilter = T.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.needsUpdate = true;
+  const material = makeShader({
+    uniforms: {
+      ...lighting.uniforms,
+      clouds: { value: texture },
+      cloudCenter: { value: p.position.clone() },
+      cloudRadius: { value: p.radius + Math.max(p.radius * 0.04, p.amplitude * 1.15) },
+      sunColor: { value: lighting.point.color.clone() },
+    },
+    vertexShader:
+      'varying vec2 vUv;varying vec3 vWorld,vNormal;void main(){vUv=uv;vWorld=(modelMatrix*vec4(position,1.)).xyz;vNormal=normal;gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
+    fragmentShader: `varying vec2 vUv;varying vec3 vWorld,vNormal;uniform sampler2D clouds;uniform vec3 sunColor,cloudCenter;uniform float cloudRadius;${eclipseGLSL}void main(){float cameraAltitude=length(cameraPosition-cloudCenter)-cloudRadius;bool inside=cameraAltitude<0.;if((inside&&gl_FrontFacing)||(!inside&&!gl_FrontFacing))discard;float alpha=texture2D(clouds,vUv).a*smoothstep(0.,cloudRadius*.002,abs(cameraAltitude));vec3 sunlight=normalize(veStar-vWorld);float facing=max(0.,dot(normalize(vNormal),sunlight));float illumination=facing>.001?facing*veVisibility(vWorld):0.;
+float grazing=abs(dot(normalize(vNormal),normalize(cameraPosition-vWorld)));alpha*=smoothstep(.01,.12,grazing);gl_FragColor=vec4(vec3(.035,.045,.065)+sunColor*illumination*.95,alpha);}`,
+    side: T.DoubleSide,
+    transparent: true,
+    depthWrite: false,
+  });
+  material.userData.ownedTextures = [texture];
+  const cloudHeight = Math.max(p.radius * 0.04, p.amplitude * 1.15);
+  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + cloudHeight, 96, 64), material);
+  mesh.position.copy(p.position);
+  mesh.renderOrder = 20;
+  return mesh;
+}
+export function makeRings(p: PlanetData, lighting: CelestialLighting) {
+  const group = new T.Group();
+  group.position.copy(p.position);
+  group.rotation.set(0.39, 0, -0.38);
+  const data = new Uint8Array(512 * 4);
+  for (let i = 0; i < 512; i++) {
+    const t = i / 511;
+    const density = 0.52 + Math.sin(t * 87) * 0.12 + Math.sin(t * 307) * 0.05;
+    const gap = 1 - T.MathUtils.smoothstep(Math.abs(t - 0.43), 0.018, 0.037);
+    data[i * 4] = (0.76 + density * 0.2) * 255;
+    data[i * 4 + 1] = data[i * 4] * 0.96;
+    data[i * 4 + 2] = data[i * 4] * 0.93;
+    data[i * 4 + 3] =
+      (density * 0.32 + 0.04) *
+      (1 - gap * 0.94) *
+      T.MathUtils.smoothstep(t, 0, 0.03) *
+      (1 - T.MathUtils.smoothstep(t, 0.97, 1)) *
+      255;
+  }
+  const texture = new T.DataTexture(data, 512, 1);
+  texture.minFilter = T.LinearMipmapLinearFilter;
+  texture.magFilter = T.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.needsUpdate = true;
+  const material = makeShader({
+    uniforms: {
+      ...lighting.uniforms,
+      bands: { value: texture },
+      sunColor: { value: lighting.point.color.clone() },
+    },
+    vertexShader:
+      'varying vec2 vUv;varying vec3 vWorld,vNormal;void main(){vUv=uv;vWorld=(modelMatrix*vec4(position,1.)).xyz;vNormal=normalize(mat3(modelMatrix)*normal);gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
+    fragmentShader: `varying vec2 vUv;varying vec3 vWorld,vNormal;uniform sampler2D bands;uniform vec3 sunColor;${eclipseGLSL}void main(){float r=length(vUv-.5)*2.;float t=(r-.68421)/.31579;vec4 band=texture2D(bands,vec2(t,.5));float light=.12+abs(dot(normalize(vNormal),normalize(veStar-vWorld)))*veVisibility(vWorld);gl_FragColor=vec4(band.rgb*sunColor*light,band.a);}`,
+    side: T.DoubleSide,
+    transparent: true,
+    depthWrite: false,
+  });
+  material.userData.ownedTextures = [texture];
+  const geo = new T.RingGeometry(p.radius * 1.3, p.radius * 1.9, 192);
   const pos = geo.getAttribute('position'),
     uv = geo.getAttribute('uv');
   for (let i = 0; i < pos.count; i++)
     uv.setXY(i, pos.getX(i) / (p.radius * 3.8) + 0.5, pos.getY(i) / (p.radius * 3.8) + 0.5);
   geo.rotateX(Math.PI / 2);
-  group.add(new T.Mesh(geo, material));
+  const mesh = new T.Mesh(geo, material);
+  mesh.renderOrder = 10;
+  group.add(mesh);
   return group;
 }
+
 function plate(points: number[][], thickness: number, mat: T.Material) {
   const shape = new T.Shape();
   shape.moveTo(points[0][0], points[0][1]);
@@ -236,7 +313,7 @@ export class Spacecraft {
   flames: T.Mesh[] = [];
   lights: T.Sprite[] = [];
   constructor() {
-    const hull = new T.MeshStandardMaterial({ color: '#c1cdcf', metalness: 0.65, roughness: 0.56 });
+    const hull = new T.MeshStandardMaterial({ color: '#c1cdcf', metalness: 0.35, roughness: 0.48 });
     const dark = new T.MeshStandardMaterial({ color: '#182531', metalness: 0.7, roughness: 0.4 });
     const trim = new T.MeshStandardMaterial({ color: '#c88251', metalness: 0.55, roughness: 0.4 });
     const glowMat = new T.MeshStandardMaterial({
@@ -485,6 +562,10 @@ export class SpaceDust {
       }),
     );
     this.mesh.frustumCulled = false;
+    for (let i = 0; i < 180; i++) this.reset(i);
+  }
+  resetAll() {
+    this.rng = random(5);
     for (let i = 0; i < 180; i++) this.reset(i);
   }
   private reset(i: number) {

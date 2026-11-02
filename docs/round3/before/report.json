@@ -1,0 +1,1343 @@
+{
+  "stage": "before",
+  "browser": "154.0.8037.57",
+  "renderer": "Chromium / ANGLE SwiftShader (forced software)",
+  "viewport": [1280, 800],
+  "quality": "medium",
+  "sampling": "Frozen deterministic poses, 12 warmup frames, last 8 samples; CPU/submission and RAF timing, not hardware GPU timings",
+  "results": [
+    {
+      "scene": "render-orbit",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 3750,
+        "playTime": 0,
+        "position": [510.3728923167951, 1275.9322307919879, 5103.7289231679515],
+        "rotation": [
+          -0.12145262091738432, 0.049444021752185166, 0.006057524905014573, 0.9913464863393086
+        ],
+        "forward": [-0.09656090991705352, -0.2414022747926338, -0.9656090991705352],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 3750,
+          "arrivalClearance": 975,
+          "centerDistance": 5285.502101784345,
+          "arrivalGap": 2775,
+          "headingError": 0,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-orbit",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [511.93756242819467, 1283.1414298939544, 5119.375624281946],
+          "rotation": [
+            -0.148665291891978, 0.04925876597025213, 0.007414773772230855, 0.9876321309534576
+          ],
+          "shipDistance": 17.29855485293465,
+          "shipProjection": {
+            "x": -1.1211408329712994e-14,
+            "y": -0.23779826569445423,
+            "z": 0.9953354325641386,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 2,
+          "simulationTime": 0,
+          "frames": 21,
+          "sceneGeneration": 2,
+          "lastFrameMs": 350,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 209.89999999850988,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 776.5
+            },
+            {
+              "frameMs": 799.8999999999996,
+              "updateMs": 1.1000000014901161,
+              "submissionMs": 4
+            },
+            {
+              "frameMs": 33.400000000000546,
+              "updateMs": 0.3999999985098839,
+              "submissionMs": 1.4000000022351742
+            },
+            {
+              "frameMs": 683.1999999999998,
+              "updateMs": 2.199999999254942,
+              "submissionMs": 1.8999999985098839
+            },
+            {
+              "frameMs": 333.39999999999964,
+              "updateMs": 1.5,
+              "submissionMs": 2.300000000745058
+            },
+            {
+              "frameMs": 283.3000000000002,
+              "updateMs": 0.5,
+              "submissionMs": 1.9000000022351742
+            },
+            {
+              "frameMs": 333.3000000000002,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 1366.6000000000004,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.0999999977648258
+            },
+            {
+              "frameMs": 416.6999999999989,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.8999999985098839
+            },
+            {
+              "frameMs": 449.90000000000146,
+              "updateMs": 0.7999999970197678,
+              "submissionMs": 6.5
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1.5999999977648258
+            },
+            {
+              "frameMs": 333.39999999999964,
+              "updateMs": 1.300000000745058,
+              "submissionMs": 2
+            },
+            {
+              "frameMs": 366.60000000000036,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 1.300000000745058
+            },
+            {
+              "frameMs": 316.59999999999854,
+              "updateMs": 0.9000000022351742,
+              "submissionMs": 1.0999999977648258
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 1.300000000745058
+            }
+          ],
+          "textures": 16,
+          "geometries": 65,
+          "patches": 72,
+          "drawCalls": 79,
+          "triangles": 44018
+        },
+        "patches": 72
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 366.60000000000036,
+        "rafP95Ms": 1366.6000000000004,
+        "updateMedianMs": 0.8999999985098839,
+        "submissionMedianMs": 1.5999999977648258
+      }
+    },
+    {
+      "scene": "render-terminator",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 3749.9999999999995,
+        "playTime": 0,
+        "position": [-2581.081988980215, 0, -4588.590202631493],
+        "rotation": [0, 0.9673612399524154, 0, -0.25340132485392686],
+        "forward": [0.490261239632559, 0, 0.8715755371245493],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 3749.9999999999995,
+          "arrivalClearance": 975,
+          "centerDistance": 5264.7074260137,
+          "arrivalGap": 2774.9999999999995,
+          "headingError": 0,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-terminator",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [-2589.4164300539687, 3.2, -4603.40698676261],
+          "rotation": [
+            0.006967658140747787, 0.9669954795349563, 0.02659908121034384, -0.2533055135163051
+          ],
+          "shipDistance": 17.298554852934693,
+          "shipProjection": {
+            "x": -2.2130852900838525e-14,
+            "y": -0.23779826569441767,
+            "z": 0.9953354325641388,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 3,
+          "simulationTime": 0,
+          "frames": 40,
+          "sceneGeneration": 3,
+          "lastFrameMs": 433.2999999999993,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 416.60000000000036,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 721.2000000029802
+            },
+            {
+              "frameMs": 716.7000000000007,
+              "updateMs": 0.3999999985098839,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 16.69999999999891,
+              "updateMs": 0.4000000022351742,
+              "submissionMs": 1.2999999970197678
+            },
+            {
+              "frameMs": 16.600000000000364,
+              "updateMs": 0.3999999985098839,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 483.3000000000011,
+              "updateMs": 0.5,
+              "submissionMs": 1.0999999977648258
+            },
+            {
+              "frameMs": 366.6999999999989,
+              "updateMs": 0.7000000029802322,
+              "submissionMs": 4.199999999254942
+            },
+            {
+              "frameMs": 333.3000000000011,
+              "updateMs": 11.900000002235174,
+              "submissionMs": 6.699999999254942
+            },
+            {
+              "frameMs": 316.59999999999854,
+              "updateMs": 0.5,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 350.10000000000036,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 6.699999999254942
+            },
+            {
+              "frameMs": 366.5000000000018,
+              "updateMs": 1.300000000745058,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 416.6999999999971,
+              "updateMs": 16.299999997019768,
+              "submissionMs": 12.5
+            },
+            {
+              "frameMs": 466.6000000000022,
+              "updateMs": 1,
+              "submissionMs": 1.5
+            },
+            {
+              "frameMs": 483.2999999999993,
+              "updateMs": 0.5,
+              "submissionMs": 0.7000000029802322
+            },
+            {
+              "frameMs": 433.2999999999993,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 1
+            }
+          ],
+          "textures": 16,
+          "geometries": 65,
+          "patches": 72,
+          "drawCalls": 79,
+          "triangles": 44018
+        },
+        "patches": 72
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 416.6999999999971,
+        "rafP95Ms": 483.2999999999993,
+        "updateMedianMs": 1,
+        "submissionMedianMs": 1.5
+      }
+    },
+    {
+      "scene": "render-night",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 3750.0000000000005,
+        "playTime": 0,
+        "position": [4118.843757186091, -2316.8496134171764, -2316.8496134171764],
+        "rotation": [
+          0.11406747131983966, 0.8408869166580789, -0.19503797889013466, 0.4917905978873712
+        ],
+        "forward": [-0.7825855808712295, 0.44020438924006666, 0.4402043892400668],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 3750.0000000000005,
+          "arrivalClearance": 975,
+          "centerDistance": 5263.1224723061005,
+          "arrivalGap": 2775.0000000000005,
+          "headingError": 0,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-night",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [4133.375460467291, -2321.459815722084, -2325.023696512851],
+          "rotation": [
+            0.10050180538695228, 0.8459318447453025, -0.17184275912033406, 0.49474111138825283
+          ],
+          "shipDistance": 17.29855485293513,
+          "shipProjection": {
+            "x": 2.989708887923301e-14,
+            "y": -0.2377982656944057,
+            "z": 0.9953354325641388,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 4,
+          "simulationTime": 0,
+          "frames": 59,
+          "sceneGeneration": 4,
+          "lastFrameMs": 349.90000000000146,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 566.7000000000007,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1089.5999999977648
+            },
+            {
+              "frameMs": 1100,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.300000000745058
+            },
+            {
+              "frameMs": 16.599999999998545,
+              "updateMs": 0.9000000022351742,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 566.7000000000007,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 1.800000000745058
+            },
+            {
+              "frameMs": 349.90000000000146,
+              "updateMs": 2.2000000029802322,
+              "submissionMs": 1.3999999985098839
+            },
+            {
+              "frameMs": 266.7000000000007,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 1.300000000745058
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 1.7999999970197678,
+              "submissionMs": 2
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.199999999254942
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.5,
+              "submissionMs": 4.199999999254942
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 1.199999999254942
+            },
+            {
+              "frameMs": 349.8999999999978,
+              "updateMs": 0.5,
+              "submissionMs": 0.5999999977648258
+            },
+            {
+              "frameMs": 333.2999999999993,
+              "updateMs": 2,
+              "submissionMs": 1.3999999985098839
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 349.90000000000146,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 0.8999999985098839
+            }
+          ],
+          "textures": 17,
+          "geometries": 66,
+          "patches": 72,
+          "drawCalls": 81,
+          "triangles": 47988
+        },
+        "patches": 72
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 350,
+        "rafP95Ms": 350,
+        "updateMedianMs": 0.8000000007450581,
+        "submissionMedianMs": 1.199999999254942
+      }
+    },
+    {
+      "scene": "render-desert",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 3393.7000740668745,
+        "playTime": 0,
+        "position": [21056.434752092042, 5236.940273563749, -13237.851608914332],
+        "rotation": [
+          -0.14328606327645277, -0.27233830023160066, -0.04105071889206753, 0.9505870779555882
+        ],
+        "forward": [0.5059985462556725, -0.29477112641614733, -0.8106019085953979],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 1,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-1",
+          "name": "PYRA"
+        },
+        "navigation": {
+          "targetId": "0-1",
+          "targetName": "PYRA",
+          "targetPosition": [23446.395710768113, 3844.6606136858463, -17066.532400405027],
+          "distance": 3393.7000740668745,
+          "arrivalClearance": 882.3620192573871,
+          "centerDistance": 4723.256571311301,
+          "arrivalGap": 2511.3380548094874,
+          "headingError": 0,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-desert",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [21048.332262027066, 5245.009199945138, -13224.871544130261],
+          "rotation": [
+            -0.16936973654308607, -0.27110657631428253, -0.048523556894987704, 0.9462877897599296
+          ],
+          "shipDistance": 17.298554852934647,
+          "shipProjection": {
+            "x": -1.195883555169386e-13,
+            "y": -0.2377982656945499,
+            "z": 0.9953354325641386,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 5,
+          "simulationTime": 0,
+          "frames": 76,
+          "sceneGeneration": 5,
+          "lastFrameMs": 316.7000000000007,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 633.2999999999993,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 726.6999999992549
+            },
+            {
+              "frameMs": 733.2999999999993,
+              "updateMs": 0.5,
+              "submissionMs": 2.099999997764826
+            },
+            {
+              "frameMs": 16.599999999998545,
+              "updateMs": 0.4000000022351742,
+              "submissionMs": 0.7999999970197678
+            },
+            {
+              "frameMs": 600,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 3.199999999254942
+            },
+            {
+              "frameMs": 550,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 5.600000001490116
+            },
+            {
+              "frameMs": 16.700000000000728,
+              "updateMs": 0.20000000298023224,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 299.90000000000146,
+              "updateMs": 1.1000000014901161,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 333.3999999999978,
+              "updateMs": 0.5,
+              "submissionMs": 1.800000000745058
+            },
+            {
+              "frameMs": 250,
+              "updateMs": 0.9000000022351742,
+              "submissionMs": 1.3999999985098839
+            },
+            {
+              "frameMs": 316.6000000000022,
+              "updateMs": 1,
+              "submissionMs": 1.199999999254942
+            },
+            {
+              "frameMs": 316.7000000000007,
+              "updateMs": 0.9000000022351742,
+              "submissionMs": 2.099999997764826
+            },
+            {
+              "frameMs": 316.59999999999854,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 3.399999998509884
+            },
+            {
+              "frameMs": 316.7000000000007,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1.5
+            }
+          ],
+          "textures": 16,
+          "geometries": 62,
+          "patches": 72,
+          "drawCalls": 76,
+          "triangles": 17418
+        },
+        "patches": 72
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 316.6000000000022,
+        "rafP95Ms": 333.3999999999978,
+        "updateMedianMs": 0.9000000022351742,
+        "submissionMedianMs": 1.5
+      }
+    },
+    {
+      "scene": "render-near",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 450,
+        "playTime": 0,
+        "position": [191.72188959051851, 479.3047239762963, 1917.2188959051853],
+        "rotation": [
+          -0.12145262091738432, 0.049444021752185166, 0.006057524905014573, 0.9913464863393086
+        ],
+        "forward": [-0.09656090991705352, -0.2414022747926338, -0.9656090991705352],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 450,
+          "arrivalClearance": 975,
+          "centerDistance": 1985.5021017843446,
+          "arrivalGap": 0,
+          "headingError": 0,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-near",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [193.28655970191804, 486.51392307826274, 1932.8655970191805],
+          "rotation": [
+            -0.148665291891978, 0.04925876597025213, 0.007414773772230855, 0.9876321309534576
+          ],
+          "shipDistance": 17.298554852935013,
+          "shipProjection": {
+            "x": -4.671420137380167e-16,
+            "y": -0.2377982656944237,
+            "z": 0.9953354325641388,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 6,
+          "simulationTime": 0,
+          "frames": 94,
+          "sceneGeneration": 6,
+          "lastFrameMs": 433.40000000000146,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 566.7000000000044,
+              "updateMs": 1,
+              "submissionMs": 478.3999999985099
+            },
+            {
+              "frameMs": 499.8999999999942,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 16.700000000004366,
+              "updateMs": 117.29999999701977,
+              "submissionMs": 4.600000001490116
+            },
+            {
+              "frameMs": 583.2999999999956,
+              "updateMs": 1,
+              "submissionMs": 1.5
+            },
+            {
+              "frameMs": 466.6000000000058,
+              "updateMs": 1.0999999977648258,
+              "submissionMs": 1.199999999254942
+            },
+            {
+              "frameMs": 366.6999999999971,
+              "updateMs": 0.5,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 516.6999999999971,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.3999999985098839
+            },
+            {
+              "frameMs": 449.90000000000146,
+              "updateMs": 0.5,
+              "submissionMs": 1.9000000022351742
+            },
+            {
+              "frameMs": 533.4000000000015,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.5
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 449.90000000000146,
+              "updateMs": 1.1000000014901161,
+              "submissionMs": 2
+            },
+            {
+              "frameMs": 450,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1.4000000022351742
+            },
+            {
+              "frameMs": 433.40000000000146,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.3999999985098839
+            }
+          ],
+          "textures": 16,
+          "geometries": 119,
+          "patches": 138,
+          "drawCalls": 133,
+          "triangles": 64754
+        },
+        "patches": 138
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 449.90000000000146,
+        "rafP95Ms": 533.4000000000015,
+        "updateMedianMs": 0.8000000007450581,
+        "submissionMedianMs": 1.4000000022351742
+      }
+    },
+    {
+      "scene": "render-atmosphere",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 44.99999999999977,
+        "playTime": 0,
+        "position": [-37.38070116340222, 513.0594902844415, 1508.998500836593],
+        "rotation": [
+          0.37544912914582157, 0.5355096087895553, 0.44498206064353807, 0.6117666025725269
+        ],
+        "forward": [-0.9893500423365176, -0.017209862074476223, -0.14453482063540324],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 44.99999999999977,
+          "arrivalClearance": 975,
+          "centerDistance": 1594.2721953661123,
+          "arrivalGap": 0,
+          "headingError": 83.15722658736907,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-atmosphere",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [-21.017229145610138, 514.3826430093337, 1514.4506609946905],
+          "rotation": [
+            0.35848571021183473, 0.5230716676261697, 0.4595384705629005, 0.6218588426430908
+          ],
+          "shipDistance": 17.298554852934974,
+          "shipProjection": {
+            "x": -2.569281075559095e-15,
+            "y": -0.23779826569441848,
+            "z": 0.9953354325641388,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 7,
+          "simulationTime": 0,
+          "frames": 113,
+          "sceneGeneration": 7,
+          "lastFrameMs": 366.59999999999854,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 483.29999999999563,
+              "updateMs": 8.5,
+              "submissionMs": 1125.699999999255
+            },
+            {
+              "frameMs": 1150,
+              "updateMs": 0.5,
+              "submissionMs": 2.7000000029802322
+            },
+            {
+              "frameMs": 16.599999999998545,
+              "updateMs": 132.19999999925494,
+              "submissionMs": 9.300000000745058
+            },
+            {
+              "frameMs": 650,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 2.400000002235174
+            },
+            {
+              "frameMs": 450,
+              "updateMs": 1.300000000745058,
+              "submissionMs": 1.8999999985098839
+            },
+            {
+              "frameMs": 433.3000000000029,
+              "updateMs": 2,
+              "submissionMs": 3.400000002235174
+            },
+            {
+              "frameMs": 416.59999999999854,
+              "updateMs": 1,
+              "submissionMs": 2.400000002235174
+            },
+            {
+              "frameMs": 533.4000000000015,
+              "updateMs": 1.3999999985098839,
+              "submissionMs": 2.699999999254942
+            },
+            {
+              "frameMs": 916.5999999999985,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 3.100000001490116
+            },
+            {
+              "frameMs": 200,
+              "updateMs": 1.0999999977648258,
+              "submissionMs": 8.5
+            },
+            {
+              "frameMs": 216.70000000000437,
+              "updateMs": 1.800000000745058,
+              "submissionMs": 12.099999997764826
+            },
+            {
+              "frameMs": 383.29999999999563,
+              "updateMs": 1,
+              "submissionMs": 4.700000002980232
+            },
+            {
+              "frameMs": 366.70000000000437,
+              "updateMs": 1.199999999254942,
+              "submissionMs": 10
+            },
+            {
+              "frameMs": 366.59999999999854,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 4
+            }
+          ],
+          "textures": 17,
+          "geometries": 116,
+          "patches": 225,
+          "drawCalls": 131,
+          "triangles": 73268
+        },
+        "patches": 225
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 383.29999999999563,
+        "rafP95Ms": 916.5999999999985,
+        "updateMedianMs": 1.0999999977648258,
+        "submissionMedianMs": 4.700000002980232
+      }
+    },
+    {
+      "scene": "render-surface",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "landed",
+        "system": 0,
+        "score": 0,
+        "altitude": 0.6099999999996726,
+        "playTime": 0,
+        "position": [-36.339894374281506, 498.77415629949024, 1466.9828126455598],
+        "rotation": [
+          0.37544912914582157, 0.5355096087895553, 0.44498206064353807, 0.6117666025725269
+        ],
+        "forward": [-0.9893500423365176, -0.017209862074476223, -0.14453482063540324],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 0.6099999999996726,
+          "arrivalClearance": 975,
+          "centerDistance": 1549.8821953661122,
+          "arrivalGap": 0,
+          "headingError": 83.15722658736907,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-surface",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [-19.976422356489422, 500.0973090243824, 1472.4349728036573],
+          "rotation": [
+            0.35848571021183473, 0.5230716676261697, 0.4595384705629005, 0.6218588426430908
+          ],
+          "shipDistance": 17.29855485293497,
+          "shipProjection": {
+            "x": -4.554634633945642e-15,
+            "y": -0.2377982656944169,
+            "z": 0.9953354325641388,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 8,
+          "simulationTime": 0,
+          "frames": 132,
+          "sceneGeneration": 8,
+          "lastFrameMs": 433.3000000000029,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 566.5999999999985,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 674.9000000022352
+            },
+            {
+              "frameMs": 683.4000000000015,
+              "updateMs": 0.5,
+              "submissionMs": 1.4000000022351742
+            },
+            {
+              "frameMs": 16.599999999998545,
+              "updateMs": 171.30000000074506,
+              "submissionMs": 4.299999997019768
+            },
+            {
+              "frameMs": 583.3000000000029,
+              "updateMs": 1,
+              "submissionMs": 1.699999999254942
+            },
+            {
+              "frameMs": 366.6999999999971,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 1.699999999254942
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 1,
+              "submissionMs": 2.900000002235174
+            },
+            {
+              "frameMs": 433.3000000000029,
+              "updateMs": 0.5,
+              "submissionMs": 1.699999999254942
+            },
+            {
+              "frameMs": 383.40000000000146,
+              "updateMs": 0.5,
+              "submissionMs": 2.100000001490116
+            },
+            {
+              "frameMs": 433.29999999999563,
+              "updateMs": 1.800000000745058,
+              "submissionMs": 3.699999999254942
+            },
+            {
+              "frameMs": 433.20000000000437,
+              "updateMs": 0.8999999985098839,
+              "submissionMs": 1.699999999254942
+            },
+            {
+              "frameMs": 450,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 3
+            },
+            {
+              "frameMs": 450,
+              "updateMs": 0.9000000022351742,
+              "submissionMs": 2.2999999970197678
+            },
+            {
+              "frameMs": 383.29999999999563,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 1.5999999977648258
+            },
+            {
+              "frameMs": 433.3000000000029,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 1.5999999977648258
+            }
+          ],
+          "textures": 17,
+          "geometries": 142,
+          "patches": 297,
+          "drawCalls": 155,
+          "triangles": 79172
+        },
+        "patches": 297
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 433.3000000000029,
+        "rafP95Ms": 450,
+        "updateMedianMs": 0.8000000007450581,
+        "submissionMedianMs": 2.100000001490116
+      }
+    },
+    {
+      "scene": "render-cruise",
+      "snapshot": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 3750,
+        "playTime": 0,
+        "position": [510.3728923167951, 1275.9322307919879, 5103.7289231679515],
+        "rotation": [
+          -0.12145262091738432, 0.049444021752185166, 0.006057524905014573, 0.9913464863393086
+        ],
+        "forward": [-0.09656090991705352, -0.2414022747926338, -0.9656090991705352],
+        "angularVelocity": [0, 0, 0],
+        "speed": 900,
+        "velocity": [-86.90481892534817, -217.2620473133704, -869.0481892534816],
+        "actualSpeed": 900,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 3750,
+          "arrivalClearance": 975,
+          "centerDistance": 5285.502101784345,
+          "arrivalGap": 2775,
+          "headingError": 0,
+          "closingSpeed": 900,
+          "eta": 3.0833333333333335,
+          "stoppingDistance": 2891.25,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "render-cruise",
+        "quality": "medium",
+        "cockpit": false,
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [511.93756242819467, 1283.1414298939544, 5119.375624281946],
+          "rotation": [
+            -0.148665291891978, 0.04925876597025213, 0.007414773772230855, 0.9876321309534576
+          ],
+          "shipDistance": 17.29855485293465,
+          "shipProjection": {
+            "x": -8.965879151942982e-15,
+            "y": -0.19016973158560221,
+            "z": 0.9953354325641386,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 9,
+          "simulationTime": 0,
+          "frames": 150,
+          "sceneGeneration": 9,
+          "lastFrameMs": 350,
+          "backend": "WebGL2",
+          "pixelRatio": 1,
+          "viewport": [1280, 800],
+          "fov": 69.45454545454545,
+          "performanceSamples": [
+            {
+              "frameMs": 1066.5999999999985,
+              "updateMs": 5.800000000745058,
+              "submissionMs": 1498.699999999255
+            },
+            {
+              "frameMs": 1516.5999999999985,
+              "updateMs": 0.8000000007450581,
+              "submissionMs": 1.300000000745058
+            },
+            {
+              "frameMs": 16.69999999999709,
+              "updateMs": 1.3999999985098839,
+              "submissionMs": 2.300000000745058
+            },
+            {
+              "frameMs": 733.3000000000029,
+              "updateMs": 1,
+              "submissionMs": 1.800000000745058
+            },
+            {
+              "frameMs": 283.3000000000029,
+              "updateMs": 0.6000000014901161,
+              "submissionMs": 0.6999999992549419
+            },
+            {
+              "frameMs": 283.29999999999563,
+              "updateMs": 0.7999999970197678,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 416.59999999999854,
+              "updateMs": 1.800000000745058,
+              "submissionMs": 2.399999998509884
+            },
+            {
+              "frameMs": 416.70000000000437,
+              "updateMs": 1.699999999254942,
+              "submissionMs": 1.2000000029802322
+            },
+            {
+              "frameMs": 433.29999999999563,
+              "updateMs": 0.5999999977648258,
+              "submissionMs": 1.6000000014901161
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 1
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 0.6999999992549419,
+              "submissionMs": 0.8999999985098839
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 1.699999999254942,
+              "submissionMs": 2.400000002235174
+            },
+            {
+              "frameMs": 350,
+              "updateMs": 1,
+              "submissionMs": 3.400000002235174
+            }
+          ],
+          "textures": 16,
+          "geometries": 65,
+          "patches": 72,
+          "drawCalls": 79,
+          "triangles": 44018
+        },
+        "patches": 72
+      },
+      "performance": {
+        "samples": 8,
+        "rafMedianMs": 350,
+        "rafP95Ms": 433.29999999999563,
+        "updateMedianMs": 1,
+        "submissionMedianMs": 1.6000000014901161
+      }
+    }
+  ],
+  "errors": []
+}

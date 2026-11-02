@@ -1,0 +1,122 @@
+{
+  "viewport": [1280, 800],
+  "quality": "medium",
+  "renderer": "forced ANGLE SwiftShader, Linux Chromium 154",
+  "samples_per_scene": 8,
+  "timing_caution": "Frozen pose samples; noisy software rasterization and scheduling, not a GPU benchmark or desktop performance claim. RAF durations include driver/presentation stalls. CPU submission timings are not GPU execution durations.",
+  "luma_caution": "sRGB screenshot ROI mean, only an aid to compare day/night exposure; not a visual quality score.",
+  "results": [
+    {
+      "scene": "render-orbit",
+      "before_raf_median_ms": 366.6,
+      "after_raf_median_ms": 450,
+      "after_cpu_update_median_ms": 1,
+      "after_submission_median_ms": 2.6,
+      "before_triangles": 44018,
+      "after_triangles": 84810,
+      "planet_roi_luma_srgb": {
+        "before": 0.24173345399419027,
+        "after": 0.30928012033405955
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-terminator",
+      "before_raf_median_ms": 416.7,
+      "after_raf_median_ms": 416.7,
+      "after_cpu_update_median_ms": 1.4,
+      "after_submission_median_ms": 2,
+      "before_triangles": 44018,
+      "after_triangles": 84810,
+      "planet_roi_luma_srgb": {
+        "before": 0.16033605627572015,
+        "after": 0.18472420345557977
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-night",
+      "before_raf_median_ms": 350,
+      "after_raf_median_ms": 483.3,
+      "after_cpu_update_median_ms": 0.7,
+      "after_submission_median_ms": 1.6,
+      "before_triangles": 47988,
+      "after_triangles": 88780,
+      "planet_roi_luma_srgb": {
+        "before": 0.14359453916727186,
+        "after": 0.03990399159404502
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-desert",
+      "before_raf_median_ms": 316.6,
+      "after_raf_median_ms": 333.4,
+      "after_cpu_update_median_ms": 0.7,
+      "after_submission_median_ms": 1,
+      "before_triangles": 17418,
+      "after_triangles": 23562,
+      "planet_roi_luma_srgb": {
+        "before": 0.18347762631324135,
+        "after": 0.23426448822319046
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-near",
+      "before_raf_median_ms": 449.9,
+      "after_raf_median_ms": 683.4,
+      "after_cpu_update_median_ms": 0.8,
+      "after_submission_median_ms": 1.5,
+      "before_triangles": 64754,
+      "after_triangles": 130890,
+      "planet_roi_luma_srgb": {
+        "before": 0.36028940309247154,
+        "after": 0.468945482976277
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-atmosphere",
+      "before_raf_median_ms": 383.3,
+      "after_raf_median_ms": 633.4,
+      "after_cpu_update_median_ms": 1,
+      "after_submission_median_ms": 2.4,
+      "before_triangles": 73268,
+      "after_triangles": 144268,
+      "planet_roi_luma_srgb": {
+        "before": 0.4569872304768821,
+        "after": 0.2699107019365771
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-surface",
+      "before_raf_median_ms": 433.3,
+      "after_raf_median_ms": 683.4,
+      "after_cpu_update_median_ms": 1,
+      "after_submission_median_ms": 3,
+      "before_triangles": 79172,
+      "after_triangles": 159260,
+      "planet_roi_luma_srgb": {
+        "before": 0.5395894881505688,
+        "after": 0.5034353937424352
+      },
+      "same_pose": true
+    },
+    {
+      "scene": "render-cruise",
+      "before_raf_median_ms": 350,
+      "after_raf_median_ms": 533.3,
+      "after_cpu_update_median_ms": 0.9,
+      "after_submission_median_ms": 1.5,
+      "before_triangles": 44018,
+      "after_triangles": 84810,
+      "planet_roi_luma_srgb": {
+        "before": 0.21231202861897844,
+        "after": 0.25244632384410554
+      },
+      "same_pose": true
+    }
+  ]
+}
