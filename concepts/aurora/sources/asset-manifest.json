@@ -1,0 +1,76 @@
+{
+  "algorithm": "SHA-256",
+  "selected_master": "originals/aurora-v01-reference-sheet.png",
+  "master_bytes_equal_generator_output": true,
+  "files": {
+    "originals/aurora-v01-reference-sheet.png": {
+      "sha256": "4a862604cc07f45d3162d8b4e7e7bc3f6908eed379778877e5deb4da4248426b",
+      "bytes": 1764003,
+      "native_dimensions": [1536, 1024]
+    },
+    "review/01-initial-sheet.png": {
+      "sha256": "e8f1320da918bca834756a27866cfad83e96d1ccbbfd3c8959c0d288f13ef570",
+      "bytes": 2388521,
+      "native_dimensions": [1536, 1024]
+    },
+    "review/02-intermediate-sheet.png": {
+      "sha256": "2f506d88fd80d9937b9d60b0c6277a0218d6de610ae4e5eac15343a85e888f7e",
+      "bytes": 2012066,
+      "native_dimensions": [1536, 1024]
+    },
+    "review/03-side-tail-correction.png": {
+      "sha256": "525001ee90813780aa9c68b0f96d9964dae9bd345b9faf4102813c2082c0db6e",
+      "bytes": 1826500,
+      "native_dimensions": [1536, 1024]
+    },
+    "review/04-registered-sheet.png": {
+      "sha256": "ccc59700cdc76b73b8c0e9c2f4bb7106c04b607667b7fb380940aaf1cd7f4039",
+      "bytes": 1750179,
+      "native_dimensions": [1536, 1024]
+    },
+    "views/01-top.png": {
+      "sha256": "060b131fe652d9e3d602e9a7a8ad3c1baafe0aed0e7ac174174d669ed449f357",
+      "bytes": 403159,
+      "native_dimensions": [724, 574]
+    },
+    "views/02-front.png": {
+      "sha256": "0b83af85e28815dd4885c501e054d678c4707995a03a31d82eaae905143e5e3a",
+      "bytes": 398760,
+      "native_dimensions": [789, 574]
+    },
+    "views/03-port.png": {
+      "sha256": "d6dd8a4fe7cba90899e72ec52d0fcb6f6097be12cc9011815800009887b75a2f",
+      "bytes": 255283,
+      "native_dimensions": [724, 373]
+    },
+    "views/04-perspective.png": {
+      "sha256": "7d39e35cc80b33f540d67d45a338cf083d11b99f2069dd5df663fc3fb85b8e0a",
+      "bytes": 335697,
+      "native_dimensions": [789, 373]
+    }
+  },
+  "view_extraction": {
+    "tool": "ImageMagick 7; crop and repage only; no resize, redraw or palette transform",
+    "coordinates": "[x,y,width,height], top-left origin in master pixels",
+    "regions": {
+      "01-top.png": [10, 61, 724, 574],
+      "02-front.png": [736, 61, 789, 574],
+      "03-port.png": [10, 636, 724, 373],
+      "04-perspective.png": [736, 636, 789, 373]
+    },
+    "verification": "Decoded RGB pixels of every extracted view equal corresponding master pixels, exhaustively checked with Pillow; Pillow used for reading and comparison only."
+  },
+  "manual_review": {
+    "performed": true,
+    "method": "Visual review of the full generated sheet and individual view panels; generative corrections for identified side-view contradictions",
+    "checked": [
+      "four independent wings in top/front/perspective",
+      "same single forward dorsal canopy",
+      "two aft flanking engine nacelles; no front-facing exhausts",
+      "fore forward sweep and aft backward sweep",
+      "aft wing tips ahead of exhausts",
+      "side opposite wings/nacelle overlap explicitly noted"
+    ],
+    "limitation": "No mathematically solved projection, scale proof, 3D structure or runtime integration verification. Remaining tolerances and open design decisions documented in README.md and design-spec.json."
+  }
+}

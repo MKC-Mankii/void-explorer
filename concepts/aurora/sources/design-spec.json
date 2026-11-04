@@ -1,0 +1,94 @@
+{
+  "name": "AURORA",
+  "revision": "01",
+  "status": "selected-concept; exact construction linework pending",
+  "date": "2026-11-04",
+  "units": "nominal metres, not runtime engine units",
+  "coordinate_convention": {
+    "s": "aft from nose",
+    "x": "starboard positive",
+    "h": "dorsal positive"
+  },
+  "topology": {
+    "wings": 4,
+    "canopies": 1,
+    "main_engine_nacelles": 2,
+    "tail_fins": 0,
+    "wingtip_engines": 0,
+    "layout": "two longitudinally separate bilateral wing pairs; high shorter forward-swept fore pair and lower longer aft-swept aft pair",
+    "symmetry": "port and starboard mirror about x=0"
+  },
+  "targets": {
+    "length": 18,
+    "aft_wingspan": 18.6,
+    "fore_wingspan": 12.6,
+    "max_fuselage_width_approx": 4,
+    "canopy": {
+      "length_approx": 4.8,
+      "width_approx": 1.2,
+      "longitudinal_extent_fraction": [0.16, 0.43]
+    },
+    "fore_wing_root_extent_fraction": [0.36, 0.52],
+    "aft_wing_root_extent_fraction": [0.61, 0.81],
+    "wing_pair_height_offset_approx": 1.4,
+    "engine_lateral_centers_approx": [-1.8, 1.8],
+    "engine_location": "flanking aft fuselage; exhausts face aft; aft wing tips terminate ahead of exhausts",
+    "fuselage_height": null,
+    "fore_dihedral_degrees": null,
+    "wing_thickness": null
+  },
+  "authority": {
+    "planform": "originals/aurora-v01-reference-sheet.png: TOP; nominal targets resolve scale discrepancies",
+    "height_layout": "FRONT plus PORT, interpreted as concept intent",
+    "volume_material": "PERSPECTIVE; not a precision projection",
+    "warning": "Images are generated concept illustrations, not geometrically solved orthographic drawings. Do not independently trace four views into incompatible geometry. Exact cross-sections, wing root stations and dihedral remain to be fixed in 2D before modeling."
+  },
+  "view_mapping": {
+    "top": {
+      "nose": "up",
+      "port": "image left",
+      "starboard": "image right",
+      "visible_wings": ["F-P", "F-S", "A-P", "A-S"]
+    },
+    "front": {
+      "from": "nose looking aft",
+      "port": "image right",
+      "starboard": "image left",
+      "visible_wings": ["F-S", "F-P", "A-S", "A-P"],
+      "engines": "front caps/housings; exhausts not visible from nose"
+    },
+    "port": {
+      "nose": "left",
+      "visible_wings": ["F-P", "A-P"],
+      "overlapped_wings": ["F-S", "A-S"],
+      "engines": "E-P visible, E-S overlaps"
+    },
+    "perspective": {
+      "camera": "elevated front-port",
+      "near_side": "port",
+      "visible_wings": ["F-P", "F-S", "A-P", "A-S"]
+    }
+  },
+  "materials": {
+    "hull": "matte ivory/light gray",
+    "structure": "charcoal blue-gray",
+    "canopy": "smoked petrol teal",
+    "accents": "restrained copper leading edges",
+    "exhaust": "cyan",
+    "numeric_shader_values_defined": false
+  },
+  "open_decisions": [
+    "exact 2D construction outlines and cross-sections",
+    "final absolute scale against astronaut and cockpit viewpoint",
+    "wing root thickness, precise stations and fore dihedral",
+    "underside, landing gear, entry access and ground clearance",
+    "final material parameters under game lighting"
+  ],
+  "scope": {
+    "blender_model_created": false,
+    "mesh_asset_created": false,
+    "runtime_files_changed": false,
+    "game_asset_replaced": false,
+    "online_game_deployed": false
+  }
+}
