@@ -1,0 +1,29 @@
+{
+  "blender_version": "4.3.2",
+  "generator": "assets/aurora/build-aurora.py",
+  "exporter": "assets/aurora/export-aurora.py",
+  "meters_per_game_unit": 10,
+  "scale_to_game": 0.1,
+  "simulation_landing_datum_m": 6.1,
+  "nominal_dimensions_m": {
+    "length": 18,
+    "aft_wingspan": 18.6,
+    "fore_wingspan": 12.6
+  },
+  "triangles": 2584,
+  "mesh_primitives": 29,
+  "materials": 6,
+  "textures": 0,
+  "non_manifold_edges": 0,
+  "glb_bytes": 163824,
+  "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "source_blend_sha256": "10a03758181c3596177da49a8ee6942f8fcc728fc708de947e4a8b742fbdd72f",
+  "wing_nodes": ["Wing_Aft_Port", "Wing_Aft_Starboard", "Wing_Fore_Port", "Wing_Fore_Starboard"],
+  "exhaust_nodes": ["Exhaust_Port", "Exhaust_Starboard"],
+  "ground_contacts": [
+    "Contact_Aft_Port",
+    "Contact_Aft_Starboard",
+    "Contact_Fore_Port",
+    "Contact_Fore_Starboard"
+  ]
+}

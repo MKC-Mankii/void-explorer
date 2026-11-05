@@ -1,4 +1,5 @@
 import { Simulation } from './simulation';
+import { SHIP_LAYOUT } from './ship-layout';
 import { UNIVERSE, distanceLabel, altitude } from './universe';
 import { ContactProjection, arrivalClearance } from './navigation';
 function etaLabel(seconds: number | null) {
@@ -66,10 +67,10 @@ export class UI {
  <section class="welcome" id="welcome"><div class="eyebrow"><span class="short-line"></span>一场没有边界的独自远行</div><h1>宇宙，<br/>等你抵达<span>。</span></h1><p>驶向遥远的世界，穿过暮色与云层。<br/>在一颗无人知晓的行星上，留下你的足迹。</p><div class="welcome-actions"><button class="primary" data-action="start" id="start-button">${hasSave ? '继续旅程' : '开始航行'}<span>↗</span></button><button class="subtle" data-action="help">飞行指南 ${icon('help')}</button></div><div class="welcome-caption"><span class="status-dot"></span>程序化宇宙 · 5 个星系 · 15 颗可探索行星</div></section>
  <section class="mission game-only"><div class="mission-index" id="mission-index">01</div><div><div class="eyebrow" id="mission-title">首次接触</div><p id="mission-text">按 F 扫描 VESPER，开始你的探索记录</p></div><span class="mission-check" id="mission-check">◇</span></section>
  <div class="context-hint game-only" id="context-hint"><kbd>L</kbd><span>启动自动着陆</span></div>
- <div class="cockpit" id="cockpit" hidden><div class="cockpit-beam left"></div><div class="cockpit-beam right"></div><div class="cockpit-console"><span>KESTREL / MK. IV</span><span>FLIGHT ASSIST ONLINE</span></div></div>
+ <div class="cockpit" id="cockpit" hidden><div class="cockpit-beam left"></div><div class="cockpit-beam right"></div><div class="cockpit-console"><span>AURORA / EXPLORER</span><span>FLIGHT ASSIST ONLINE</span></div></div>
  <footer class="telemetry game-only"><div class="radar"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="12"/><path d="M50 2v96M2 50h96"/><path class="radar-craft" d="m50 41-5 14 5-3 5 3Z"/><circle class="radar-target" id="radar-target" cx="50" cy="50" r="2"/></svg><span>SYS · ONLINE</span></div><div class="speed-block"><span class="eyebrow" id="speed-caption">相对速度</span><div><strong id="speed">0000</strong><span class="unit">m/s</span></div><div class="thrust-bar"><i id="thrust-fill"></i></div></div><div class="telemetry-item"><span class="eyebrow">距地表</span><strong id="altitude">29.0 <small>km</small></strong><span class="meta" id="altitude-label">轨道空间</span></div><div class="telemetry-item"><span class="eyebrow">航行状态</span><strong id="drive-state">巡航待命</strong><span class="meta" id="drive-meta">惯性辅助 · 已启用</span></div><div class="telemetry-item score-block"><span class="eyebrow">探索点数</span><strong id="score">0000</strong><span class="meta" id="discovery-count">0 / 15 个世界</span></div><button class="view-button" data-action="view"><span class="view-icon">⌖</span><span id="view-label">追踪视角</span><kbd>C</kbd></button></footer>
  <div class="bottom-controls game-only"><span><kbd>W</kbd><kbd>S</kbd>推进</span><span><kbd>Shift</kbd>加速</span><span><kbd>X</kbd>制动</span><span><kbd>F</kbd>扫描</span><span><kbd>L</kbd>着陆</span><span class="mouse-hint">右键锁定 · T 对准 · G 远航 · Esc 暂停</span></div>
- <div class="idle-footer"><span>KESTREL MK. IV<span class="separator">/</span>深空勘探飞船</span><span>向未知，前进 <span class="arrow">↗</span></span></div>
+ <div class="idle-footer"><span>AURORA<span class="separator">/</span>深空勘探飞船</span><span>向未知，前进 <span class="arrow">↗</span></span></div>
  <div id="notification" role="status" aria-live="polite"></div><div class="scan-overlay" id="scan-overlay"></div><div class="jump-overlay" id="jump-overlay"><div>SPACETIME TRANSIT</div><strong>正在折叠星空</strong><span>目标坐标已锁定</span></div><div id="modal-root"></div><button id="photo-exit" data-action="photo" hidden>退出摄影模式 P</button>`;
     this.root.addEventListener('click', (e) => {
       const button = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
@@ -243,8 +244,10 @@ export class UI {
         ? ['E', '离舱探索 · Space 起飞']
         : s.mode === 'walking'
           ? [
-              s.position.distanceTo(s.shipPosition) < 7 ? 'E' : 'F',
-              s.position.distanceTo(s.shipPosition) < 7 ? '返回飞船' : '采集地表样本',
+              s.position.distanceTo(s.shipPosition) < SHIP_LAYOUT.boardingRadius ? 'E' : 'F',
+              s.position.distanceTo(s.shipPosition) < SHIP_LAYOUT.boardingRadius
+                ? '返回飞船'
+                : '采集地表样本',
             ]
           : s.mode === 'landing'
             ? ['↓', '着陆引导中，请稍候']

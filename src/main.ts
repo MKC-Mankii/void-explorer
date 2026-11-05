@@ -13,7 +13,6 @@ import {
   makeClouds,
   makeOcean,
   makeRings,
-  Spacecraft,
   SurfaceDetails,
   SpaceDust,
 } from './visuals';
@@ -22,6 +21,8 @@ import { UI } from './ui';
 import { pickPlanet, projectContact, raySphereDistance } from './navigation';
 import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
 import { AudioEngine } from './audio';
+import { Spacecraft } from './spacecraft';
+import { SHIP_LAYOUT } from './ship-layout';
 import './style.css';
 const SAVE_KEY = 'void-explorer-save-v1',
   SETTINGS_KEY = 'void-explorer-settings-v1';
@@ -68,10 +69,12 @@ class Game {
   private cameraRig = new T.Quaternion();
   private diagnosticScenario: string = 'player';
   private captureFrozen = false;
+  private diagnosticShipView: string | null = null;
   private performanceSamples: { frameMs: number; updateMs: number; submissionMs: number }[] = [];
   private readonly diagnosticsEnabled =
     import.meta.env.DEV && new URLSearchParams(location.search).has('test');
   private renderedFrames = 0;
+  private shipReadyFrame = Infinity;
   private sceneGeneration = 0;
   private renderedScene = -1;
   private renderedSimulationTime = -1;
@@ -125,10 +128,26 @@ class Game {
     this.composer.addPass(new OutputPass());
     this.applyQuality();
     this.scene.add(this.sky, this.ship.group, this.dust.mesh, this.details.group);
-    this.ship.group.scale.setScalar(0.3);
     this.scene.add(this.lighting.group);
     this.lighting.bindGroup(this.ship.group);
     this.ui = new UI(this.sim, hasSave);
+    const startButton = document.querySelector<HTMLButtonElement>('#start-button')!;
+    const startLabel = startButton.innerHTML;
+    startButton.disabled = true;
+    startButton.textContent = '正在装载 AURORA…';
+    this.ship.ready.then((loaded) => {
+      startButton.disabled = !loaded;
+      if (loaded) {
+        this.shipReadyFrame = this.renderedFrames + 1;
+        startButton.innerHTML = startLabel;
+        this.lighting.bindGroup(this.ship.group);
+        this.ship.update(0, 0, this.sim.mode, 0);
+        this.updateCamera(1, true);
+      } else {
+        startButton.textContent = 'AURORA 加载失败 · 请刷新重试';
+        this.ui.toast('飞船资源未能加载，请检查网络后刷新页面重试');
+      }
+    });
     this.ui.onAction = (a, v) => this.action(a, v);
     this.sim.onEvent = (message) => {
       this.ui.toast(message);
@@ -152,6 +171,14 @@ class Game {
       (window as unknown as { __VOID__: unknown }).__VOID__ = {
         snapshot: () => this.snapshot(),
         scenarios: [...scenarioNames],
+        shipView: (view: string | null) => {
+          if (view !== null && !['top', 'front', 'port', 'rear', 'quarter'].includes(view))
+            throw new Error('Unknown ship inspection view');
+          this.diagnosticShipView = view;
+          this.cockpit = false;
+          this.updateCamera(1, true);
+          return this.snapshot();
+        },
         probeTerrain: () => {
           const planet = this.sim.nearest,
             up = this.sim.position.clone().sub(planet.position).normalize(),
@@ -201,12 +228,23 @@ class Game {
   }
   private snapshot() {
     const shipProjection = this.ship.group.position.clone().project(this.camera);
+    const asset = this.ship.observe();
     return {
       schemaVersion: 2,
       ...observeSimulation(this.sim),
       scenario: this.diagnosticScenario,
       quality: this.settings.quality,
       cockpit: this.cockpit,
+      ship: {
+        ...asset,
+        rendered: this.renderedFrames >= this.shipReadyFrame,
+        inspectionView: this.diagnosticShipView,
+        groundClearances: asset.groundContacts.map((coordinates) => {
+          const point = new T.Vector3().fromArray(coordinates);
+          const radial = point.sub(this.sim.nearest.position);
+          return radial.length() - surfaceRadius(this.sim.nearest, radial.clone().normalize());
+        }),
+      },
       modal: this.ui.modal,
       paused:
         !this.ui.started ||
@@ -236,10 +274,12 @@ class Game {
       rendering: {
         ready:
           this.renderedFrames > 0 &&
+          this.renderedFrames >= this.shipReadyFrame &&
           this.renderedScene === this.sceneGeneration &&
           this.renderedSimulationTime === this.sim.playTime &&
           !this.jumping &&
-          !this.disposed,
+          !this.disposed &&
+          this.ship.state === 'ready',
         renderedScene: this.renderedScene,
         simulationTime: this.renderedSimulationTime,
         frames: this.renderedFrames,
@@ -436,6 +476,7 @@ class Game {
   private action(action: string, value?: string) {
     switch (action) {
       case 'start':
+        if (this.ship.state !== 'ready') return;
         this.ui.start();
         this.audio.start();
         this.lastTime = performance.now();
@@ -637,23 +678,57 @@ class Game {
         desired.addScaledVector(new T.Vector3(0, 1, 0).applyQuaternion(s.rotation), bob);
       }
     } else if (this.cockpit) {
-      desired = target.add(new T.Vector3(0, 0.45, -0.6).applyQuaternion(this.cameraRig));
+      desired = target.add(this.ship.cockpitOffset.clone().applyQuaternion(this.cameraRig));
       rotation = this.cameraRig.clone();
     } else {
-      desired = target.add(new T.Vector3(0, 3.2, 17).applyQuaternion(this.cameraRig));
+      desired = target.add(new T.Vector3(...SHIP_LAYOUT.chase).applyQuaternion(this.cameraRig));
       rotation = this.cameraRig
         .clone()
-        .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), -0.055));
+        .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), -0.1));
     }
     if (!walking) {
       const planet = s.nearest;
       const radial = desired.clone().sub(planet.position);
-      const floor = surfaceRadius(planet, radial.clone().normalize()) + 0.6;
+      const floor = surfaceRadius(planet, radial.clone().normalize()) + (this.cockpit ? 0.18 : 0.6);
       if (radial.length() < floor)
         desired.copy(planet.position).addScaledVector(radial.normalize(), floor);
     }
     this.camera.position.copy(desired);
     this.camera.quaternion.copy(rotation);
+    const near = walking || this.cockpit ? 0.008 : 0.04;
+    if (this.camera.near !== near) {
+      this.camera.near = near;
+      this.camera.updateProjectionMatrix();
+    }
+    this.camera.up.set(0, 1, 0);
+    if (this.diagnosticShipView) {
+      const offsets: Record<string, number[]> = {
+        top: [0, 2.6, 0],
+        front: [0, 0.3, -2.8],
+        port: [-2.8, 0.3, 0],
+        rear: [0, 0.5, 2.8],
+        quarter: [-1.35, 1.1, -1.6],
+      };
+      const center = this.ship.targetOffset
+        .clone()
+        .applyQuaternion(s.shipRotation)
+        .add(s.shipPosition);
+      this.camera.position
+        .copy(center)
+        .add(
+          new T.Vector3()
+            .fromArray(offsets[this.diagnosticShipView])
+            .applyQuaternion(s.shipRotation),
+        );
+      this.camera.up
+        .set(
+          0,
+          this.diagnosticShipView === 'top' ? 0 : 1,
+          this.diagnosticShipView === 'top' ? -1 : 0,
+        )
+        .applyQuaternion(s.shipRotation);
+      this.camera.lookAt(center);
+    }
     const fov = this.cockpit ? 68 : 58 + Math.min(Math.abs(s.speed) / 1100, 1) * 14;
     if (snap) {
       this.camera.fov = fov;
@@ -675,7 +750,15 @@ class Game {
         ? 0
         : Math.max(0.12, Math.min(1, Math.abs(s.speed) / 320)),
       this.captureFrozen ? 0 : this.elapsed,
+      s.mode,
+      this.captureFrozen ? 0 : dt,
     );
+    if (s.mode === 'landed' || s.mode === 'walking') {
+      this.ship.conformGear((point) => {
+        const radial = point.clone().sub(s.nearest.position);
+        return radial.length() - surfaceRadius(s.nearest, radial.clone().normalize());
+      });
+    }
     this.updateCamera(dt);
     this.sky.position.copy(this.camera.position);
     this.dust.update(

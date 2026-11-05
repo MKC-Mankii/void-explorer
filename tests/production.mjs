@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { existsSync } from 'node:fs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 
 const url = process.env.VOID_PRODUCTION_URL ?? 'http://127.0.0.1:4173/';
@@ -24,13 +25,26 @@ page.on('console', (message) => {
 });
 page.on('requestfailed', (r) => errors.push(`Request failed: ${r.url()}`));
 try {
+  const assetResponse = page.waitForResponse((response) => response.url().endsWith('.glb'));
   await page.goto(`${url}?test=1&scenario=approach`);
+  const model = await assetResponse;
+  assert.equal(model.status(), 200);
+  const glbSha256 = createHash('sha256')
+    .update(await model.body())
+    .digest('hex');
+  assert.equal(
+    glbSha256,
+    createHash('sha256')
+      .update(await readFile('assets/aurora/aurora.glb'))
+      .digest('hex'),
+  );
   await page.waitForSelector('#start-button');
   await page.evaluate(
     () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
   );
   assert.equal(await page.evaluate(() => typeof window.__VOID__), 'undefined');
   assert.equal(await page.locator('#target-name').textContent(), 'VESPER');
+  assert((await page.locator('.idle-footer').textContent()).includes('AURORA'));
   await page.locator('[data-action=start]').click();
   await page.keyboard.press('KeyF');
   await page.waitForFunction(() => document.querySelector('#score').textContent === '0100');
@@ -50,6 +64,8 @@ try {
   assert.deepEqual(errors, []);
   const checks = [
     'Production WebGL scene renders',
+    'Delivered Blender GLB matches the source export SHA-256',
+    'AURORA identity shown in the production interface',
     'Development API absent',
     'Scenario query ignored by production',
     'Selected-body scan awards score',
@@ -59,7 +75,7 @@ try {
   ];
   await writeFile(
     'test-results/round2/production-report.json',
-    JSON.stringify({ url, browser: await browser.version(), checks, errors }, null, 2),
+    JSON.stringify({ url, browser: await browser.version(), glbSha256, checks, errors }, null, 2),
   );
   checks.forEach((c) => console.log('PASS', c));
 } finally {

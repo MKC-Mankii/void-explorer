@@ -34,6 +34,7 @@ jobs:
       - run: npm run test:production
       - run: npm run test:rendering
       - run: npm run test:render-flight
+      - run: npm run test:aurora
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,10 +1,12 @@
 # VOID EXPLORER
 
-**[第二轮在线试玩](https://mkc-mankii.github.io/void-explorer/)** · [第二轮 Draft PR #2](https://github.com/MKC-Mankii/void-explorer/pull/2) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
+**[AURORA 集成预览](https://mkc-mankii.github.io/void-explorer/aurora/)** · [第二轮默认试玩](https://mkc-mankii.github.io/void-explorer/) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
 
-一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。驾驶 **KESTREL MK. IV**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。
+一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。本分支驾驶 **AURORA**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。默认线上第二轮仍保留旧飞船；AURORA 使用上方独立预览入口。
 
-![实际浏览器画面](docs/screenshots/orbit.png)
+飞船已在 Blender 4.3.2 制作并以 GLB 集成，源文件、导出与编辑方法见 [资产目录](assets/aurora/README.md)，游戏内截图、必要尺度调整与验证限制见 [集成报告](docs/AURORA-INTEGRATION.md)。第四轮 [概念设计](concepts/aurora/README.md)保留不变。
+
+![AURORA 实际浏览器画面](docs/aurora/real-flight.png)
 
 第二轮以独立分支和叠加 Draft PR 保留完整历史，未合并 PR #1 或 PR #2。游戏改动与测试证据见 [第二轮开发记录](docs/ROUND2.md)，发布方式、入口和源码来源见 [第二轮发布记录](docs/ROUND2-DELIVERY.md)。线上实际源码 SHA 可在 [build-info.json](https://mkc-mankii.github.io/void-explorer/build-info.json) 核对。
 
@@ -18,7 +20,7 @@
 - 轨道扫描、自动选择附近陆地并下降、着陆、第一人称步行与采样、登舱、起飞。
 - 星图、行星航向辅助、跨星系跃迁、探索日志与发现积分。
 - 追踪 / 驾驶舱视角、摄影模式、画质设置、程序音效、浏览器自动存档。
-- 自制程序化飞船、星空、恒星、星环、海洋、大气光晕、岩石和晶体，无需加载外部模型或媒体。
+- 自制 Blender AURORA 飞船，通过仓库内的 GLB 加载；星空、恒星、行星、大气、岩石和晶体继续程序化生成，不依赖外部媒体服务。
 
 这是第一版可玩的探索游戏，范围是有限星系目录，尚无战斗、建造、任务剧情或无限宇宙。具体限制与验证范围见 [开发记录](docs/DEVELOPMENT.md)。
 

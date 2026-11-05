@@ -1,0 +1,74 @@
+{
+  "asset_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "blender": "4.3.2",
+  "manual_blender_file_reopened": true,
+  "logic_tests_passed": 35,
+  "exploration_checks_passed": 15,
+  "navigation_checks_passed": 16,
+  "production_checks_passed": 9,
+  "aurora_browser_check_groups_passed": 6,
+  "normal_browser_errors": [],
+  "real_landing_contact_centres_max_radius_error_metres": 0.00023722173182250117,
+  "contact_caution": "Sampled four exported contact centres against the procedural collision surface at this real landing; not a test of every footpad corner or all terrain.",
+  "inspections": [
+    {
+      "view": "top",
+      "raf_median_ms": 500,
+      "draw_calls": 37,
+      "triangles": 3634
+    },
+    {
+      "view": "front",
+      "raf_median_ms": 400,
+      "draw_calls": 37,
+      "triangles": 3634
+    },
+    {
+      "view": "port",
+      "raf_median_ms": 533.4000000000015,
+      "draw_calls": 62,
+      "triangles": 25010
+    },
+    {
+      "view": "quarter",
+      "raf_median_ms": 433.3000000000029,
+      "draw_calls": 37,
+      "triangles": 3634
+    },
+    {
+      "view": "rear",
+      "raf_median_ms": 583.3999999999942,
+      "draw_calls": 65,
+      "triangles": 86258
+    }
+  ],
+  "timing_caution": "Linux Chromium forced SwiftShader at 1440x900 DPR1 medium inspection views. Whole-frame RAF includes software rasterization and scheduling; CPU submission is not GPU time. Different camera scene coverage is not a controlled comparison.",
+  "load_wall_ms": 3178.3000000002794,
+  "load_caution": "Wall time from spacecraft object construction to attached model; includes game startup/main-thread blocking, not isolated download, decode or GPU timing.",
+  "rendering_scenes_passed": 8,
+  "inherited_real_flight_passed": true,
+  "source_sha256": {
+    "src/audio.ts": "05347b5bee15ed90bfb292763b8a5b6c9a0d5e936449a42db03db3651aba15d4",
+    "src/diagnostics.ts": "6e718b0dff7fa1a1fdfdb406bc6855b2222146c6f3dbee3b37144f701b27a115",
+    "src/main.ts": "3712b55a5213a67327b371dbc316b918ba0ec7692032773c1efec42db31cdc46",
+    "src/navigation.ts": "9e32753f4e17b5cb1926cf16c0a6a0c7e32f48cb87efb84e87e06f79ff362f0b",
+    "src/planet-materials.ts": "a307978bcfbab37fa8b87c225c6d61cf2dd9d693af5832eb4964fd0bca5261b7",
+    "src/rendering.ts": "8593a41f9c16a0b36688f92480106f87be9c0ff24011bc6e220433d9bfe1c585",
+    "src/ship-layout.ts": "885a8f84d39a0fa895c0f578319b3f24f84525c75f7fa43c03e29271abafe2ee",
+    "src/simulation.ts": "1484c3c0a9720f0a5c2d03a6ead479a74b5fff91289cf97433665de27347c864",
+    "src/spacecraft.ts": "faeda890737677770fe1fb66792f922a76e7e3ceffc8d0b5b0e3e690075b44f1",
+    "src/style.css": "0e003b812e50d74fea0ece8bd04d005c809f0ffcd69f6b6053687d3ccc75a049",
+    "src/terrain.ts": "fbf6376115cbebed5ee540431be816631550978bfd92d32244641055b2bddf41",
+    "src/ui.ts": "cd3320bbe959fb1978155ce63e8d5647d94a666cb66bbf4ddd91315509de8e49",
+    "src/universe.ts": "a6d176a0b975cda4a759b9d241ebbcc253954e6de9696f8840eed9ef00bb2781",
+    "src/visuals.ts": "f9fc78d26a08878cf64b4053e9565a481e3f9fbcb67910b2b4f1bc2f445a6354",
+    "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+  },
+  "unchanged_from_concept_branch": {
+    "src/navigation.ts": true,
+    "src/universe.ts": true,
+    "src/terrain.ts": true,
+    "src/rendering.ts": true,
+    "src/planet-materials.ts": true
+  }
+}
