@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { PerspectiveCamera, Vector3 } from 'three';
+import { PerspectiveCamera, Vector2, Vector3 } from 'three';
 import { Simulation, NO_INPUT } from '../src/simulation';
 import { applyScenario, observeSimulation, scenarioNames } from '../src/diagnostics';
 import {
   FLIGHT,
   pickPlanet,
+  pickPlanetAtScreen,
   projectContact,
   routeObstacle,
   arrivalClearance,
@@ -158,6 +159,29 @@ describe('target and route continuity', () => {
   });
 });
 describe('visible navigation and observation', () => {
+  it('distinguishes a free cursor ray from the reticle and respects physical occlusion', () => {
+    const sim = new Simulation();
+    const planet = {
+      ...sim.selected,
+      position: new Vector3(300, 0, -1000),
+      radius: 40,
+      amplitude: 0,
+    };
+    const system = { ...sim.system, star: new Vector3(1e6, 0, 0), planets: [planet] };
+    const camera = new PerspectiveCamera(60, 16 / 9, 0.01, 100000);
+    camera.updateMatrixWorld();
+    const projected = planet.position.clone().project(camera);
+    expect(pickPlanetAtScreen(system, camera, new Vector2())).toBe(null);
+    expect(pickPlanetAtScreen(system, camera, new Vector2(projected.x, projected.y))).toBe(0);
+    const hidden = { ...planet, position: new Vector3(0, 0, -10000) };
+    expect(
+      pickPlanetAtScreen(
+        { ...system, planets: [hidden], star: new Vector3(0, 0, -5000) },
+        camera,
+        new Vector2(),
+      ),
+    ).toBe(null);
+  });
   it('locks only the first physical planet under a ray', () => {
     const s = new Simulation(),
       p = s.system.planets[0];

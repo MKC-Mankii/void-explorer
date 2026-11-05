@@ -46,6 +46,17 @@ try {
   assert.equal(await page.locator('#target-name').textContent(), 'VESPER');
   assert((await page.locator('.idle-footer').textContent()).includes('AURORA'));
   await page.locator('[data-action=start]').click();
+  await page.keyboard.press('Tab');
+  await page.waitForFunction(() => document.querySelector('#target-name').textContent === 'PYRA');
+  await page.keyboard.press('KeyV');
+  await page.waitForFunction(() => document.querySelector('#target-name').textContent === 'VESPER');
+  await page.mouse.click(640, 400);
+  await page.waitForFunction(() => !!document.pointerLockElement);
+  await page.keyboard.press('Tab');
+  await page.waitForFunction(() => document.querySelector('#target-name').textContent === 'PYRA');
+  await page.mouse.click(640, 400, { button: 'right' });
+  await page.waitForFunction(() => document.querySelector('#target-name').textContent === 'VESPER');
+  assert(await page.evaluate(() => !!document.pointerLockElement));
   await page.keyboard.press('KeyF');
   await page.waitForFunction(() => document.querySelector('#score').textContent === '0100');
   await page.keyboard.press('KeyG');
@@ -66,6 +77,8 @@ try {
     'Production WebGL scene renders',
     'Delivered Blender GLB matches the source export SHA-256',
     'AURORA identity shown in the production interface',
+    'V selects the reticle planet in the production build',
+    'Captured right-click selects the planet without losing mouse capture',
     'Development API absent',
     'Scenario query ignored by production',
     'Selected-body scan awards score',

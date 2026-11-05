@@ -1,4 +1,4 @@
-import { MathUtils, Vector3, PerspectiveCamera } from 'three';
+import { MathUtils, Vector2, Vector3, PerspectiveCamera, Raycaster } from 'three';
 import { PlanetData, SystemData, altitude } from './universe';
 
 export const FLIGHT = {
@@ -70,6 +70,13 @@ export function pickPlanet(system: SystemData, origin: Vector3, direction: Vecto
     }
   });
   return index;
+}
+/** NDC (0,0) is the reticle; a free cursor uses its actual canvas coordinates. */
+export function pickPlanetAtScreen(system: SystemData, camera: PerspectiveCamera, ndc: Vector2) {
+  camera.updateMatrixWorld();
+  const ray = new Raycaster();
+  ray.setFromCamera(ndc, camera);
+  return pickPlanet(system, ray.ray.origin, ray.ray.direction);
 }
 /** A blocked direct course is reported instead of silently flying through another world. */
 export function routeObstacle(system: SystemData, origin: Vector3, target: PlanetData) {

@@ -1,0 +1,23 @@
+{
+  "before": {
+    "target": 1,
+    "marker": {
+      "x": 738.328125,
+      "y": 320.703125,
+      "width": 64.9375,
+      "height": 61,
+      "top": 320.703125,
+      "right": 803.265625,
+      "bottom": 381.703125,
+      "left": 738.328125
+    }
+  },
+  "afterMarker": {
+    "target": 1,
+    "message": "目的地已切换 · PYRA · 按 T 对准航向"
+  },
+  "afterEmptySky": {
+    "target": 0,
+    "message": "已锁定 VESPER · T 航向辅助，G 远航引导"
+  }
+}

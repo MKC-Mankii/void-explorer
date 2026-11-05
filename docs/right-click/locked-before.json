@@ -1,0 +1,15 @@
+{
+  "target": 0,
+  "locked": true,
+  "modal": null,
+  "message": "已锁定 VESPER · T 航向辅助，G 远航引导",
+  "events": [
+    {
+      "name": "mousedown",
+      "button": 2,
+      "target": "universe",
+      "prevented": true,
+      "locked": true
+    }
+  ]
+}

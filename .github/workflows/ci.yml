@@ -27,6 +27,7 @@ jobs:
           node --input-type=module -e 'for(let i=0;i<50;i++){try{const r=await fetch("http://127.0.0.1:5173");if(r.ok)process.exit(0);}catch{}await new Promise(r=>setTimeout(r,200));}process.exit(1);'
       - run: npm run test:e2e
       - run: npm run test:navigation
+      - run: npm run test:right-click
       - name: Start production preview server
         run: |
           npm run preview -- --port 4173 > /tmp/void-preview.log 2>&1 &
