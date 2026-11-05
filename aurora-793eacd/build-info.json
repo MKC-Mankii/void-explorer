@@ -1,0 +1,23 @@
+{
+  "round": 5,
+  "stage": "AURORA model and game integration",
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_commit": "793eacdbe4153723cc5f2160e6d944023d7bfa15",
+  "source_branch": "feat/aurora-integration",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/5",
+  "concept_source_commit": "645ba3aefbe4aa362685f70c8e5871aa7f6276d7",
+  "renderer": "Three.js / WebGL2",
+  "blender_version": "4.3.2",
+  "glb_file": "assets/aurora-DTA2SnWJ.glb",
+  "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "source_blend_sha256": "10a03758181c3596177da49a8ee6942f8fcc728fc708de947e4a8b742fbdd72f",
+  "preview_path": "/aurora/",
+  "default_site_still_round": 2,
+  "preserved_archives": [
+    "/round1/",
+    "/round3/"
+  ],
+  "asset_manifest": "./asset-manifest.json",
+  "built_at": "2026-11-05T12:49:59.110576+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42029889014"
+}

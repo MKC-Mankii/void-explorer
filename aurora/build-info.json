@@ -2,9 +2,9 @@
   "round": 5,
   "stage": "AURORA model and game integration",
   "source_repository": "https://github.com/MKC-Mankii/void-explorer",
-  "source_commit": "793eacdbe4153723cc5f2160e6d944023d7bfa15",
-  "source_branch": "feat/aurora-integration",
-  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/5",
+  "source_commit": "d60189172e28a18d84bcc56e1834c68c28748058",
+  "source_branch": "fix/right-click-targeting",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/6",
   "concept_source_commit": "645ba3aefbe4aa362685f70c8e5871aa7f6276d7",
   "renderer": "Three.js / WebGL2",
   "blender_version": "4.3.2",
@@ -15,9 +15,13 @@
   "default_site_still_round": 2,
   "preserved_archives": [
     "/round1/",
-    "/round3/"
+    "/round3/",
+    "/aurora-793eacd/"
   ],
   "asset_manifest": "./asset-manifest.json",
-  "built_at": "2026-11-05T12:49:59.110576+00:00",
-  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42029889014"
+  "built_at": "2026-11-05T16:08:01.503233+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42061365027",
+  "revision": "right-click targeting fix",
+  "previous_source_commit": "793eacdbe4153723cc5f2160e6d944023d7bfa15",
+  "previous_preview_archive": "/aurora-793eacd/"
 }
