@@ -33,7 +33,9 @@ const controls = [
   ['F', '行星扫描 / 地表采样'],
   ['C', '切换驾驶舱视角'],
   ['T / G', '航向辅助 / 远航引导'],
-  ['鼠标右键 / Tab', '准星锁定 / 切换目标'],
+  ['鼠标右键', '捕获后锁定准星；自由鼠标点选行星'],
+  ['Tab', '切换当前星系目标'],
+  ['V', '锁定准星内行星（右键不可用时）'],
   ['M', '星图与跃迁'],
   ['P', '摄影模式（隐藏界面）'],
   ['Esc', '释放鼠标 / 暂停'],
@@ -62,7 +64,7 @@ export class UI {
  <div class="flight-status"><span class="status-dot"></span><span id="flight-status">飞行系统待命</span><span class="tiny" id="fps"></span></div>
  <div id="target-marker" class="target-marker"><i></i><span id="marker-name">VESPER</span><small id="marker-distance"></small></div>
  <div id="contact-markers" class="game-only"></div><div id="velocity-marker" hidden><i>⊕</i><small>运动方向</small></div>
- <div class="reticle" id="reticle"><i></i><b></b><span></span></div><div id="offscreen" class="offscreen" hidden>◇ 目标在后方 · 按 T 对准</div>
+ <div class="reticle" id="reticle"><i></i><b></b><span></span></div><small id="lock-candidate" hidden></small><div id="offscreen" class="offscreen" hidden>◇ 目标在后方 · 按 T 对准</div>
  <section class="target-panel game-only"><div class="panel-heading"><span class="eyebrow">NAVIGATION / 目的地</span><span class="pill" id="target-index">01</span></div><div class="planet-name" id="target-name">VESPER</div><div class="planet-sub" id="target-sub">暮光之境</div><div class="target-range" id="target-range">37.5 km</div><dl class="navigation-data"><div><dt>航向偏差</dt><dd id="target-bearing">—</dd></div><div><dt>接近速度</dt><dd id="target-closure">—</dd></div><div><dt>近空 ETA</dt><dd id="target-eta">—</dd></div><div><dt>探索记录</dt><dd id="target-survey">等待扫描</dd></div></dl><div class="navigation-actions"><button data-action="align" id="align-button">航向辅助 <kbd>T</kbd></button><button data-action="cruise" id="cruise-button">远航引导 <kbd>G</kbd></button></div><button class="text-button" data-action="cycle">切换目的地 <span>Tab ↗</span></button></section>
  <section class="welcome" id="welcome"><div class="eyebrow"><span class="short-line"></span>一场没有边界的独自远行</div><h1>宇宙，<br/>等你抵达<span>。</span></h1><p>驶向遥远的世界，穿过暮色与云层。<br/>在一颗无人知晓的行星上，留下你的足迹。</p><div class="welcome-actions"><button class="primary" data-action="start" id="start-button">${hasSave ? '继续旅程' : '开始航行'}<span>↗</span></button><button class="subtle" data-action="help">飞行指南 ${icon('help')}</button></div><div class="welcome-caption"><span class="status-dot"></span>程序化宇宙 · 5 个星系 · 15 颗可探索行星</div></section>
  <section class="mission game-only"><div class="mission-index" id="mission-index">01</div><div><div class="eyebrow" id="mission-title">首次接触</div><p id="mission-text">按 F 扫描 VESPER，开始你的探索记录</p></div><span class="mission-check" id="mission-check">◇</span></section>
@@ -105,6 +107,17 @@ export class UI {
   scan() {
     this.scanUntil = performance.now() + 2200;
     this.el('scan-overlay').classList.add('active');
+  }
+  aimTarget(name: string | null, pointerLocked: boolean) {
+    const show = this.started && !this.modal && !this.photo && this.sim.mode === 'flight';
+    this.el('lock-candidate').hidden = !show;
+    this.el('reticle').classList.toggle('lockable', show && name !== null);
+    this.text(
+      'lock-candidate',
+      name
+        ? `${pointerLocked ? '右键 / V' : 'V'} · 锁定 ${name}`
+        : `${pointerLocked ? '右键 / V' : 'V'} · 准星未对准行星`,
+    );
   }
   update() {
     const s = this.sim,
@@ -332,7 +345,7 @@ export class UI {
       '<button class="modal-close" data-action="close" aria-label="关闭">× <kbd>Esc</kbd></button>';
     let content = '';
     if (this.modal === 'help')
-      content = `<div class="eyebrow">PILOT HANDBOOK / 飞行指南</div><h2>你的星际旅程</h2><p class="modal-description">先扫描，再着陆。在地表采集样本，返回飞船，继续寻找下一个世界。</p><div class="help-grid">${controls.map(([key, label]) => `<div><kbd>${key}</kbd><span>${label}</span></div>`).join('')}</div><div class="tip">松开 W 保持巡航；X 制动，转向后运动方向会逐渐跟随船头。<br/>右键锁定准星内行星；T 渐进对准；G 远航至近空并自动减速，手动驾驶可接管。<br/>L 为最近天体寻找陆地；F 始终扫描所选行星。<br/>航路被天体遮挡时需先手动绕行；ETA 按当前接近速度估算。<br/>地表离舱后为第一人称。点击画面捕获鼠标，Esc 可随时释放。</div>`;
+      content = `<div class="eyebrow">PILOT HANDBOOK / 飞行指南</div><h2>你的星际旅程</h2><p class="modal-description">先扫描，再着陆。在地表采集样本，返回飞船，继续寻找下一个世界。</p><div class="help-grid">${controls.map(([key, label]) => `<div><kbd>${key}</kbd><span>${label}</span></div>`).join('')}</div><div class="tip">松开 W 保持巡航；X 制动，转向后运动方向会逐渐跟随船头。<br/>捕获鼠标后，右键 / V 锁定中央准星内行星；自由鼠标可右键点选行星或标签。<br/>T 渐进对准；G 远航至近空并自动减速，手动驾驶可接管。<br/>L 为最近天体寻找陆地；F 始终扫描所选行星。<br/>航路被天体遮挡时需先手动绕行；ETA 按当前接近速度估算。<br/>地表离舱后为第一人称。点击画面捕获鼠标，Esc 可随时释放。</div>`;
     if (this.modal === 'pause')
       content = `<div class="eyebrow">FLIGHT PAUSED</div><h2>星空会等你。</h2><p class="modal-description">航行已暂停，探索进度保存在此浏览器中。</p><button class="primary" data-action="resume">继续航行 <span>↗</span></button><div class="pause-links"><button data-action="help">飞行指南</button><button data-action="settings">设置</button><button data-action="map">打开星图</button></div>`;
     if (this.modal === 'settings')

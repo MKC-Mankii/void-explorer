@@ -537,6 +537,24 @@ dt {
 .playing .reticle {
   opacity: 0.65;
 }
+.reticle.lockable {
+  opacity: 1;
+}
+.reticle.lockable > i,
+.reticle.lockable > b {
+  border-color: #8fdfd0;
+}
+#lock-candidate {
+  position: absolute;
+  top: calc(50% + 25px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #a9cbc5;
+  text-shadow: 0 1px 5px #050911;
+  white-space: nowrap;
+}
 .reticle > i,
 .reticle > b {
   position: absolute;

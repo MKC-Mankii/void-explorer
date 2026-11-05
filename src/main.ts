@@ -18,7 +18,7 @@ import {
 } from './visuals';
 import { CelestialLighting, airState, stellarColor, disposeMaterialResources } from './rendering';
 import { UI } from './ui';
-import { pickPlanet, projectContact, raySphereDistance } from './navigation';
+import { pickPlanetAtScreen, projectContact, raySphereDistance } from './navigation';
 import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
 import { AudioEngine } from './audio';
 import { Spacecraft } from './spacecraft';
@@ -89,6 +89,9 @@ class Game {
   private jumping = false;
   private saveWarning = false;
   private lockSuppressedUntil = 0;
+  private lockAttempts = 0;
+  private lastLockAttempt: { input: string; target: number | null; pointerLocked: boolean } | null =
+    null;
   private settings: Settings = { quality: 'medium', sensitivity: 1, audio: true };
   private disposed = false;
   constructor() {
@@ -235,6 +238,11 @@ class Game {
       scenario: this.diagnosticScenario,
       quality: this.settings.quality,
       cockpit: this.cockpit,
+      targeting: {
+        attempts: this.lockAttempts,
+        lastAttempt: this.lastLockAttempt ? { ...this.lastLockAttempt } : null,
+        reticleCandidate: pickPlanetAtScreen(this.sim.system, this.camera, new T.Vector2()),
+      },
       ship: {
         ...asset,
         rendered: this.renderedFrames >= this.shipReadyFrame,
@@ -382,6 +390,9 @@ class Game {
         case 'KeyC':
           this.action('view');
           break;
+        case 'KeyV':
+          this.lockTarget('keyboard');
+          break;
         case 'Tab':
           this.action('cycle');
           break;
@@ -425,28 +436,102 @@ class Game {
         this.mouse.y += e.movementY;
       }
     });
-    this.renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
-    this.renderer.domElement.addEventListener('mousedown', (e) => {
+    const isGameSurface = (e: MouseEvent) =>
+      document.pointerLockElement === this.renderer.domElement ||
+      e.target === this.renderer.domElement ||
+      (e.target instanceof Element && !!e.target.closest('#contact-markers [data-action=lock]'));
+    let lastPointerDown = -Infinity,
+      lastSecondary = -Infinity,
+      secondaryHeld = false;
+    const secondaryDown = (e: MouseEvent) => {
+      if (!(e.button === 2 || (e.button === 0 && e.ctrlKey)) || !isGameSurface(e)) return;
+      e.preventDefault();
+      // Pointer and compatibility mouse events represent one physical press.
       if (
-        e.button === 2 &&
-        this.ui.started &&
-        !this.ui.modal &&
-        !this.jumping &&
-        this.sim.mode === 'flight'
-      ) {
+        e.type === 'mousedown' &&
+        e.timeStamp - lastPointerDown >= 0 &&
+        e.timeStamp - lastPointerDown < 100
+      )
+        return;
+      if (e.type === 'pointerdown') lastPointerDown = e.timeStamp;
+      lastSecondary = e.timeStamp;
+      secondaryHeld = true;
+      this.lockTarget('mouse', e);
+    };
+    document.addEventListener('pointerdown', secondaryDown, true);
+    document.addEventListener('mousedown', secondaryDown, true);
+    document.addEventListener(
+      'mouseup',
+      (e) => {
+        if (secondaryHeld && (e.button === 2 || (e.button === 0 && e.ctrlKey)) && isGameSurface(e))
+          lastSecondary = e.timeStamp;
+        secondaryHeld = false;
+      },
+      true,
+    );
+    document.addEventListener(
+      'contextmenu',
+      (e) => {
+        if (!isGameSurface(e)) return;
         e.preventDefault();
-        const direction = this.camera.getWorldDirection(new T.Vector3());
-        const index = pickPlanet(this.sim.system, this.camera.position, direction);
-        if (index !== null) {
-          this.sim.selectTarget(index);
-          this.ui.toast(`已锁定 ${this.sim.selected.name} · T 航向辅助，G 远航引导`);
-        } else this.ui.toast('准星下没有可锁定行星');
-      }
-    });
-    this.renderer.domElement.addEventListener('click', () => {
+        // Some trackpad/accessibility paths deliver only contextmenu. Keep the
+        // fallback while avoiding a second selection for a native down/up pair.
+        if (e.timeStamp - lastSecondary >= 0 && e.timeStamp - lastSecondary < 750) return;
+        this.lockTarget('contextmenu', e);
+        lastSecondary = e.timeStamp;
+      },
+      true,
+    );
+    this.renderer.domElement.addEventListener('click', (e) => {
+      if (e.ctrlKey) return;
       if (this.ui.started && !this.ui.modal && !this.jumping) this.lockMouse();
     });
     addEventListener('pagehide', () => this.save());
+  }
+  private lockTarget(input: string, event?: MouseEvent) {
+    if (!this.ui.started || this.ui.modal || this.jumping) return;
+    const locked = document.pointerLockElement === this.renderer.domElement;
+    if (this.sim.mode !== 'flight') {
+      this.lockAttempts++;
+      this.lastLockAttempt = { input, target: null, pointerLocked: locked };
+      this.ui.toast(
+        this.sim.mode === 'walking'
+          ? '请先返回飞船并起飞，再锁定航行目标'
+          : this.sim.mode === 'landed'
+            ? '请先按 Space 起飞，再锁定航行目标'
+            : '当前正在着陆或起飞，请等待自由飞行后再锁定目标',
+      );
+      return;
+    }
+    const point = new T.Vector2();
+    const marker =
+      !locked && event?.target instanceof Element
+        ? event.target.closest<HTMLElement>('#contact-markers [data-action=lock]')
+        : null;
+    if (event && !locked) {
+      const rect = this.renderer.domElement.getBoundingClientRect();
+      point.set(
+        ((event.clientX - rect.left) / rect.width) * 2 - 1,
+        1 - ((event.clientY - rect.top) / rect.height) * 2,
+      );
+    }
+    const index = marker
+      ? Number(marker.dataset.value)
+      : pickPlanetAtScreen(this.sim.system, this.camera, point);
+    this.lockAttempts++;
+    this.lastLockAttempt = { input, target: index, pointerLocked: locked };
+    if (index !== null) {
+      const same = index === this.sim.target;
+      if (this.sim.selectTarget(index)) {
+        this.ui.update();
+        this.ui.toast(
+          `${same ? '已确认当前目标' : '已锁定'} ${this.sim.selected.name} · T 对准，G 远航`,
+        );
+      }
+    } else
+      this.ui.toast(
+        `${locked || !event ? '准星' : '鼠标'}下没有可锁定行星 · 也可按 Tab 或打开星图选择`,
+      );
   }
   private lockMouse() {
     try {
@@ -816,6 +901,11 @@ class Game {
       return { index, name: planet.name, ...projection, occluded };
     });
     this.ui.contacts(contacts);
+    const aim = pickPlanetAtScreen(this.sim.system, this.camera, new T.Vector2());
+    this.ui.aimTarget(
+      aim === null ? null : this.sim.system.planets[aim].name,
+      document.pointerLockElement === this.renderer.domElement,
+    );
     const motion =
       this.sim.velocity.length() > 1
         ? projectContact(
