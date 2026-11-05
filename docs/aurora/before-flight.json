@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 2,
+  "mode": "flight",
+  "system": 0,
+  "score": 0,
+  "altitude": 3746.903848937962,
+  "playTime": 0,
+  "position": [0, 700, 5200],
+  "rotation": [-0.05160248905413715, 0.09010569353149621, 0.004675000313796325, 0.9945834763802844],
+  "forward": [-0.1787527845233825, -0.10348845419774776, -0.9784362942332515],
+  "angularVelocity": [0, 0, 0],
+  "speed": 0,
+  "velocity": [0, 0, 0],
+  "actualSpeed": 0,
+  "speedLimit": 320,
+  "target": 0,
+  "discoveries": {},
+  "nearest": {
+    "id": "0-0",
+    "name": "VESPER"
+  },
+  "navigation": {
+    "targetId": "0-0",
+    "targetName": "VESPER",
+    "targetPosition": [0, 0, 0],
+    "distance": 3746.903848937962,
+    "arrivalClearance": 975,
+    "centerDistance": 5246.903848937962,
+    "arrivalGap": 2771.903848937962,
+    "headingError": 10.423824187988865,
+    "closingSpeed": 0,
+    "eta": null,
+    "stoppingDistance": 0,
+    "guidance": "off",
+    "status": "idle",
+    "blockedBy": null
+  },
+  "limits": {
+    "normal": 320,
+    "boost": 1100,
+    "cruise": 2200,
+    "deceleration": 160
+  },
+  "scenario": "player",
+  "quality": "medium",
+  "cockpit": false,
+  "modal": null,
+  "paused": true,
+  "input": {
+    "keys": [],
+    "pointerLocked": false
+  },
+  "camera": {
+    "position": [2.979281457676069, 704.9421218173328, 5216.307645873595],
+    "rotation": [
+      -0.07893057645204374, 0.08994307815826262, 0.007150826955155282, 0.9927885336093595
+    ],
+    "shipDistance": 17.298554852934657,
+    "shipProjection": {
+      "x": 0,
+      "y": -0.23779826569442966,
+      "z": 0.9953354325641388,
+      "onScreen": true
+    }
+  },
+  "rendering": {
+    "ready": true,
+    "renderedScene": 1,
+    "simulationTime": 0,
+    "frames": 14,
+    "sceneGeneration": 1,
+    "lastFrameMs": 1816.6000000000022,
+    "backend": "WebGL2",
+    "pixelRatio": 1,
+    "viewport": [1440, 900],
+    "fov": 58,
+    "performanceSamples": [
+      {
+        "frameMs": 16.666666666666668,
+        "updateMs": 3.299999999930151,
+        "submissionMs": 3800
+      },
+      {
+        "frameMs": 3983.239999999999,
+        "updateMs": 3.8999999999068677,
+        "submissionMs": 5.600000000093132
+      },
+      {
+        "frameMs": 33.30000000000109,
+        "updateMs": 0.6999999999534339,
+        "submissionMs": 3.400000000023283
+      },
+      {
+        "frameMs": 616.6000000000004,
+        "updateMs": 1.8000000000465661,
+        "submissionMs": 4.099999999976717
+      },
+      {
+        "frameMs": 949.8999999999996,
+        "updateMs": 2.800000000046566,
+        "submissionMs": 6.099999999976717
+      },
+      {
+        "frameMs": 833.2999999999993,
+        "updateMs": 2.400000000023283,
+        "submissionMs": 2.099999999976717
+      },
+      {
+        "frameMs": 600,
+        "updateMs": 1.5,
+        "submissionMs": 2
+      },
+      {
+        "frameMs": 278.70000000002256,
+        "updateMs": 17.599999999976717,
+        "submissionMs": 39.300000000046566
+      },
+      {
+        "frameMs": 483.2000000000007,
+        "updateMs": 2.699999999953434,
+        "submissionMs": 2.900000000023283
+      },
+      {
+        "frameMs": 516.7000000000007,
+        "updateMs": 1.5,
+        "submissionMs": 13.099999999976717
+      },
+      {
+        "frameMs": 1133.2999999999993,
+        "updateMs": 1.2999999999301508,
+        "submissionMs": 4
+      },
+      {
+        "frameMs": 16.700000000000728,
+        "updateMs": 0.2999999999301508,
+        "submissionMs": 1.8000000000465661
+      },
+      {
+        "frameMs": 1549.8999999999978,
+        "updateMs": 0.8999999999068677,
+        "submissionMs": 1.400000000023283
+      },
+      {
+        "frameMs": 1816.6000000000022,
+        "updateMs": 4.199999999953434,
+        "submissionMs": 2.400000000023283
+      }
+    ],
+    "textures": 19,
+    "geometries": 65,
+    "terrain": [
+      {
+        "active": 24,
+        "cached": 30,
+        "queued": 0,
+        "generatedLastFrame": 0,
+        "transitioning": 0
+      },
+      {
+        "active": 24,
+        "cached": 30,
+        "queued": 0,
+        "generatedLastFrame": 0,
+        "transitioning": 0
+      },
+      {
+        "active": 24,
+        "cached": 30,
+        "queued": 0,
+        "generatedLastFrame": 0,
+        "transitioning": 0
+      }
+    ],
+    "patches": 72,
+    "drawCalls": 79,
+    "triangles": 84810
+  },
+  "patches": 72
+}

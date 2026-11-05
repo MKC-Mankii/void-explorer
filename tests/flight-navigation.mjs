@@ -97,7 +97,11 @@ try {
   await screenshot('navigation-midflight');
   const middle = await snapshot();
   assert(middle.navigation.distance < chosen.navigation.distance);
-  assert(middle.camera.shipDistance > 16 && middle.camera.shipDistance < 18);
+  // AURORA is 18 m long; the chase rig moved from the old ~170 m offset to
+  // ~47 m. Keep checking a usable, stable distance against the loaded ship.
+  const shipLengths =
+    middle.camera.shipDistance / (middle.ship.sizeMetres[2] * middle.ship.scaleToGame);
+  assert(shipLengths > 2.4 && shipLengths < 2.8);
   await page.waitForFunction(
     () => window.__VOID__.snapshot().navigation.status === 'arrived',
     undefined,
@@ -120,7 +124,10 @@ try {
       b = path[i],
       travel = Math.hypot(...b.position.map((v, j) => v - a.position[j]));
     assert(travel <= 2200 * (b.playTime - a.playTime) + 1, 'continuous speed-bounded movement');
-    assert(b.camera.shipDistance < 18, 'camera remains near craft during high-speed travel');
+    assert(
+      b.camera.shipDistance > 4.5 && b.camera.shipDistance < 5,
+      'camera remains at the AURORA chase distance during high-speed travel',
+    );
     assert(b.camera.shipProjection.onScreen, 'ship remains visible in the chase camera');
   }
   assert(Math.hypot(...arrived.position.map((v, i) => v - chosen.position[i])) > 20000);

@@ -1,4 +1,5 @@
 import { Vector3, Quaternion, Matrix4, MathUtils, Euler } from 'three';
+import { SHIP_LAYOUT, avoidShipHull } from './ship-layout';
 import {
   SystemData,
   PlanetData,
@@ -264,7 +265,7 @@ export class Simulation {
     this.position.addScaledVector(this.velocity, dt);
     for (const p of this.system.planets) {
       const d = this.position.clone().sub(p.position),
-        floor = surfaceRadius(p, d.clone().normalize()) + 0.8;
+        floor = surfaceRadius(p, d.clone().normalize()) + SHIP_LAYOUT.flightClearance;
       if (d.length() < floor) {
         const impact = this.velocity.length();
         this.position.copy(p.position).addScaledVector(d.normalize(), floor);
@@ -322,6 +323,16 @@ export class Simulation {
       return;
     }
     this.position.copy(p.position).addScaledVector(dir, nextRadius + this.walkVertical);
+    const local = this.position
+      .clone()
+      .sub(this.shipPosition)
+      .applyQuaternion(this.shipRotation.clone().invert());
+    const guarded = avoidShipHull(local.clone());
+    if (guarded.distanceToSquared(local) > 1e-12) {
+      const world = guarded.applyQuaternion(this.shipRotation).add(this.shipPosition);
+      const normal = world.sub(p.position).normalize();
+      this.position.copy(p.position).addScaledVector(normal, surfaceRadius(p, normal) + 0.18);
+    }
     this.rotation.premultiply(new Quaternion().setFromUnitVectors(prevUp, dir));
     this.speed = movement.length() * (input.boost ? 1.1 : 0.55);
   }
@@ -394,16 +405,21 @@ export class Simulation {
     if (this.mode === 'landed') {
       this.mode = 'walking';
       const p = this.landedPlanet!,
-        right = new Vector3(1, 0, 0).applyQuaternion(this.rotation);
-      const dir = this.position.clone().sub(p.position).addScaledVector(right, 4.5).normalize();
+        offset = new Vector3(...SHIP_LAYOUT.exit).applyQuaternion(this.shipRotation);
+      const dir = this.shipPosition.clone().sub(p.position).add(offset).normalize();
       this.position.copy(p.position).addScaledVector(dir, surfaceRadius(p, dir) + 0.18);
-      this.lookAt(this.shipPosition, dir);
+      this.lookAt(
+        this.shipPosition
+          .clone()
+          .add(new Vector3(...SHIP_LAYOUT.lookTarget).applyQuaternion(this.shipRotation)),
+        dir,
+      );
       this.onEvent('离舱完成 · WASD 步行 · F 采样 · 靠近飞船按 E 登舱');
       return true;
     }
     if (this.mode === 'walking') {
-      if (this.position.distanceTo(this.shipPosition) > 7) {
-        this.onEvent('请返回飞船附近（70 m 内）再登舱');
+      if (this.position.distanceTo(this.shipPosition) > SHIP_LAYOUT.boardingRadius) {
+        this.onEvent('请返回飞船附近（12 m 内）再登舱');
         return false;
       }
       this.position.copy(this.shipPosition);

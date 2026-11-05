@@ -3,3 +3,4 @@ dist/
 test-results/
 playwright-report/
 *.local
+*.blend[0-9]
