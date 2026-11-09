@@ -1,6 +1,6 @@
 # VOID EXPLORER
 
-**[AURORA 集成预览](https://mkc-mankii.github.io/void-explorer/aurora/)** · [第二轮默认试玩](https://mkc-mankii.github.io/void-explorer/) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
+**[世界连续性预览](https://mkc-mankii.github.io/void-explorer/coherence/)** · **[AURORA 集成预览](https://mkc-mankii.github.io/void-explorer/aurora/)** · [第二轮默认试玩](https://mkc-mankii.github.io/void-explorer/) · [首轮试玩归档](https://mkc-mankii.github.io/void-explorer/round1/)
 
 一款面向 PC 桌面浏览器的单人 3D 太空探索游戏。本分支驾驶 **AURORA**，穿越行星大气层，着陆、离舱、步行勘探，再返回星空。默认线上第二轮仍保留旧飞船；AURORA 使用上方独立预览入口。
 
@@ -11,6 +11,8 @@
 第二轮以独立分支和叠加 Draft PR 保留完整历史，未合并 PR #1 或 PR #2。游戏改动与测试证据见 [第二轮开发记录](docs/ROUND2.md)，发布方式、入口和源码来源见 [第二轮发布记录](docs/ROUND2-DELIVERY.md)。线上实际源码 SHA 可在 [build-info.json](https://mkc-mankii.github.io/void-explorer/build-info.json) 核对。
 
 **[第三轮渲染预览](https://mkc-mankii.github.io/void-explorer/round3/)** 在独立分支交付；改动、性能限制和八组同机位证据见 [第三轮渲染报告](docs/ROUND3.md)。默认入口仍为第二轮，前两轮分支、PR 和可试玩历史保留。
+
+世界连续性改进与同机位证据见 [本轮报告](docs/WORLD-COHERENCE.md)。新增 `test:coherence` 复用现有截图框架；`test:coherence-journey` 通过真实按键和实时模拟检查完整下降、步行、存档与返回旅程。
 
 ## 当前可玩内容
 

@@ -1,0 +1,19 @@
+{
+  "url": "http://127.0.0.1:4173/",
+  "browser": "154.0.8037.57",
+  "glbSha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "checks": [
+    "Production WebGL scene renders",
+    "Delivered Blender GLB matches the source export SHA-256",
+    "AURORA identity shown in the production interface",
+    "V selects the reticle planet in the production build",
+    "Captured right-click selects the planet without losing mouse capture",
+    "Development API absent",
+    "Scenario query ignored by production",
+    "Selected-body scan awards score",
+    "G cruise engages and real X takes over",
+    "Star map opens",
+    "No failed requests or JavaScript/console errors"
+  ],
+  "errors": []
+}

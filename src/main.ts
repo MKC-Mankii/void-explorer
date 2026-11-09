@@ -4,19 +4,12 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { Simulation, NO_INPUT, FlightInput } from './simulation';
+import { AtmospherePass } from './atmosphere';
+import { SurfaceDetails } from './surface-details';
 import { Terrain } from './terrain';
 import { UNIVERSE, surfaceRadius } from './universe';
-import {
-  makeSky,
-  makeStar,
-  makeAtmosphere,
-  makeClouds,
-  makeOcean,
-  makeRings,
-  SurfaceDetails,
-  SpaceDust,
-} from './visuals';
-import { CelestialLighting, airState, stellarColor, disposeMaterialResources } from './rendering';
+import { makeSky, makeStar, makeClouds, makeOcean, makeRings, SpaceDust } from './visuals';
+import { CelestialLighting, airState, disposeMaterialResources } from './rendering';
 import { UI } from './ui';
 import { pickPlanetAtScreen, projectContact, raySphereDistance } from './navigation';
 import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
@@ -55,7 +48,7 @@ class Game {
   readonly audio = new AudioEngine();
   readonly ship = new Spacecraft();
   readonly lighting = new CelestialLighting();
-  private airFog = new T.FogExp2(0, 0);
+  readonly atmosphere = new AtmospherePass();
   readonly sky = makeSky();
   readonly dust = new SpaceDust();
   readonly details = new SurfaceDetails();
@@ -124,8 +117,13 @@ class Game {
       '3D 宇宙探索场景，点击捕获鼠标；W/S 推进，方向键转向，H 查看指南',
     );
     document.querySelector('#app')!.append(this.renderer.domElement);
-    this.composer = new EffectComposer(this.renderer);
+    const target = new T.WebGLRenderTarget(innerWidth, innerHeight, {
+      type: T.HalfFloatType,
+      depthTexture: new T.DepthTexture(innerWidth, innerHeight, T.UnsignedIntType),
+    });
+    this.composer = new EffectComposer(this.renderer, target);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
+    this.composer.addPass(this.atmosphere);
     this.bloom = new UnrealBloomPass(new T.Vector2(innerWidth, innerHeight), 0.38, 0.65, 1.1);
     this.composer.addPass(this.bloom);
     this.composer.addPass(new OutputPass());
@@ -293,6 +291,10 @@ class Game {
         frames: this.renderedFrames,
         sceneGeneration: this.sceneGeneration,
         lastFrameMs: this.lastFrameMs,
+        environment: {
+          ...this.atmosphere.observe(this.sim.system, this.camera.position),
+          details: this.details.diagnostics,
+        },
         backend: 'WebGL2',
         pixelRatio: this.renderer.getPixelRatio(),
         viewport: [innerWidth, innerHeight],
@@ -326,11 +328,12 @@ class Game {
     this.scene.add(this.systemGroup);
     const system = this.sim.system;
     this.lighting.configure(system);
+    this.atmosphere.configure(system);
     this.systemGroup.add(makeStar(system));
     for (const p of system.planets) {
       const terrain = new Terrain(p);
       this.terrains.push(terrain);
-      this.systemGroup.add(terrain.group, makeAtmosphere(p, system.star, stellarColor(system)));
+      this.systemGroup.add(terrain.group);
       if (p.ocean) this.systemGroup.add(makeOcean(p), makeClouds(p, this.lighting));
       if (p.rings) this.systemGroup.add(makeRings(p, this.lighting));
     }
@@ -668,30 +671,9 @@ class Game {
     this.renderer.setPixelRatio(ratio);
     this.composer.setPixelRatio(ratio);
     this.bloom.enabled = this.settings.quality !== 'low';
-    this.systemGroup.traverse((o) => {
-      if (
-        o instanceof T.Mesh &&
-        o.userData.oceanPlanet &&
-        o.material instanceof T.MeshStandardMaterial
-      ) {
-        const p = o.userData.oceanPlanet;
-        o.material.userData.detail.value =
-          1 -
-          T.MathUtils.smoothstep(
-            this.camera.position.distanceTo(p.position) - p.radius,
-            p.radius * 0.04,
-            p.radius * 0.16,
-          );
-      }
-      if (
-        o instanceof T.Mesh &&
-        o.material instanceof T.ShaderMaterial &&
-        o.material.userData.kind === 'atmosphere'
-      )
-        o.material.uniforms.airSteps.value =
-          this.settings.quality === 'high' ? 6 : this.settings.quality === 'low' ? 2 : 3;
-    });
+    this.atmosphere.quality(this.settings.quality);
   }
+
   private jump(id: number) {
     if (this.jumping || !UNIVERSE[id] || id === this.sim.system.id) return;
     if (this.sim.mode !== 'flight') {
@@ -854,30 +836,15 @@ class Game {
     const nearest = s.nearest,
       h = s.height;
     for (const terrain of this.terrains) terrain.tick(dt, this.camera.position);
-    this.details.group.visible = h < 120;
-    if (h < 120) this.details.update(nearest, s.position);
+    this.details.group.visible = h < 240;
+    if (h < 240) this.details.update(nearest, s.position);
     this.lighting.bindGroup(this.details.group);
+    this.atmosphere.update(this.camera);
+    // Preserve the continuous daylight contrast cue for pin-point stars; no second surface fog.
     const air = airState(nearest, this.camera.position, s.system.star);
-    this.airFog.color.copy(air.fogColor);
-    this.airFog.density = air.fogDensity;
-    this.scene.fog = air.density > 0.0001 ? this.airFog : null;
     ((this.sky.children[1] as T.Points).material as T.PointsMaterial).opacity =
       0.85 * (1 - air.density * air.daylight * 0.98);
     this.systemGroup.traverse((o) => {
-      if (
-        o instanceof T.Mesh &&
-        o.userData.oceanPlanet &&
-        o.material instanceof T.MeshStandardMaterial
-      ) {
-        const p = o.userData.oceanPlanet;
-        o.material.userData.detail.value =
-          1 -
-          T.MathUtils.smoothstep(
-            this.camera.position.distanceTo(p.position) - p.radius,
-            p.radius * 0.04,
-            p.radius * 0.16,
-          );
-      }
       if (o instanceof T.Mesh && o.material instanceof T.ShaderMaterial && o.material.uniforms.time)
         o.material.uniforms.time.value = this.captureFrozen ? 0 : s.playTime;
     });

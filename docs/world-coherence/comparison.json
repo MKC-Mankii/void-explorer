@@ -1,0 +1,138 @@
+{
+  "method": "Same frozen actor/camera pose, rotation, FOV; 1280x800, medium, DPR1, 30 warmup frames, last8 samples; Chromium ANGLE SwiftShader software. Not GPU timestamps or a desktop GPU benchmark.",
+  "boundary": {
+    "region": [70, 555, 930, 95],
+    "range": 255,
+    "meanAbsoluteRGB": {
+      "before": 49.87457460856442,
+      "after": 2.7603206942086396
+    },
+    "interpretation": "Adjacent views differ in radius by 2 world units (20 meters); lower variation corroborates reduced discontinuity here, not a whole-journey visual guarantee."
+  },
+  "scenes": [
+    {
+      "scene": "coherence-orbit",
+      "beforeRafMedianMs": 366.7000000000007,
+      "afterRafMedianMs": 483.2999999999993,
+      "beforeUpdateMedianMs": 1,
+      "afterUpdateMedianMs": 1.1999999999534339,
+      "beforeTriangles": 82418,
+      "afterTriangles": 39731,
+      "beforeDrawCalls": 59,
+      "afterDrawCalls": 59,
+      "afterInstances": 0
+    },
+    {
+      "scene": "coherence-air-out",
+      "beforeRafMedianMs": 500,
+      "afterRafMedianMs": 583.3000000000029,
+      "beforeUpdateMedianMs": 1.400000000023283,
+      "afterUpdateMedianMs": 1.3000000000465661,
+      "beforeTriangles": 147954,
+      "afterTriangles": 105661,
+      "beforeDrawCalls": 153,
+      "afterDrawCalls": 154,
+      "afterInstances": 403
+    },
+    {
+      "scene": "coherence-air-in",
+      "beforeRafMedianMs": 549.8999999999942,
+      "afterRafMedianMs": 600,
+      "beforeUpdateMedianMs": 1.400000000023283,
+      "afterUpdateMedianMs": 1.8000000000465661,
+      "beforeTriangles": 147954,
+      "afterTriangles": 105701,
+      "beforeDrawCalls": 153,
+      "afterDrawCalls": 154,
+      "afterInstances": 405
+    },
+    {
+      "scene": "coherence-cloud-out",
+      "beforeRafMedianMs": 566.6999999999971,
+      "afterRafMedianMs": 649.9000000000087,
+      "beforeUpdateMedianMs": 1,
+      "afterUpdateMedianMs": 0.9000000001396984,
+      "beforeTriangles": 164274,
+      "afterTriangles": 118281,
+      "beforeDrawCalls": 173,
+      "afterDrawCalls": 172,
+      "afterInstances": 467
+    },
+    {
+      "scene": "coherence-cloud-in",
+      "beforeRafMedianMs": 566.6000000000058,
+      "afterRafMedianMs": 716.5999999999913,
+      "beforeUpdateMedianMs": 1.1999999999534339,
+      "afterUpdateMedianMs": 1.5,
+      "beforeTriangles": 160114,
+      "afterTriangles": 118931,
+      "beforeDrawCalls": 172,
+      "afterDrawCalls": 173,
+      "afterInstances": 468
+    },
+    {
+      "scene": "coherence-coast",
+      "beforeRafMedianMs": 683.2999999999884,
+      "afterRafMedianMs": 916.6000000000058,
+      "beforeUpdateMedianMs": 2.200000000069849,
+      "afterUpdateMedianMs": 1.5,
+      "beforeTriangles": 219314,
+      "afterTriangles": 174381,
+      "beforeDrawCalls": 259,
+      "afterDrawCalls": 258,
+      "afterInstances": 533
+    },
+    {
+      "scene": "coherence-water",
+      "beforeRafMedianMs": 699.8999999999942,
+      "afterRafMedianMs": 783.4000000000233,
+      "beforeUpdateMedianMs": 1.3999999999068677,
+      "afterUpdateMedianMs": 2.0999999998603016,
+      "beforeTriangles": 194228,
+      "afterTriangles": 148431,
+      "beforeDrawCalls": 224,
+      "afterDrawCalls": 224,
+      "afterInstances": 104
+    },
+    {
+      "scene": "coherence-ground",
+      "beforeRafMedianMs": 716.8000000000175,
+      "afterRafMedianMs": 866.6999999999825,
+      "beforeUpdateMedianMs": 1.5,
+      "afterUpdateMedianMs": 2.199999999953434,
+      "beforeTriangles": 240230,
+      "afterTriangles": 195337,
+      "beforeDrawCalls": 300,
+      "afterDrawCalls": 299,
+      "afterInstances": 535
+    },
+    {
+      "scene": "coherence-night",
+      "beforeRafMedianMs": 799.8999999999942,
+      "afterRafMedianMs": 766.6999999999825,
+      "beforeUpdateMedianMs": 1.6999999999534339,
+      "afterUpdateMedianMs": 1.5,
+      "beforeTriangles": 172978,
+      "afterTriangles": 133271,
+      "beforeDrawCalls": 195,
+      "afterDrawCalls": 195,
+      "afterInstances": 490
+    },
+    {
+      "scene": "coherence-dry",
+      "beforeRafMedianMs": 499.8999999999942,
+      "afterRafMedianMs": 599.8999999999651,
+      "beforeUpdateMedianMs": 1.3999999999068677,
+      "afterUpdateMedianMs": 1.7000000001862645,
+      "beforeTriangles": 100850,
+      "afterTriangles": 98525,
+      "beforeDrawCalls": 175,
+      "afterDrawCalls": 175,
+      "afterInstances": 535
+    }
+  ],
+  "medianOfSceneMedians": {
+    "before": 566.6500000000015,
+    "after": 683.25
+  }
+}

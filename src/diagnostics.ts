@@ -1,9 +1,20 @@
 import { Vector3 } from 'three';
 import { Simulation } from './simulation';
 import { surfaceRadius, terrainHeight } from './universe';
+import { atmosphereParameters } from './rendering';
 import { FLIGHT, arrivalClearance } from './navigation';
 
 export const scenarioNames = [
+  'coherence-orbit',
+  'coherence-air-out',
+  'coherence-air-in',
+  'coherence-cloud-out',
+  'coherence-cloud-in',
+  'coherence-coast',
+  'coherence-water',
+  'coherence-ground',
+  'coherence-night',
+  'coherence-dry',
   'departure',
   'transfer',
   'approach',
@@ -25,7 +36,58 @@ export function applyScenario(sim: Simulation, name: string) {
   if (!scenarioNames.includes(name as ScenarioName))
     throw new Error(`Unknown flight scenario: ${name}`);
   const fixture = new Simulation();
-  if (name.startsWith('render-')) {
+  if (name.startsWith('coherence-')) {
+    if (name === 'coherence-dry') fixture.selectTarget(1);
+    const p = fixture.selected;
+    let dir = new Vector3(-0.65, 0.35, 0.68).normalize();
+    // Find a reproducible sunlit shore; geometry and simulation share this same seed.
+    let score = Infinity;
+    for (let i = 0; i < 600; i++) {
+      const d = new Vector3(
+        Math.sin(i * 2.399963),
+        0.15 + (i % 21) / 24,
+        Math.cos(i * 2.399963),
+      ).normalize();
+      if (d.dot(fixture.system.star.clone().sub(p.position).normalize()) < 0.25) continue;
+      const h = terrainHeight(p, d),
+        error = Math.abs(h - (name === 'coherence-water' ? -14 : 2));
+      if (error < score) {
+        dir = d;
+        score = error;
+      }
+    }
+    if (name === 'coherence-night')
+      dir = fixture.system.star.clone().sub(p.position).normalize().negate();
+    const air = atmosphereParameters(p),
+      cloud = Math.max(p.radius * 0.04, p.amplitude * 1.15);
+    const heights: Record<string, number> = {
+      'coherence-orbit': p.radius * 1.2,
+      'coherence-air-out': air.height + 1,
+      'coherence-air-in': air.height - 1,
+      'coherence-cloud-out': cloud + 1,
+      'coherence-cloud-in': cloud - 1,
+      'coherence-coast': 12,
+      'coherence-water': 2,
+      'coherence-ground': surfaceRadius(p, dir) - p.radius + 0.61,
+      'coherence-night': 25,
+      'coherence-dry': surfaceRadius(p, dir) - p.radius + 30,
+    };
+    // Chase camera is ~1 unit above the datum; boundary pairs deliberately straddle it.
+    fixture.position.copy(p.position).addScaledVector(dir, p.radius + heights[name] - 1);
+    const tangent = new Vector3(0, 1, 0).cross(dir).normalize();
+    fixture.lookAt(
+      fixture.position
+        .clone()
+        .addScaledVector(tangent, 100)
+        .addScaledVector(dir, name === 'coherence-orbit' ? -90 : -6),
+      dir,
+    );
+    if (name === 'coherence-ground') {
+      fixture.position.copy(p.position).addScaledVector(dir, surfaceRadius(p, dir) + 0.61);
+      fixture.mode = 'landed';
+      fixture.landedPlanet = p;
+    }
+  } else if (name.startsWith('render-')) {
     if (name === 'render-desert') fixture.selectTarget(1);
     const p = fixture.selected,
       sun = fixture.system.star.clone().sub(p.position).normalize();
