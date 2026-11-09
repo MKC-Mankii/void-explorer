@@ -85,13 +85,6 @@ export class Terrain {
     return normal.clone().addScaledVector(a, u).addScaledVector(b, v).normalize();
   }
   update(camera: T.Vector3, force = false) {
-    this.material.userData.detail.value =
-      1 -
-      T.MathUtils.smoothstep(
-        camera.distanceTo(this.data.position) - this.data.radius,
-        this.data.radius * 0.04,
-        this.data.radius * 0.16,
-      );
     if (!force && camera.distanceToSquared(this.last) < 0.09) return;
     this.last.copy(camera);
     const pos = camera.clone().sub(this.data.position);
@@ -150,13 +143,6 @@ export class Terrain {
     }
   }
   tick(dt: number, camera: T.Vector3) {
-    this.material.userData.detail.value =
-      1 -
-      T.MathUtils.smoothstep(
-        camera.distanceTo(this.data.position) - this.data.radius,
-        this.data.radius * 0.04,
-        this.data.radius * 0.16,
-      );
     this.interval += dt;
     if (this.interval > 0.25) {
       this.interval = 0;
@@ -194,6 +180,11 @@ export class Terrain {
       normals.array[i] =
         data.fineNormals[i] + (data.coarseNormals[i] - data.fineNormals[i]) * weight;
     }
+    const elevation = g.getAttribute('veElevation') as T.BufferAttribute;
+    for (let i = 0; i < elevation.count; i++)
+      elevation.array[i] =
+        data.fineElevations[i] + (data.coarseElevations[i] - data.fineElevations[i]) * weight;
+    elevation.needsUpdate = true;
     positions.needsUpdate = true;
     normals.needsUpdate = true;
   }
@@ -255,6 +246,8 @@ export class Terrain {
       count = (n + 1) * (n + 1) + 4 * (n + 1),
       verts = new Float32Array(count * 3),
       normals = new Float32Array(count * 3),
+      elevations = new Float32Array(count),
+      coarseElevations = tile.parent ? new Float32Array(count) : null,
       coarsePositions = tile.parent ? new Float32Array(count * 3) : null,
       coarseNormals = tile.parent ? new Float32Array(count * 3) : null,
       indices: number[] = [];
@@ -286,6 +279,7 @@ export class Terrain {
         drop = skirt ? Math.max(0.07, tile.size * this.data.radius * 0.035) : 0,
         r = this.data.radius + h - drop,
         k = vertex++ * 3;
+      elevations[k / 3] = h;
       verts[k] = d.x * r;
       verts[k + 1] = d.y * r;
       verts[k + 2] = d.z * r;
@@ -323,6 +317,11 @@ export class Terrain {
             attribute.getY(i0) * w0 + attribute.getY(i1) * w1 + attribute.getY(i2) * w2,
             attribute.getZ(i0) * w0 + attribute.getZ(i1) * w1 + attribute.getZ(i2) * w2,
           );
+        const parentElevation = parent!.mesh!.geometry.userData.fineElevation as T.BufferAttribute;
+        coarseElevations![k / 3] =
+          parentElevation.getX(i0) * w0 +
+          parentElevation.getX(i1) * w1 +
+          parentElevation.getX(i2) * w2;
         blend(parentPosition, coarse).addScaledVector(d, -drop);
         blend(parentNormal, coarseNormal).normalize();
         coarsePositions[k] = coarse.x;
@@ -359,6 +358,8 @@ export class Terrain {
     const geometry = new T.BufferGeometry();
     geometry.setAttribute('position', new T.BufferAttribute(verts, 3));
     geometry.setAttribute('normal', new T.BufferAttribute(normals, 3));
+    geometry.setAttribute('veElevation', new T.BufferAttribute(elevations, 1));
+    geometry.userData.fineElevation = new T.BufferAttribute(elevations.slice(), 1);
     geometry.setIndex(indices);
     geometry.userData.finePosition = new T.BufferAttribute(verts.slice(), 3);
     geometry.userData.fineNormal = new T.BufferAttribute(normals.slice(), 3);
@@ -368,6 +369,8 @@ export class Terrain {
         fineNormals: geometry.userData.fineNormal.array,
         coarsePositions,
         coarseNormals,
+        fineElevations: geometry.userData.fineElevation.array,
+        coarseElevations,
       };
       const bounds = new T.Box3().setFromBufferAttribute(
         geometry.getAttribute('position') as T.BufferAttribute,

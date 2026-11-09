@@ -16,7 +16,9 @@
     "test:rendering": "node tests/rendering.mjs",
     "test:render-flight": "node tests/render-flight.mjs",
     "test:aurora": "node tests/aurora.mjs",
-    "test:right-click": "node tests/right-click.mjs"
+    "test:right-click": "node tests/right-click.mjs",
+    "test:coherence": "node tests/coherence.mjs",
+    "test:coherence-journey": "node tests/coherence-journey.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

@@ -2,9 +2,11 @@ import { chromium } from '@playwright/test';
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
+const coherence = process.env.VOID_VISUAL_SUITE === 'coherence';
+const suite = coherence ? 'coherence' : 'round3';
 const base = process.env.VOID_URL ?? 'http://127.0.0.1:5173',
   stage = process.env.VOID_VISUAL_STAGE ?? 'after',
-  out = `test-results/round3/${stage}`;
+  out = `test-results/${suite}/${stage}`;
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({
   executablePath:
@@ -26,18 +28,34 @@ const page = await browser.newPage({
   results = [];
 page.on('pageerror', (e) => errors.push(e.message));
 page.on('console', (m) => {
-  if (m.type() === 'error') errors.push(m.text());
+  if (m.type() === 'error') {
+    errors.push(m.text());
+    console.error(m.text());
+  }
 });
-const scenes = [
-  'render-orbit',
-  'render-terminator',
-  'render-night',
-  'render-desert',
-  'render-near',
-  'render-atmosphere',
-  'render-surface',
-  'render-cruise',
-];
+const scenes = coherence
+  ? [
+      'coherence-orbit',
+      'coherence-air-out',
+      'coherence-air-in',
+      'coherence-cloud-out',
+      'coherence-cloud-in',
+      'coherence-coast',
+      'coherence-water',
+      'coherence-ground',
+      'coherence-night',
+      'coherence-dry',
+    ]
+  : [
+      'render-orbit',
+      'render-terminator',
+      'render-night',
+      'render-desert',
+      'render-near',
+      'render-atmosphere',
+      'render-surface',
+      'render-cruise',
+    ];
 const percentile = (a, p) =>
   [...a].sort((x, y) => x - y)[Math.min(a.length - 1, Math.floor(a.length * p))];
 try {
@@ -53,8 +71,8 @@ try {
     await page.waitForFunction(() => window.__VOID__.snapshot().rendering.ready);
     const start = await page.evaluate(() => window.__VOID__.snapshot());
     await page.waitForFunction(
-      (frame) => window.__VOID__.snapshot().rendering.frames >= frame + 12,
-      start.rendering.frames,
+      (frame) => window.__VOID__.snapshot().rendering.frames >= frame,
+      start.rendering.frames + (coherence ? 30 : 12),
       { timeout: 60000 },
     );
     const snapshot = await page.evaluate(() => window.__VOID__.snapshot());
@@ -94,26 +112,60 @@ try {
     );
   }
   assert.deepEqual(errors, []);
-  if (stage === 'after' && existsSync('test-results/round3/before/report.json')) {
-    const before = JSON.parse(await readFile('test-results/round3/before/report.json', 'utf8'));
+  if (stage === 'after' && existsSync(`test-results/${suite}/before/report.json`)) {
+    const before = JSON.parse(await readFile(`test-results/${suite}/before/report.json`, 'utf8'));
     for (const result of results) {
       const b = before.results.find((s) => s.scene === result.scene);
       assert.deepEqual(result.snapshot.position, b.snapshot.position);
       assert.deepEqual(result.snapshot.rotation, b.snapshot.rotation);
+      assert.deepEqual(result.snapshot.camera.position, b.snapshot.camera.position);
+      assert.deepEqual(result.snapshot.camera.rotation, b.snapshot.camera.rotation);
       assert(Math.abs(result.snapshot.rendering.fov - b.snapshot.rendering.fov) < 1e-7);
     }
+  }
+  let boundaryDelta = null;
+  if (coherence) {
+    const pngs = await Promise.all(
+      ['out', 'in'].map(async (side) =>
+        (await readFile(`${out}/coherence-air-${side}.png`)).toString('base64'),
+      ),
+    );
+    boundaryDelta = await page.evaluate(async (pngs) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 930;
+      canvas.height = 95;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true }),
+        pixels = [];
+      for (const png of pngs) {
+        const bitmap = await createImageBitmap(
+          await (await fetch('data:image/png;base64,' + png)).blob(),
+        );
+        ctx.drawImage(bitmap, 70, 555, 930, 95, 0, 0, 930, 95);
+        pixels.push(ctx.getImageData(0, 0, 930, 95).data);
+        bitmap.close();
+      }
+      let total = 0;
+      for (let i = 0; i < pixels[0].length; i++)
+        if (i % 4 !== 3) total += Math.abs(pixels[0][i] - pixels[1][i]);
+      return { region: [70, 555, 930, 95], meanAbsoluteRgb: total / (930 * 95 * 3), scale: 255 };
+    }, pngs);
+    if (stage === 'after')
+      assert(
+        boundaryDelta.meanAbsoluteRgb < 12,
+        `atmosphere boundary surface pop: ${boundaryDelta.meanAbsoluteRgb}`,
+      );
   }
   await writeFile(
     `${out}/report.json`,
     JSON.stringify(
       {
         stage,
+        boundaryDelta,
         browser: await browser.version(),
         renderer: 'Chromium / ANGLE SwiftShader (forced software)',
         viewport: [1280, 800],
         quality: 'medium',
-        sampling:
-          'Frozen deterministic poses, 12 warmup frames, last 8 samples; CPU/submission and RAF timing, not hardware GPU timings',
+        sampling: `Frozen deterministic poses, ${coherence ? 30 : 12} warmup frames, last 8 samples; CPU/submission and RAF timing, not hardware GPU timings`,
         results,
         errors,
       },

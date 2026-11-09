@@ -1,5 +1,5 @@
 import * as T from 'three';
-import { atmosphereParameters, stellarColor, eclipseGLSL, CelestialLighting } from './rendering';
+import { stellarColor, eclipseGLSL, CelestialLighting } from './rendering';
 import { createOceanMaterial } from './planet-materials';
 import { PlanetData, SystemData, random, terrainHeight, noise } from './universe';
 /** Custom shaders must share Three.js logarithmic depth with terrain and spacecraft. */
@@ -145,44 +145,9 @@ export function makeStar(system: SystemData) {
   group.add(halo);
   return group;
 }
-export function makeAtmosphere(p: PlanetData, star: T.Vector3, color: T.Color) {
-  const air = atmosphereParameters(p);
-  const material = makeShader({
-    uniforms: {
-      center: { value: p.position.clone() },
-      star: { value: star.clone() },
-      sunColor: { value: color.clone() },
-      airColor: { value: new T.Color(p.atmosphere) },
-      bodyRadius: { value: p.radius },
-      outerRadius: { value: p.radius + air.height },
-      scaleHeight: { value: air.scale },
-      airSteps: { value: 3 },
-      sunDirection: { value: star.clone().sub(p.position).normalize() },
-    },
-    vertexShader:
-      'varying vec3 vWorld;void main(){vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
-    fragmentShader: `varying vec3 vWorld;uniform vec3 center,star,sunColor,airColor,sunDirection;uniform float bodyRadius,outerRadius,scaleHeight;uniform int airSteps;
- vec2 sphere(vec3 ro,vec3 rd,float r){float b=dot(ro,rd),d=b*b-dot(ro,ro)+r*r;if(d<0.)return vec2(-1.);float root=sqrt(d);return vec2(-b-root,-b+root);}
- void main(){vec3 ro=cameraPosition-center,rd=normalize(vWorld-cameraPosition);bool inside=length(ro)<outerRadius;if((!inside&&!gl_FrontFacing)||(inside&&gl_FrontFacing))discard;
- vec2 shell=sphere(ro,rd,outerRadius);float begin=max(0.,shell.x),end=shell.y;vec2 ground=sphere(ro,rd,min(bodyRadius,length(ro)-.01));if(ground.x>0.)end=min(end,ground.x);if(end<=begin)discard;
- float ds=(end-begin)/float(airSteps),column=0.,litColumn=0.;
- for(int i=0;i<8;i++){if(i>=airSteps)break;vec3 samplePosition=ro+rd*(begin+(float(i)+.5)*ds);float density=exp(-max(0.,length(samplePosition)-bodyRadius)/scaleHeight);vec3 sunlight=sunDirection;float day=smoothstep(-.13,.18,dot(normalize(samplePosition),sunlight));column+=density*ds/scaleHeight;litColumn+=density*day*ds/scaleHeight;}
- float opacity=1.-exp(-column*.12);float day=litColumn/max(column,.001);vec3 sunlight=normalize(star-cameraPosition);float mu=dot(rd,sunlight);float rayleigh=.65+.35*mu*mu;float mie=.48/pow(max(.08,1.52-1.44*mu),1.5);
- vec3 scatter=(airColor*rayleigh+sunColor*mie*.035)*day;
- scatter+=sunColor*vec3(.28,.085,.025)*pow(1.-day,2.)*day*.6;
- scatter+=vec3(.002,.003,.008)*(1.-day);gl_FragColor=vec4(scatter,clamp(opacity,0.,.94));}`,
-    side: T.DoubleSide,
-    transparent: true,
-    depthWrite: false,
-  });
-  material.userData.kind = 'atmosphere';
-  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + air.height, 64, 48), material);
-  mesh.position.copy(p.position);
-  mesh.renderOrder = 30;
-  return mesh;
-}
 export function makeOcean(p: PlanetData) {
-  const mesh = new T.Mesh(new T.SphereGeometry(p.radius + 0.1, 192, 128), createOceanMaterial());
+  // Conservative proxy covers tessellation chord sag; the material writes true sea depth.
+  const mesh = new T.Mesh(new T.SphereGeometry(p.radius * 1.0025, 96, 64), createOceanMaterial(p));
   mesh.position.copy(p.position);
   mesh.userData.oceanPlanet = p;
   return mesh;
@@ -291,75 +256,6 @@ export function makeRings(p: PlanetData, lighting: CelestialLighting) {
   return group;
 }
 
-/** Seeded details reuse the actual terrain function and are generated only near a surface visitor. */
-export class SurfaceDetails {
-  group = new T.Group();
-  private origin = new T.Vector3(Infinity, 0, 0);
-  private planetId = '';
-  update(p: PlanetData, pos: T.Vector3) {
-    if (this.planetId === p.id && pos.distanceTo(this.origin) < 65) return;
-    this.clear();
-    this.planetId = p.id;
-    this.origin.copy(pos);
-    const normal = pos.clone().sub(p.position).normalize();
-    const east = new T.Vector3()
-      .crossVectors(
-        normal,
-        Math.abs(normal.y) > 0.9 ? new T.Vector3(1, 0, 0) : new T.Vector3(0, 1, 0),
-      )
-      .normalize();
-    const north = new T.Vector3().crossVectors(normal, east);
-    const rng = random(p.seed + Math.floor(normal.x * 50) * 17 + Math.floor(normal.z * 50));
-    const crystalGeo = new T.ConeGeometry(1, 1, 5);
-    crystalGeo.translate(0, 0.5, 0);
-    const rockGeo = new T.IcosahedronGeometry(1, 0);
-    const crystalMat = new T.MeshStandardMaterial({
-      color: p.atmosphere,
-      emissive: p.atmosphere,
-      emissiveIntensity: 0.3,
-      metalness: 0.3,
-      roughness: 0.3,
-    });
-    const rockMat = new T.MeshStandardMaterial({ color: p.colors[2], roughness: 1 });
-    const crystals = new T.InstancedMesh(crystalGeo, crystalMat, 120),
-      rocks = new T.InstancedMesh(rockGeo, rockMat, 180);
-    const dummy = new T.Object3D();
-    for (const [mesh, count] of [
-      [crystals, 120],
-      [rocks, 180],
-    ] as const) {
-      for (let i = 0; i < count; i++) {
-        const a = rng() * Math.PI * 2,
-          r = 12 + rng() * 210;
-        const dir = normal
-          .clone()
-          .multiplyScalar(p.radius)
-          .addScaledVector(east, Math.cos(a) * r)
-          .addScaledVector(north, Math.sin(a) * r)
-          .normalize();
-        const h = terrainHeight(p, dir);
-        dummy.position.copy(p.position).addScaledVector(dir, p.radius + h);
-        dummy.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), dir);
-        const size = mesh === crystals ? 0.2 + rng() * 0.55 : 0.25 + rng() * 1.7;
-        dummy.scale.set(size, size * (mesh === crystals ? 3 : 1), size);
-        if (p.ocean && h < 1) dummy.scale.setScalar(0);
-        dummy.updateMatrix();
-        mesh.setMatrixAt(i, dummy.matrix);
-      }
-      mesh.instanceMatrix.needsUpdate = true;
-      this.group.add(mesh);
-    }
-  }
-  clear() {
-    for (const m of [...this.group.children]) {
-      const mesh = m as T.Mesh;
-      mesh.geometry.dispose();
-      if (Array.isArray(mesh.material)) mesh.material.forEach((x) => x.dispose());
-      else mesh.material.dispose();
-      this.group.remove(m);
-    }
-  }
-}
 export class SpaceDust {
   mesh: T.LineSegments;
   private positions: Float32Array;

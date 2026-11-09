@@ -1,0 +1,312 @@
+{
+  "browser": "154.0.8037.57",
+  "renderer": "Chromium headless / SwiftShader",
+  "checks": [
+    "WebGL scene boots",
+    "Keyboard orbital scan awards discovery once",
+    "Throttle and inertial brake respond to real keyboard input",
+    "Landing reaches the shared terrain surface",
+    "Disembark and surface sampling complete the discovery loop",
+    "WASD walks on curved ground at astronaut eye height",
+    "Pointer lock rotates view and Escape releases into pause",
+    "Reboarding and takeoff return to free flight",
+    "Star chart selects and aligns local destinations",
+    "Hyperspace transfers into a separately generated system",
+    "Journal retains discoveries across systems",
+    "Quality settings and photo mode are interactive",
+    "Reload restores location, discoveries and preferences",
+    "Desktop HUD fits 1280 × 720",
+    "No JavaScript or browser console errors"
+  ],
+  "errors": [],
+  "final": {
+    "schemaVersion": 2,
+    "mode": "flight",
+    "system": 1,
+    "score": 500,
+    "altitude": 3705.4456993771555,
+    "playTime": 27.909300000000066,
+    "position": [0, 700, 5200],
+    "rotation": [-0.06685558457278488, 0, 0, 0.9977626625663196],
+    "forward": [0, -0.13341201214153922, -0.9910606616228624],
+    "angularVelocity": [0, 0, 0],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "actualSpeed": 0,
+    "speedLimit": 320,
+    "target": 0,
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": true,
+        "sample": true
+      }
+    },
+    "nearest": {
+      "id": "1-0",
+      "name": "PYRA B"
+    },
+    "navigation": {
+      "targetId": "1-0",
+      "targetName": "PYRA B",
+      "targetPosition": [0, 0, 0],
+      "distance": 3705.4456993771555,
+      "arrivalClearance": 975,
+      "centerDistance": 5246.903848937962,
+      "arrivalGap": 2730.4456993771555,
+      "headingError": 0,
+      "closingSpeed": 0,
+      "eta": null,
+      "stoppingDistance": 0,
+      "guidance": "off",
+      "status": "idle",
+      "blockedBy": null
+    },
+    "limits": {
+      "normal": 320,
+      "boost": 1100,
+      "cruise": 2200,
+      "deceleration": 160
+    },
+    "scenario": "player",
+    "quality": "low",
+    "cockpit": false,
+    "targeting": {
+      "attempts": 0,
+      "lastAttempt": null,
+      "reticleCandidate": 0
+    },
+    "ship": {
+      "name": "AURORA",
+      "state": "ready",
+      "error": null,
+      "url": "http://127.0.0.1:5173/assets/aurora/aurora.glb",
+      "sourceUnits": "metres",
+      "scaleToGame": 0.1,
+      "sizeMetres": [18.600000381469727, 4.166999816894531, 18.033612278212928],
+      "triangles": 2584,
+      "meshPrimitives": 29,
+      "materials": 6,
+      "textures": 0,
+      "loadMs": 5422.300000000279,
+      "gearExtension": 0,
+      "wings": [
+        {
+          "name": "Wing_Aft_Port",
+          "pair": "aft",
+          "side": "port"
+        },
+        {
+          "name": "Wing_Aft_Starboard",
+          "pair": "aft",
+          "side": "starboard"
+        },
+        {
+          "name": "Wing_Fore_Port",
+          "pair": "fore",
+          "side": "port"
+        },
+        {
+          "name": "Wing_Fore_Starboard",
+          "pair": "fore",
+          "side": "starboard"
+        }
+      ],
+      "engines": ["Nacelle_Port", "Nacelle_Starboard"],
+      "cockpitOffset": [0, -0.24199999332404967, -0.3499999999999999],
+      "groundContacts": [
+        [-0.17500000000000002, 699.5986623602599, 5200.467724399201],
+        [0.17500000000000002, 699.5986623602599, 5200.467724399201],
+        [-0.17500000000000002, 699.5292881149006, 5199.952372862245],
+        [0.17500000000000002, 699.5292881149006, 5199.952372862245]
+      ],
+      "plumes": [
+        {
+          "name": "Plume_Port",
+          "visible": true,
+          "position": [-0.17999999523162843, 699.6842709546705, 5200.952638046857],
+          "direction": [0, 0.13341201214153922, 0.9910606616228624]
+        },
+        {
+          "name": "Plume_Starboard",
+          "visible": true,
+          "position": [0.17999999523162843, 699.6842709546705, 5200.952638046857],
+          "direction": [0, 0.13341201214153922, 0.9910606616228624]
+        }
+      ],
+      "visible": true,
+      "modelLoaded": true,
+      "rendered": true,
+      "inspectionView": null,
+      "groundClearances": [
+        3705.8417251112605, 3705.8417251615288, 3705.3217237447907, 3705.321723795074
+      ]
+    },
+    "modal": null,
+    "paused": false,
+    "input": {
+      "keys": [],
+      "pointerLocked": false
+    },
+    "camera": {
+      "position": [0, 701.604755917474, 5204.425467031324],
+      "rotation": [-0.11663938150529139, 0, 0, 0.9931743324724333],
+      "shipDistance": 4.707440918376233,
+      "shipProjection": {
+        "x": 0,
+        "y": -0.20666793734127348,
+        "z": 0.9828945781379985,
+        "onScreen": true
+      }
+    },
+    "rendering": {
+      "ready": true,
+      "renderedScene": 1,
+      "simulationTime": 27.909300000000066,
+      "frames": 13,
+      "sceneGeneration": 1,
+      "lastFrameMs": 16.700000000000728,
+      "environment": {
+        "method": "opaque-depth-integration",
+        "samples": 2,
+        "nearSamples": 1,
+        "planets": [
+          {
+            "id": "1-0",
+            "radialAltitude": 3751.5039441487843,
+            "height": 121.25853299255249,
+            "scale": 36,
+            "density": 0,
+            "seaRadius": null
+          },
+          {
+            "id": "1-1",
+            "radialAltitude": 32860.517302057524,
+            "height": 124.64956363727605,
+            "scale": 30.97642710853368,
+            "density": 0,
+            "seaRadius": null
+          },
+          {
+            "id": "1-2",
+            "radialAltitude": 40528.96747413764,
+            "height": 118.90269204502407,
+            "scale": 31.8397097363323,
+            "density": 0,
+            "seaRadius": 1326.654572347179
+          }
+        ],
+        "details": {
+          "method": "world-cell-distance-fade",
+          "instances": 0,
+          "rebuilds": 0,
+          "fade": {
+            "full": 115,
+            "end": 185,
+            "cache": 290
+          }
+        }
+      },
+      "backend": "WebGL2",
+      "pixelRatio": 0.75,
+      "viewport": [1280, 720],
+      "fov": 58,
+      "performanceSamples": [
+        {
+          "frameMs": 16.666666666666668,
+          "updateMs": 1.3999999999068677,
+          "submissionMs": 603.3999999999069
+        },
+        {
+          "frameMs": 4783.1,
+          "updateMs": 2.1999999997206032,
+          "submissionMs": 6.100000000093132
+        },
+        {
+          "frameMs": 33.399999999999636,
+          "updateMs": 0.6999999997206032,
+          "submissionMs": 3.900000000372529
+        },
+        {
+          "frameMs": 450,
+          "updateMs": 1.7999999998137355,
+          "submissionMs": 458.10000000009313
+        },
+        {
+          "frameMs": 483.3000000000002,
+          "updateMs": 2.6999999997206032,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 50,
+          "updateMs": 1.2999999998137355,
+          "submissionMs": 6.2000000001862645
+        },
+        {
+          "frameMs": 166.60000000000036,
+          "updateMs": 1,
+          "submissionMs": 4.399999999906868
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 1.2000000001862645,
+          "submissionMs": 2.8999999999068677
+        },
+        {
+          "frameMs": 233.40000000000055,
+          "updateMs": 1.6000000000931323,
+          "submissionMs": 2.3999999999068677
+        },
+        {
+          "frameMs": 166.59999999999945,
+          "updateMs": 0.7000000001862645,
+          "submissionMs": 1.3999999999068677
+        },
+        {
+          "frameMs": 159.49999999990723,
+          "updateMs": 2.3999999999068677,
+          "submissionMs": 2.6000000000931323
+        },
+        {
+          "frameMs": 433.2999999999993,
+          "updateMs": 7,
+          "submissionMs": 5.100000000093132
+        },
+        {
+          "frameMs": 16.700000000000728,
+          "updateMs": 0.7999999998137355,
+          "submissionMs": 0.900000000372529
+        }
+      ],
+      "textures": 6,
+      "geometries": 71,
+      "terrain": [
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        },
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        },
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        }
+      ],
+      "patches": 72,
+      "drawCalls": 73,
+      "triangles": 34342
+    },
+    "patches": 72
+  }
+}

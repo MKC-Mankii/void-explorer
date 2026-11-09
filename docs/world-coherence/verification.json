@@ -1,0 +1,83 @@
+{
+  "baselineRendererCommit": "d60189172e28a18d84bcc56e1834c68c28748058",
+  "branch": "feat/world-coherence",
+  "unit": {
+    "passed": 40,
+    "files": 6
+  },
+  "build": "pass",
+  "format": "pass",
+  "fixedScenes": {
+    "passed": 10,
+    "cameraPoseComparedExactly": true,
+    "sameViewportQualityDpr": true,
+    "boundaryMeanAbsoluteRGB": {
+      "before": 49.87457460856442,
+      "after": 2.7603206942086396
+    }
+  },
+  "journey": {
+    "passed": true,
+    "normalStart": "player spawn",
+    "normalScenarioOnly": true,
+    "renderedFramesObserved": 61,
+    "allObservedFramesReady": true,
+    "normalControls": [
+      "W",
+      "X",
+      "L",
+      "E",
+      "W",
+      "F",
+      "Escape",
+      "reload",
+      "E",
+      "Space",
+      "Space",
+      "X"
+    ],
+    "normalUsesFixtureFreezeOrStep": false,
+    "coastalDiagnosticStart": "coherence-water fixture; then real W/Space",
+    "coastalUsesStep": false,
+    "qualityChecks": [
+      ["medium", 3],
+      ["high", 6],
+      ["low", 2]
+    ],
+    "errors": []
+  },
+  "regressions": {
+    "exploration": {
+      "passedGroups": 15,
+      "errors": [],
+      "report": "regression/exploration.json"
+    },
+    "navigation": {
+      "passedGroups": 16,
+      "errors": [],
+      "report": "regression/navigation.json"
+    },
+    "right-click": {
+      "passedGroups": 10,
+      "errors": [],
+      "report": "regression/right-click.json"
+    },
+    "aurora": {
+      "passedGroups": 6,
+      "errors": [],
+      "report": "regression/aurora.json"
+    },
+    "production": {
+      "passedGroups": 11,
+      "errors": [],
+      "report": "regression/production.json"
+    }
+  },
+  "limits": [
+    "Cloud ANGLE SwiftShader software; not Windows/macOS hardware GPU acceptance",
+    "No Firefox/Safari run",
+    "Thin cloud shell and transparent-layer atmosphere ordering remain approximate",
+    "Screenshot readback journey is excluded from timing benchmark"
+  ],
+  "sourceAndDeployment": "Final source SHA, PR, CI and deployment provenance are in the PR and preview build-info.json; no source revision is self-embedded here."
+}
