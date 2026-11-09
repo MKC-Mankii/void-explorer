@@ -1,0 +1,25 @@
+{
+  "stage": "Keep the world coherent",
+  "showcase_stage": 8,
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_commit": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+  "source_branch": "feat/world-coherence",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/7",
+  "baseline_source_commit": "d60189172e28a18d84bcc56e1834c68c28748058",
+  "renderer": "Three.js / WebGL2 / depth-integrated atmosphere and analytic sea",
+  "glb_file": "assets/aurora-DTA2SnWJ.glb",
+  "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "aurora_asset_source_commit": "793eacdbe4153723cc5f2160e6d944023d7bfa15",
+  "preview_path": "/coherence/",
+  "preserved_paths": [
+    "/",
+    "/round1/",
+    "/round3/",
+    "/aurora/",
+    "/aurora-793eacd/"
+  ],
+  "asset_manifest": "./asset-manifest.json",
+  "built_at": "2026-11-09T05:51:47.043084+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42569574845",
+  "local_verification": "40 unit tests; fixed visual scenes; real-input exploration/return and coastal diagnostic; exploration/navigation/right-click/AURORA/production regressions passed. GPU hardware acceptance not performed."
+}
