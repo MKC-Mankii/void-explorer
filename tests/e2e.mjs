@@ -2,6 +2,7 @@ import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { failWithEvidence } from './failure-evidence.mjs';
 const base = process.env.VOID_URL ?? 'http://127.0.0.1:5173';
 const browser = await chromium.launch({
   executablePath:
@@ -35,6 +36,7 @@ const shot = async (name) => {
   await page.waitForTimeout(600);
   await page.screenshot({ path: `test-results/${name}.png` });
 };
+let failed = false;
 try {
   await mkdir('test-results', { recursive: true });
   await page.goto(`${base}/?test=1`);
@@ -176,9 +178,25 @@ try {
     ),
   );
 } catch (e) {
-  await page.screenshot({ path: 'test-results/failure.png' });
-  console.error(await snapshot().catch(() => null));
-  throw e;
+  failed = true;
+  await failWithEvidence(e, {
+    context: { url: base, renderer: 'Chromium headless / SwiftShader' },
+    checks,
+    errors,
+    snapshot,
+    screenshot: async () => {
+      const path = 'test-results/failure.png';
+      await page.screenshot({ path, timeout: 5000 });
+      return path;
+    },
+    writeReport: (report) =>
+      writeFile('test-results/browser-failure-report.json', JSON.stringify(report, null, 2)),
+  });
 } finally {
-  await browser.close();
+  try {
+    await browser.close();
+  } catch (error) {
+    console.error('Additional browser cleanup failure:', error);
+    if (!failed) throw error;
+  }
 }
