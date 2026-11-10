@@ -146,6 +146,8 @@ export class SurfaceDetails {
   }
   clear() {
     for (const mesh of this.meshes) {
+      // Instance attributes belong to the mesh; geometry/material disposal does not free them.
+      mesh.dispose();
       mesh.geometry.dispose();
       (mesh.material as T.Material).dispose();
       this.group.remove(mesh);
