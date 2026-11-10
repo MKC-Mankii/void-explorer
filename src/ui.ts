@@ -294,13 +294,16 @@ export class UI {
     offscreen.hidden = !show || selected.onScreen;
     offscreen.textContent = `${selected.occluded ? '目标被天体遮挡' : selected.front ? '目标位于视野边缘' : '目标在后半球'} · T 对准，G 远航`;
     const container = this.el('contact-markers');
-    if (!container.children.length)
+    const system = String(this.sim.system.id);
+    if (!container.children.length || container.dataset.system !== system) {
       container.innerHTML = contacts
         .map(
           (c) =>
             `<button class="contact-marker" data-action="lock" data-value="${c.index}" aria-label="锁定 ${c.name}"><i>◇</i><small>${c.name}</small></button>`,
         )
         .join('');
+      container.dataset.system = system;
+    }
     for (const c of contacts) {
       const el = container.children[c.index] as HTMLElement;
       el.hidden = !show || c.index === this.sim.target || !c.onScreen || c.occluded;
