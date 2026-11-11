@@ -19,6 +19,7 @@ async function newPage(mode = '') {
   const p = await browser.newPage({ viewport: { width: 1000, height: 700 } });
   p.on('pageerror', (e) => report.errors.push(e.stack));
   await p.addInitScript((mode) => {
+    if (mode === 'legacy-param') AudioParam.prototype.cancelAndHoldAtTime = undefined;
     const Native = window.AudioContext;
     const state = (window.__audioTest = {
       contexts: [],
@@ -286,6 +287,19 @@ try {
     check(`${mode}: audio failure does not block start, controls, or settings`);
     await page.close();
   }
+  page = await newPage('legacy-param');
+  await page.locator('#start-button').click();
+  await page.waitForFunction(() => window.__audioTest.sources[0]?.buffer);
+  await waitState(page, 'running');
+  await settings();
+  await page.locator('#audio-setting').click();
+  await waitState(page, 'suspended');
+  await page.locator('#audio-setting').click();
+  await close();
+  await waitState(page, 'running');
+  assert.equal((await state()).sources, 1);
+  check('missing hold API: portable gain automation plays, mutes, and resumes safely');
+  await page.close();
   page = await newPage();
   await page.route('**/*.mp3', async (r) => {
     await new Promise((resolve) => setTimeout(resolve, 1200));

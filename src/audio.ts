@@ -1,4 +1,4 @@
-import { Music, MusicStatus } from './music';
+import { Music, MusicStatus, holdGain } from './music';
 
 export class AudioEngine {
   private context: AudioContext | null = null;
@@ -74,6 +74,7 @@ export class AudioEngine {
       this.reconcile(true);
       this.music?.load();
     } catch {
+      if (this.context) void this.context.suspend().catch(() => {});
       this.blocked = true;
       this.onStatus('blocked');
     }
@@ -95,7 +96,7 @@ export class AudioEngine {
     if (this.suspendTimer) clearTimeout(this.suspendTimer);
     this.suspendTimer = null;
     const t = ctx.currentTime;
-    this.master.gain.cancelAndHoldAtTime(t);
+    holdGain(this.master.gain, t);
     this.master.gain.setTargetAtTime(wanted ? 1 : 0, t, 0.045);
     if (wanted && !this.blocked) {
       if (!this.resuming) {

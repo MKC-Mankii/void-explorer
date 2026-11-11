@@ -2,6 +2,17 @@ import musicUrl from '../assets/music/a-light-beyond.mp3?url';
 
 export type MusicStatus = 'idle' | 'loading' | 'ready' | 'unavailable';
 
+/** Keep fades portable when the newer hold API is absent (e.g. older engines). */
+export function holdGain(param: AudioParam, time: number) {
+  if (typeof param.cancelAndHoldAtTime === 'function') {
+    param.cancelAndHoldAtTime(time);
+  } else {
+    const current = param.value;
+    param.cancelScheduledValues(time);
+    param.setValueAtTime(current, time);
+  }
+}
+
 /** One decoded score and one looping source per audio engine, loaded after a gesture. */
 export class Music {
   private buffer: AudioBuffer | null = null;
@@ -24,7 +35,7 @@ export class Music {
   setEnabled(enabled: boolean) {
     this.enabled = enabled;
     const t = this.context.currentTime;
-    this.gain.gain.cancelAndHoldAtTime(t);
+    holdGain(this.gain.gain, t);
     this.gain.gain.setTargetAtTime(enabled && this.source ? 0.45 : 0, t, 0.25);
   }
   load() {
@@ -77,7 +88,7 @@ export class Music {
   duck() {
     if (!this.enabled || !this.source) return;
     const t = this.context.currentTime;
-    this.gain.gain.cancelAndHoldAtTime(t);
+    holdGain(this.gain.gain, t);
     this.gain.gain.linearRampToValueAtTime(0.18, t + 0.04);
     this.gain.gain.setTargetAtTime(0.45, t + 0.65, 0.35);
   }
