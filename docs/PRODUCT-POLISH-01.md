@@ -18,7 +18,7 @@
 - 动效为极慢、低幅度姿态变化；`prefers-reduced-motion` 下固定展示姿态且取消欢迎淡入。尾焰开场时间固定，避免新增闪动。
 - `tests/opening.mjs` 复用 Playwright、device-browser、GL 计数和 failure-evidence，加入现有 CI。
 
-`ui.ts`、`simulation.ts`、`audio.ts`、`save-storage.ts`、`universe.ts`、`spacecraft.ts`、`ship-layout.ts`、地形/大气/行星材质、所有 assets 和依赖锁文件与基线无差异。没有新增外部资源，现有 AURORA GLB 仍为 163,820 字节，授权和制作来源沿用 assets/aurora 的记录。
+`ui.ts`、`simulation.ts`、`audio.ts`、`save-storage.ts`、`universe.ts`、`spacecraft.ts`、`ship-layout.ts`、地形/大气/行星材质、所有 assets 和依赖锁文件与基线无差异。没有新增外部资源，现有 AURORA GLB 仍为 163,824 字节，授权和制作来源沿用 assets/aurora 的记录。
 
 ## 真实浏览器截图
 
