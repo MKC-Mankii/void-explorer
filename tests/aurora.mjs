@@ -85,11 +85,6 @@ try {
   assert.equal(loaded.ship.wings.length, 4);
   assert.equal(loaded.ship.engines.length, 2);
   assert.equal(loaded.ship.rendered, true);
-  for (const plume of loaded.ship.plumes) {
-    assert(
-      new Vector3().fromArray(plume.direction).dot(new Vector3().fromArray(loaded.forward)) < -0.99,
-    );
-  }
   assert(loaded.ship.sizeMetres[0] > 18.5 && loaded.ship.sizeMetres[0] < 18.7);
   assert.equal(loaded.ship.textures, 0);
   check('Normal player spawn loads the exact Blender GLB with four wings and two engines');
@@ -98,6 +93,23 @@ try {
   await page.locator('#quality-setting').selectOption('low');
   await page.locator('[data-action=close]').click();
   await page.locator('[data-action=start]').click();
+  // The welcome screen has its own render-only pose. Validate the flight contract
+  // after the real start action, once the original simulation pose has rendered.
+  const startFrame = (await snapshot()).rendering.frames;
+  await page.waitForFunction(
+    (frame) => window.__VOID__.snapshot().rendering.frames > frame + 1,
+    startFrame,
+  );
+  const spawned = await observe('started-normal-spawn');
+  assert.equal(spawned.opening.active, false);
+  assert.deepEqual(spawned.position, loaded.position);
+  assert.deepEqual(spawned.rotation, loaded.rotation);
+  for (const plume of spawned.ship.plumes) {
+    assert(
+      new Vector3().fromArray(plume.direction).dot(new Vector3().fromArray(spawned.forward)) <
+        -0.99,
+    );
+  }
   await page.keyboard.press('KeyF');
   await page.keyboard.down('KeyW');
   await page.waitForFunction(() => window.__VOID__.snapshot().speed > 30);
@@ -185,8 +197,17 @@ try {
   await page.waitForFunction(() => window.__VOID__?.snapshot().rendering.ready);
   const restored = await observe('restored-walking');
   assert.equal(restored.mode, 'walking');
-  assert(restored.ship.gearExtension > 0.99);
   await page.locator('[data-action=start]').click();
+  const continuedFrame = (await snapshot()).rendering.frames;
+  await page.waitForFunction(
+    (frame) => window.__VOID__.snapshot().rendering.frames > frame + 1,
+    continuedFrame,
+  );
+  const continued = await observe('continued-walking');
+  assert.equal(continued.opening.active, false);
+  assert.equal(continued.mode, 'walking');
+  assert(continued.ship.gearExtension > 0.99);
+  assert(continued.ship.plumes.every((plume) => !plume.visible));
   await page.keyboard.press('KeyE');
   await page.waitForFunction(() => window.__VOID__.snapshot().mode === 'landed');
   await page.keyboard.press('Space');

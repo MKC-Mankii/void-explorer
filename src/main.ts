@@ -875,15 +875,18 @@ class Game {
   }
   private sync(dt: number) {
     const s = this.sim;
+    const opening =
+      !this.ui.started && this.diagnosticScenario === 'player' && !this.diagnosticShipView;
     this.ship.group.position.copy(s.shipPosition);
     this.ship.group.quaternion.copy(s.shipRotation);
     this.ship.update(
       s.mode === 'landed' || s.mode === 'walking'
         ? 0
         : Math.max(0.12, Math.min(1, Math.abs(s.speed) / 320)),
-      this.captureFrozen || !this.ui.started ? 0 : this.elapsed,
-      !this.ui.started && this.diagnosticScenario === 'player' ? 'flight' : s.mode,
-      this.captureFrozen ? 0 : dt,
+      this.captureFrozen || opening ? 0 : this.elapsed,
+      opening ? 'flight' : s.mode,
+      // Restore saved landing gear immediately when leaving the display pose.
+      this.captureFrozen || this.opening.visible !== opening ? 0 : dt,
     );
     if (s.mode === 'landed' || s.mode === 'walking') {
       this.ship.conformGear((point) => {
