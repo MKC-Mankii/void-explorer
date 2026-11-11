@@ -1,0 +1,47 @@
+{
+  "stage": "第三阶段·产品精修02：原创音乐与声音氛围",
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_branch": "feat/product-polish-02-original-audio",
+  "source_commit": "c809aac02732cf408fec7758905084bea9d15d1f",
+  "baseline_source_commit": "cd28f2fab337a71c94294a7e77f1e6834e621083",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/11",
+  "preview_path": "/product-polish-02/",
+  "asset_version": "c809aac02732cf408fec7758905084bea9d15d1f",
+  "asset_manifest": "./asset-manifest.json",
+  "asset_manifest_sha256": "dc1e6e2a3456750578aec89d18e044c429233f84502138e56b7577b34b1bed77",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/43032002456",
+  "pages_parent": "cf8e1c738da47e86151b85dd6861909f5af0086f",
+  "built_at": "2026-11-11T13:44:55.363705+00:00",
+  "prepared_at": "2026-11-11T14:12:28.489077+00:00",
+  "build": {
+    "command": "npm run build",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "base": "./"
+  },
+  "music_file": "assets/a-light-beyond-BSYDlI6D.mp3",
+  "music": {
+    "file": "a-light-beyond.mp3",
+    "title": "A Light Beyond / 远方的微光",
+    "license": "CC0-1.0",
+    "source": "render-score.py; score.json",
+    "bytes": 2305196,
+    "sha256": "3159dbc3b61e5dd52d46981c5f8dd22309d30808fe2f83fd618930ebbafd1669",
+    "sample_rate": 32000,
+    "channels": 2,
+    "codec": "MP3 / MPEG-1 Layer III",
+    "bitrate": 128000,
+    "decoded_duration_seconds": 144,
+    "integrated_lufs": -24.07,
+    "true_peak_dbtp": -12.82,
+    "loudness_range_lu": 3.8,
+    "external_samples": 0,
+    "subjective_listening": "pending-human-review; no audio-perception tool available"
+  },
+  "preserved_paths": [
+    "/",
+    "/coherence/",
+    "/product-polish-01/",
+    "all-existing-tracked-files"
+  ]
+}
