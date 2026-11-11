@@ -1,0 +1,12 @@
+[
+  {
+    "name": "firefox",
+    "status": "launch-failed",
+    "error": "browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/firefox-1555/firefox/firefox\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n    at /workspace/void-explorer/[eval1]:6:26\n    at async node:internal/modules/esm/loader:224:26"
+  },
+  {
+    "name": "webkit",
+    "status": "launch-failed",
+    "error": "browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/webkit-2370/pw_run.sh\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n    at /workspace/void-explorer/[eval1]:6:26"
+  }
+]

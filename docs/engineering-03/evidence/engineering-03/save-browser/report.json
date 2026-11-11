@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "current",
+    "early-v1",
+    "missing-transform",
+    "unknown-system",
+    "contradictory-walking",
+    "invalid-json",
+    "future-version",
+    "getItem-failure-playable",
+    "setItem-failure-playable"
+  ],
+  "errors": [],
+  "status": "passed"
+}

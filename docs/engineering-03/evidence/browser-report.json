@@ -1,0 +1,491 @@
+{
+  "browser": "154.0.8037.57",
+  "renderer": "Chromium headless / SwiftShader",
+  "checks": [
+    "WebGL scene boots",
+    "Keyboard orbital scan awards discovery once",
+    "Throttle and inertial brake respond to real keyboard input",
+    "Landing reaches the shared terrain surface",
+    "Disembark and surface sampling complete the discovery loop",
+    "WASD walks on curved ground at astronaut eye height",
+    "Pointer lock rotates view and Escape releases into pause",
+    "Reboarding and takeoff return to free flight",
+    "Star chart selects and aligns local destinations",
+    "Hyperspace transfers into a separately generated system",
+    "Journal retains discoveries across systems",
+    "Quality settings and photo mode are interactive",
+    "Reload restores location, discoveries and preferences",
+    "Desktop HUD fits 1280 × 720",
+    "No JavaScript or browser console errors"
+  ],
+  "errors": [],
+  "final": {
+    "schemaVersion": 2,
+    "mode": "flight",
+    "system": 1,
+    "score": 500,
+    "altitude": 3705.4456993771555,
+    "playTime": 37.354199999999665,
+    "position": [0, 700, 5200],
+    "rotation": [-0.06685558457278488, 0, 0, 0.9977626625663196],
+    "forward": [0, -0.13341201214153922, -0.9910606616228624],
+    "angularVelocity": [0, 0, 0],
+    "speed": 0,
+    "velocity": [0, 0, 0],
+    "actualSpeed": 0,
+    "speedLimit": 320,
+    "target": 0,
+    "discoveries": {
+      "0-0": {
+        "scan": true,
+        "land": true,
+        "sample": true
+      }
+    },
+    "nearest": {
+      "id": "1-0",
+      "name": "PYRA B"
+    },
+    "navigation": {
+      "targetId": "1-0",
+      "targetName": "PYRA B",
+      "targetPosition": [0, 0, 0],
+      "distance": 3705.4456993771555,
+      "arrivalClearance": 975,
+      "centerDistance": 5246.903848937962,
+      "arrivalGap": 2730.4456993771555,
+      "headingError": 0,
+      "closingSpeed": 0,
+      "eta": null,
+      "stoppingDistance": 0,
+      "guidance": "off",
+      "status": "idle",
+      "blockedBy": null
+    },
+    "limits": {
+      "normal": 320,
+      "boost": 1100,
+      "cruise": 2200,
+      "deceleration": 160
+    },
+    "scenario": "player",
+    "quality": "low",
+    "cockpit": false,
+    "targeting": {
+      "attempts": 0,
+      "lastAttempt": null,
+      "reticleCandidate": 0
+    },
+    "ship": {
+      "name": "AURORA",
+      "state": "ready",
+      "error": null,
+      "url": "http://127.0.0.1:5173/assets/aurora/aurora.glb",
+      "sourceUnits": "metres",
+      "scaleToGame": 0.1,
+      "sizeMetres": [18.600000381469727, 4.166999816894531, 18.033612278212928],
+      "triangles": 2584,
+      "meshPrimitives": 29,
+      "materials": 6,
+      "textures": 0,
+      "loadMs": 3975.100000000093,
+      "gearExtension": 0,
+      "wings": [
+        {
+          "name": "Wing_Aft_Port",
+          "pair": "aft",
+          "side": "port"
+        },
+        {
+          "name": "Wing_Aft_Starboard",
+          "pair": "aft",
+          "side": "starboard"
+        },
+        {
+          "name": "Wing_Fore_Port",
+          "pair": "fore",
+          "side": "port"
+        },
+        {
+          "name": "Wing_Fore_Starboard",
+          "pair": "fore",
+          "side": "starboard"
+        }
+      ],
+      "engines": ["Nacelle_Port", "Nacelle_Starboard"],
+      "cockpitOffset": [0, -0.24199999332404967, -0.3499999999999999],
+      "groundContacts": [
+        [-0.17500000000000002, 699.5986623602599, 5200.467724399201],
+        [0.17500000000000002, 699.5986623602599, 5200.467724399201],
+        [-0.17500000000000002, 699.5292881149006, 5199.952372862245],
+        [0.17500000000000002, 699.5292881149006, 5199.952372862245]
+      ],
+      "plumes": [
+        {
+          "name": "Plume_Port",
+          "visible": true,
+          "position": [-0.17999999523162843, 699.6842709546705, 5200.952638046857],
+          "direction": [0, 0.13341201214153922, 0.9910606616228624]
+        },
+        {
+          "name": "Plume_Starboard",
+          "visible": true,
+          "position": [0.17999999523162843, 699.6842709546705, 5200.952638046857],
+          "direction": [0, 0.13341201214153922, 0.9910606616228624]
+        }
+      ],
+      "visible": true,
+      "modelLoaded": true,
+      "rendered": true,
+      "inspectionView": null,
+      "groundClearances": [
+        3705.8417251112605, 3705.8417251615288, 3705.3217237447907, 3705.321723795074
+      ]
+    },
+    "modal": null,
+    "paused": false,
+    "input": {
+      "keys": [],
+      "pointerLocked": false
+    },
+    "camera": {
+      "position": [0, 701.604755917474, 5204.425467031324],
+      "rotation": [-0.11663938150529139, 0, 0, 0.9931743324724333],
+      "shipDistance": 4.707440918376233,
+      "shipProjection": {
+        "x": 0,
+        "y": -0.20666793734127348,
+        "z": 0.9828945781379985,
+        "onScreen": true
+      }
+    },
+    "rendering": {
+      "ready": true,
+      "renderedScene": 1,
+      "simulationTime": 37.354199999999665,
+      "frames": 29,
+      "sceneGeneration": 1,
+      "lastFrameMs": 66.59999999999945,
+      "environment": {
+        "method": "opaque-depth-integration",
+        "samples": 2,
+        "nearSamples": 1,
+        "planets": [
+          {
+            "id": "1-0",
+            "radialAltitude": 3751.5039441487843,
+            "height": 121.25853299255249,
+            "scale": 36,
+            "density": 0,
+            "seaRadius": null
+          },
+          {
+            "id": "1-1",
+            "radialAltitude": 32860.517302057524,
+            "height": 124.64956363727605,
+            "scale": 30.97642710853368,
+            "density": 0,
+            "seaRadius": null
+          },
+          {
+            "id": "1-2",
+            "radialAltitude": 40528.96747413764,
+            "height": 118.90269204502407,
+            "scale": 31.8397097363323,
+            "density": 0,
+            "seaRadius": 1326.654572347179
+          }
+        ],
+        "details": {
+          "method": "world-cell-distance-fade",
+          "instances": 0,
+          "rebuilds": 0,
+          "fade": {
+            "full": 115,
+            "end": 185,
+            "cache": 290
+          }
+        }
+      },
+      "backend": "WebGL2",
+      "device": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "extensions": [
+          "EXT_clip_control",
+          "EXT_color_buffer_float",
+          "EXT_color_buffer_half_float",
+          "EXT_conservative_depth",
+          "EXT_depth_clamp",
+          "EXT_disjoint_timer_query_webgl2",
+          "EXT_float_blend",
+          "EXT_polygon_offset_clamp",
+          "EXT_texture_compression_bptc",
+          "EXT_texture_compression_rgtc",
+          "EXT_texture_filter_anisotropic",
+          "EXT_texture_mirror_clamp_to_edge",
+          "NV_shader_noperspective_interpolation",
+          "OES_draw_buffers_indexed",
+          "OES_sample_variables",
+          "OES_shader_multisample_interpolation",
+          "OES_texture_float_linear",
+          "OVR_multiview2",
+          "WEBGL_clip_cull_distance",
+          "WEBGL_compressed_texture_astc",
+          "WEBGL_compressed_texture_etc",
+          "WEBGL_compressed_texture_etc1",
+          "WEBGL_compressed_texture_s3tc",
+          "WEBGL_compressed_texture_s3tc_srgb",
+          "WEBGL_debug_renderer_info",
+          "WEBGL_debug_shaders",
+          "WEBGL_lose_context",
+          "WEBGL_multi_draw",
+          "WEBGL_polygon_mode",
+          "WEBGL_stencil_texturing"
+        ],
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "dpr": 1
+      },
+      "programs": 9,
+      "sceneObjects": 156,
+      "materials": 14,
+      "pixelRatio": 0.75,
+      "viewport": [1280, 720],
+      "fov": 58,
+      "performanceSamples": [
+        {
+          "frameMs": 16.666666666666668,
+          "updateMs": 1.1999999999534339,
+          "simulationMs": 0,
+          "sceneMs": 1.1999999999534339,
+          "submissionMs": 1545.6999999999534
+        },
+        {
+          "frameMs": 3699.7999999999997,
+          "updateMs": 1.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.5999999998603016
+        },
+        {
+          "frameMs": 133.30000000000018,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.4000000001396984
+        },
+        {
+          "frameMs": 50.100000000000364,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 318.5
+        },
+        {
+          "frameMs": 333.2999999999993,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.3000000000465661
+        },
+        {
+          "frameMs": 16.700000000000728,
+          "updateMs": 0.39999999990686774,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.3000000000465661
+        },
+        {
+          "frameMs": 66.69999999999982,
+          "updateMs": 0.4000000001396984,
+          "simulationMs": 0,
+          "sceneMs": 0.4000000001396984,
+          "submissionMs": 1
+        },
+        {
+          "frameMs": 99.89999999999964,
+          "updateMs": 2.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 1.8000000000465661,
+          "submissionMs": 1.0999999998603016
+        },
+        {
+          "frameMs": 83.40000000000055,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.1000000000931323
+        },
+        {
+          "frameMs": 83.19999999999982,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.8000000000465661,
+          "submissionMs": 1.1999999999534339
+        },
+        {
+          "frameMs": 83.39999999999964,
+          "updateMs": 0.39999999990686774,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.1000000000931323
+        },
+        {
+          "frameMs": 83.40000000000055,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 0.8000000000465661
+        },
+        {
+          "frameMs": 99.89999999999964,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1
+        },
+        {
+          "frameMs": 83.39999999999964,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 0.9000000001396984
+        },
+        {
+          "frameMs": 166.60000000000036,
+          "updateMs": 0.6999999999534339,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.0999999998603016
+        },
+        {
+          "frameMs": 16.699999999999818,
+          "updateMs": 0.30000000004656613,
+          "simulationMs": 0,
+          "sceneMs": 0.30000000004656613,
+          "submissionMs": 4.699999999953434
+        },
+        {
+          "frameMs": 83.30000000000018,
+          "updateMs": 0.2999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 83.30000000000018,
+          "updateMs": 0.5999999998603016,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 0.8000000000465661
+        },
+        {
+          "frameMs": 83.39999999999964,
+          "updateMs": 0.2999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 1.3000000000465661
+        },
+        {
+          "frameMs": 71.19999999986067,
+          "updateMs": 5.199999999953434,
+          "simulationMs": 0.19999999995343387,
+          "sceneMs": 0.19999999995343387,
+          "submissionMs": 0.6000000000931323
+        },
+        {
+          "frameMs": 183.39999999999964,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.19999999995343387,
+          "submissionMs": 0.6000000000931323
+        },
+        {
+          "frameMs": 16.600000000000364,
+          "updateMs": 1.7000000001862645,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 1.6000000000931323,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 200,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0.20000000018626451,
+          "sceneMs": 0.19999999995343387,
+          "submissionMs": 0.7999999998137355
+        },
+        {
+          "frameMs": 16.699999999999818,
+          "updateMs": 0.30000000004656613,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.19999999995343387,
+          "submissionMs": 1.1000000000931323
+        },
+        {
+          "frameMs": 216.69999999999982,
+          "updateMs": 0.6999999999534339,
+          "simulationMs": 0.09999999986030161,
+          "sceneMs": 0.30000000004656613,
+          "submissionMs": 0.39999999990686774
+        },
+        {
+          "frameMs": 16.699999999999818,
+          "updateMs": 2.199999999953434,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 2.0999999998603016,
+          "submissionMs": 1.1999999999534339
+        },
+        {
+          "frameMs": 149.90000000000055,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 0.8999999999068677
+        },
+        {
+          "frameMs": 66.69999999999982,
+          "updateMs": 0.39999999990686774,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 0.7000000001862645
+        },
+        {
+          "frameMs": 66.59999999999945,
+          "updateMs": 0.6999999999534339,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 0.5999999998603016
+        }
+      ],
+      "textures": 6,
+      "geometries": 71,
+      "terrain": [
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        },
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        },
+        {
+          "active": 24,
+          "cached": 30,
+          "queued": 0,
+          "generatedLastFrame": 0,
+          "transitioning": 0
+        }
+      ],
+      "patches": 72,
+      "drawCalls": 73,
+      "triangles": 34342
+    },
+    "patches": 72
+  }
+}

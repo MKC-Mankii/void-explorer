@@ -1,0 +1,15 @@
+
+> void-explorer@0.1.0 test:aurora
+> node tests/aurora.mjs
+
+PASS Invalid GLB is observable and blocks start with a recovery message; no old-ship fallback
+PASS Normal player spawn loads the exact Blender GLB with four wings and two engines
+PASS Real W/X input and C camera switch use the loaded model and actual cockpit mount
+PASS Real-time L descent lands on four adapted gear contacts with plumes off
+PASS Port exit, real walking hull guard, sampling, saved walking reload, E boarding and real takeoff succeed
+PASS Five asset views plus atmosphere and surface captured in the actual game renderer
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

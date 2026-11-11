@@ -1,0 +1,638 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-11T06:30:14.540119+00:00",
+  "baseline": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+  "branch": "feat/engineering-03",
+  "verifiedCodeHead": "628b8b6bf61c9d79f2937645d3834ba8fd0370a8",
+  "draftPR": "https://github.com/MKC-Mankii/void-explorer/pull/9",
+  "baseBranch": "fix/engineering-02",
+  "deployment": false,
+  "mergedHistoricalPRs": false,
+  "performance": {
+    "beforeStatus": "passed",
+    "afterStatus": "passed",
+    "runsPerRevision": 20,
+    "beforeSamples": 3050,
+    "afterSamples": 2998,
+    "hardware": false,
+    "gpuTimingCollected": false,
+    "optimizationCount": 0,
+    "summary": "performance-summary.json"
+  },
+  "compatibility": {
+    "chromiumSoftware": "passed",
+    "configurations": 18,
+    "firefox": "launch-failed",
+    "webkit": "missing-system-libraries",
+    "windows": "not-run",
+    "macOS": "not-run",
+    "safari": "not-run",
+    "hardwareGPU": "not-run"
+  },
+  "soak": {
+    "status": "passed",
+    "rounds": 6,
+    "seconds": 197.53,
+    "longRealDeviceAcceptance": false
+  },
+  "dependencyAudit": {
+    "beforeProduction": 0,
+    "beforeAffectedPackages": 3,
+    "uniqueAdvisories": 4,
+    "afterAll": 0,
+    "afterProduction": 0,
+    "directUpgrade": "vitest 3.2.7 -> 4.1.12"
+  },
+  "unit": {
+    "files": 11,
+    "tests": 85,
+    "status": "passed"
+  },
+  "saveBrowser": {
+    "status": "passed",
+    "checks": [
+      "current",
+      "early-v1",
+      "missing-transform",
+      "unknown-system",
+      "contradictory-walking",
+      "invalid-json",
+      "future-version",
+      "getItem-failure-playable",
+      "setItem-failure-playable"
+    ]
+  },
+  "regression": [
+    {
+      "name": "save-browser",
+      "command": "npm run test:save-browser",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 64.77,
+      "log": "test-results/engineering-03/regression/save-browser.log"
+    },
+    {
+      "name": "soak",
+      "command": "npm run test:resource-soak",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 1,
+      "seconds": 125.31,
+      "log": "test-results/engineering-03/regression/soak.log"
+    },
+    {
+      "name": "compatibility",
+      "command": "npm run test:device",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 65.57,
+      "log": "test-results/engineering-03/regression/compatibility.log"
+    },
+    {
+      "name": "format",
+      "command": "npm run format:check",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 1,
+      "seconds": 5.02,
+      "log": "test-results/engineering-03/regression/format.log"
+    },
+    {
+      "name": "unit",
+      "command": "npm test",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 1.89,
+      "log": "test-results/engineering-03/regression/unit.log"
+    },
+    {
+      "name": "build",
+      "command": "npm run build",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 2.6,
+      "log": "test-results/engineering-03/regression/build.log"
+    },
+    {
+      "name": "e2e",
+      "command": "npm run test:e2e",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 65.17,
+      "log": "test-results/engineering-03/regression/e2e.log"
+    },
+    {
+      "name": "navigation",
+      "command": "npm run test:navigation",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 72.26,
+      "log": "test-results/engineering-03/regression/navigation.log"
+    },
+    {
+      "name": "right-click",
+      "command": "npm run test:right-click",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 21.95,
+      "log": "test-results/engineering-03/regression/right-click.log"
+    },
+    {
+      "name": "production",
+      "command": "npm run test:production",
+      "environment": {
+        "VOID_SOFTWARE": "1",
+        "VOID_PRODUCTION_URL": "http://127.0.0.1:4173/coherence/"
+      },
+      "exitCode": 0,
+      "seconds": 8.29,
+      "log": "test-results/engineering-03/regression/production.log"
+    },
+    {
+      "name": "engineering-02",
+      "command": "npm run test:engineering-02",
+      "environment": {
+        "VOID_SOFTWARE": "1",
+        "VOID_URL": "http://127.0.0.1:4173/coherence/"
+      },
+      "exitCode": 0,
+      "seconds": 25.72,
+      "log": "test-results/engineering-03/regression/engineering-02.log"
+    },
+    {
+      "name": "rendering",
+      "command": "npm run test:rendering",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 63.21,
+      "log": "test-results/engineering-03/regression/rendering.log"
+    },
+    {
+      "name": "render-flight",
+      "command": "npm run test:render-flight",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 32.81,
+      "log": "test-results/engineering-03/regression/render-flight.log"
+    },
+    {
+      "name": "aurora",
+      "command": "npm run test:aurora",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 96.37,
+      "log": "test-results/engineering-03/regression/aurora.log"
+    },
+    {
+      "name": "coherence",
+      "command": "npm run test:coherence",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 141.8,
+      "log": "test-results/engineering-03/regression/coherence.log"
+    },
+    {
+      "name": "coherence-journey",
+      "command": "npm run test:coherence-journey",
+      "environment": {
+        "VOID_SOFTWARE": "1"
+      },
+      "exitCode": 0,
+      "seconds": 68.48,
+      "log": "test-results/engineering-03/regression/coherence-journey.log"
+    },
+    {
+      "name": "performance-after",
+      "command": "npm run test:performance",
+      "environment": {
+        "VOID_SOFTWARE": "1",
+        "VOID_REPORT_DIR": "test-results/engineering-03/performance-after"
+      },
+      "exitCode": 0,
+      "seconds": 766.99,
+      "log": "test-results/engineering-03/regression/performance-after.log"
+    }
+  ],
+  "targetedRechecks": [
+    {
+      "name": "soak-fixed",
+      "reason": "Pass target frame as serialized browser argument; original frame count and assertions unchanged.",
+      "exitCode": 0,
+      "seconds": 198.27,
+      "log": "test-results/engineering-03/regression/soak-fixed.log"
+    },
+    {
+      "name": "device-final",
+      "reason": "Assert only the injected ERR_FAILED network error is expected; original failure survives report/cleanup errors.",
+      "exitCode": 0,
+      "seconds": 68.08,
+      "log": "test-results/engineering-03/regression/device-final.log"
+    }
+  ],
+  "baselineDynamicJourney": {
+    "source": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+    "diagnosticPatch": "docs/engineering-03/baseline-instrumentation.patch",
+    "exitCode": 0,
+    "seconds": 71.67,
+    "method": "Same current journey harness against instrumented baseline development server; no game simulation modifications."
+  },
+  "coastAB": [
+    {
+      "label": "before",
+      "samples": 132,
+      "median": 216.70000000000437,
+      "p95": 366.6000000000022,
+      "worst": 433.40000000000146,
+      "min": 16.600000000000364
+    },
+    {
+      "label": "after",
+      "samples": 130,
+      "median": 233.29999999999927,
+      "p95": 416.60000000000036,
+      "worst": 616.7000000000007,
+      "min": 16.599999999998545
+    },
+    {
+      "label": "before",
+      "samples": 131,
+      "median": 233.29999999999927,
+      "p95": 350,
+      "worst": 450,
+      "min": 16.599999999998545
+    },
+    {
+      "label": "after",
+      "samples": 128,
+      "median": 233.3000000000029,
+      "p95": 266.70000000000437,
+      "worst": 450,
+      "min": 33.399999999999636
+    }
+  ],
+  "performanceSource": "85c11d4d7ae438160f39970d371b57c9a7902f18",
+  "applicationSourceUnchangedSincePerformance": true,
+  "formatFinal": {
+    "status": "passed",
+    "command": "npm run format:check",
+    "log": "evidence/engineering-03/format-final.log"
+  },
+  "visualComparisons": [
+    {
+      "scene": "coherence-air-in",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-air-out",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-cloud-in",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-cloud-out",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-coast",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-dry",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-ground",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-night",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-orbit",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    },
+    {
+      "scene": "coherence-water",
+      "meanAbsoluteRgb": 0.0,
+      "maxChannelDelta": 0.0,
+      "changedPixels": 0,
+      "totalPixels": 1024000
+    }
+  ],
+  "ci": {
+    "runId": 42970272392,
+    "url": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42970272392",
+    "head": "628b8b6bf61c9d79f2937645d3834ba8fd0370a8",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 130356888340,
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-11T06:07:59Z",
+        "completedAt": "2026-11-11T06:22:29Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:00Z",
+            "completedAt": "2026-11-11T06:08:00Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:00Z",
+            "completedAt": "2026-11-11T06:08:02Z"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:02Z",
+            "completedAt": "2026-11-11T06:08:03Z"
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:03Z",
+            "completedAt": "2026-11-11T06:08:05Z"
+          },
+          {
+            "name": "Run npm run format:check",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:05Z",
+            "completedAt": "2026-11-11T06:08:10Z"
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:10Z",
+            "completedAt": "2026-11-11T06:08:13Z"
+          },
+          {
+            "name": "Run npm run build",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:13Z",
+            "completedAt": "2026-11-11T06:08:16Z"
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:16Z",
+            "completedAt": "2026-11-11T06:08:32Z"
+          },
+          {
+            "name": "Start development verification server",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:32Z",
+            "completedAt": "2026-11-11T06:08:32Z"
+          },
+          {
+            "name": "Run npm run test:e2e",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:08:32Z",
+            "completedAt": "2026-11-11T06:09:53Z"
+          },
+          {
+            "name": "Run npm run test:navigation",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:09:53Z",
+            "completedAt": "2026-11-11T06:11:04Z"
+          },
+          {
+            "name": "Run npm run test:right-click",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:11:04Z",
+            "completedAt": "2026-11-11T06:11:28Z"
+          },
+          {
+            "name": "Start production preview server",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:11:28Z",
+            "completedAt": "2026-11-11T06:11:28Z"
+          },
+          {
+            "name": "Run npm run test:production",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:11:28Z",
+            "completedAt": "2026-11-11T06:11:38Z"
+          },
+          {
+            "name": "Run npm run test:engineering-02",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:11:38Z",
+            "completedAt": "2026-11-11T06:12:06Z"
+          },
+          {
+            "name": "Run npm run test:rendering",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:12:06Z",
+            "completedAt": "2026-11-11T06:13:12Z"
+          },
+          {
+            "name": "Run npm run test:render-flight",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:13:12Z",
+            "completedAt": "2026-11-11T06:13:47Z"
+          },
+          {
+            "name": "Run npm run test:aurora",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:13:47Z",
+            "completedAt": "2026-11-11T06:15:34Z"
+          },
+          {
+            "name": "Run npm run test:coherence",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:15:34Z",
+            "completedAt": "2026-11-11T06:18:12Z"
+          },
+          {
+            "name": "Run npm run test:coherence-journey",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:18:12Z",
+            "completedAt": "2026-11-11T06:19:26Z"
+          },
+          {
+            "name": "Run npm run test:save-browser",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:19:26Z",
+            "completedAt": "2026-11-11T06:20:35Z"
+          },
+          {
+            "name": "Run npm run test:resource-soak",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:20:35Z",
+            "completedAt": "2026-11-11T06:22:24Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:22:24Z",
+            "completedAt": "2026-11-11T06:22:26Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:22:26Z",
+            "completedAt": "2026-11-11T06:22:27Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:22:27Z",
+            "completedAt": "2026-11-11T06:22:27Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-11T06:22:27Z",
+            "completedAt": "2026-11-11T06:22:27Z"
+          }
+        ]
+      }
+    ],
+    "supersededFailure": {
+      "runId": 42968627259,
+      "url": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42968627259",
+      "cause": "Resource test browser closure omitted serialized frame target; fixed in 85c11d4; original failure retained."
+    }
+  },
+  "limitations": [
+    "Cloud SwiftShader is not hardware GPU acceptance.",
+    "Firefox and WebKit could not launch here; neither passed.",
+    "No Windows/macOS/Safari or 30–60-minute real-device exploration performed.",
+    "GPU timer extension present but GPU time not sampled.",
+    "JS heap and GL object counters are not GPU VRAM.",
+    "Terrain metadata outside observed mesh cache is not independently proven bounded by this short test.",
+    "Coast software RAF shift is observed; causality is not established by this small experiment."
+  ],
+  "commits": [
+    "628b8b6bf61c9d79f2937645d3834ba8fd0370a8 test: preserve original failures through new runner cleanup",
+    "85c11d4d7ae438160f39970d371b57c9a7902f18 test: pass resource settle frame target across browser boundary",
+    "146023838314a0914dfc2c9c591ff9def7aa3c03 test: measure CPU and frame distributions during real exploration",
+    "483b4aa3e5d06c6a076c50c15ef32be47a557fbe fix: preserve malformed optional save fields and bound backup exhaustion",
+    "f9f33e4f7ac2153899d024a75ead4082cbcb859e test: add bounded performance capture and device lifecycle verification",
+    "cdaaefa1c1acdbc871ea4278d949654420de1cb9 fix(deps): update only Vitest chain to patched 4.1.12",
+    "578c9794f44b73571f2ce07fecc1ae24f6a97878 fix: preserve invalid saves and recover known player progress safely"
+  ],
+  "finalCommitNote": "Only documentation/evidence follows verifiedCodeHead. Final delivery SHA is resolved from PR head; CI success above applies to verifiedCodeHead, not a subsequently triggered docs-only run.",
+  "initialWorkspace": {
+    "branch": "work",
+    "head": "d6948844b1de26b1237cce3ceaf753b9dd964775",
+    "clean": true,
+    "remote": "https://github.com/MKC-Mankii/void-explorer.git"
+  },
+  "protectedRefsAtFinalVerification": {
+    "HEAD": "d6948844b1de26b1237cce3ceaf753b9dd964775",
+    "refs/heads/feat/world-coherence": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+    "refs/heads/fix/engineering-02": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+    "refs/heads/gh-pages": "b6d59d01e8ad860708aa2fc676c94a1ca93dae17",
+    "refs/heads/main": "d6948844b1de26b1237cce3ceaf753b9dd964775"
+  },
+  "protectedRefsUnchanged": true,
+  "finalChecks": {
+    "save-browser": "passed",
+    "soak": "passed",
+    "compatibility": "passed",
+    "format": "passed",
+    "unit": "passed-85",
+    "build": "passed",
+    "e2e": "passed",
+    "navigation": "passed",
+    "right-click": "passed",
+    "production": "passed",
+    "engineering-02": "passed",
+    "rendering": "passed",
+    "render-flight": "passed",
+    "aurora": "passed",
+    "coherence": "passed",
+    "coherence-journey": "passed",
+    "performance-after": "passed",
+    "device-final": "passed",
+    "baseline-journey": "passed",
+    "coast-ab": "passed"
+  },
+  "handoffWorkingTree": "All task changes committed; final git status checked after delivery commit.",
+  "rawEvidenceManifest": "evidence-manifest.json"
+}

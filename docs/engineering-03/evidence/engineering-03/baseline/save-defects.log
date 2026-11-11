@@ -1,0 +1,81 @@
+
+ RUN  v3.2.7 /workspace/void-explorer
+
+ ❯ tests/save-boundaries.test.ts (3 tests | 3 failed) 21ms
+   × rejects a landed save at the planet centre before it can corrupt simulation 7ms
+     → expected true to be false // Object.is equality
+   × rejects a string system index and physically unbounded velocity 1ms
+     → expected true to be false // Object.is equality
+   × restoring a stationary surface state clears residual motion 4ms
+     → expected 10 to be +0 // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/save-boundaries.test.ts > rejects a landed save at the planet centre before it can corrupt simulation
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/save-boundaries.test.ts:11:30
+      9|   saved.position = sim.nearest.position.toArray();
+     10|   saved.shipPosition = [...saved.position];
+     11|   expect(sim.restore(saved)).toBe(false);
+       |                              ^
+     12| });
+     13| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/save-boundaries.test.ts > rejects a string system index and physically unbounded velocity
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/save-boundaries.test.ts:16:55
+     14| it('rejects a string system index and physically unbounded velocity', …
+     15|   const sim = new Simulation();
+     16|   expect(sim.restore({ ...sim.save(), system: '0' })).toBe(false);
+       |                                                       ^
+     17|   expect(sim.restore({ ...sim.save(), velocity: [9999999, 0, 0] })).to…
+     18| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/save-boundaries.test.ts > restoring a stationary surface state clears residual motion
+AssertionError: expected 10 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 10
+
+ ❯ tests/save-boundaries.test.ts:28:33
+     26|   saved.speed = 10;
+     27|   expect(sim.restore(saved)).toBe(true);
+     28|   expect(sim.velocity.length()).toBe(0);
+       |                                 ^
+     29|   expect(sim.speed).toBe(0);
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  05:31:14
+   Duration  420ms (transform 97ms, setup 0ms, collect 128ms, tests 21ms, environment 0ms, prepare 54ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,30 @@
+[
+  {
+    "label": "before",
+    "repeat": 1,
+    "exitCode": 0,
+    "seconds": 43.9,
+    "report": "test-results/engineering-03/coast-ab/1-before/report.json"
+  },
+  {
+    "label": "after",
+    "repeat": 1,
+    "exitCode": 0,
+    "seconds": 43.25,
+    "report": "test-results/engineering-03/coast-ab/1-after/report.json"
+  },
+  {
+    "label": "before",
+    "repeat": 2,
+    "exitCode": 0,
+    "seconds": 43.03,
+    "report": "test-results/engineering-03/coast-ab/2-before/report.json"
+  },
+  {
+    "label": "after",
+    "repeat": 2,
+    "exitCode": 0,
+    "seconds": 44.02,
+    "report": "test-results/engineering-03/coast-ab/2-after/report.json"
+  }
+]

@@ -1,0 +1,44 @@
+Original test failure: AssertionError [ERR_ASSERTION]: EO04_ORIGINAL_ASSERTION
+
+1 !== 2
+
+    at file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:7:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+Additional evidence failure (screenshot): Error: EO04_SCREENSHOT_FAILURE
+    at screenshot (file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:17:13)
+    at failWithEvidence (file:///workspace/void-explorer/tests/failure-evidence.mjs:40:33)
+    at async file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:9:3
+Additional evidence failure (report): Error: EO04_REPORT_FAILURE
+    at writeReport (file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:20:36)
+    at failWithEvidence (file:///workspace/void-explorer/tests/failure-evidence.mjs:45:13)
+    at async file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:9:3
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: EO04_ORIGINAL_ASSERTION
+
+1 !== 2
+
+    at file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:7:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

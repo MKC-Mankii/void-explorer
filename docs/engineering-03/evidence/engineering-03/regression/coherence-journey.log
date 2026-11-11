@@ -1,0 +1,24 @@
+
+> void-explorer@0.1.0 test:coherence-journey
+> node tests/coherence-journey.mjs
+
+CAPTURE 01-space: flight, 37469 m above surface
+CAPTURE 02-approach: 36909 m (same-frame canvas)
+CAPTURE 03-air: 1088 m (same-frame canvas)
+CAPTURE 04-low: 467 m (same-frame canvas)
+CAPTURE 05-ground-approach: 191 m (same-frame canvas)
+CAPTURE 06-landed: landed, 6 m above surface
+CAPTURE 07-walking: walking, 2 m above surface
+CAPTURE 08-restored: walking, 2 m above surface
+CAPTURE 09-takeoff: flight, 906 m above surface
+CAPTURE 10-exit-air: flight, 1683 m above surface
+CAPTURE 11-coast-start: flight, 14 m above surface
+CAPTURE 12-coast-3: flight, 194 m above surface
+CAPTURE 12-coast-6: flight, 478 m above surface
+CAPTURE 12-coast-9: flight, 716 m above surface
+PASS normal continuous exploration/return journey, all qualities/resize, and separately seeded real coastal flight
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

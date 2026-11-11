@@ -1,0 +1,7 @@
+{
+  "name": "device-final",
+  "reason": "Assert only the injected ERR_FAILED network error is expected; original failure survives report/cleanup errors.",
+  "exitCode": 0,
+  "seconds": 68.08,
+  "log": "test-results/engineering-03/regression/device-final.log"
+}

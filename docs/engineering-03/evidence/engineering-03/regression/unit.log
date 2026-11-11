@@ -1,0 +1,18 @@
+
+> void-explorer@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.12 /workspace/void-explorer
+
+
+ Test Files  11 passed (11)
+      Tests  83 passed (83)
+   Start at  05:56:39
+   Duration  1.50s (transform 373ms, setup 0ms, import 800ms, tests 2.43s, environment 1ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

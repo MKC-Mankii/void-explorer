@@ -1,0 +1,2258 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-11-11T06:25:16.747Z",
+  "status": "passed",
+  "source": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+  "host": {
+    "os": "linux 6.18.57 x64",
+    "cpu": "AMD EPYC 9V45 96-Core Processor",
+    "logicalCPUs": 5,
+    "memoryBytes": 18882662400,
+    "node": "v24.19.0"
+  },
+  "settings": {
+    "viewport": {
+      "width": 960,
+      "height": 600
+    },
+    "dpr": 1,
+    "quality": "medium",
+    "seconds": 30,
+    "repeats": 1,
+    "warmupFrames": 30
+  },
+  "limitations": [
+    "RAF includes scheduling and software rendering; submission is CPU wall time, not GPU time.",
+    "Heap is Chromium JS heap only; GL counters are API objects, not GPU memory.",
+    "Fixed poses are fixtures, not flown journeys. Timing instrumentation is development-only.",
+    "GPU timing not collected; no disjoint query results are claimed."
+  ],
+  "runs": [
+    {
+      "scene": "coherence-coast",
+      "repeat": 0,
+      "elapsedMs": 30486,
+      "metrics": {
+        "frameMs": {
+          "samples": 132,
+          "median": 216.70000000000437,
+          "p95": 366.6000000000022,
+          "worst": 433.40000000000146,
+          "min": 16.600000000000364
+        },
+        "updateMs": {
+          "samples": 132,
+          "median": 0.7999999998137355,
+          "p95": 1.1000000000931323,
+          "worst": 5.099999999627471,
+          "min": 0.2999999998137355
+        },
+        "simulationMs": {
+          "samples": 132,
+          "median": 0,
+          "p95": 0.10000000009313226,
+          "worst": 0.10000000009313226,
+          "min": 0
+        },
+        "sceneMs": {
+          "samples": 132,
+          "median": 0.5,
+          "p95": 0.7999999998137355,
+          "worst": 4.899999999906868,
+          "min": 0.2999999998137355
+        },
+        "submissionMs": {
+          "samples": 132,
+          "median": 1.7999999998137355,
+          "p95": 4.900000000372529,
+          "worst": 17.299999999813735,
+          "min": 1
+        }
+      },
+      "gpuMs": null,
+      "before": {
+        "schemaVersion": 2,
+        "mode": "flight",
+        "system": 0,
+        "score": 0,
+        "altitude": 8.65331960495314,
+        "playTime": 0,
+        "position": [428.05801513054195, 1059.422467190562, 988.6917475605646],
+        "rotation": [
+          0.18901142793081555, -0.49636629385318104, -0.3381331564435746, 0.7768919815209299
+        ],
+        "forward": [0.8990680486439037, -0.04199287783500655, -0.43579036487602335],
+        "angularVelocity": [0, 0, 0],
+        "speed": 0,
+        "velocity": [0, 0, 0],
+        "actualSpeed": 0,
+        "speedLimit": 320,
+        "target": 0,
+        "discoveries": {},
+        "nearest": {
+          "id": "0-0",
+          "name": "VESPER"
+        },
+        "navigation": {
+          "targetId": "0-0",
+          "targetName": "VESPER",
+          "targetPosition": [0, 0, 0],
+          "distance": 8.65331960495314,
+          "arrivalClearance": 975,
+          "centerDistance": 1511,
+          "arrivalGap": 0,
+          "headingError": 86.56636963754949,
+          "closingSpeed": 0,
+          "eta": null,
+          "stoppingDistance": 0,
+          "guidance": "off",
+          "status": "idle",
+          "blockedBy": null
+        },
+        "limits": {
+          "normal": 320,
+          "boost": 1100,
+          "cruise": 2200,
+          "deceleration": 160
+        },
+        "scenario": "coherence-coast",
+        "quality": "medium",
+        "cockpit": false,
+        "targeting": {
+          "attempts": 0,
+          "lastAttempt": null,
+          "reticleCandidate": 0
+        },
+        "ship": {
+          "name": "AURORA",
+          "state": "ready",
+          "error": null,
+          "url": "http://127.0.0.1:5174/assets/aurora/aurora.glb",
+          "sourceUnits": "metres",
+          "scaleToGame": 0.1,
+          "sizeMetres": [18.600000381469727, 4.166999816894531, 18.033612278212928],
+          "triangles": 2584,
+          "meshPrimitives": 29,
+          "materials": 6,
+          "textures": 0,
+          "loadMs": 1474.3000000002794,
+          "gearExtension": 0,
+          "wings": [
+            {
+              "name": "Wing_Aft_Port",
+              "pair": "aft",
+              "side": "port"
+            },
+            {
+              "name": "Wing_Aft_Starboard",
+              "pair": "aft",
+              "side": "starboard"
+            },
+            {
+              "name": "Wing_Fore_Port",
+              "pair": "fore",
+              "side": "port"
+            },
+            {
+              "name": "Wing_Fore_Starboard",
+              "pair": "fore",
+              "side": "starboard"
+            }
+          ],
+          "engines": ["Nacelle_Port", "Nacelle_Starboard"],
+          "cockpitOffset": [0, -0.2419999933242707, -0.35000000000000003],
+          "groundContacts": [
+            [427.48523219909384, 1059.242413035111, 988.4682229998862],
+            [427.5827327286818, 1058.9928547471773, 988.6934213738894],
+            [427.952747577958, 1059.220576738937, 988.2416120132677],
+            [428.050248107546, 1058.9710184510036, 988.4668103872708]
+          ],
+          "plumes": [
+            {
+              "name": "Plume_Port",
+              "visible": true,
+              "position": [427.04830343131, 1059.2807412598047, 988.6920963483387],
+              "direction": [-0.8990680486439037, 0.04199287783500655, 0.4357903648760233]
+            },
+            {
+              "name": "Plume_Starboard",
+              "visible": true,
+              "position": [427.1485896876581, 1059.0240527418728, 988.9237289554629],
+              "direction": [-0.8990680486439037, 0.04199287783500655, 0.4357903648760233]
+            }
+          ],
+          "visible": true,
+          "modelLoaded": true,
+          "rendered": true,
+          "inspectionView": null,
+          "groundClearances": [
+            8.318993550110008, 8.312426525091496, 8.170809884972641, 8.166347850085458
+          ]
+        },
+        "modal": null,
+        "paused": true,
+        "input": {
+          "keys": [],
+          "pointerLocked": false
+        },
+        "camera": {
+          "position": [424.2600501786789, 1060.3155157258532, 991.3257419679304],
+          "rotation": [
+            0.1499467970140592, -0.47884635097522676, -0.3625185530669394, 0.7853677029934368
+          ],
+          "shipDistance": 4.707440918375922,
+          "shipProjection": {
+            "x": -2.0556341145914007e-14,
+            "y": -0.20666793734140265,
+            "z": 0.9828945781379952,
+            "onScreen": true
+          }
+        },
+        "rendering": {
+          "ready": true,
+          "renderedScene": 2,
+          "simulationTime": 0,
+          "frames": 45,
+          "sceneGeneration": 2,
+          "lastFrameMs": 250,
+          "environment": {
+            "method": "opaque-depth-integration",
+            "samples": 3,
+            "nearSamples": 1,
+            "planets": [
+              {
+                "id": "0-0",
+                "radialAltitude": 12.280499694043101,
+                "height": 131.62016897139836,
+                "scale": 36,
+                "density": 0.7109700374401943,
+                "seaRadius": 1500
+              },
+              {
+                "id": "0-1",
+                "radialAltitude": 28033.97363787978,
+                "height": 120.0566153203305,
+                "scale": 32.57952071104199,
+                "density": 0,
+                "seaRadius": null
+              },
+              {
+                "id": "0-2",
+                "radialAltitude": 42766.08868525722,
+                "height": 100.85874671669193,
+                "scale": 23.330687297713013,
+                "density": 0,
+                "seaRadius": null
+              }
+            ],
+            "details": {
+              "method": "world-cell-distance-fade",
+              "instances": 533,
+              "rebuilds": 1,
+              "fade": {
+                "full": 115,
+                "end": 185,
+                "cache": 290
+              }
+            }
+          },
+          "backend": "WebGL2",
+          "device": {
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "extensions": [
+              "EXT_clip_control",
+              "EXT_color_buffer_float",
+              "EXT_color_buffer_half_float",
+              "EXT_conservative_depth",
+              "EXT_depth_clamp",
+              "EXT_disjoint_timer_query_webgl2",
+              "EXT_float_blend",
+              "EXT_polygon_offset_clamp",
+              "EXT_texture_compression_bptc",
+              "EXT_texture_compression_rgtc",
+              "EXT_texture_filter_anisotropic",
+              "EXT_texture_mirror_clamp_to_edge",
+              "NV_shader_noperspective_interpolation",
+              "OES_draw_buffers_indexed",
+              "OES_sample_variables",
+              "OES_shader_multisample_interpolation",
+              "OES_texture_float_linear",
+              "OVR_multiview2",
+              "WEBGL_clip_cull_distance",
+              "WEBGL_compressed_texture_astc",
+              "WEBGL_compressed_texture_etc",
+              "WEBGL_compressed_texture_etc1",
+              "WEBGL_compressed_texture_s3tc",
+              "WEBGL_compressed_texture_s3tc_srgb",
+              "WEBGL_debug_renderer_info",
+              "WEBGL_debug_shaders",
+              "WEBGL_lose_context",
+              "WEBGL_multi_draw",
+              "WEBGL_polygon_mode",
+              "WEBGL_stencil_texturing"
+            ],
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+            "dpr": 1
+          },
+          "programs": 22,
+          "sceneObjects": 924,
+          "materials": 17,
+          "pixelRatio": 1,
+          "viewport": [960, 600],
+          "fov": 58,
+          "performanceSamples": [
+            {
+              "frameMs": 266.5999999999999,
+              "updateMs": 1.3999999999068677,
+              "simulationMs": 0.10000000009313226,
+              "sceneMs": 0.6999999997206032,
+              "submissionMs": 110.20000000018626
+            },
+            {
+              "frameMs": 733.3000000000002,
+              "updateMs": 1.1999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.7999999998137355,
+              "submissionMs": 5.399999999906868
+            },
+            {
+              "frameMs": 16.699999999999818,
+              "updateMs": 0.599999999627471,
+              "simulationMs": 0,
+              "sceneMs": 0.599999999627471,
+              "submissionMs": 3.2000000001862645
+            },
+            {
+              "frameMs": 1066.6000000000004,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.2999999998137355,
+              "submissionMs": 2.2000000001862645
+            },
+            {
+              "frameMs": 283.3000000000002,
+              "updateMs": 0.8000000002793968,
+              "simulationMs": 0.10000000009313226,
+              "sceneMs": 0.5,
+              "submissionMs": 2.2999999998137355
+            },
+            {
+              "frameMs": 199.89999999999964,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0.09999999962747097,
+              "sceneMs": 0.5,
+              "submissionMs": 2
+            },
+            {
+              "frameMs": 266.6999999999998,
+              "updateMs": 2.3999999999068677,
+              "simulationMs": 0,
+              "sceneMs": 2.2000000001862645,
+              "submissionMs": 2.3999999999068677
+            },
+            {
+              "frameMs": 200,
+              "updateMs": 0.7000000001862645,
+              "simulationMs": 0,
+              "sceneMs": 0.40000000037252903,
+              "submissionMs": 1.7999999998137355
+            },
+            {
+              "frameMs": 400,
+              "updateMs": 0.7999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.900000000372529
+            },
+            {
+              "frameMs": 100,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.6000000000931323,
+              "submissionMs": 1.3000000002793968
+            },
+            {
+              "frameMs": 16.699999999999818,
+              "updateMs": 0.7000000001862645,
+              "simulationMs": 0.10000000009313226,
+              "sceneMs": 0.20000000018626451,
+              "submissionMs": 1.2999999998137355
+            },
+            {
+              "frameMs": 566.7000000000007,
+              "updateMs": 0.7000000001862645,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.7999999998137355
+            },
+            {
+              "frameMs": 33.19999999999982,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.6000000000931323,
+              "submissionMs": 4.5
+            },
+            {
+              "frameMs": 233.30000000000018,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.5,
+              "submissionMs": 1.8000000002793968
+            },
+            {
+              "frameMs": 450,
+              "updateMs": 0.7999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.5,
+              "submissionMs": 2.3999999999068677
+            },
+            {
+              "frameMs": 16.699999999999818,
+              "updateMs": 0.2999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.2999999998137355,
+              "submissionMs": 2.3000000002793968
+            },
+            {
+              "frameMs": 466.6999999999998,
+              "updateMs": 0.8000000002793968,
+              "simulationMs": 0,
+              "sceneMs": 0.40000000037252903,
+              "submissionMs": 1.6999999997206032
+            },
+            {
+              "frameMs": 233.29999999999927,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 2.6000000000931323
+            },
+            {
+              "frameMs": 16.600000000000364,
+              "updateMs": 0.2999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.2999999998137355,
+              "submissionMs": 3.5
+            },
+            {
+              "frameMs": 216.8000000000011,
+              "updateMs": 1.2999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.6999999997206032,
+              "submissionMs": 4.899999999906868
+            },
+            {
+              "frameMs": 233.29999999999927,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.6000000000931323
+            },
+            {
+              "frameMs": 416.60000000000036,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.6000000000931323,
+              "submissionMs": 2.2000000001862645
+            },
+            {
+              "frameMs": 33.399999999999636,
+              "updateMs": 1.8999999999068677,
+              "simulationMs": 0,
+              "sceneMs": 1.8999999999068677,
+              "submissionMs": 2.5
+            },
+            {
+              "frameMs": 266.60000000000036,
+              "updateMs": 0.7999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 2
+            },
+            {
+              "frameMs": 216.60000000000036,
+              "updateMs": 0.6999999997206032,
+              "simulationMs": 0,
+              "sceneMs": 0.5,
+              "submissionMs": 2.2000000001862645
+            },
+            {
+              "frameMs": 216.6999999999989,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.8999999999068677
+            },
+            {
+              "frameMs": 216.60000000000036,
+              "updateMs": 0.7999999998137355,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.6000000000931323
+            },
+            {
+              "frameMs": 316.7000000000007,
+              "updateMs": 1.3999999999068677,
+              "simulationMs": 0,
+              "sceneMs": 1,
+              "submissionMs": 2.6000000000931323
+            },
+            {
+              "frameMs": 250,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.7999999998137355
+            },
+            {
+              "frameMs": 233.29999999999927,
+              "updateMs": 0.6000000000931323,
+              "simulationMs": 0,
+              "sceneMs": 0.39999999990686774,
+              "submissionMs": 1.6999999997206032
+            },
+            {
+              "frameMs": 233.29999999999927,
+              "updateMs": 1.2000000001862645,
+              "simulationMs": 0,
+              "sceneMs": 1,
+              "submissionMs": 1.7999999998137355
+            },
+            {
+              "frameMs": 250,
+              "updateMs": 0.8000000002793968,
+              "simulationMs": 0,
+              "sceneMs": 0.5,
+              "submissionMs": 1.7999999998137355
+            }
+          ],
+          "textures": 19,
+          "geometries": 243,
+          "terrain": [
+            {
+              "active": 597,
+              "cached": 794,
+              "queued": 0,
+              "generatedLastFrame": 0,
+              "transitioning": 0
+            },
+            {
+              "active": 24,
+              "cached": 30,
+              "queued": 0,
+              "generatedLastFrame": 0,
+              "transitioning": 0
+            },
+            {
+              "active": 24,
+              "cached": 30,
+              "queued": 0,
+              "generatedLastFrame": 0,
+              "transitioning": 0
+            }
+          ],
+          "patches": 645,
+          "drawCalls": 258,
+          "triangles": 174381
+        },
+        "patches": 645
+      },
+      "after": {
+        "snapshot": {
+          "schemaVersion": 2,
+          "mode": "flight",
+          "system": 0,
+          "score": 0,
+          "altitude": 8.65331960495314,
+          "playTime": 0,
+          "position": [428.05801513054195, 1059.422467190562, 988.6917475605646],
+          "rotation": [
+            0.18901142793081555, -0.49636629385318104, -0.3381331564435746, 0.7768919815209299
+          ],
+          "forward": [0.8990680486439037, -0.04199287783500655, -0.43579036487602335],
+          "angularVelocity": [0, 0, 0],
+          "speed": 0,
+          "velocity": [0, 0, 0],
+          "actualSpeed": 0,
+          "speedLimit": 320,
+          "target": 0,
+          "discoveries": {},
+          "nearest": {
+            "id": "0-0",
+            "name": "VESPER"
+          },
+          "navigation": {
+            "targetId": "0-0",
+            "targetName": "VESPER",
+            "targetPosition": [0, 0, 0],
+            "distance": 8.65331960495314,
+            "arrivalClearance": 975,
+            "centerDistance": 1511,
+            "arrivalGap": 0,
+            "headingError": 86.56636963754949,
+            "closingSpeed": 0,
+            "eta": null,
+            "stoppingDistance": 0,
+            "guidance": "off",
+            "status": "idle",
+            "blockedBy": null
+          },
+          "limits": {
+            "normal": 320,
+            "boost": 1100,
+            "cruise": 2200,
+            "deceleration": 160
+          },
+          "scenario": "coherence-coast",
+          "quality": "medium",
+          "cockpit": false,
+          "targeting": {
+            "attempts": 0,
+            "lastAttempt": null,
+            "reticleCandidate": 0
+          },
+          "ship": {
+            "name": "AURORA",
+            "state": "ready",
+            "error": null,
+            "url": "http://127.0.0.1:5174/assets/aurora/aurora.glb",
+            "sourceUnits": "metres",
+            "scaleToGame": 0.1,
+            "sizeMetres": [18.600000381469727, 4.166999816894531, 18.033612278212928],
+            "triangles": 2584,
+            "meshPrimitives": 29,
+            "materials": 6,
+            "textures": 0,
+            "loadMs": 1474.3000000002794,
+            "gearExtension": 0,
+            "wings": [
+              {
+                "name": "Wing_Aft_Port",
+                "pair": "aft",
+                "side": "port"
+              },
+              {
+                "name": "Wing_Aft_Starboard",
+                "pair": "aft",
+                "side": "starboard"
+              },
+              {
+                "name": "Wing_Fore_Port",
+                "pair": "fore",
+                "side": "port"
+              },
+              {
+                "name": "Wing_Fore_Starboard",
+                "pair": "fore",
+                "side": "starboard"
+              }
+            ],
+            "engines": ["Nacelle_Port", "Nacelle_Starboard"],
+            "cockpitOffset": [0, -0.2419999933242707, -0.35000000000000003],
+            "groundContacts": [
+              [427.48523219909384, 1059.242413035111, 988.4682229998862],
+              [427.5827327286818, 1058.9928547471773, 988.6934213738894],
+              [427.952747577958, 1059.220576738937, 988.2416120132677],
+              [428.050248107546, 1058.9710184510036, 988.4668103872708]
+            ],
+            "plumes": [
+              {
+                "name": "Plume_Port",
+                "visible": true,
+                "position": [427.04830343131, 1059.2807412598047, 988.6920963483387],
+                "direction": [-0.8990680486439037, 0.04199287783500655, 0.4357903648760233]
+              },
+              {
+                "name": "Plume_Starboard",
+                "visible": true,
+                "position": [427.1485896876581, 1059.0240527418728, 988.9237289554629],
+                "direction": [-0.8990680486439037, 0.04199287783500655, 0.4357903648760233]
+              }
+            ],
+            "visible": true,
+            "modelLoaded": true,
+            "rendered": true,
+            "inspectionView": null,
+            "groundClearances": [
+              8.318993550110008, 8.312426525091496, 8.170809884972641, 8.166347850085458
+            ]
+          },
+          "modal": null,
+          "paused": true,
+          "input": {
+            "keys": [],
+            "pointerLocked": false
+          },
+          "camera": {
+            "position": [424.2600501786789, 1060.3155157258532, 991.3257419679304],
+            "rotation": [
+              0.1499467970140592, -0.47884635097522676, -0.3625185530669394, 0.7853677029934368
+            ],
+            "shipDistance": 4.707440918375922,
+            "shipProjection": {
+              "x": -2.0556341145914007e-14,
+              "y": -0.20666793734140265,
+              "z": 0.9828945781379952,
+              "onScreen": true
+            }
+          },
+          "rendering": {
+            "ready": true,
+            "renderedScene": 2,
+            "simulationTime": 0,
+            "frames": 179,
+            "sceneGeneration": 2,
+            "lastFrameMs": 216.59999999999854,
+            "environment": {
+              "method": "opaque-depth-integration",
+              "samples": 3,
+              "nearSamples": 1,
+              "planets": [
+                {
+                  "id": "0-0",
+                  "radialAltitude": 12.280499694043101,
+                  "height": 131.62016897139836,
+                  "scale": 36,
+                  "density": 0.7109700374401943,
+                  "seaRadius": 1500
+                },
+                {
+                  "id": "0-1",
+                  "radialAltitude": 28033.97363787978,
+                  "height": 120.0566153203305,
+                  "scale": 32.57952071104199,
+                  "density": 0,
+                  "seaRadius": null
+                },
+                {
+                  "id": "0-2",
+                  "radialAltitude": 42766.08868525722,
+                  "height": 100.85874671669193,
+                  "scale": 23.330687297713013,
+                  "density": 0,
+                  "seaRadius": null
+                }
+              ],
+              "details": {
+                "method": "world-cell-distance-fade",
+                "instances": 533,
+                "rebuilds": 1,
+                "fade": {
+                  "full": 115,
+                  "end": 185,
+                  "cache": 290
+                }
+              }
+            },
+            "backend": "WebGL2",
+            "device": {
+              "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+              "vendor": "Google Inc. (Google)",
+              "extensions": [
+                "EXT_clip_control",
+                "EXT_color_buffer_float",
+                "EXT_color_buffer_half_float",
+                "EXT_conservative_depth",
+                "EXT_depth_clamp",
+                "EXT_disjoint_timer_query_webgl2",
+                "EXT_float_blend",
+                "EXT_polygon_offset_clamp",
+                "EXT_texture_compression_bptc",
+                "EXT_texture_compression_rgtc",
+                "EXT_texture_filter_anisotropic",
+                "EXT_texture_mirror_clamp_to_edge",
+                "NV_shader_noperspective_interpolation",
+                "OES_draw_buffers_indexed",
+                "OES_sample_variables",
+                "OES_shader_multisample_interpolation",
+                "OES_texture_float_linear",
+                "OVR_multiview2",
+                "WEBGL_clip_cull_distance",
+                "WEBGL_compressed_texture_astc",
+                "WEBGL_compressed_texture_etc",
+                "WEBGL_compressed_texture_etc1",
+                "WEBGL_compressed_texture_s3tc",
+                "WEBGL_compressed_texture_s3tc_srgb",
+                "WEBGL_debug_renderer_info",
+                "WEBGL_debug_shaders",
+                "WEBGL_lose_context",
+                "WEBGL_multi_draw",
+                "WEBGL_polygon_mode",
+                "WEBGL_stencil_texturing"
+              ],
+              "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+              "dpr": 1
+            },
+            "programs": 22,
+            "sceneObjects": 924,
+            "materials": 17,
+            "pixelRatio": 1,
+            "viewport": [960, 600],
+            "fov": 58,
+            "performanceSamples": [
+              {
+                "frameMs": 233.29999999999927,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.7999999998137355
+              },
+              {
+                "frameMs": 216.60000000000218,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.2999999998137355
+              },
+              {
+                "frameMs": 233.39999999999782,
+                "updateMs": 1.1000000000931323,
+                "simulationMs": 0,
+                "sceneMs": 0.7999999998137355,
+                "submissionMs": 1.599999999627471
+              },
+              {
+                "frameMs": 216.60000000000218,
+                "updateMs": 0.7000000001862645,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2.2999999998137355
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 5
+              },
+              {
+                "frameMs": 383.3000000000029,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.7000000001862645
+              },
+              {
+                "frameMs": 33.39999999999782,
+                "updateMs": 0.2999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.2999999998137355,
+                "submissionMs": 1.3999999999068677
+              },
+              {
+                "frameMs": 266.6000000000022,
+                "updateMs": 2.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 2.5,
+                "submissionMs": 5.100000000093132
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 1.8999999999068677
+              },
+              {
+                "frameMs": 250.09999999999854,
+                "updateMs": 1.1000000000931323,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.8999999999068677
+              },
+              {
+                "frameMs": 216.70000000000073,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 2
+              },
+              {
+                "frameMs": 299.90000000000146,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.7999999998137355
+              },
+              {
+                "frameMs": 400,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 2.3999999999068677
+              },
+              {
+                "frameMs": 16.700000000000728,
+                "updateMs": 0.5,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 433.2999999999993,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.900000000372529
+              },
+              {
+                "frameMs": 16.700000000000728,
+                "updateMs": 0.5,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.3999999999068677
+              },
+              {
+                "frameMs": 233.29999999999927,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1.7000000001862645
+              },
+              {
+                "frameMs": 233.29999999999927,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 233.40000000000146,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 233.3000000000029,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.8000000002793968
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 2.1000000000931323
+              },
+              {
+                "frameMs": 233.3000000000029,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 4.900000000372529
+              },
+              {
+                "frameMs": 216.70000000000437,
+                "updateMs": 1.3999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.8999999999068677,
+                "submissionMs": 3.3999999999068677
+              },
+              {
+                "frameMs": 233.1999999999971,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 2.3000000002793968
+              },
+              {
+                "frameMs": 433.40000000000146,
+                "updateMs": 0.900000000372529,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 50,
+                "updateMs": 0.5,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.7000000001862645
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 5.100000000093132
+              },
+              {
+                "frameMs": 233.40000000000146,
+                "updateMs": 0.7000000001862645,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.6999999997206032
+              },
+              {
+                "frameMs": 250,
+                "updateMs": 1,
+                "simulationMs": 0,
+                "sceneMs": 0.7999999998137355,
+                "submissionMs": 1.7999999998137355
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 1,
+                "simulationMs": 0,
+                "sceneMs": 0.6999999997206032,
+                "submissionMs": 2
+              },
+              {
+                "frameMs": 250,
+                "updateMs": 0.900000000372529,
+                "simulationMs": 0.10000000009313226,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.599999999627471
+              },
+              {
+                "frameMs": 216.5,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 2.5
+              },
+              {
+                "frameMs": 216.8000000000029,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 249.90000000000146,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 4.900000000372529
+              },
+              {
+                "frameMs": 200,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2.400000000372529
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.8000000002793968
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2
+              },
+              {
+                "frameMs": 216.60000000000582,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 233.29999999999563,
+                "updateMs": 1,
+                "simulationMs": 0.10000000009313226,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 5.5
+              },
+              {
+                "frameMs": 216.70000000000437,
+                "updateMs": 0.6000000000931323,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 2
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.7000000001862645,
+                "simulationMs": 0,
+                "sceneMs": 0.40000000037252903,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 216.70000000000437,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 4.800000000279397
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.7000000001862645,
+                "simulationMs": 0,
+                "sceneMs": 0.39999999990686774,
+                "submissionMs": 17.299999999813735
+              },
+              {
+                "frameMs": 250,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 2.2999999998137355
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.7000000001862645,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2.5
+              },
+              {
+                "frameMs": 416.59999999999854,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.3999999999068677
+              },
+              {
+                "frameMs": 166.70000000000437,
+                "updateMs": 5.099999999627471,
+                "simulationMs": 0,
+                "sceneMs": 4.899999999906868,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 50,
+                "updateMs": 0.40000000037252903,
+                "simulationMs": 0,
+                "sceneMs": 0.40000000037252903,
+                "submissionMs": 1.6999999997206032
+              },
+              {
+                "frameMs": 199.90000000000146,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 1.7000000001862645
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.6999999997206032,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.6000000000931323
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.6000000000931323,
+                "submissionMs": 1.8000000002793968
+              },
+              {
+                "frameMs": 216.70000000000437,
+                "updateMs": 0.6000000000931323,
+                "simulationMs": 0,
+                "sceneMs": 0.2999999998137355,
+                "submissionMs": 1.599999999627471
+              },
+              {
+                "frameMs": 216.6999999999971,
+                "updateMs": 0.8999999999068677,
+                "simulationMs": 0,
+                "sceneMs": 0.599999999627471,
+                "submissionMs": 1.7999999998137355
+              },
+              {
+                "frameMs": 233.3000000000029,
+                "updateMs": 0.8000000002793968,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 1.5
+              },
+              {
+                "frameMs": 250,
+                "updateMs": 0.7999999998137355,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2.1000000000931323
+              },
+              {
+                "frameMs": 216.59999999999854,
+                "updateMs": 0.900000000372529,
+                "simulationMs": 0,
+                "sceneMs": 0.5,
+                "submissionMs": 2.099999999627471
+              }
+            ],
+            "textures": 19,
+            "geometries": 243,
+            "terrain": [
+              {
+                "active": 597,
+                "cached": 794,
+                "queued": 0,
+                "generatedLastFrame": 0,
+                "transitioning": 0
+              },
+              {
+                "active": 24,
+                "cached": 30,
+                "queued": 0,
+                "generatedLastFrame": 0,
+                "transitioning": 0
+              },
+              {
+                "active": 24,
+                "cached": 30,
+                "queued": 0,
+                "generatedLastFrame": 0,
+                "transitioning": 0
+              }
+            ],
+            "patches": 645,
+            "drawCalls": 258,
+            "triangles": 174381
+          },
+          "patches": 645
+        },
+        "heap": {
+          "used": 45641807,
+          "total": 45953579,
+          "limit": 4395630592
+        },
+        "gl": {
+          "Buffer": {
+            "created": 1057,
+            "deleted": 108,
+            "live": 949
+          },
+          "Texture": {
+            "created": 25,
+            "deleted": 2,
+            "live": 23
+          },
+          "Framebuffer": {
+            "created": 16,
+            "deleted": 0,
+            "live": 16
+          },
+          "Renderbuffer": {
+            "created": 11,
+            "deleted": 0,
+            "live": 11
+          },
+          "Program": {
+            "created": 26,
+            "deleted": 4,
+            "live": 22
+          },
+          "Shader": {
+            "created": 52,
+            "deleted": 52,
+            "live": 0
+          }
+        }
+      },
+      "samples": [
+        {
+          "frameMs": 16.600000000000364,
+          "updateMs": 0.3000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.3000000002793968,
+          "submissionMs": 1.2999999998137355
+        },
+        {
+          "frameMs": 200,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 216.6999999999989,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.3000000002793968
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 1.5,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 216.60000000000036,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 216.6999999999989,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 216.60000000000036,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 233.3000000000011,
+          "updateMs": 1.3000000002793968,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 1,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 216.6999999999989,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 216.60000000000036,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.1999999997206032
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.1000000000931323
+        },
+        {
+          "frameMs": 266.6999999999989,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.1000000000931323
+        },
+        {
+          "frameMs": 216.60000000000036,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.7000000001862645
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 249.89999999999964,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 433.39999999999964,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 4.100000000093132
+        },
+        {
+          "frameMs": 233.20000000000073,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 33.39999999999782,
+          "updateMs": 0.2999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 1.3000000002793968
+        },
+        {
+          "frameMs": 300,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 200,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.900000000372529,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 199.90000000000146,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.900000000372529
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.5,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 2.1999999997206032
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 2.1000000000931323
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 266.59999999999854,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.7999999998137355,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.900000000372529
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 233.20000000000073,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 250.09999999999854,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 199.90000000000146,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.1999999997206032
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.40000000037252903,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 266.7000000000007,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 266.59999999999854,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 183.40000000000146,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 7.099999999627471
+        },
+        {
+          "frameMs": 249.89999999999782,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 3.1000000000931323
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.900000000372529
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 216.60000000000218,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 350.09999999999854,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.6000000000931323
+        },
+        {
+          "frameMs": 83.29999999999927,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 366.6000000000022,
+          "updateMs": 0.900000000372529,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 50,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 200,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.7999999998137355,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 216.60000000000218,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.2999999998137355
+        },
+        {
+          "frameMs": 233.39999999999782,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.7999999998137355,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 216.60000000000218,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.2999999998137355
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 5
+        },
+        {
+          "frameMs": 383.3000000000029,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 33.39999999999782,
+          "updateMs": 0.2999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 1.3999999999068677
+        },
+        {
+          "frameMs": 266.6000000000022,
+          "updateMs": 2.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 2.5,
+          "submissionMs": 5.100000000093132
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 250.09999999999854,
+          "updateMs": 1.1000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.8999999999068677
+        },
+        {
+          "frameMs": 216.70000000000073,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 299.90000000000146,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 400,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 2.3999999999068677
+        },
+        {
+          "frameMs": 16.700000000000728,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 433.2999999999993,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.900000000372529
+        },
+        {
+          "frameMs": 16.700000000000728,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.3999999999068677
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 233.29999999999927,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 233.3000000000029,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.1000000000931323
+        },
+        {
+          "frameMs": 233.3000000000029,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 4.900000000372529
+        },
+        {
+          "frameMs": 216.70000000000437,
+          "updateMs": 1.3999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.8999999999068677,
+          "submissionMs": 3.3999999999068677
+        },
+        {
+          "frameMs": 233.1999999999971,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.3000000002793968
+        },
+        {
+          "frameMs": 433.40000000000146,
+          "updateMs": 0.900000000372529,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 50,
+          "updateMs": 0.5,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 5.100000000093132
+        },
+        {
+          "frameMs": 233.40000000000146,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.7999999998137355,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 1,
+          "simulationMs": 0,
+          "sceneMs": 0.6999999997206032,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.900000000372529,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 216.5,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 2.5
+        },
+        {
+          "frameMs": 216.8000000000029,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 249.90000000000146,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 4.900000000372529
+        },
+        {
+          "frameMs": 200,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.400000000372529
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 216.60000000000582,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 233.29999999999563,
+          "updateMs": 1,
+          "simulationMs": 0.10000000009313226,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 5.5
+        },
+        {
+          "frameMs": 216.70000000000437,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 2
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.40000000037252903,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 216.70000000000437,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 4.800000000279397
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.39999999990686774,
+          "submissionMs": 17.299999999813735
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 2.2999999998137355
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.7000000001862645,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.5
+        },
+        {
+          "frameMs": 416.59999999999854,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.3999999999068677
+        },
+        {
+          "frameMs": 166.70000000000437,
+          "updateMs": 5.099999999627471,
+          "simulationMs": 0,
+          "sceneMs": 4.899999999906868,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 50,
+          "updateMs": 0.40000000037252903,
+          "simulationMs": 0,
+          "sceneMs": 0.40000000037252903,
+          "submissionMs": 1.6999999997206032
+        },
+        {
+          "frameMs": 199.90000000000146,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 1.7000000001862645
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.6999999997206032,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.6000000000931323
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.6000000000931323,
+          "submissionMs": 1.8000000002793968
+        },
+        {
+          "frameMs": 216.70000000000437,
+          "updateMs": 0.6000000000931323,
+          "simulationMs": 0,
+          "sceneMs": 0.2999999998137355,
+          "submissionMs": 1.599999999627471
+        },
+        {
+          "frameMs": 216.6999999999971,
+          "updateMs": 0.8999999999068677,
+          "simulationMs": 0,
+          "sceneMs": 0.599999999627471,
+          "submissionMs": 1.7999999998137355
+        },
+        {
+          "frameMs": 233.3000000000029,
+          "updateMs": 0.8000000002793968,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 1.5
+        },
+        {
+          "frameMs": 250,
+          "updateMs": 0.7999999998137355,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.1000000000931323
+        },
+        {
+          "frameMs": 216.59999999999854,
+          "updateMs": 0.900000000372529,
+          "simulationMs": 0,
+          "sceneMs": 0.5,
+          "submissionMs": 2.099999999627471
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "browser": {
+    "name": "chromium",
+    "version": "154.0.8037.57",
+    "forcedSoftware": true,
+    "executable": "/usr/bin/chromium"
+  },
+  "device": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "vendor": "Google Inc. (Google)",
+    "extensions": [
+      "EXT_clip_control",
+      "EXT_color_buffer_float",
+      "EXT_color_buffer_half_float",
+      "EXT_conservative_depth",
+      "EXT_depth_clamp",
+      "EXT_disjoint_timer_query_webgl2",
+      "EXT_float_blend",
+      "EXT_polygon_offset_clamp",
+      "EXT_texture_compression_bptc",
+      "EXT_texture_compression_rgtc",
+      "EXT_texture_filter_anisotropic",
+      "EXT_texture_mirror_clamp_to_edge",
+      "NV_shader_noperspective_interpolation",
+      "OES_draw_buffers_indexed",
+      "OES_sample_variables",
+      "OES_shader_multisample_interpolation",
+      "OES_texture_float_linear",
+      "OVR_multiview2",
+      "WEBGL_clip_cull_distance",
+      "WEBGL_compressed_texture_astc",
+      "WEBGL_compressed_texture_etc",
+      "WEBGL_compressed_texture_etc1",
+      "WEBGL_compressed_texture_s3tc",
+      "WEBGL_compressed_texture_s3tc_srgb",
+      "WEBGL_debug_renderer_info",
+      "WEBGL_debug_shaders",
+      "WEBGL_lose_context",
+      "WEBGL_multi_draw",
+      "WEBGL_polygon_mode",
+      "WEBGL_stencil_texturing"
+    ],
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "dpr": 1
+  },
+  "finishedAt": "2026-11-11T06:25:59.802Z"
+}

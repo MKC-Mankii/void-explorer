@@ -1,0 +1,13 @@
+
+> void-explorer@0.1.0 test:engineering-02
+> node tests/engineering-02.mjs
+
+PASS 普通刷新保留已扫描进度，并可继续旅程
+PASS 两次确认重置后旧存档不恢复，再次刷新仍为新游戏，且可重新获得积分
+PASS 实际跨星系跃迁后，标记文字、aria-label、索引与当前星图一致
+PASS 返回原星系后标记再次同步，目标索引保持原有规则
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

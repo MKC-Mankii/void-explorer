@@ -1,3 +1,4 @@
+import { beginJourneySampling, endJourneySampling } from './journey-sampling.mjs';
 import { chromium } from '@playwright/test';
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -20,7 +21,8 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 800 } }),
   errors = [],
   trace = [],
   shots = [],
-  qualityChecks = [];
+  qualityChecks = [],
+  performanceStages = [];
 page.on('pageerror', (e) => errors.push(e.message));
 page.on('console', (m) => {
   if (m.type() === 'error') errors.push(m.text());
@@ -70,6 +72,7 @@ try {
   await page.locator('[data-action=start]').click();
   assert.equal((await snapshot()).scenario, 'player');
   await shot('01-space');
+  await beginJourneySampling(page);
   // Every transition uses normal player inputs. No fixtures, pose injection, freeze or step API.
   const start = (await snapshot()).playTime;
   await page.keyboard.down('KeyW');
@@ -183,6 +186,7 @@ try {
   assert((await snapshot()).position.some((v, i) => Math.abs(v - walkStart.position[i]) > 0.01));
   await page.keyboard.press('KeyF');
   await shot('07-walking');
+  performanceStages.push(await endJourneySampling(page, 'flight-descent-walking'));
   await page.keyboard.press('Escape'); // Pause saves through the normal game action.
   const saved = await snapshot();
   await page.reload();
@@ -193,6 +197,7 @@ try {
   await shot('08-restored');
   await page.keyboard.press('KeyE');
   await page.waitForFunction(() => window.__VOID__.snapshot().mode === 'landed');
+  await beginJourneySampling(page);
   await page.keyboard.press('Space');
   await page.waitForFunction(() => window.__VOID__.snapshot().mode === 'flight', undefined, {
     timeout: 90000,
@@ -217,6 +222,7 @@ try {
     assert(captured.has(band), `missing ${band}`);
   const normalFinal = await snapshot(),
     coast = [];
+  performanceStages.push(await endJourneySampling(page, 'takeoff-exit-atmosphere'));
   // A separate diagnostic starts at a fixed sea location, then uses real continuous W/Space.
   // It supplements the normal journey above; it is not evidence of player travel to this start.
   await page.evaluate(() => window.__VOID__.scenario('coherence-water'));
@@ -225,6 +231,7 @@ try {
   coast.push(coastStart);
   await shot('11-coast-start');
   await page.keyboard.down('KeyW');
+  await beginJourneySampling(page);
   await page.keyboard.down('Space');
   for (const t of [3, 6, 9]) {
     await page.waitForFunction((t) => window.__VOID__.snapshot().playTime > t, t, {
@@ -235,6 +242,7 @@ try {
   }
   await page.keyboard.up('KeyW');
   await page.keyboard.up('Space');
+  performanceStages.push(await endJourneySampling(page, 'coastal-flight'));
   const coastEnd = await snapshot();
   assert(Math.hypot(...coastEnd.position.map((v, i) => v - coastStart.position[i])) > 100);
   assert.deepEqual(errors, []);
@@ -246,6 +254,7 @@ try {
         renderer: 'ANGLE SwiftShader software',
         method:
           'Normal journey: fresh player start, W/X, L continuous auto-descent, E, actual W walk, F, Escape save/reload, E, Space takeoff/lift, X; no fixtures or stepping. Separate coastal diagnostic: coherence-water fixture then real W/Space, no stepping.',
+        performanceStages,
         normalFinal,
         coast,
         probe,

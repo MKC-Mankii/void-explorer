@@ -1,0 +1,21 @@
+
+> void-explorer@0.1.0 test:resource-soak
+> node tests/resource-soak.mjs
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 120000ms exceeded.
+    at settle (/workspace/void-explorer/tests/resource-soak.mjs:38:16)
+    at async file:///workspace/void-explorer/tests/resource-soak.mjs:68:7 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

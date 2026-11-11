@@ -1,0 +1,72 @@
+[
+  {
+    "scene": "coherence-air-in",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-air-out",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-cloud-in",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-cloud-out",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-coast",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-dry",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-ground",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-night",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-orbit",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  },
+  {
+    "scene": "coherence-water",
+    "meanAbsoluteRgb": 0.0,
+    "maxChannelDelta": 0.0,
+    "changedPixels": 0,
+    "totalPixels": 1024000
+  }
+]

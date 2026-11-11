@@ -1,0 +1,29 @@
+
+> void-explorer@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/void-explorer
+
+ ✓ tests/aurora.test.ts (2 tests) 37ms
+ ✓ tests/simulation.test.ts (12 tests) 40ms
+ ✓ tests/navigation.test.ts (16 tests) 67ms
+ ✓ tests/failure-evidence.test.js (5 tests) 147ms
+ ✓ tests/rendering.test.ts (5 tests) 321ms
+ ✓ tests/surface-details.test.ts (3 tests) 429ms
+   ✓ does not release resources owned by another still-live SurfaceDetails instance  396ms
+ ✓ tests/navigation-observation.test.js (7 tests) 8ms
+ ✓ tests/coherence.test.ts (4 tests) 163ms
+ ✓ tests/terrain.test.ts (1 test) 794ms
+   ✓ keeps rendered highland terrain within astronaut clearance of the collision surface  793ms
+
+ Test Files  9 passed (9)
+      Tests  55 passed (55)
+   Start at  05:30:05
+   Duration  2.06s (transform 309ms, setup 0ms, collect 859ms, tests 2.01s, environment 1ms, prepare 446ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
