@@ -1,11 +1,11 @@
 {
-  "stage": "工程优化02：缺陷修复与导航 CI 校正",
+  "stage": "工程优化03：存档安全恢复与工程稳定性补强",
   "showcase_stage": 8,
   "source_repository": "https://github.com/MKC-Mankii/void-explorer",
-  "source_commit": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
-  "source_branch": "fix/engineering-02",
-  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/8",
-  "baseline_source_commit": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+  "source_commit": "74bd18c50e061360fc657a104824494949b9aa36",
+  "source_branch": "feat/engineering-03",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/9",
+  "baseline_source_commit": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
   "renderer": "Three.js / WebGL2 / depth-integrated atmosphere and analytic sea",
   "glb_file": "assets/aurora-DTA2SnWJ.glb",
   "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
@@ -19,8 +19,20 @@
     "/aurora-793eacd/"
   ],
   "asset_manifest": "./asset-manifest.json",
-  "built_at": "2026-11-11T00:47:16.746638+00:00",
-  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42933996214",
-  "local_verification": "55 unit tests; Chromium 156: navigation 16, exploration 15, right-click 10, production 11, engineering regressions 4 in development and actual /coherence/ production subpath, renderer 8 scenes, real descent, AURORA 6, coherence 10 scenes and continuous journey passed. Full remote CI passed for the exact source SHA. Hardware GPU and sustained memory acceptance not performed.",
-  "release_prepared_at": "2026-11-11T01:04:11.027300+00:00"
+  "built_at": "2026-11-11T06:54:58.516383+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42973908505",
+  "local_verification": "Production /coherence/ smoke 11; engineering-02 regression 4; production save recovery 14; fresh isolated Linux Chromium/SwiftShader contexts. See release acceptance report for public results.",
+  "release_prepared_at": "2026-11-11T06:58:50.116340+00:00",
+  "code_verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42970272392",
+  "code_verification_sha": "628b8b6bf61c9d79f2937645d3834ba8fd0370a8",
+  "rollback_pages_commit": "b6d59d01e8ad860708aa2fc676c94a1ca93dae17",
+  "previous_source_commit": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+  "asset_version": "74bd18c50e061360fc657a104824494949b9aa36",
+  "build_environment": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "command": "npm run build",
+    "base": "./"
+  },
+  "asset_manifest_sha256": "ccf97d76872c89159b6d21d359b44865fe8472b21a2ca26a8528a4ffd89e5f1d"
 }
