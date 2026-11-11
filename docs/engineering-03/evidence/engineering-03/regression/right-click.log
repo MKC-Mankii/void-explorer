@@ -1,0 +1,19 @@
+
+> void-explorer@0.1.0 test:right-click
+> node tests/right-click.mjs
+
+PASS Free cursor clicking empty sky does not select the planet under the central reticle
+PASS Right-clicking a planet label selects once, without requiring mouse capture
+PASS Free cursor right-click uses the actual planet pixel, beyond its HUD label
+PASS A contextmenu-only platform event can lock a visible planet
+PASS Captured real right-click locks the reticle candidate once and immediately updates the panel
+PASS Captured Control-click secondary gesture locks the reticle target
+PASS V locks the reticle target and reconfirming the same planet gives explicit feedback
+PASS Looking away gives a miss message and preserves the selected destination
+PASS Paused keyboard input cannot change the navigation target
+PASS Captured mouse on a landed ship explains Space takeoff instead of silently ignoring lock
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

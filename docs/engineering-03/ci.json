@@ -1,0 +1,205 @@
+{
+  "runId": 42970272392,
+  "url": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42970272392",
+  "head": "628b8b6bf61c9d79f2937645d3834ba8fd0370a8",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 130356888340,
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-11T06:07:59Z",
+      "completedAt": "2026-11-11T06:22:29Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:00Z",
+          "completedAt": "2026-11-11T06:08:00Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:00Z",
+          "completedAt": "2026-11-11T06:08:02Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:02Z",
+          "completedAt": "2026-11-11T06:08:03Z"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:03Z",
+          "completedAt": "2026-11-11T06:08:05Z"
+        },
+        {
+          "name": "Run npm run format:check",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:05Z",
+          "completedAt": "2026-11-11T06:08:10Z"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:10Z",
+          "completedAt": "2026-11-11T06:08:13Z"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:13Z",
+          "completedAt": "2026-11-11T06:08:16Z"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:16Z",
+          "completedAt": "2026-11-11T06:08:32Z"
+        },
+        {
+          "name": "Start development verification server",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:32Z",
+          "completedAt": "2026-11-11T06:08:32Z"
+        },
+        {
+          "name": "Run npm run test:e2e",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:08:32Z",
+          "completedAt": "2026-11-11T06:09:53Z"
+        },
+        {
+          "name": "Run npm run test:navigation",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:09:53Z",
+          "completedAt": "2026-11-11T06:11:04Z"
+        },
+        {
+          "name": "Run npm run test:right-click",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:11:04Z",
+          "completedAt": "2026-11-11T06:11:28Z"
+        },
+        {
+          "name": "Start production preview server",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:11:28Z",
+          "completedAt": "2026-11-11T06:11:28Z"
+        },
+        {
+          "name": "Run npm run test:production",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:11:28Z",
+          "completedAt": "2026-11-11T06:11:38Z"
+        },
+        {
+          "name": "Run npm run test:engineering-02",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:11:38Z",
+          "completedAt": "2026-11-11T06:12:06Z"
+        },
+        {
+          "name": "Run npm run test:rendering",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:12:06Z",
+          "completedAt": "2026-11-11T06:13:12Z"
+        },
+        {
+          "name": "Run npm run test:render-flight",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:13:12Z",
+          "completedAt": "2026-11-11T06:13:47Z"
+        },
+        {
+          "name": "Run npm run test:aurora",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:13:47Z",
+          "completedAt": "2026-11-11T06:15:34Z"
+        },
+        {
+          "name": "Run npm run test:coherence",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:15:34Z",
+          "completedAt": "2026-11-11T06:18:12Z"
+        },
+        {
+          "name": "Run npm run test:coherence-journey",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:18:12Z",
+          "completedAt": "2026-11-11T06:19:26Z"
+        },
+        {
+          "name": "Run npm run test:save-browser",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:19:26Z",
+          "completedAt": "2026-11-11T06:20:35Z"
+        },
+        {
+          "name": "Run npm run test:resource-soak",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:20:35Z",
+          "completedAt": "2026-11-11T06:22:24Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:22:24Z",
+          "completedAt": "2026-11-11T06:22:26Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:22:26Z",
+          "completedAt": "2026-11-11T06:22:27Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:22:27Z",
+          "completedAt": "2026-11-11T06:22:27Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-11T06:22:27Z",
+          "completedAt": "2026-11-11T06:22:27Z"
+        }
+      ]
+    }
+  ],
+  "supersededFailure": {
+    "runId": 42968627259,
+    "url": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42968627259",
+    "cause": "Resource test browser closure omitted serialized frame target; fixed in 85c11d4; original failure retained."
+  }
+}

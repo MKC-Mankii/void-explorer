@@ -1,0 +1,11 @@
+
+> void-explorer@0.1.0 build
+> tsc --noEmit && vite build
+
+tests/save-storage.test.ts(108,15): error TS2352: Conversion of type 'SaveData' to type 'Record<string, unknown>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Index signature for type 'string' is missing in type 'SaveData'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

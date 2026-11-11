@@ -1,0 +1,175 @@
+[
+  {
+    "name": "save-browser",
+    "command": "npm run test:save-browser",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 64.77,
+    "log": "test-results/engineering-03/regression/save-browser.log"
+  },
+  {
+    "name": "soak",
+    "command": "npm run test:resource-soak",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 1,
+    "seconds": 125.31,
+    "log": "test-results/engineering-03/regression/soak.log"
+  },
+  {
+    "name": "compatibility",
+    "command": "npm run test:device",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 65.57,
+    "log": "test-results/engineering-03/regression/compatibility.log"
+  },
+  {
+    "name": "format",
+    "command": "npm run format:check",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 1,
+    "seconds": 5.02,
+    "log": "test-results/engineering-03/regression/format.log"
+  },
+  {
+    "name": "unit",
+    "command": "npm test",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 1.89,
+    "log": "test-results/engineering-03/regression/unit.log"
+  },
+  {
+    "name": "build",
+    "command": "npm run build",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 2.6,
+    "log": "test-results/engineering-03/regression/build.log"
+  },
+  {
+    "name": "e2e",
+    "command": "npm run test:e2e",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 65.17,
+    "log": "test-results/engineering-03/regression/e2e.log"
+  },
+  {
+    "name": "navigation",
+    "command": "npm run test:navigation",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 72.26,
+    "log": "test-results/engineering-03/regression/navigation.log"
+  },
+  {
+    "name": "right-click",
+    "command": "npm run test:right-click",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 21.95,
+    "log": "test-results/engineering-03/regression/right-click.log"
+  },
+  {
+    "name": "production",
+    "command": "npm run test:production",
+    "environment": {
+      "VOID_SOFTWARE": "1",
+      "VOID_PRODUCTION_URL": "http://127.0.0.1:4173/coherence/"
+    },
+    "exitCode": 0,
+    "seconds": 8.29,
+    "log": "test-results/engineering-03/regression/production.log"
+  },
+  {
+    "name": "engineering-02",
+    "command": "npm run test:engineering-02",
+    "environment": {
+      "VOID_SOFTWARE": "1",
+      "VOID_URL": "http://127.0.0.1:4173/coherence/"
+    },
+    "exitCode": 0,
+    "seconds": 25.72,
+    "log": "test-results/engineering-03/regression/engineering-02.log"
+  },
+  {
+    "name": "rendering",
+    "command": "npm run test:rendering",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 63.21,
+    "log": "test-results/engineering-03/regression/rendering.log"
+  },
+  {
+    "name": "render-flight",
+    "command": "npm run test:render-flight",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 32.81,
+    "log": "test-results/engineering-03/regression/render-flight.log"
+  },
+  {
+    "name": "aurora",
+    "command": "npm run test:aurora",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 96.37,
+    "log": "test-results/engineering-03/regression/aurora.log"
+  },
+  {
+    "name": "coherence",
+    "command": "npm run test:coherence",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 141.8,
+    "log": "test-results/engineering-03/regression/coherence.log"
+  },
+  {
+    "name": "coherence-journey",
+    "command": "npm run test:coherence-journey",
+    "environment": {
+      "VOID_SOFTWARE": "1"
+    },
+    "exitCode": 0,
+    "seconds": 68.48,
+    "log": "test-results/engineering-03/regression/coherence-journey.log"
+  },
+  {
+    "name": "performance-after",
+    "command": "npm run test:performance",
+    "environment": {
+      "VOID_SOFTWARE": "1",
+      "VOID_REPORT_DIR": "test-results/engineering-03/performance-after"
+    },
+    "exitCode": 0,
+    "seconds": 766.99,
+    "log": "test-results/engineering-03/regression/performance-after.log"
+  }
+]

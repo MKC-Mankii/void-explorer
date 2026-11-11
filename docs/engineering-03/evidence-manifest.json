@@ -1,0 +1,79 @@
+[
+  {
+    "originalPath": "evidence/round3/real-flight-report.json",
+    "storedPath": "evidence/round3/real-flight-report.json.gz",
+    "uncompressedBytes": 889861,
+    "compressedBytes": 36023,
+    "sha256Uncompressed": "975c5ee381c082c25144cb038d08b3c0bfac65831a3ed82e98b054269f522e3d"
+  },
+  {
+    "originalPath": "evidence/aurora/report.json",
+    "storedPath": "evidence/aurora/report.json.gz",
+    "uncompressedBytes": 389173,
+    "compressedBytes": 18894,
+    "sha256Uncompressed": "a0fca256ef6fca2acd9f7042017e75766e62d8d33dcf31ef366eb74561d975fb"
+  },
+  {
+    "originalPath": "evidence/right-click/report.json",
+    "storedPath": "evidence/right-click/report.json.gz",
+    "uncompressedBytes": 218571,
+    "compressedBytes": 9686,
+    "sha256Uncompressed": "bd12d25811a31d04cd2bc780e34f5312bf3350ace71b8361bf5f87190a179ff8"
+  },
+  {
+    "originalPath": "evidence/round2/navigation-report.json",
+    "storedPath": "evidence/round2/navigation-report.json.gz",
+    "uncompressedBytes": 1333425,
+    "compressedBytes": 53859,
+    "sha256Uncompressed": "e0627c3c1b2649794eac5ea0fd79f19105e2558d571d593e5f9aff812a5bc174"
+  },
+  {
+    "originalPath": "evidence/coherence/journey/report.json",
+    "storedPath": "evidence/coherence/journey/report.json.gz",
+    "uncompressedBytes": 868640,
+    "compressedBytes": 74623,
+    "sha256Uncompressed": "7a03a86a9313fba59494dc0b59d0ddaff45c21fd2508147285d6014d42f2cb39"
+  },
+  {
+    "originalPath": "evidence/engineering-03/soak/report.json",
+    "storedPath": "evidence/engineering-03/soak/report.json.gz",
+    "uncompressedBytes": 929065,
+    "compressedBytes": 58064,
+    "sha256Uncompressed": "1ed82163f9223357cb36a91370408117d45e5a2d03913e9bef91b4d5deef2297"
+  },
+  {
+    "originalPath": "evidence/engineering-03/performance-after/report.json",
+    "storedPath": "evidence/engineering-03/performance-after/report.json.gz",
+    "uncompressedBytes": 1474380,
+    "compressedBytes": 122838,
+    "sha256Uncompressed": "ce3458e8553b3672305e93a493bf4fba50343c855044df5812aff619811b0eb4"
+  },
+  {
+    "originalPath": "evidence/engineering-03/compatibility/report.json",
+    "storedPath": "evidence/engineering-03/compatibility/report.json.gz",
+    "uncompressedBytes": 213256,
+    "compressedBytes": 5712,
+    "sha256Uncompressed": "1eb7c072e51edcfee85212fb86bf45e30beec917722b07f345e133738300beb4"
+  },
+  {
+    "originalPath": "evidence/engineering-03/baseline/performance-final/report.json",
+    "storedPath": "evidence/engineering-03/baseline/performance-final/report.json.gz",
+    "uncompressedBytes": 1486581,
+    "compressedBytes": 123680,
+    "sha256Uncompressed": "c0c28b32a6cb14939271bd846a3a93916f9b25f45eb96af97ea1ed66de927624"
+  },
+  {
+    "originalPath": "evidence/engineering-03/baseline/journey/report.json",
+    "storedPath": "evidence/engineering-03/baseline/journey/report.json.gz",
+    "uncompressedBytes": 882705,
+    "compressedBytes": 75768,
+    "sha256Uncompressed": "84fa093370482c2d3c2027b577ae22775573a190f1e1c4ece88a3b5e02135ccb"
+  },
+  {
+    "originalPath": "evidence/engineering-03/baseline/performance/report.json",
+    "storedPath": "evidence/engineering-03/baseline/performance/report.json.gz",
+    "uncompressedBytes": 384848,
+    "compressedBytes": 33024,
+    "sha256Uncompressed": "d134ba282231ea11ac7004ac2479f470f62e73fcf1c631ba4b0cb3002f1db4be"
+  }
+]

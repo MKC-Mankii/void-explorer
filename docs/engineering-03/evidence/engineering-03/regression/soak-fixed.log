@@ -1,0 +1,15 @@
+
+> void-explorer@0.1.0 test:resource-soak
+> node tests/resource-soak.mjs
+
+ROUND 1/6 {"round":0,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":22440619,"frameMs":33.400000000001455}
+ROUND 2/6 {"round":1,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":24323463,"frameMs":33.30000000000291}
+ROUND 3/6 {"round":2,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":22897260,"frameMs":133.1999999999971}
+ROUND 4/6 {"round":3,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":51131958,"frameMs":266.6000000000058}
+ROUND 5/6 {"round":4,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":22562627,"frameMs":150}
+ROUND 6/6 {"round":5,"geometries":55,"textures":19,"programs":21,"materials":15,"sceneObjects":178,"queued":0,"buffers":174,"glTextures":23,"framebuffers":16,"renderbuffers":11,"heap":23255748,"frameMs":316.70000000001164}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,19 @@
+
+> void-explorer@0.1.0 test:coherence
+> node tests/coherence.mjs
+
+PASS after coherence-orbit: 217 ms/frame (software renderer)
+PASS after coherence-air-out: 267 ms/frame (software renderer)
+PASS after coherence-air-in: 267 ms/frame (software renderer)
+PASS after coherence-cloud-out: 333 ms/frame (software renderer)
+PASS after coherence-cloud-in: 333 ms/frame (software renderer)
+PASS after coherence-coast: 367 ms/frame (software renderer)
+PASS after coherence-water: 400 ms/frame (software renderer)
+PASS after coherence-ground: 367 ms/frame (software renderer)
+PASS after coherence-night: 400 ms/frame (software renderer)
+PASS after coherence-dry: 283 ms/frame (software renderer)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

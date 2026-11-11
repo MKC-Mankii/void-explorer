@@ -1,0 +1,932 @@
+[
+  {
+    "scene": "coherence-orbit",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 412,
+          "median": 149.89999999996508,
+          "p95": 250,
+          "worst": 400
+        },
+        "updateMs": {
+          "samples": 412,
+          "median": 0.6999999999534339,
+          "p95": 1,
+          "worst": 16.199999999953434
+        },
+        "simulationMs": {
+          "samples": 412,
+          "median": 0,
+          "p95": 0.09999999986030161,
+          "worst": 0.19999999995343387
+        },
+        "sceneMs": {
+          "samples": 412,
+          "median": 0.39999999990686774,
+          "p95": 0.5999999999767169,
+          "worst": 7.699999999953434
+        },
+        "submissionMs": {
+          "samples": 412,
+          "median": 0.8000000000465661,
+          "p95": 1.6999999999534339,
+          "worst": 21.9000000001397
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [133.39999999999964, 150],
+      "resources": {
+        "drawCalls": 59,
+        "triangles": 39731,
+        "geometries": 55,
+        "textures": 19,
+        "programs": 19,
+        "materials": 15,
+        "sceneObjects": 178
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 408,
+          "median": 149.90000000000146,
+          "p95": 250,
+          "worst": 516.6000000000004
+        },
+        "updateMs": {
+          "samples": 408,
+          "median": 0.6999999997206032,
+          "p95": 1,
+          "worst": 3.1000000000931323
+        },
+        "simulationMs": {
+          "samples": 408,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.20000000018626451
+        },
+        "sceneMs": {
+          "samples": 408,
+          "median": 0.39999999990686774,
+          "p95": 0.6000000000931323,
+          "worst": 2.5
+        },
+        "submissionMs": {
+          "samples": 408,
+          "median": 0.7999999998137355,
+          "p95": 1.7000000001862645,
+          "worst": 12.700000000186265
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [133.40000000002328, 150],
+      "resources": {
+        "drawCalls": 59,
+        "triangles": 39731,
+        "geometries": 55,
+        "textures": 19,
+        "programs": 19,
+        "materials": 15,
+        "sceneObjects": 178
+      }
+    }
+  },
+  {
+    "scene": "coherence-air-out",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 350,
+          "median": 166.6999999999971,
+          "p95": 316.5999999999767,
+          "worst": 500
+        },
+        "updateMs": {
+          "samples": 350,
+          "median": 0.6999999999534339,
+          "p95": 1.099999999976717,
+          "worst": 7.300000000046566
+        },
+        "simulationMs": {
+          "samples": 350,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.2000000000698492
+        },
+        "sceneMs": {
+          "samples": 350,
+          "median": 0.40000000002328306,
+          "p95": 0.6999999999534339,
+          "worst": 7
+        },
+        "submissionMs": {
+          "samples": 350,
+          "median": 1.2999999998137355,
+          "p95": 2.700000000069849,
+          "worst": 14.70000000006985
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [166.6999999999971, 166.70000000001164],
+      "resources": {
+        "drawCalls": 154,
+        "triangles": 105661,
+        "geometries": 150,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 520
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 338,
+          "median": 166.70000000001164,
+          "p95": 316.6999999999971,
+          "worst": 433.29999999998836
+        },
+        "updateMs": {
+          "samples": 338,
+          "median": 0.7000000001862645,
+          "p95": 1.1000000000931323,
+          "worst": 7.899999999906868
+        },
+        "simulationMs": {
+          "samples": 338,
+          "median": 0,
+          "p95": 0.09999999962747097,
+          "worst": 1.3999999999068677
+        },
+        "sceneMs": {
+          "samples": 338,
+          "median": 0.39999999990686774,
+          "p95": 0.6000000000931323,
+          "worst": 7.699999999720603
+        },
+        "submissionMs": {
+          "samples": 338,
+          "median": 1.2999999998137355,
+          "p95": 2.3999999999068677,
+          "worst": 15.399999999906868
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [166.70000000001164, 183.3000000000029],
+      "resources": {
+        "drawCalls": 154,
+        "triangles": 105661,
+        "geometries": 150,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 520
+      }
+    }
+  },
+  {
+    "scene": "coherence-air-in",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 343,
+          "median": 166.70000000001164,
+          "p95": 299.90000000000873,
+          "worst": 450
+        },
+        "updateMs": {
+          "samples": 343,
+          "median": 0.6999999999534339,
+          "p95": 1,
+          "worst": 6.600000000093132
+        },
+        "simulationMs": {
+          "samples": 343,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 343,
+          "median": 0.4000000001396984,
+          "p95": 0.6999999999534339,
+          "worst": 6.199999999953434
+        },
+        "submissionMs": {
+          "samples": 343,
+          "median": 1.3000000000465661,
+          "p95": 3.800000000046566,
+          "worst": 7.699999999953434
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [166.60000000003492, 183.29999999998836],
+      "resources": {
+        "drawCalls": 154,
+        "triangles": 105701,
+        "geometries": 150,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 520
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 338,
+          "median": 166.79999999998836,
+          "p95": 283.3000000000029,
+          "worst": 549.9000000000233
+        },
+        "updateMs": {
+          "samples": 338,
+          "median": 0.7000000001862645,
+          "p95": 1.2000000001862645,
+          "worst": 9.899999999906868
+        },
+        "simulationMs": {
+          "samples": 338,
+          "median": 0,
+          "p95": 0.09999999962747097,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 338,
+          "median": 0.40000000037252903,
+          "p95": 0.7999999998137355,
+          "worst": 2.3999999999068677
+        },
+        "submissionMs": {
+          "samples": 338,
+          "median": 1.3999999999068677,
+          "p95": 4.600000000093132,
+          "worst": 14.399999999906868
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [166.70000000001164, 183.29999999998836],
+      "resources": {
+        "drawCalls": 154,
+        "triangles": 105701,
+        "geometries": 150,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 520
+      }
+    }
+  },
+  {
+    "scene": "coherence-cloud-out",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 301,
+          "median": 200,
+          "p95": 350,
+          "worst": 400
+        },
+        "updateMs": {
+          "samples": 301,
+          "median": 0.6999999999534339,
+          "p95": 1.099999999976717,
+          "worst": 5
+        },
+        "simulationMs": {
+          "samples": 301,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.19999999995343387
+        },
+        "sceneMs": {
+          "samples": 301,
+          "median": 0.40000000002328306,
+          "p95": 0.7000000000698492,
+          "worst": 4.699999999953434
+        },
+        "submissionMs": {
+          "samples": 301,
+          "median": 1.5,
+          "p95": 4.699999999953434,
+          "worst": 11.599999999860302
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [199.90000000002328, 200],
+      "resources": {
+        "drawCalls": 172,
+        "triangles": 118281,
+        "geometries": 168,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 568
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 309,
+          "median": 183.40000000002328,
+          "p95": 316.70000000001164,
+          "worst": 416.70000000006985
+        },
+        "updateMs": {
+          "samples": 309,
+          "median": 0.7000000001862645,
+          "p95": 1,
+          "worst": 4
+        },
+        "simulationMs": {
+          "samples": 309,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 309,
+          "median": 0.40000000037252903,
+          "p95": 0.6000000000931323,
+          "worst": 4
+        },
+        "submissionMs": {
+          "samples": 309,
+          "median": 1.3999999999068677,
+          "p95": 4.2999999998137355,
+          "worst": 9.5
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [183.39999999996508, 200],
+      "resources": {
+        "drawCalls": 172,
+        "triangles": 118281,
+        "geometries": 168,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 568
+      }
+    }
+  },
+  {
+    "scene": "coherence-cloud-in",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 315,
+          "median": 183.40000000002328,
+          "p95": 250,
+          "worst": 449.8999999999942
+        },
+        "updateMs": {
+          "samples": 315,
+          "median": 0.6999999999534339,
+          "p95": 0.9000000001396984,
+          "worst": 4.800000000046566
+        },
+        "simulationMs": {
+          "samples": 315,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 315,
+          "median": 0.40000000002328306,
+          "p95": 0.6000000000931323,
+          "worst": 4.599999999976717
+        },
+        "submissionMs": {
+          "samples": 315,
+          "median": 1.3999999999068677,
+          "p95": 3.400000000023283,
+          "worst": 16.600000000093132
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [183.30000000004657, 199.89999999999418],
+      "resources": {
+        "drawCalls": 173,
+        "triangles": 118931,
+        "geometries": 169,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 572
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 307,
+          "median": 200,
+          "p95": 233.39999999990687,
+          "worst": 416.70000000006985
+        },
+        "updateMs": {
+          "samples": 307,
+          "median": 0.7000000001862645,
+          "p95": 1.1000000000931323,
+          "worst": 5.899999999906868
+        },
+        "simulationMs": {
+          "samples": 307,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 307,
+          "median": 0.5,
+          "p95": 0.7000000001862645,
+          "worst": 2.3999999999068677
+        },
+        "submissionMs": {
+          "samples": 307,
+          "median": 1.5,
+          "p95": 4.100000000093132,
+          "worst": 15.600000000093132
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [183.30000000001746, 200],
+      "resources": {
+        "drawCalls": 173,
+        "triangles": 118931,
+        "geometries": 169,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 572
+      }
+    }
+  },
+  {
+    "scene": "coherence-coast",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 256,
+          "median": 233.30000000004657,
+          "p95": 333.30000000004657,
+          "worst": 600
+        },
+        "updateMs": {
+          "samples": 256,
+          "median": 0.7999999999301508,
+          "p95": 1.1999999999534339,
+          "worst": 6.200000000069849
+        },
+        "simulationMs": {
+          "samples": 256,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.2000000000698492
+        },
+        "sceneMs": {
+          "samples": 256,
+          "median": 0.5,
+          "p95": 0.8000000000465661,
+          "worst": 2
+        },
+        "submissionMs": {
+          "samples": 256,
+          "median": 1.900000000023283,
+          "p95": 6.099999999976717,
+          "worst": 28
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [233.29999999998836, 233.30000000004657],
+      "resources": {
+        "drawCalls": 258,
+        "triangles": 174381,
+        "geometries": 254,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 924
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 230,
+          "median": 266.5,
+          "p95": 350,
+          "worst": 533.2999999999302
+        },
+        "updateMs": {
+          "samples": 230,
+          "median": 0.7999999998137355,
+          "p95": 1.1000000000931323,
+          "worst": 9.399999999906868
+        },
+        "simulationMs": {
+          "samples": 230,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 230,
+          "median": 0.5,
+          "p95": 0.7999999998137355,
+          "worst": 1.8999999999068677
+        },
+        "submissionMs": {
+          "samples": 230,
+          "median": 2,
+          "p95": 5.800000000279397,
+          "worst": 15.799999999813735
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [250, 266.5999999999767],
+      "resources": {
+        "drawCalls": 258,
+        "triangles": 174381,
+        "geometries": 254,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 924
+      }
+    }
+  },
+  {
+    "scene": "coherence-water",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 254,
+          "median": 233.39999999999418,
+          "p95": 333.29999999998836,
+          "worst": 516.6999999999534
+        },
+        "updateMs": {
+          "samples": 254,
+          "median": 0.9000000001396984,
+          "p95": 1.4000000001396984,
+          "worst": 5.800000000046566
+        },
+        "simulationMs": {
+          "samples": 254,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 254,
+          "median": 0.6999999999534339,
+          "p95": 1.1000000000931323,
+          "worst": 5.599999999860302
+        },
+        "submissionMs": {
+          "samples": 254,
+          "median": 2,
+          "p95": 6.5,
+          "worst": 14.099999999976717
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [233.30000000004657, 233.39999999999418],
+      "resources": {
+        "drawCalls": 224,
+        "triangles": 148431,
+        "geometries": 220,
+        "textures": 20,
+        "programs": 23,
+        "materials": 17,
+        "sceneObjects": 1068
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 241,
+          "median": 249.90000000002328,
+          "p95": 416.6000000000058,
+          "worst": 766.7000000000116
+        },
+        "updateMs": {
+          "samples": 241,
+          "median": 1,
+          "p95": 1.3999999999068677,
+          "worst": 17.899999999906868
+        },
+        "simulationMs": {
+          "samples": 241,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 241,
+          "median": 0.7000000001862645,
+          "p95": 1.1000000000931323,
+          "worst": 17.699999999720603
+        },
+        "submissionMs": {
+          "samples": 241,
+          "median": 2.1999999997206032,
+          "p95": 6.399999999906868,
+          "worst": 9.899999999906868
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [233.40000000002328, 266.5999999999767],
+      "resources": {
+        "drawCalls": 224,
+        "triangles": 148431,
+        "geometries": 220,
+        "textures": 20,
+        "programs": 23,
+        "materials": 17,
+        "sceneObjects": 1068
+      }
+    }
+  },
+  {
+    "scene": "coherence-ground",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 230,
+          "median": 266.5999999999767,
+          "p95": 333.30000000004657,
+          "worst": 533.3000000000466
+        },
+        "updateMs": {
+          "samples": 230,
+          "median": 1,
+          "p95": 1.599999999976717,
+          "worst": 2.800000000046566
+        },
+        "simulationMs": {
+          "samples": 230,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 230,
+          "median": 0.6999999999534339,
+          "p95": 1.3000000000465661,
+          "worst": 2.5
+        },
+        "submissionMs": {
+          "samples": 230,
+          "median": 2.300000000046566,
+          "p95": 6.800000000046566,
+          "worst": 11
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [266.5999999999767, 266.5999999999767],
+      "resources": {
+        "drawCalls": 299,
+        "triangles": 195337,
+        "geometries": 286,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 1052
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 228,
+          "median": 266.5999999999767,
+          "p95": 333.29999999993015,
+          "worst": 649.9000000000233
+        },
+        "updateMs": {
+          "samples": 228,
+          "median": 1,
+          "p95": 1.5,
+          "worst": 5.7000000001862645
+        },
+        "simulationMs": {
+          "samples": 228,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 228,
+          "median": 0.7000000001862645,
+          "p95": 1,
+          "worst": 5.400000000372529
+        },
+        "submissionMs": {
+          "samples": 228,
+          "median": 2.2000000001862645,
+          "p95": 6.5,
+          "worst": 17.09999999962747
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [266.5999999999767, 266.6000000000349],
+      "resources": {
+        "drawCalls": 299,
+        "triangles": 195337,
+        "geometries": 286,
+        "textures": 19,
+        "programs": 22,
+        "materials": 17,
+        "sceneObjects": 1052
+      }
+    }
+  },
+  {
+    "scene": "coherence-night",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 268,
+          "median": 216.70000000001164,
+          "p95": 399.9000000000233,
+          "worst": 616.7000000000116
+        },
+        "updateMs": {
+          "samples": 268,
+          "median": 0.8000000000465661,
+          "p95": 1.6000000000931323,
+          "worst": 8.400000000023283
+        },
+        "simulationMs": {
+          "samples": 268,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 268,
+          "median": 0.5,
+          "p95": 1.099999999976717,
+          "worst": 8
+        },
+        "submissionMs": {
+          "samples": 268,
+          "median": 1.7000000000698492,
+          "p95": 5.699999999953434,
+          "worst": 17.5
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [216.69999999995343, 216.70000000001164],
+      "resources": {
+        "drawCalls": 195,
+        "triangles": 133271,
+        "geometries": 191,
+        "textures": 19,
+        "programs": 21,
+        "materials": 17,
+        "sceneObjects": 788
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 273,
+          "median": 216.69999999995343,
+          "p95": 400,
+          "worst": 716.6000000000931
+        },
+        "updateMs": {
+          "samples": 273,
+          "median": 0.8000000002793968,
+          "p95": 1.3000000002793968,
+          "worst": 6
+        },
+        "simulationMs": {
+          "samples": 273,
+          "median": 0,
+          "p95": 0.09999999962747097,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 273,
+          "median": 0.5,
+          "p95": 0.8999999999068677,
+          "worst": 4.100000000093132
+        },
+        "submissionMs": {
+          "samples": 273,
+          "median": 1.8000000002793968,
+          "p95": 6.100000000093132,
+          "worst": 15.299999999813735
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [216.59999999997672, 233.29999999993015],
+      "resources": {
+        "drawCalls": 195,
+        "triangles": 133271,
+        "geometries": 191,
+        "textures": 19,
+        "programs": 21,
+        "materials": 17,
+        "sceneObjects": 788
+      }
+    }
+  },
+  {
+    "scene": "coherence-dry",
+    "before": {
+      "metrics": {
+        "frameMs": {
+          "samples": 321,
+          "median": 183.30000000004657,
+          "p95": 250,
+          "worst": 366.70000000001164
+        },
+        "updateMs": {
+          "samples": 321,
+          "median": 0.8000000000465661,
+          "p95": 1.2000000001862645,
+          "worst": 21.100000000093132
+        },
+        "simulationMs": {
+          "samples": 321,
+          "median": 0,
+          "p95": 0.09999999986030161,
+          "worst": 0.20000000018626451
+        },
+        "sceneMs": {
+          "samples": 321,
+          "median": 0.5,
+          "p95": 0.8000000000465661,
+          "worst": 20.800000000046566
+        },
+        "submissionMs": {
+          "samples": 321,
+          "median": 1.8000000000465661,
+          "p95": 6.099999999860302,
+          "worst": 22.699999999953434
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [183.30000000004657, 183.39999999996508],
+      "resources": {
+        "drawCalls": 175,
+        "triangles": 98525,
+        "geometries": 171,
+        "textures": 17,
+        "programs": 18,
+        "materials": 17,
+        "sceneObjects": 868
+      }
+    },
+    "after": {
+      "metrics": {
+        "frameMs": {
+          "samples": 326,
+          "median": 183.30000000004657,
+          "p95": 316.70000000001164,
+          "worst": 783.4000000000233
+        },
+        "updateMs": {
+          "samples": 326,
+          "median": 0.8000000002793968,
+          "p95": 1.5,
+          "worst": 18.299999999813735
+        },
+        "simulationMs": {
+          "samples": 326,
+          "median": 0,
+          "p95": 0,
+          "worst": 0.10000000009313226
+        },
+        "sceneMs": {
+          "samples": 326,
+          "median": 0.5,
+          "p95": 0.900000000372529,
+          "worst": 18
+        },
+        "submissionMs": {
+          "samples": 326,
+          "median": 1.7999999998137355,
+          "p95": 6,
+          "worst": 33
+        }
+      },
+      "gpuMs": null,
+      "runMedianRangeMs": [183.29999999998836, 183.30000000004657],
+      "resources": {
+        "drawCalls": 175,
+        "triangles": 98525,
+        "geometries": 171,
+        "textures": 17,
+        "programs": 18,
+        "materials": 17,
+        "sceneObjects": 868
+      }
+    }
+  }
+]

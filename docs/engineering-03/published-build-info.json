@@ -1,0 +1,20 @@
+{
+  "stage": "工程优化02：缺陷修复与导航 CI 校正",
+  "showcase_stage": 8,
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_commit": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+  "source_branch": "fix/engineering-02",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/8",
+  "baseline_source_commit": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+  "renderer": "Three.js / WebGL2 / depth-integrated atmosphere and analytic sea",
+  "glb_file": "assets/aurora-DTA2SnWJ.glb",
+  "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "aurora_asset_source_commit": "793eacdbe4153723cc5f2160e6d944023d7bfa15",
+  "preview_path": "/coherence/",
+  "preserved_paths": ["/", "/round1/", "/round3/", "/aurora/", "/aurora-793eacd/"],
+  "asset_manifest": "./asset-manifest.json",
+  "built_at": "2026-11-11T00:47:16.746638+00:00",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42933996214",
+  "local_verification": "55 unit tests; Chromium 156: navigation 16, exploration 15, right-click 10, production 11, engineering regressions 4 in development and actual /coherence/ production subpath, renderer 8 scenes, real descent, AURORA 6, coherence 10 scenes and continuous journey passed. Full remote CI passed for the exact source SHA. Hardware GPU and sustained memory acceptance not performed.",
+  "release_prepared_at": "2026-11-11T01:04:11.027300+00:00"
+}

@@ -1,0 +1,25 @@
+
+> void-explorer@0.1.0 test:navigation
+> node tests/flight-navigation.mjs
+
+PASS Normal player route begins at the real fresh-game spawn
+PASS Right mouse locks the actual planet under the camera reticle
+PASS Star-map selection starts bounded steering; scanning cannot silently hit a different planet
+PASS Real-time player flight travels continuously to PYRA and brakes to a stable near-space arrival
+PASS Actual arrival and selected-body orbital scan agree
+PASS Reload preserves the selected destination and real flight velocity
+PASS Boost release with W held is acceleration-bounded rather than an instant speed clamp
+PASS Real X input stops lateral as well as forward motion
+PASS A loaded scene becomes ready only after its current pose has actually rendered
+PASS Real steering updates front/rear direction cues and ship-relative radar
+PASS Occluded route is explained, and manual controls can take over
+PASS Real pointer-locked mouse steering immediately takes over from cruise
+PASS Reproducible high-speed approach brakes above the surface using real time and inputs
+PASS Diagnostic scenes do not overwrite the player save
+PASS State observation returns detached copies without exposing live game internals
+PASS No JavaScript or console errors
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

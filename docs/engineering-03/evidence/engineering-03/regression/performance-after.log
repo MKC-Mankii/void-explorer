@@ -1,0 +1,29 @@
+
+> void-explorer@0.1.0 test:performance
+> node tests/performance.mjs
+
+PASS 1 coherence-orbit: n=197, RAF median=150.0 p95=266.7 ms
+PASS 1 coherence-air-out: n=167, RAF median=183.3 p95=316.5 ms
+PASS 1 coherence-air-in: n=171, RAF median=166.7 p95=266.7 ms
+PASS 1 coherence-cloud-out: n=150, RAF median=200.0 p95=316.7 ms
+PASS 1 coherence-cloud-in: n=161, RAF median=183.3 p95=216.7 ms
+PASS 1 coherence-coast: n=116, RAF median=250.0 p95=333.4 ms
+PASS 1 coherence-water: n=115, RAF median=266.6 p95=466.6 ms
+PASS 1 coherence-ground: n=113, RAF median=266.6 p95=316.7 ms
+PASS 1 coherence-night: n=142, RAF median=216.6 p95=250.1 ms
+PASS 1 coherence-dry: n=162, RAF median=183.3 p95=333.3 ms
+PASS 2 coherence-orbit: n=211, RAF median=133.4 p95=233.3 ms
+PASS 2 coherence-air-out: n=171, RAF median=166.7 p95=316.7 ms
+PASS 2 coherence-air-in: n=167, RAF median=183.3 p95=283.4 ms
+PASS 2 coherence-cloud-out: n=159, RAF median=183.4 p95=333.3 ms
+PASS 2 coherence-cloud-in: n=146, RAF median=200.0 p95=249.9 ms
+PASS 2 coherence-coast: n=114, RAF median=266.6 p95=400.0 ms
+PASS 2 coherence-water: n=126, RAF median=233.4 p95=350.0 ms
+PASS 2 coherence-ground: n=115, RAF median=266.6 p95=366.6 ms
+PASS 2 coherence-night: n=131, RAF median=233.3 p95=416.6 ms
+PASS 2 coherence-dry: n=164, RAF median=183.3 p95=300.0 ms
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

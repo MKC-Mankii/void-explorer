@@ -1,0 +1,7 @@
+{
+  "source": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
+  "diagnosticPatch": "docs/engineering-03/baseline-instrumentation.patch",
+  "exitCode": 0,
+  "seconds": 71.67,
+  "method": "Same current journey harness against instrumented baseline development server; no game simulation modifications."
+}

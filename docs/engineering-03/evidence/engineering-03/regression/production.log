@@ -1,0 +1,20 @@
+
+> void-explorer@0.1.0 test:production
+> node tests/production.mjs
+
+PASS Production WebGL scene renders
+PASS Delivered Blender GLB matches the source export SHA-256
+PASS AURORA identity shown in the production interface
+PASS V selects the reticle planet in the production build
+PASS Captured right-click selects the planet without losing mouse capture
+PASS Development API absent
+PASS Scenario query ignored by production
+PASS Selected-body scan awards score
+PASS G cruise engages and real X takes over
+PASS Star map opens
+PASS No failed requests or JavaScript/console errors
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

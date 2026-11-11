@@ -1,0 +1,70 @@
+
+> void-explorer@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/void-explorer
+
+ ✓ tests/save-boundaries.test.ts (3 tests) 5ms
+ ✓ tests/surface-details.test.ts (3 tests) 550ms
+   ✓ does not release resources owned by another still-live SurfaceDetails instance  485ms
+ ✓ tests/rendering.test.ts (5 tests) 453ms
+   ✓ retains full terrain coverage while budgeted children load and morph  416ms
+ ✓ tests/coherence.test.ts (4 tests) 159ms
+ ❯ tests/navigation.test.ts (16 tests | 1 failed) 68ms
+   ✓ flight controls > smoothly reduces boost speed whether W is held or released 9ms
+   ✓ flight controls > brakes all motion even if a translation key remains held 3ms
+   ✓ flight controls > smooths turning, clamps rate spikes and lets rotation settle 1ms
+   ✓ flight controls > produces comparable flight across supported frame step sizes 2ms
+   ✓ target and route continuity > selects and gradually aligns without teleporting orientation or position 3ms
+   ✓ target and route continuity > cancels cruise on explicit manual steering, throttle or brakes 1ms
+   ✓ target and route continuity > flies through actual intervening space and stops at the destination near-space boundary 24ms
+   ✓ target and route continuity > brakes from an approaching fixture without falling through the surface 10ms
+   ✓ target and route continuity > reports an occluded route and allows manual departure instead of crossing a planet 0ms
+   ✓ target and route continuity > keeps scanning tied to the selected destination 0ms
+   ✓ target and route continuity > preserves target and motion through saves, and loads first-round saves 0ms
+   × target and route continuity > rejects invalid saved navigation and velocity fields 5ms
+     → expected true to be false // Object.is equality
+   ✓ visible navigation and observation > distinguishes a free cursor ray from the reticle and respects physical occlusion 1ms
+   ✓ visible navigation and observation > locks only the first physical planet under a ray 0ms
+   ✓ visible navigation and observation > distinguishes offscreen front contacts from rear contacts and clamps arrows inside the screen 0ms
+   ✓ visible navigation and observation > repeats named scenarios and returns detached observations 7ms
+ ✓ tests/terrain.test.ts (1 test) 1133ms
+   ✓ keeps rendered highland terrain within astronaut clearance of the collision surface  1132ms
+ ✓ tests/failure-evidence.test.js (5 tests) 184ms
+ ✓ tests/simulation.test.ts (12 tests) 42ms
+ ✓ tests/aurora.test.ts (2 tests) 25ms
+ ✓ tests/navigation-observation.test.js (7 tests) 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/navigation.test.ts > target and route continuity > rejects invalid saved navigation and velocity fields
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/navigation.test.ts:158:47
+    156|       { ...s.save(), speed: Infinity },
+    157|     ])
+    158|       expect(new Simulation().restore(state)).toBe(false);
+       |                                               ^
+    159|   });
+    160| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 9 passed (10)
+      Tests  1 failed | 57 passed (58)
+   Start at  05:32:59
+   Duration  1.74s (transform 270ms, setup 0ms, collect 876ms, tests 2.63s, environment 1ms, prepare 484ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

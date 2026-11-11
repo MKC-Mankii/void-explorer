@@ -1,0 +1,15 @@
+CAPTURE 01-space: flight, 37469 m above surface
+CAPTURE 02-approach: 37022 m (same-frame canvas)
+CAPTURE 03-air: 1173 m (same-frame canvas)
+CAPTURE 04-low: 504 m (same-frame canvas)
+CAPTURE 05-ground-approach: 111 m (same-frame canvas)
+CAPTURE 06-landed: landed, 6 m above surface
+CAPTURE 07-walking: walking, 2 m above surface
+CAPTURE 08-restored: walking, 2 m above surface
+CAPTURE 09-takeoff: flight, 906 m above surface
+CAPTURE 10-exit-air: flight, 1732 m above surface
+CAPTURE 11-coast-start: flight, 14 m above surface
+CAPTURE 12-coast-3: flight, 177 m above surface
+CAPTURE 12-coast-6: flight, 454 m above surface
+CAPTURE 12-coast-9: flight, 667 m above surface
+PASS normal continuous exploration/return journey, all qualities/resize, and separately seeded real coastal flight

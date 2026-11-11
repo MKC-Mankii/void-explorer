@@ -1,0 +1,7 @@
+{
+  "name": "soak-fixed",
+  "reason": "Pass target frame as serialized browser argument; original frame count and assertions unchanged.",
+  "exitCode": 0,
+  "seconds": 198.27,
+  "log": "test-results/engineering-03/regression/soak-fixed.log"
+}

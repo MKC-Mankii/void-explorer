@@ -1,0 +1,29 @@
+{
+  "status": "pending-real-device-execution",
+  "operator": null,
+  "startedAt": null,
+  "os": null,
+  "browser": null,
+  "gpu": null,
+  "driver": null,
+  "hardwareAcceleration": null,
+  "resolution": null,
+  "dpr": null,
+  "quality": null,
+  "powerMode": null,
+  "extensions": null,
+  "scenes": [],
+  "longExplorationMinutes": null,
+  "checklist": {
+    "pointerLock": null,
+    "rightClick": null,
+    "macControlClick": null,
+    "osFocusRestore": null,
+    "audioUnlock": null,
+    "contextLossRefresh": null,
+    "pagesSubpath": null,
+    "saveRefresh": null
+  },
+  "errors": [],
+  "evidencePaths": []
+}

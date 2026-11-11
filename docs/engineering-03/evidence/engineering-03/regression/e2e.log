@@ -1,0 +1,24 @@
+
+> void-explorer@0.1.0 test:e2e
+> node tests/e2e.mjs
+
+PASS WebGL scene boots
+PASS Keyboard orbital scan awards discovery once
+PASS Throttle and inertial brake respond to real keyboard input
+PASS Landing reaches the shared terrain surface
+PASS Disembark and surface sampling complete the discovery loop
+PASS WASD walks on curved ground at astronaut eye height
+PASS Pointer lock rotates view and Escape releases into pause
+PASS Reboarding and takeoff return to free flight
+PASS Star chart selects and aligns local destinations
+PASS Hyperspace transfers into a separately generated system
+PASS Journal retains discoveries across systems
+PASS Quality settings and photo mode are interactive
+PASS Reload restores location, discoveries and preferences
+PASS Desktop HUD fits 1280 × 720
+PASS No JavaScript or browser console errors
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

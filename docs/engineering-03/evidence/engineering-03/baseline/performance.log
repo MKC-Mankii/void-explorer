@@ -1,0 +1,16 @@
+PASS 1 coherence-orbit: n=182, RAF median=150.0 p95=333.3 ms
+PASS 1 coherence-air-out: n=172, RAF median=166.7 p95=249.9 ms
+PASS 1 coherence-air-in: n=160, RAF median=183.3 p95=266.7 ms
+PASS 1 coherence-cloud-out: n=145, RAF median=200.0 p95=283.4 ms
+PASS 1 coherence-cloud-in: n=155, RAF median=199.9 p95=316.7 ms
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: Execution context was destroyed, most likely because of a navigation.
+    at /workspace/void-explorer/tests/performance.mjs:87:34 {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.19.0

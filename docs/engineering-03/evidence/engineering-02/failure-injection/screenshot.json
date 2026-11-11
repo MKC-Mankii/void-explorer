@@ -1,0 +1,23 @@
+{
+  "checks": ["completed before failure"],
+  "errors": ["earlier console diagnostic"],
+  "failure": {
+    "name": "AssertionError",
+    "message": "EO04_ORIGINAL_ASSERTION\n\n1 !== 2\n",
+    "stack": "AssertionError [ERR_ASSERTION]: EO04_ORIGINAL_ASSERTION\n\n1 !== 2\n\n    at file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:7:10\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)",
+    "details": "AssertionError [ERR_ASSERTION]: EO04_ORIGINAL_ASSERTION\n\n1 !== 2\n\n    at file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:7:10\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: 1,\n  expected: 2,\n  operator: 'strictEqual',\n  diff: 'simple'\n}"
+  },
+  "evidenceErrors": [
+    {
+      "stage": "screenshot",
+      "name": "Error",
+      "message": "EO04_SCREENSHOT_FAILURE",
+      "stack": "Error: EO04_SCREENSHOT_FAILURE\n    at screenshot (file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:17:13)\n    at failWithEvidence (file:///workspace/void-explorer/tests/failure-evidence.mjs:40:33)\n    at async file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:9:3",
+      "details": "Error: EO04_SCREENSHOT_FAILURE\n    at screenshot (file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:17:13)\n    at failWithEvidence (file:///workspace/void-explorer/tests/failure-evidence.mjs:40:33)\n    at async file:///workspace/void-explorer/tests/fixtures/failure-evidence.mjs:9:3"
+    }
+  ],
+  "final": {
+    "mode": "flight"
+  },
+  "screenshot": null
+}

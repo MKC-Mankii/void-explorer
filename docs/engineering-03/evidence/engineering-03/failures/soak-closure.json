@@ -1,0 +1,12 @@
+{
+  "startedAt": "2026-11-11T05:53:23.389Z",
+  "rounds": 6,
+  "status": "failed",
+  "scope": "Short repeated lifecycle stress. Fixture placement and accelerated simulation steps; not real-time flight or long-term hardware acceptance.",
+  "stages": [],
+  "errors": [],
+  "samples": [],
+  "browser": "154.0.8037.57",
+  "failure": "page.waitForFunction: Timeout 120000ms exceeded.\n    at settle (/workspace/void-explorer/tests/resource-soak.mjs:38:16)\n    at async file:///workspace/void-explorer/tests/resource-soak.mjs:68:7",
+  "elapsedMs": 124403
+}
