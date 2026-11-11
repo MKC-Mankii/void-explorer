@@ -1,14 +1,14 @@
 {
-  "source_commit": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+  "source_commit": "8a858eb55a3750c1a6c762ac3d3be73695758f96",
   "algorithm": "SHA-256",
   "files": {
     "assets/aurora-DTA2SnWJ.glb": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+    "assets/index-BGAn3yRo.js": "e25bdfec2415a0b951bbc51b9c46bd79b5ff1376bf31e6f01c220b56bac9d54c",
     "assets/index-BTjUQzMX.css": "09e28769a3cae49792e1874f33ff24f4d1d35deab57996f07ffd8258a2d32112",
-    "assets/index-CDfp1uAY.js": "c63bb5fb94f8bd7db1554e20fa84f6aac00e6ababcff707df7f4b5baab0586b3",
     "assets/three-core-jFRPNpNn.js": "76260d7f0c808d069f45b5302713c010e17b0238abbea93123aee0028af16ab6",
     "assets/three-effects-DdeklLf1.js": "081f1700b4e832bb1b0cb764e315df08003fc54584b9e9c186416f64aa319895",
     "favicon.svg": "1703c717251a5fbe973222b7100130059cac3e3f648013dbf8c5ae6ec1296758",
-    "index.html": "fb6ee5f937300c4f1b9932006b222c59a6e306c254e3f58b39b81637ab566e06",
+    "index.html": "5b517db71c20041f4fa6641669af05878edf4d82b49344cbdc68c2d579df032b",
     "third-party-notices.txt": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
   }
 }
