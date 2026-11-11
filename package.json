@@ -25,7 +25,8 @@
     "test:save-browser": "node tests/save-browser.mjs",
     "test:device": "node tests/device-compatibility.mjs",
     "record:exploration": "node tests/device-observer.mjs",
-    "test:opening": "node tests/opening.mjs"
+    "test:opening": "node tests/opening.mjs",
+    "test:audio": "node tests/audio.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

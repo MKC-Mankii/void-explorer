@@ -1,0 +1,18 @@
+{
+  "file": "a-light-beyond.mp3",
+  "title": "A Light Beyond / 远方的微光",
+  "license": "CC0-1.0",
+  "source": "render-score.py; score.json",
+  "bytes": 2305196,
+  "sha256": "3159dbc3b61e5dd52d46981c5f8dd22309d30808fe2f83fd618930ebbafd1669",
+  "sample_rate": 32000,
+  "channels": 2,
+  "codec": "MP3 / MPEG-1 Layer III",
+  "bitrate": 128000,
+  "decoded_duration_seconds": 144,
+  "integrated_lufs": -24.07,
+  "true_peak_dbtp": -12.82,
+  "loudness_range_lu": 3.8,
+  "external_samples": 0,
+  "subjective_listening": "pending-human-review; no audio-perception tool available"
+}

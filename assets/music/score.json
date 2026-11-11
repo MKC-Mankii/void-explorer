@@ -1,0 +1,1953 @@
+{
+  "title": "A Light Beyond / \u8fdc\u65b9\u7684\u5fae\u5149",
+  "bpm": 80,
+  "meter": "4/4",
+  "bars": 48,
+  "duration": 144.0,
+  "sections": [
+    ["First light", ["Dmaj9", "Bm11", "Gmaj9", "Asus9"]],
+    ["An answer across distance", ["D6/9", "F#m7", "Em9", "Asus9"]],
+    ["Orbits", ["Bm11", "Gmaj9", "Dmaj9", "Asus9"]],
+    ["Open horizon", ["Gmaj9", "D6/9", "Em9", "Asus9"]],
+    ["The quiet surface", ["Bm11", "F#m7", "Gmaj9", "Em9"]],
+    ["A light remembered", ["Dmaj9", "Bm11", "Gmaj9", "Asus9"]]
+  ],
+  "events": [
+    {
+      "start": 0.0,
+      "midi": 38,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 0.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 0.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 0.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 0.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 6.0,
+      "midi": 35,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 6.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 6.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 6.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 6.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 12.0,
+      "midi": 31,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 12.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 12.025,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 12.05,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 12.075,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 18.0,
+      "midi": 33,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 18.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 18.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 18.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 18.075,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 0.0,
+      "midi": 74,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 2.25,
+      "midi": 69,
+      "duration": 0.75,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 3.75,
+      "midi": 76,
+      "duration": 1.875,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 6.0,
+      "midi": 78,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 9.0,
+      "midi": 76,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 10.5,
+      "midi": 71,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 12.75,
+      "midi": 69,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 15.75,
+      "midi": 66,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 18.0,
+      "midi": 67,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 20.25,
+      "midi": 71,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 22.5,
+      "midi": 69,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 24.0,
+      "midi": 38,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 24.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 24.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 24.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 24.075,
+      "midi": 69,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 30.0,
+      "midi": 30,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 30.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 30.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 30.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 30.075,
+      "midi": 69,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 36.0,
+      "midi": 40,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 36.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 36.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 36.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 36.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 42.0,
+      "midi": 33,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 42.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 42.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 42.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 42.075,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 24.0,
+      "midi": 74,
+      "duration": 1.875,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 27.0,
+      "midi": 76,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 29.25,
+      "midi": 73,
+      "duration": 1.875,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 32.25,
+      "midi": 69,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 36.75,
+      "midi": 71,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 39.0,
+      "midi": 74,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 42.0,
+      "midi": 78,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 45.75,
+      "midi": 76,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 36.75,
+      "midi": 62,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 40.5,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 43.5,
+      "midi": 66,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 45.75,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 48.0,
+      "midi": 35,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 48.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 48.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 48.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 48.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 48.375,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 49.5,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 50.625,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 51.75,
+      "midi": 78,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 52.875,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 54.0,
+      "midi": 31,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 54.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 54.025,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 54.05,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 54.075,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 54.375,
+      "midi": 66,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 55.5,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 56.625,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 57.75,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 58.875,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 60.0,
+      "midi": 38,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 60.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 60.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 60.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 60.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 60.375,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 61.5,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 62.625,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 63.75,
+      "midi": 78,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 64.875,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 66.0,
+      "midi": 33,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 66.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 66.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 66.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 66.075,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 66.375,
+      "midi": 67,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 67.5,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 68.625,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 69.75,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 70.875,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 48.0,
+      "midi": 66,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 51.75,
+      "midi": 69,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 54.0,
+      "midi": 73,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 57.75,
+      "midi": 71,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 60.75,
+      "midi": 74,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 64.5,
+      "midi": 71,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 67.5,
+      "midi": 69,
+      "duration": 3.0,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 72.0,
+      "midi": 31,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 72.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 72.025,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 72.05,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 72.075,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 72.375,
+      "midi": 66,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 73.5,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 74.625,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 75.75,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 76.875,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 78.0,
+      "midi": 38,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 78.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 78.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 78.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 78.075,
+      "midi": 69,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 78.375,
+      "midi": 66,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 79.5,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 80.625,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 81.75,
+      "midi": 81,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 82.875,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 84.0,
+      "midi": 40,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 84.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 84.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 84.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 84.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 84.375,
+      "midi": 67,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 85.5,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 86.625,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 87.75,
+      "midi": 78,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 88.875,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 90.0,
+      "midi": 33,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 90.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 90.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 90.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 90.075,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 90.375,
+      "midi": 67,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 91.5,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 92.625,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 93.75,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 94.875,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 72.0,
+      "midi": 79,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 75.0,
+      "midi": 78,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 77.25,
+      "midi": 74,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 81.0,
+      "midi": 76,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 84.0,
+      "midi": 78,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 86.25,
+      "midi": 76,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 88.5,
+      "midi": 74,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 92.25,
+      "midi": 71,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 94.5,
+      "midi": 69,
+      "duration": 0.75,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 84.75,
+      "midi": 62,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 88.5,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 91.5,
+      "midi": 66,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 93.75,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 96.0,
+      "midi": 35,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 96.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.63
+    },
+    {
+      "start": 96.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.21
+    },
+    {
+      "start": 96.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.21
+    },
+    {
+      "start": 96.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.63
+    },
+    {
+      "start": 102.0,
+      "midi": 30,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 102.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.63
+    },
+    {
+      "start": 102.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.21
+    },
+    {
+      "start": 102.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.21
+    },
+    {
+      "start": 102.075,
+      "midi": 69,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.63
+    },
+    {
+      "start": 108.0,
+      "midi": 31,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 108.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.63
+    },
+    {
+      "start": 108.025,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.21
+    },
+    {
+      "start": 108.05,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.21
+    },
+    {
+      "start": 108.075,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.63
+    },
+    {
+      "start": 114.0,
+      "midi": 40,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 114.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.63
+    },
+    {
+      "start": 114.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": -0.21
+    },
+    {
+      "start": 114.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.21
+    },
+    {
+      "start": 114.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.021,
+      "pan": 0.63
+    },
+    {
+      "start": 97.5,
+      "midi": 66,
+      "duration": 3.0,
+      "voice": "glass",
+      "level": 0.061,
+      "pan": -0.12
+    },
+    {
+      "start": 102.75,
+      "midi": 69,
+      "duration": 3.75,
+      "voice": "glass",
+      "level": 0.061,
+      "pan": -0.12
+    },
+    {
+      "start": 108.75,
+      "midi": 67,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.061,
+      "pan": -0.12
+    },
+    {
+      "start": 113.25,
+      "midi": 71,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.061,
+      "pan": -0.12
+    },
+    {
+      "start": 117.0,
+      "midi": 74,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.061,
+      "pan": -0.12
+    },
+    {
+      "start": 120.0,
+      "midi": 38,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 120.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 120.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 120.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 120.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 120.375,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 121.5,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 122.625,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 123.75,
+      "midi": 78,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 124.875,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 126.0,
+      "midi": 35,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 126.0,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 126.025,
+      "midi": 61,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 126.05,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 126.075,
+      "midi": 66,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 126.375,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 127.5,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 128.625,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 129.75,
+      "midi": 78,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 130.875,
+      "midi": 73,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 132.0,
+      "midi": 31,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 132.0,
+      "midi": 54,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 132.025,
+      "midi": 57,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 132.05,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 132.075,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 132.375,
+      "midi": 66,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 133.5,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 134.625,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 135.75,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 136.875,
+      "midi": 69,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 138.0,
+      "midi": 33,
+      "duration": 5.75,
+      "voice": "bass",
+      "level": 0.043,
+      "pan": 0
+    },
+    {
+      "start": 138.0,
+      "midi": 55,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.63
+    },
+    {
+      "start": 138.025,
+      "midi": 59,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": -0.21
+    },
+    {
+      "start": 138.05,
+      "midi": 62,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.21
+    },
+    {
+      "start": 138.075,
+      "midi": 64,
+      "duration": 5.8,
+      "voice": "pad",
+      "level": 0.026,
+      "pan": 0.63
+    },
+    {
+      "start": 138.375,
+      "midi": 67,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 139.5,
+      "midi": 74,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": -0.5
+    },
+    {
+      "start": 140.625,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 141.75,
+      "midi": 76,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 142.875,
+      "midi": 71,
+      "duration": 0.375,
+      "voice": "pulse",
+      "level": 0.016,
+      "pan": 0.5
+    },
+    {
+      "start": 120.0,
+      "midi": 74,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 122.25,
+      "midi": 69,
+      "duration": 0.75,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 123.75,
+      "midi": 76,
+      "duration": 1.875,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 126.0,
+      "midi": 78,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 129.0,
+      "midi": 76,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 130.5,
+      "midi": 71,
+      "duration": 1.125,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 132.0,
+      "midi": 69,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 135.75,
+      "midi": 67,
+      "duration": 1.875,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 138.75,
+      "midi": 64,
+      "duration": 2.25,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 141.75,
+      "midi": 69,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.084,
+      "pan": -0.12
+    },
+    {
+      "start": 132.75,
+      "midi": 62,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 136.5,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 139.5,
+      "midi": 66,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    },
+    {
+      "start": 141.75,
+      "midi": 64,
+      "duration": 1.5,
+      "voice": "glass",
+      "level": 0.028,
+      "pan": 0.42
+    }
+  ]
+}

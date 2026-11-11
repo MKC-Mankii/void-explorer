@@ -24,6 +24,7 @@ interface Settings {
   quality: 'low' | 'medium' | 'high';
   sensitivity: number;
   audio: boolean;
+  music: boolean;
 }
 function readStorage(key: string): unknown {
   try {
@@ -96,7 +97,8 @@ class Game {
   private lockAttempts = 0;
   private lastLockAttempt: { input: string; target: number | null; pointerLocked: boolean } | null =
     null;
-  private settings: Settings = { quality: 'medium', sensitivity: 1, audio: true };
+  private settings: Settings = { quality: 'medium', sensitivity: 1, audio: true, music: true };
+  private musicStatus = '交互后播放 · 原创配乐';
   private disposed = false;
   constructor() {
     const fixture =
@@ -111,6 +113,7 @@ class Game {
     if (settings && typeof settings.sensitivity === 'number')
       this.settings.sensitivity = T.MathUtils.clamp(settings.sensitivity, 0.3, 2);
     if (settings?.audio === false) this.settings.audio = false;
+    if (settings?.music === false) this.settings.music = false;
     this.renderer = new T.WebGLRenderer({
       antialias: true,
       powerPreference: 'high-performance',
@@ -172,9 +175,24 @@ class Game {
     this.updateCamera(1, true);
     this.listen();
     this.audio.enabled = this.settings.audio;
+    this.audio.setMusicEnabled(this.settings.music);
+    this.audio.onStatus = (status) => {
+      this.musicStatus =
+        status === 'ready'
+          ? '原创主题 · 远方的微光'
+          : status === 'loading'
+            ? '音乐正在载入，航行不受影响'
+            : status === 'unavailable'
+              ? '音乐暂不可用，飞船音效仍可使用'
+              : status === 'blocked'
+                ? '浏览器未开启声音，可通过声音开关重试'
+                : '交互后播放 · 原创配乐';
+      this.syncSettings();
+    };
     this.renderer.domElement.addEventListener('webglcontextlost', (event) => {
       event.preventDefault();
       this.disposed = true;
+      this.audio.dispose();
       this.save();
       this.ui.toast('图形设备连接中断 · 进度已保存，请刷新页面恢复');
       this.ui.show('pause');
@@ -266,6 +284,7 @@ class Game {
     const asset = this.ship.observe();
     return {
       schemaVersion: 2,
+      audio: this.audio.observe(),
       ...observeSimulation(this.sim),
       scenario: this.diagnosticScenario,
       opening: this.opening.observe(this.camera, this.ship.group),
@@ -598,6 +617,7 @@ class Game {
     this.mouse.set(0, 0);
   }
   private openModal(name: string) {
+    if (this.ui.started) this.audio.setActivity(false);
     this.ui.show(name);
     this.releaseMouse();
     this.save();
@@ -609,6 +629,7 @@ class Game {
     this.lastTime = performance.now();
   }
   private action(action: string, value?: string) {
+    if (!this.ui.started && ['help', 'settings'].includes(action)) this.audio.start();
     switch (action) {
       case 'start':
         if (this.ship.state !== 'ready') return;
@@ -687,6 +708,13 @@ class Game {
         this.syncSettings();
         this.persistSettings();
         break;
+      case 'music':
+        this.settings.music = !this.settings.music;
+        this.audio.setMusicEnabled(this.settings.music);
+        this.audio.start();
+        this.syncSettings();
+        this.persistSettings();
+        break;
       case 'reset':
         if (this.ui.resetConfirm()) {
           // Reload also fires leave-page saves. Never resurrect progress after an explicit reset.
@@ -706,6 +734,10 @@ class Game {
     if (sensitivity) sensitivity.value = String(this.settings.sensitivity);
     const audio = document.querySelector('#audio-setting');
     if (audio) audio.textContent = this.settings.audio ? '已开启' : '已关闭';
+    const music = document.querySelector('#music-setting');
+    if (music) music.textContent = this.settings.music ? '已开启' : '已关闭';
+    const status = document.querySelector('#music-status');
+    if (status) status.textContent = this.musicStatus;
   }
   private persistSettings() {
     writeStorage(SETTINGS_KEY, this.settings);
@@ -976,7 +1008,7 @@ class Game {
     const simulationEnd = this.diagnosticsEnabled ? performance.now() : 0;
     this.sync(dt);
     const sceneEnd = this.diagnosticsEnabled ? performance.now() : 0;
-    this.audio.update(this.sim.speed, active, this.sim.mode === 'walking');
+    this.audio.update(this.sim.speed, active, this.sim.mode === 'walking', !this.ui.started);
     this.uiTimer += raw;
     this.saveTimer += active ? dt : 0;
     if (this.uiTimer > 0.1) {
