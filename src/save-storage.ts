@@ -81,6 +81,7 @@ export class SaveStorage {
         return false;
       }
       if (this.preserve && this.observed !== null) {
+        this.backupKey = null;
         // Bounded slots preserve earlier failures too. If full or quota limited,
         // leave the primary untouched and report the existing save failure UI.
         for (let i = 0; i < 20; i++) {

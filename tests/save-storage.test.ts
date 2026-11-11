@@ -168,3 +168,23 @@ describe('save recovery and atomic preservation', () => {
     expect(storage.getItem(SAVE_KEY)).toBe('newer-tab');
   });
 });
+
+it('keeps the primary when all backup slots are occupied', () => {
+  const storage = memory('{broken');
+  for (let i = 0; i < 20; i++)
+    storage.setItem(i === 0 ? RECOVERY_KEY : `${RECOVERY_KEY}-${i}`, `older-${i}`);
+  const { sim, store } = reload(storage);
+  expect(store.save(sim)).toBe(false);
+  expect(storage.getItem(SAVE_KEY)).toBe('{broken');
+});
+it('protects malformed null discoveries and unknown flight planet references', () => {
+  for (const patch of [{ discoveries: null }, { landedPlanet: 'missing' }]) {
+    const raw = JSON.stringify({ ...progress(), ...patch }),
+      storage = memory(raw);
+    const { sim, store, continued } = reload(storage);
+    expect(continued).toBe(true);
+    expect(store.save(sim)).toBe(true);
+    expect(storage.getItem(RECOVERY_KEY)).toBe(raw);
+    expect(reload(storage).continued).toBe(true);
+  }
+});

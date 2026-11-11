@@ -615,6 +615,7 @@ export class Simulation {
         return false;
       const planet = UNIVERSE[s.system].planets.find((p) => p.id === s.landedPlanet) ?? null;
       if (s.mode !== 'flight' && !planet) return false;
+      if (s.landedPlanet != null && !planet) this.restoreIssues.push('clear:unknown-landedPlanet');
       if (
         new Quaternion().fromArray(s.rotation).lengthSq() < 1e-12 ||
         new Quaternion().fromArray(s.shipRotation).lengthSq() < 1e-12
@@ -646,7 +647,7 @@ export class Simulation {
             sample: d.sample === true,
           };
       }
-      if (JSON.stringify(discoveries) !== JSON.stringify(s.discoveries ?? {}))
+      if (JSON.stringify(discoveries) !== JSON.stringify(s.discoveries))
         this.restoreIssues.push('sanitize:discoveries');
       if (s.velocity !== undefined && !finite(s.velocity, 3)) return false;
       if (s.velocity && new Vector3().fromArray(s.velocity).length() > FLIGHT.cruise * 2)
