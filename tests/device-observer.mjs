@@ -1,3 +1,4 @@
+import { finishWithEvidence } from './failure-evidence.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { deviceBrowser, installGLCounters } from './device-browser.mjs';
 // A bounded, read-only recorder for a real 30–60 minute human exploration session.
@@ -16,6 +17,7 @@ const report = {
   errors: [],
 };
 let browser;
+let originalFailure = null;
 try {
   const launched = await deviceBrowser();
   browser = launched.browser;
@@ -55,10 +57,14 @@ try {
     ? 'errors-recorded'
     : 'recording-complete-not-manually-accepted';
 } catch (error) {
+  originalFailure = error;
   report.status = 'failed';
   report.failure = error.stack;
   throw error;
 } finally {
-  await writeFile(`${out}/report.json`, JSON.stringify(report, null, 2));
-  await browser?.close();
+  await finishWithEvidence(
+    originalFailure,
+    () => writeFile(`${out}/report.json`, JSON.stringify(report, null, 2)),
+    async () => browser?.close(),
+  );
 }

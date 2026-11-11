@@ -1,3 +1,4 @@
+import { finishWithEvidence } from './failure-evidence.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { deviceBrowser } from './device-browser.mjs';
@@ -5,6 +6,7 @@ const out = process.env.VOID_REPORT_DIR ?? 'test-results/engineering-03/compatib
 await mkdir(out, { recursive: true });
 const report = { status: 'running', checks: [], errors: [], expectedAssetErrors: [], devices: [] };
 let browser;
+let originalFailure = null;
 try {
   const launched = await deviceBrowser();
   browser = launched.browser;
@@ -124,14 +126,20 @@ try {
     'GLB network failure blocks start with recovery text; reload after network recovery succeeds',
   );
   await failure.close();
+  assert(report.expectedAssetErrors.length > 0);
+  assert(report.expectedAssetErrors.every((message) => message.includes('net::ERR_FAILED')));
   assert.deepEqual(report.errors, []);
   report.status = 'passed';
   console.log('PASS', report.checks);
 } catch (error) {
+  originalFailure = error;
   report.status = 'failed';
   report.failure = error.stack;
   throw error;
 } finally {
-  await writeFile(`${out}/report.json`, JSON.stringify(report, null, 2));
-  await browser?.close();
+  await finishWithEvidence(
+    originalFailure,
+    () => writeFile(`${out}/report.json`, JSON.stringify(report, null, 2)),
+    async () => browser?.close(),
+  );
 }

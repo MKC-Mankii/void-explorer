@@ -51,3 +51,20 @@ export async function failWithEvidence(
     throw original;
   }
 }
+
+/** Finish a runner without allowing report/cleanup errors to replace its original failure. */
+export async function finishWithEvidence(original, writeReport, cleanup, log = console.error) {
+  let failure = original;
+  for (const [stage, operation] of [
+    ['report', writeReport],
+    ['cleanup', cleanup],
+  ]) {
+    try {
+      await operation();
+    } catch (error) {
+      log(`Additional runner failure (${stage}):`, error);
+      failure ??= error;
+    }
+  }
+  if (failure) throw failure;
+}

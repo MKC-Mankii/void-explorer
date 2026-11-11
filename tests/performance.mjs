@@ -1,3 +1,4 @@
+import { finishWithEvidence } from './failure-evidence.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
@@ -49,6 +50,7 @@ function stats(values) {
   return { samples: a.length, median: p(0.5), p95: p(0.95), worst: a.at(-1), min: a[0] };
 }
 let browser;
+let originalFailure = null;
 try {
   const launched = await deviceBrowser();
   browser = launched.browser;
@@ -129,11 +131,11 @@ try {
   assert.deepEqual(report.errors, []);
   report.status = 'passed';
 } catch (error) {
+  originalFailure = error;
   report.status = 'failed';
   report.failure = error.stack;
   throw error;
 } finally {
   report.finishedAt = new Date().toISOString();
-  await persist();
-  await browser?.close();
+  await finishWithEvidence(originalFailure, persist, async () => browser?.close());
 }

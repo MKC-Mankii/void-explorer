@@ -88,3 +88,38 @@ for (const mode of ['screenshot', 'collectors', 'report']) {
     }
   });
 }
+
+it('runner finalization preserves the original when report and cleanup both fail', async () => {
+  const { finishWithEvidence } = await import('./failure-evidence.mjs');
+  const original = new Error('original runner assertion'),
+    cleanup = vi.fn(async () => {
+      throw new Error('cleanup');
+    });
+  await expect(
+    finishWithEvidence(
+      original,
+      async () => {
+        throw new Error('report');
+      },
+      cleanup,
+      vi.fn(),
+    ),
+  ).rejects.toBe(original);
+  expect(cleanup).toHaveBeenCalledOnce();
+});
+it('runner finalization fails a successful check when evidence cannot be written', async () => {
+  const { finishWithEvidence } = await import('./failure-evidence.mjs');
+  const original = new Error('report unavailable'),
+    cleanup = vi.fn(async () => {});
+  await expect(
+    finishWithEvidence(
+      null,
+      async () => {
+        throw original;
+      },
+      cleanup,
+      vi.fn(),
+    ),
+  ).rejects.toBe(original);
+  expect(cleanup).toHaveBeenCalledOnce();
+});

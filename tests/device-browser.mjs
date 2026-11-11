@@ -5,7 +5,7 @@ export async function deviceBrowser() {
   const name = process.env.VOID_BROWSER ?? 'chromium';
   const type = { chromium, firefox, webkit }[name];
   if (!type) throw new Error(`Unknown browser: ${name}`);
-  const software = process.env.VOID_SOFTWARE === '1';
+  const software = name === 'chromium' && process.env.VOID_SOFTWARE === '1';
   const executablePath =
     process.env.VOID_BROWSER_PATH ??
     (name === 'chromium' && existsSync('/usr/bin/chromium') ? '/usr/bin/chromium' : undefined);

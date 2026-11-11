@@ -1,3 +1,4 @@
+import { finishWithEvidence } from './failure-evidence.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { deviceBrowser, installGLCounters } from './device-browser.mjs';
@@ -18,6 +19,7 @@ const report = {
   samples: [],
 };
 let browser;
+let originalFailure = null;
 try {
   ({ browser } = await deviceBrowser());
   report.browser = await browser.version();
@@ -156,11 +158,15 @@ try {
   assert.deepEqual(report.errors, []);
   report.status = 'passed';
 } catch (error) {
+  originalFailure = error;
   report.status = 'failed';
   report.failure = error.stack;
   throw error;
 } finally {
   report.elapsedMs = Date.now() - started;
-  await writeFile(`${out}/report.json`, JSON.stringify(report, null, 2));
-  await browser?.close();
+  await finishWithEvidence(
+    originalFailure,
+    () => writeFile(`${out}/report.json`, JSON.stringify(report, null, 2)),
+    async () => browser?.close(),
+  );
 }

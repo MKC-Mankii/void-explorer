@@ -1,3 +1,4 @@
+import { finishWithEvidence } from './failure-evidence.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { deviceBrowser } from './device-browser.mjs';
@@ -7,6 +8,7 @@ const report = { checks: [], errors: [], status: 'running' };
 const { browser } = await deviceBrowser();
 const url = process.env.VOID_URL ?? 'http://127.0.0.1:5173';
 const key = 'void-explorer-save-v1';
+let originalFailure = null;
 try {
   const seedPage = await browser.newPage();
   await seedPage.goto(`${url}/?test=1`);
@@ -86,10 +88,14 @@ try {
   report.status = 'passed';
   console.log('PASS', report.checks.join(', '));
 } catch (error) {
+  originalFailure = error;
   report.status = 'failed';
   report.failure = error.stack;
   throw error;
 } finally {
-  await writeFile(`${out}/report.json`, JSON.stringify(report, null, 2));
-  await browser.close();
+  await finishWithEvidence(
+    originalFailure,
+    () => writeFile(`${out}/report.json`, JSON.stringify(report, null, 2)),
+    async () => browser.close(),
+  );
 }
