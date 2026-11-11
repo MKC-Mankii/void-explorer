@@ -10,6 +10,9 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    # Match package-lock.json; preinstalled dependencies avoid the runner's failing APT DNS.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,7 +23,9 @@ jobs:
       - run: npm run format:check
       - run: npm test
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      - name: Verify preinstalled browser
+        run: |
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {existsSync} from "node:fs"; import {createRequire} from "node:module"; import {chromium} from "@playwright/test"; const require=createRequire(import.meta.url); assert.equal(require("@playwright/test/package.json").version,"1.64.1","Update the pinned CI image with the lockfile"); assert(existsSync(chromium.executablePath()),"Pinned Chromium must be preinstalled"); console.log(chromium.executablePath());'
       - name: Start development verification server
         run: |
           npm run dev -- --port 5173 > /tmp/void-vite.log 2>&1 &
@@ -36,6 +41,10 @@ jobs:
           npm run preview -- --port 4173 > /tmp/void-preview.log 2>&1 &
           node --input-type=module -e 'for(let i=0;i<50;i++){try{const r=await fetch("http://127.0.0.1:4173");if(r.ok)process.exit(0);}catch{}await new Promise(r=>setTimeout(r,200));}process.exit(1);'
       - run: npm run test:production
+      - run: npm run test:audio
+        env:
+          VOID_SOFTWARE: '1'
+          VOID_URL: http://127.0.0.1:4173/
       - run: npm run test:engineering-02
         env:
           VOID_URL: http://127.0.0.1:4173/
