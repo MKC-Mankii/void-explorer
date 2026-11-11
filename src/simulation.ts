@@ -57,6 +57,7 @@ export interface SaveData {
   speed?: number;
 }
 export class Simulation {
+  restoreIssues: string[] = [];
   system: SystemData = UNIVERSE[0];
   position = new Vector3(0, 700, 5200);
   rotation = new Quaternion();
@@ -575,10 +576,32 @@ export class Simulation {
     };
   }
   restore(value: unknown) {
+    this.restoreIssues = [];
     try {
-      const s = value as SaveData;
+      if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+      const s = { ...value } as SaveData;
       const modes: Mode[] = ['flight', 'landed', 'walking'];
-      if (!s || s.version !== 1 || !UNIVERSE[s.system] || !modes.includes(s.mode)) return false;
+      if (
+        s.version !== 1 ||
+        !Number.isInteger(s.system) ||
+        !UNIVERSE[s.system] ||
+        !modes.includes(s.mode)
+      )
+        return false;
+      // Earlier v1 saves predate velocity/target; missing flight ship transforms
+      // can also be reconstructed without moving the player.
+      for (const key of ['target', 'velocity', 'speed', 'playTime', 'discoveries'] as const)
+        if (s[key] === undefined) this.restoreIssues.push(`default:${key}`);
+      if (s.mode === 'flight') {
+        if (s.shipPosition === undefined) {
+          s.shipPosition = s.position;
+          this.restoreIssues.push('default:shipPosition');
+        }
+        if (s.shipRotation === undefined) {
+          s.shipRotation = s.rotation;
+          this.restoreIssues.push('default:shipRotation');
+        }
+      }
       const finite = (a: unknown, n: number): a is number[] =>
         Array.isArray(a) &&
         a.length === n &&
@@ -592,6 +615,27 @@ export class Simulation {
         return false;
       const planet = UNIVERSE[s.system].planets.find((p) => p.id === s.landedPlanet) ?? null;
       if (s.mode !== 'flight' && !planet) return false;
+      if (
+        new Quaternion().fromArray(s.rotation).lengthSq() < 1e-12 ||
+        new Quaternion().fromArray(s.shipRotation).lengthSq() < 1e-12
+      )
+        return false;
+      const position = new Vector3().fromArray(s.position);
+      const shipPosition = new Vector3().fromArray(s.shipPosition);
+      // The former finite-only check accepted the centre of a planet. A zero
+      // surface normal cannot be repaired by the collision integration.
+      for (const p of UNIVERSE[s.system].planets) {
+        if (position.distanceTo(p.position) < p.radius * 0.5) return false;
+      }
+      if (planet && s.mode !== 'flight') {
+        if (shipPosition.distanceTo(planet.position) < planet.radius * 0.5) return false;
+        if (
+          Math.abs(altitude(planet, position)) > 2 ||
+          Math.abs(altitude(planet, shipPosition) - 0.61) > 2
+        )
+          return false;
+        if (s.mode === 'landed' && position.distanceTo(shipPosition) > 2) return false;
+      }
       const validIds = new Set(UNIVERSE.flatMap((s) => s.planets.map((p) => p.id)));
       const discoveries: SaveData['discoveries'] = {};
       for (const [id, d] of Object.entries(s.discoveries ?? {})) {
@@ -602,7 +646,11 @@ export class Simulation {
             sample: d.sample === true,
           };
       }
+      if (JSON.stringify(discoveries) !== JSON.stringify(s.discoveries ?? {}))
+        this.restoreIssues.push('sanitize:discoveries');
       if (s.velocity !== undefined && !finite(s.velocity, 3)) return false;
+      if (s.velocity && new Vector3().fromArray(s.velocity).length() > FLIGHT.cruise * 2)
+        return false;
       if (s.speed !== undefined && (!Number.isFinite(s.speed) || Math.abs(s.speed) > FLIGHT.cruise))
         return false;
       if (
@@ -614,6 +662,12 @@ export class Simulation {
       this.target = s.target ?? 0;
       this.velocity.fromArray(s.velocity ?? [0, 0, 0]);
       this.speed = s.speed ?? 0;
+      if (s.mode !== 'flight') {
+        if (this.velocity.lengthSq() !== 0 || this.speed !== 0)
+          this.restoreIssues.push('clear:surface-motion');
+        this.velocity.set(0, 0, 0);
+        this.speed = 0;
+      }
       this.cancelGuidance();
       this.angularVelocity.set(0, 0, 0);
       this.position.fromArray(s.position);
@@ -624,6 +678,9 @@ export class Simulation {
       this.landedPlanet = planet;
       this.discoveries = discoveries;
       this.playTime = Number.isFinite(s.playTime) ? Math.max(0, s.playTime) : 0;
+      if (this.playTime !== s.playTime) this.restoreIssues.push('default:playTime');
+      this.transition = 0;
+      this.walkVertical = 0;
       return true;
     } catch {
       return false;

@@ -4,6 +4,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { Simulation, NO_INPUT, FlightInput } from './simulation';
+import { SaveStorage, SAVE_KEY } from './save-storage';
 import { AtmospherePass } from './atmosphere';
 import { SurfaceDetails } from './surface-details';
 import { Terrain } from './terrain';
@@ -17,8 +18,7 @@ import { AudioEngine } from './audio';
 import { Spacecraft } from './spacecraft';
 import { SHIP_LAYOUT } from './ship-layout';
 import './style.css';
-const SAVE_KEY = 'void-explorer-save-v1',
-  SETTINGS_KEY = 'void-explorer-settings-v1';
+const SETTINGS_KEY = 'void-explorer-settings-v1';
 interface Settings {
   quality: 'low' | 'medium' | 'high';
   sensitivity: number;
@@ -41,6 +41,7 @@ function writeStorage(key: string, value: unknown) {
 }
 class Game {
   readonly sim = new Simulation();
+  private readonly saveStorage = new SaveStorage();
   readonly scene = new T.Scene();
   readonly camera = new T.PerspectiveCamera(58, innerWidth / innerHeight, 0.04, 800000);
   readonly renderer: T.WebGLRenderer;
@@ -93,7 +94,7 @@ class Game {
       import.meta.env.DEV && new URLSearchParams(location.search).has('test')
         ? new URLSearchParams(location.search).get('scenario')
         : null;
-    const hasSave = fixture ? false : this.sim.restore(readStorage(SAVE_KEY));
+    const hasSave = fixture ? false : this.saveStorage.load(this.sim);
     if (fixture) this.diagnosticScenario = applyScenario(this.sim, fixture);
     const settings = readStorage(SETTINGS_KEY) as Partial<Settings> | null;
     if (settings && ['low', 'medium', 'high'].includes(settings.quality ?? ''))
@@ -133,6 +134,8 @@ class Game {
     this.scene.add(this.lighting.group);
     this.lighting.bindGroup(this.ship.group);
     this.ui = new UI(this.sim, hasSave);
+    if (this.saveStorage.issues.length)
+      this.ui.toast('存档已安全恢复或回退 · 原始数据将保留；存储受限时暂停保存');
     const startButton = document.querySelector<HTMLButtonElement>('#start-button')!;
     const startLabel = startButton.innerHTML;
     startButton.disabled = true;
@@ -700,7 +703,7 @@ class Game {
   }
   private save() {
     if (this.resetting || !this.ui?.started || this.diagnosticScenario !== 'player') return;
-    if (!writeStorage(SAVE_KEY, this.sim.save()) && !this.saveWarning) {
+    if (!this.saveStorage.save(this.sim) && !this.saveWarning) {
       this.saveWarning = true;
       this.ui.toast('浏览器存储不可用 · 本次可继续游戏，但无法保存进度');
     }
