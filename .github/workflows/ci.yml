@@ -10,6 +10,9 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    # Match package-lock.json; preinstalled dependencies avoid the runner's failing APT DNS.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,7 +23,9 @@ jobs:
       - run: npm run format:check
       - run: npm test
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      - name: Verify preinstalled browser
+        run: |
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {existsSync} from "node:fs"; import {createRequire} from "node:module"; import {chromium} from "@playwright/test"; const require=createRequire(import.meta.url); assert.equal(require("@playwright/test/package.json").version,"1.64.1","Update the pinned CI image with the lockfile"); assert(existsSync(chromium.executablePath()),"Pinned Chromium must be preinstalled"); console.log(chromium.executablePath());'
       - name: Start development verification server
         run: |
           npm run dev -- --port 5173 > /tmp/void-vite.log 2>&1 &
