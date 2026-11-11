@@ -1,0 +1,33 @@
+{
+  "stage": "第三阶段·产品精修01：开场与初始视觉",
+  "source_repository": "https://github.com/MKC-Mankii/void-explorer",
+  "source_branch": "feat/product-polish-01-opening",
+  "source_commit": "cd28f2fab337a71c94294a7e77f1e6834e621083",
+  "baseline_source_commit": "74bd18c50e061360fc657a104824494949b9aa36",
+  "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/10",
+  "preview_path": "/product-polish-01/",
+  "asset_version": "cd28f2fab337a71c94294a7e77f1e6834e621083",
+  "asset_manifest": "./asset-manifest.json",
+  "asset_manifest_sha256": "8a4f456e01b582cd10f21c2ccddaa4ef832d91606f92bdfb9cad007f18d17413",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/42984864194",
+  "pages_parent": "78f7ab6f4736fed4a4a27e212e9e63608d6b04b6",
+  "built_at": "2026-11-11T08:11:04.302868+00:00",
+  "prepared_at": "2026-11-11T08:26:35.516242+00:00",
+  "build": {
+    "command": "npm run build",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "base": "./"
+  },
+  "glb_file": "assets/aurora-DTA2SnWJ.glb",
+  "glb_sha256": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+  "new_external_assets": 0,
+  "preserved_paths": [
+    "/",
+    "/coherence/",
+    "/round1/",
+    "/round3/",
+    "/aurora/",
+    "/aurora-793eacd/"
+  ]
+}
