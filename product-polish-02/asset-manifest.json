@@ -1,15 +1,15 @@
 {
-  "source_commit": "c809aac02732cf408fec7758905084bea9d15d1f",
+  "source_commit": "0ecdb135c0bf2f2bbcdd682af19944f83417579e",
   "algorithm": "SHA-256",
   "files": {
     "assets/a-light-beyond-BSYDlI6D.mp3": "3159dbc3b61e5dd52d46981c5f8dd22309d30808fe2f83fd618930ebbafd1669",
     "assets/aurora-DTA2SnWJ.glb": "0c6dc992a4cce5b4f719af0624cc3e9e94966a34cf1d85d704d8d4509227d9d4",
+    "assets/index-CQq8E2fQ.js": "9ff3a81d53aefdee5c88204b74021f3235b46a2967320b86ce9101cd0eeb0b07",
     "assets/index-DZrIczq2.css": "a4536e3bfcb48df4282f225082856ef530f8378093a9e0455744517d729fa7b4",
-    "assets/index-PtS0er6D.js": "e0f365bd7a183aa996b3c5f8a60c41e5e083af1e61663da522e0244da43d78e8",
     "assets/three-core-BA5YDDnL.js": "5e3123ab31453dfae8f5f88c3497cdf14aaa40eb08a1f51da80c7242850a146b",
     "assets/three-effects-DcrR3-h8.js": "c73e93570cdc49ecad85ea80c3340ca4e9fd30cb22f92b119c9ddcf7e8c98229",
     "favicon.svg": "1703c717251a5fbe973222b7100130059cac3e3f648013dbf8c5ae6ec1296758",
-    "index.html": "85b3951e8a2ba618adafa1fddd8e855a91c5e6a896e91f0b99db50b4a44d1ea7",
+    "index.html": "5ca09536c0aa540507df95d6bcfc6a468a3c73ae10ade5488e5c95c06cedbc67",
     "third-party-notices.txt": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
   },
   "original_music": {

@@ -2,17 +2,18 @@
   "stage": "第三阶段·产品精修02：原创音乐与声音氛围",
   "source_repository": "https://github.com/MKC-Mankii/void-explorer",
   "source_branch": "feat/product-polish-02-original-audio",
-  "source_commit": "c809aac02732cf408fec7758905084bea9d15d1f",
+  "source_commit": "0ecdb135c0bf2f2bbcdd682af19944f83417579e",
   "baseline_source_commit": "cd28f2fab337a71c94294a7e77f1e6834e621083",
   "pull_request": "https://github.com/MKC-Mankii/void-explorer/pull/11",
   "preview_path": "/product-polish-02/",
-  "asset_version": "c809aac02732cf408fec7758905084bea9d15d1f",
+  "asset_version": "0ecdb135c0bf2f2bbcdd682af19944f83417579e",
   "asset_manifest": "./asset-manifest.json",
-  "asset_manifest_sha256": "dc1e6e2a3456750578aec89d18e044c429233f84502138e56b7577b34b1bed77",
-  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/43032002456",
-  "pages_parent": "cf8e1c738da47e86151b85dd6861909f5af0086f",
-  "built_at": "2026-11-11T13:44:55.363705+00:00",
-  "prepared_at": "2026-11-11T14:12:28.489077+00:00",
+  "asset_manifest_sha256": "c21cac8db2b979af88e5c0f765325defae747553e724cbf286badd9bdbdec9a6",
+  "verification_run": "https://github.com/MKC-Mankii/void-explorer/actions/runs/43041818564",
+  "pages_parent": "8726a080e4441f151ebe2a978e11ba5389a531dd",
+  "task_pages_baseline": "cf8e1c738da47e86151b85dd6861909f5af0086f",
+  "built_at": "2026-11-11T14:56:04.007355+00:00",
+  "prepared_at": "2026-11-11T15:12:59.247505+00:00",
   "build": {
     "command": "npm run build",
     "node": "24.19.0",
@@ -37,6 +38,11 @@
     "loudness_range_lu": 3.8,
     "external_samples": 0,
     "subjective_listening": "pending-human-review; no audio-perception tool available"
+  },
+  "listening_feedback": {
+    "user": "方向合适，继续验收",
+    "scope": "musical direction only; broader listening/device acceptance remains open",
+    "agent_listening": "not performed; no audio-perception tool"
   },
   "preserved_paths": [
     "/",
