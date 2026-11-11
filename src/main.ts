@@ -17,6 +17,7 @@ import { applyScenario, observeSimulation, scenarioNames } from './diagnostics';
 import { AudioEngine } from './audio';
 import { Spacecraft } from './spacecraft';
 import { SHIP_LAYOUT } from './ship-layout';
+import { Opening } from './opening';
 import './style.css';
 const SETTINGS_KEY = 'void-explorer-settings-v1';
 interface Settings {
@@ -49,6 +50,7 @@ class Game {
   readonly audio = new AudioEngine();
   readonly ship = new Spacecraft();
   readonly lighting = new CelestialLighting();
+  private readonly opening = new Opening();
   readonly atmosphere = new AtmospherePass();
   readonly sky = makeSky();
   readonly dust = new SpaceDust();
@@ -139,6 +141,7 @@ class Game {
     this.applyQuality();
     this.scene.add(this.sky, this.ship.group, this.dust.mesh, this.details.group);
     this.scene.add(this.lighting.group);
+    this.scene.add(this.opening.lights);
     this.lighting.bindGroup(this.ship.group);
     this.ui = new UI(this.sim, hasSave);
     if (this.saveStorage.issues.length)
@@ -265,6 +268,7 @@ class Game {
       schemaVersion: 2,
       ...observeSimulation(this.sim),
       scenario: this.diagnosticScenario,
+      opening: this.opening.observe(this.camera, this.ship.group),
       quality: this.settings.quality,
       cockpit: this.cockpit,
       targeting: {
@@ -774,6 +778,22 @@ class Game {
     };
   }
   private updateCamera(dt: number, snap = false) {
+    const opening =
+      !this.ui.started && this.diagnosticScenario === 'player' && !this.diagnosticShipView;
+    if (opening) {
+      this.opening.present(
+        this.camera,
+        this.ship.group,
+        this.ship.targetOffset,
+        this.sim.selected,
+        this.captureFrozen ? 0 : dt,
+      );
+      return;
+    }
+    if (this.opening.visible) {
+      this.opening.leave(this.camera);
+      snap = true;
+    }
     const s = this.sim;
     const walking = s.mode === 'walking';
     const target = s.position.clone();
@@ -855,15 +875,18 @@ class Game {
   }
   private sync(dt: number) {
     const s = this.sim;
+    const opening =
+      !this.ui.started && this.diagnosticScenario === 'player' && !this.diagnosticShipView;
     this.ship.group.position.copy(s.shipPosition);
     this.ship.group.quaternion.copy(s.shipRotation);
     this.ship.update(
       s.mode === 'landed' || s.mode === 'walking'
         ? 0
         : Math.max(0.12, Math.min(1, Math.abs(s.speed) / 320)),
-      this.captureFrozen ? 0 : this.elapsed,
-      s.mode,
-      this.captureFrozen ? 0 : dt,
+      this.captureFrozen || opening ? 0 : this.elapsed,
+      opening ? 'flight' : s.mode,
+      // Restore saved landing gear immediately when leaving the display pose.
+      this.captureFrozen || this.opening.visible !== opening ? 0 : dt,
     );
     if (s.mode === 'landed' || s.mode === 'walking') {
       this.ship.conformGear((point) => {

@@ -1754,3 +1754,84 @@ dt {
     margin-top: 10px;
   }
 }
+
+/* Opening presentation only. Gameplay HUD and modal actions retain their original styles. */
+#interface:not(.playing)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #050a12e8 0%, #050a1299 30%, transparent 56%),
+    linear-gradient(0deg, #050a12b3, transparent 25%, transparent 80%, #050a1233);
+}
+#interface:not(.playing) .location,
+#interface:not(.playing) .flight-status,
+#interface:not(.playing) .target-marker,
+#interface:not(.playing) .reticle,
+#interface:not(.playing) .offscreen {
+  visibility: hidden;
+}
+#interface:not(.playing) .welcome {
+  left: 7.3%;
+  top: 29%;
+  max-width: 43%;
+}
+#interface:not(.playing) .welcome h1 {
+  font-size: clamp(44px, 5.2vw, 78px);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  margin: 25px 0 26px;
+  text-wrap: nowrap;
+}
+#interface:not(.playing) .welcome p {
+  color: #aebec7;
+  font-size: 13px;
+  line-height: 2;
+}
+#interface:not(.playing) .welcome-caption {
+  color: #97adb8;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+#interface:not(.playing) .subtle {
+  color: #b2c4cc;
+}
+#interface:not(.playing) .idle-footer {
+  color: #aabcc5;
+  bottom: 35px;
+}
+#interface:not(.playing) #start-button:disabled {
+  opacity: 0.85;
+}
+@media (max-width: 1100px) {
+  #interface:not(.playing) .welcome {
+    left: 6%;
+  }
+  #interface:not(.playing) .welcome h1 {
+    font-size: 52px;
+  }
+  #interface:not(.playing) .welcome p {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+  #interface:not(.playing) .welcome-actions {
+    gap: 20px;
+  }
+}
+@media (max-height: 750px) {
+  #interface:not(.playing) .welcome {
+    top: 26%;
+  }
+  #interface:not(.playing) .welcome h1 {
+    margin: 20px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #interface:not(.playing) .welcome {
+    animation: none;
+  }
+  #interface:not(.playing) button {
+    transition: none;
+  }
+}
