@@ -41,6 +41,13 @@ jobs:
       - run: npm run test:aurora
       - run: npm run test:coherence
       - run: npm run test:coherence-journey
+      - run: npm run test:save-browser
+        env:
+          VOID_SOFTWARE: '1'
+      - run: npm run test:resource-soak
+        env:
+          VOID_SOFTWARE: '1'
+          VOID_SOAK_ROUNDS: '3'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

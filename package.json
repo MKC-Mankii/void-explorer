@@ -19,7 +19,12 @@
     "test:aurora": "node tests/aurora.mjs",
     "test:right-click": "node tests/right-click.mjs",
     "test:coherence": "node tests/coherence.mjs",
-    "test:coherence-journey": "node tests/coherence-journey.mjs"
+    "test:coherence-journey": "node tests/coherence-journey.mjs",
+    "test:performance": "node tests/performance.mjs",
+    "test:resource-soak": "node tests/resource-soak.mjs",
+    "test:save-browser": "node tests/save-browser.mjs",
+    "test:device": "node tests/device-compatibility.mjs",
+    "record:exploration": "node tests/device-observer.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

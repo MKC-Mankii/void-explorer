@@ -64,7 +64,14 @@ class Game {
   private diagnosticScenario: string = 'player';
   private captureFrozen = false;
   private diagnosticShipView: string | null = null;
-  private performanceSamples: { frameMs: number; updateMs: number; submissionMs: number }[] = [];
+  private performanceSamples: {
+    frameMs: number;
+    updateMs: number;
+    simulationMs: number;
+    sceneMs: number;
+    submissionMs: number;
+  }[] = [];
+  private sampleLimit = 60;
   private readonly diagnosticsEnabled =
     import.meta.env.DEV && new URLSearchParams(location.search).has('test');
   private renderedFrames = 0;
@@ -175,6 +182,17 @@ class Game {
       // Observations are copies. Test scripts cannot reach the live game or mutate its vectors.
       (window as unknown as { __VOID__: unknown }).__VOID__ = {
         snapshot: () => this.snapshot(),
+        // Read-only bounded timing capture. Explicit fixtures remain separate.
+        beginSampling: () => {
+          this.sampleLimit = 12000;
+          this.performanceSamples = [];
+        },
+        endSampling: () => {
+          const samples = this.performanceSamples.map((s) => ({ ...s }));
+          this.sampleLimit = 60;
+          this.performanceSamples = this.performanceSamples.slice(-60);
+          return samples;
+        },
         scenarios: [...scenarioNames],
         shipView: (view: string | null) => {
           if (view !== null && !['top', 'front', 'port', 'rear', 'quarter'].includes(view))
@@ -232,6 +250,15 @@ class Game {
     }
   }
   private snapshot() {
+    const gl = this.renderer.getContext();
+    const debug = gl.getExtension('WEBGL_debug_renderer_info');
+    const materials = new Set<T.Material>();
+    let sceneObjects = 0;
+    this.scene.traverse((o) => {
+      sceneObjects++;
+      if (o instanceof T.Mesh)
+        for (const m of Array.isArray(o.material) ? o.material : [o.material]) materials.add(m);
+    });
     const shipProjection = this.ship.group.position.clone().project(this.camera);
     const asset = this.ship.observe();
     return {
@@ -300,6 +327,18 @@ class Game {
           details: this.details.diagnostics,
         },
         backend: 'WebGL2',
+        device: {
+          renderer: debug
+            ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
+            : gl.getParameter(gl.RENDERER),
+          vendor: debug ? gl.getParameter(debug.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR),
+          extensions: gl.getSupportedExtensions(),
+          userAgent: navigator.userAgent,
+          dpr: devicePixelRatio,
+        },
+        programs: this.renderer.info.programs?.length ?? null,
+        sceneObjects,
+        materials: materials.size,
         pixelRatio: this.renderer.getPixelRatio(),
         viewport: [innerWidth, innerHeight],
         fov: this.camera.fov,
@@ -911,7 +950,9 @@ class Game {
     } else {
       this.mouse.set(0, 0);
     }
+    const simulationEnd = this.diagnosticsEnabled ? performance.now() : 0;
     this.sync(dt);
+    const sceneEnd = this.diagnosticsEnabled ? performance.now() : 0;
     this.audio.update(this.sim.speed, active, this.sim.mode === 'walking');
     this.uiTimer += raw;
     this.saveTimer += active ? dt : 0;
@@ -938,9 +979,11 @@ class Game {
       this.performanceSamples.push({
         frameMs: raw * 1000,
         updateMs: submitStart - updateStart,
+        simulationMs: simulationEnd - updateStart,
+        sceneMs: sceneEnd - simulationEnd,
         submissionMs: performance.now() - submitStart,
       });
-      if (this.performanceSamples.length > 60) this.performanceSamples.shift();
+      if (this.performanceSamples.length > this.sampleLimit) this.performanceSamples.shift();
     }
     this.renderedFrames++;
     this.renderedScene = this.sceneGeneration;
