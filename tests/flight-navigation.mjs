@@ -2,6 +2,8 @@ import { chromium } from '@playwright/test';
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import { assertAlignmentBound } from './navigation-observation.mjs';
+import { failWithEvidence } from './failure-evidence.mjs';
 
 const base = process.env.VOID_URL ?? 'http://127.0.0.1:5173';
 const output = 'test-results/round2';
@@ -53,6 +55,8 @@ const screenshot = async (name) => {
 };
 let tracing = false,
   traceTask = Promise.resolve();
+let selectionBound = null,
+  failed = false;
 try {
   await page.goto(`${base}/?test=1`);
   await page.waitForFunction(() => window.__VOID__?.snapshot().rendering.ready);
@@ -70,12 +74,15 @@ try {
   check('Right mouse locks the actual planet under the camera reticle');
   await press('KeyM');
   actions.push({ type: 'star-map', target: 'PYRA' });
-  const beforeMap = await snapshot();
+  const guideTurnRate = await page.evaluate(
+    async () => (await import('/src/navigation.ts')).FLIGHT.guideTurnRate,
+  );
+  const beforeMap = await observe('map-before');
   await page.locator('[data-action=navigate][data-value="1"]').click();
   const chosen = await observe('map-selected');
   assert.equal(chosen.target, 1);
   assert.equal(chosen.navigation.guidance, 'align');
-  assert(chosen.rotation.every((v, i) => Math.abs(v - beforeMap.rotation[i]) < 0.08));
+  selectionBound = assertAlignmentBound(beforeMap, chosen, guideTurnRate);
   await press('KeyF');
   assert.equal((await snapshot()).score, 0);
   assert.match(await page.locator('#notification').textContent(), /PYRA/);
@@ -252,6 +259,7 @@ try {
         checks,
         actions,
         observations,
+        selectionBound,
         errors,
       },
       null,
@@ -259,18 +267,27 @@ try {
     ),
   );
 } catch (error) {
+  failed = true;
   tracing = false;
   await traceTask.catch(() => {});
-  await page.screenshot({ path: `${output}/navigation-failure.png` });
-  await writeFile(
-    `${output}/navigation-failure.json`,
-    JSON.stringify(
-      { error: String(error), checks, actions, observations, final: await snapshot(), errors },
-      null,
-      2,
-    ),
-  );
-  throw error;
+  await failWithEvidence(error, {
+    context: { actions, observations, selectionBound },
+    checks,
+    errors,
+    snapshot,
+    screenshot: async () => {
+      const path = `${output}/navigation-failure.png`;
+      await page.screenshot({ path, timeout: 5000 });
+      return path;
+    },
+    writeReport: (report) =>
+      writeFile(`${output}/navigation-failure.json`, JSON.stringify(report, null, 2)),
+  });
 } finally {
-  await browser.close();
+  try {
+    await browser.close();
+  } catch (error) {
+    console.error('Additional browser cleanup failure:', error);
+    if (!failed) throw error;
+  }
 }
