@@ -36,8 +36,8 @@ try {
   async function settle(frames = 12) {
     const frame = await page.evaluate(() => window.__VOID__.snapshot().rendering.frames);
     await page.waitForFunction(
-      (f) => window.__VOID__.snapshot().rendering.frames >= f + frames,
-      frame,
+      (targetFrame) => window.__VOID__.snapshot().rendering.frames >= targetFrame,
+      frame + frames,
       { timeout: 120000 },
     );
   }
