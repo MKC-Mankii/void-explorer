@@ -80,6 +80,7 @@ class Game {
   private frameCount = 0;
   private frameTime = 0;
   private jumping = false;
+  private resetting = false;
   private saveWarning = false;
   private lockSuppressedUntil = 0;
   private lockAttempts = 0;
@@ -642,6 +643,8 @@ class Game {
         break;
       case 'reset':
         if (this.ui.resetConfirm()) {
+          // Reload also fires leave-page saves. Never resurrect progress after an explicit reset.
+          this.resetting = true;
           try {
             localStorage.removeItem(SAVE_KEY);
           } catch {}
@@ -696,7 +699,7 @@ class Game {
     }, 1900);
   }
   private save() {
-    if (!this.ui?.started || this.diagnosticScenario !== 'player') return;
+    if (this.resetting || !this.ui?.started || this.diagnosticScenario !== 'player') return;
     if (!writeStorage(SAVE_KEY, this.sim.save()) && !this.saveWarning) {
       this.saveWarning = true;
       this.ui.toast('浏览器存储不可用 · 本次可继续游戏，但无法保存进度');

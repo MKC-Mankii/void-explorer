@@ -1,0 +1,336 @@
+{
+  "stage": "工程优化02",
+  "baseline": {
+    "baseline_sha": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+    "branch": "fix/engineering-02",
+    "tested_code_sha": "cd8207ae9534d52e5e14d483a9162b4ceac7c435",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "graphics": "Linux Chromium / forced ANGLE SwiftShader; not hardware GPU acceptance",
+    "initial_worktree": "clean; work@d6948844b1de26b1237cce3ceaf753b9dd964775",
+    "dependency_lock_blob": "ff5b4c380efb42395a4e7c1baa3b7444f66c7133"
+  },
+  "scope": ["EO-01", "EO-02", "EO-03", "EO-04"],
+  "runs": [
+    {
+      "name": "eo01-before",
+      "command": ["node", "tests/engineering-02.mjs"],
+      "exit": 1,
+      "seconds": 39.53,
+      "purpose": "修复前预期失败，用于证明缺陷"
+    },
+    {
+      "name": "eo01-after",
+      "command": ["node", "tests/engineering-02.mjs"],
+      "exit": 0,
+      "seconds": 41.29
+    },
+    {
+      "name": "eo02-before",
+      "command": ["node", "tests/engineering-02.mjs"],
+      "exit": 1,
+      "seconds": 20.53,
+      "environment_overrides": {
+        "VOID_ENGINEERING_CASE": "contacts"
+      },
+      "purpose": "修复前预期失败，用于证明缺陷"
+    },
+    {
+      "name": "eo02-after",
+      "command": ["node", "tests/engineering-02.mjs"],
+      "exit": 0,
+      "seconds": 28.74,
+      "environment_overrides": {
+        "VOID_ENGINEERING_CASE": "contacts"
+      }
+    },
+    {
+      "name": "eo03-before",
+      "command": ["npm", "test", "--", "tests/surface-details.test.ts"],
+      "exit": 1,
+      "seconds": 1.77,
+      "purpose": "修复前预期失败，用于证明缺陷"
+    },
+    {
+      "name": "eo03-after",
+      "command": ["npm", "test", "--", "tests/surface-details.test.ts"],
+      "exit": 0,
+      "seconds": 1.75
+    },
+    {
+      "name": "eo04-after",
+      "command": ["npm", "test", "--", "tests/failure-evidence.test.js"],
+      "exit": 1,
+      "seconds": 1.53,
+      "note": "默认沙箱 EPERM：2 项通过、3 项子进程测试失败；未跳过，允许启动子进程后重跑通过"
+    },
+    {
+      "name": "eo04-after-permitted",
+      "command": ["npm", "test", "--", "tests/failure-evidence.test.js"],
+      "exit": 0,
+      "seconds": 1.32,
+      "passed": 5,
+      "count_unit": "单元测试"
+    },
+    {
+      "name": "full-format",
+      "command": ["npm", "run", "format:check"],
+      "exit": 0,
+      "seconds": 7.06
+    },
+    {
+      "name": "full-unit",
+      "command": ["npm", "test"],
+      "exit": 0,
+      "seconds": 3.55,
+      "passed": 48,
+      "count_unit": "单元测试"
+    },
+    {
+      "name": "full-build",
+      "command": ["npm", "run", "build"],
+      "exit": 0,
+      "seconds": 5.05
+    },
+    {
+      "name": "full-engineering-dev",
+      "command": ["npm", "run", "test:engineering-02"],
+      "exit": 0,
+      "seconds": 47.53,
+      "passed": 4,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-e2e",
+      "command": ["npm", "run", "test:e2e"],
+      "exit": 0,
+      "seconds": 69.69,
+      "passed": 15,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-navigation",
+      "command": ["npm", "run", "test:navigation"],
+      "exit": 0,
+      "seconds": 74.86,
+      "passed": 16,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-right-click",
+      "command": ["npm", "run", "test:right-click"],
+      "exit": 0,
+      "seconds": 18.76,
+      "passed": 10,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-production",
+      "command": ["npm", "run", "test:production"],
+      "exit": 0,
+      "seconds": 13.38,
+      "passed": 11,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-engineering-production",
+      "command": ["npm", "run", "test:engineering-02"],
+      "exit": 0,
+      "seconds": 40.07,
+      "passed": 4,
+      "count_unit": "浏览器组",
+      "environment_overrides": {
+        "VOID_URL": "http://127.0.0.1:4173/"
+      }
+    },
+    {
+      "name": "full-rendering",
+      "command": ["npm", "run", "test:rendering"],
+      "exit": 0,
+      "seconds": 96.75,
+      "passed": 8,
+      "count_unit": "固定场景"
+    },
+    {
+      "name": "full-render-flight",
+      "command": ["npm", "run", "test:render-flight"],
+      "exit": 0,
+      "seconds": 51.46,
+      "passed": 1,
+      "count_unit": "真实时间旅程"
+    },
+    {
+      "name": "full-aurora",
+      "command": ["npm", "run", "test:aurora"],
+      "exit": 0,
+      "seconds": 144.3,
+      "passed": 6,
+      "count_unit": "浏览器组"
+    },
+    {
+      "name": "full-coherence",
+      "command": ["npm", "run", "test:coherence"],
+      "exit": 0,
+      "seconds": 256.29,
+      "passed": 10,
+      "count_unit": "固定场景及边界阈值"
+    },
+    {
+      "name": "full-coherence-journey",
+      "command": ["npm", "run", "test:coherence-journey"],
+      "exit": 0,
+      "seconds": 96.14,
+      "passed": 1,
+      "count_unit": "连续旅程／海岸／画质／resize 套件"
+    }
+  ],
+  "normal_regression_failures": 0,
+  "unit_tests_skipped": 0,
+  "browser_skip_count": "脚本没有独立跳过统计；未跳过任何套件",
+  "before_proofs": {
+    "EO-01": "扫描后普通刷新保留进度；确认重置后存档仍有旧扫描记录，断言失败",
+    "EO-02": "实际跃迁后目标面板已变化；文字和 aria-label 仍为旧星系，断言失败",
+    "EO-03": "3 项释放测试均失败；instance 释放事件为 0，geometry/material 为 1",
+    "EO-04": {
+      "method": "原 catch 顺序的可控等效失败注入；不是一次正常玩法失败",
+      "originalPreserved": false,
+      "surfaced": "EO04_SCREENSHOT_FAILURE",
+      "exit": 1,
+      "seconds": null
+    }
+  },
+  "visual_regression": {
+    "baseline_source_sha": "4b35a4cd9d307533b90c43ad674b44401a5e2e26",
+    "baseline_capture": "工程优化01本地固定场景截图",
+    "current_code_sha": "cd8207a",
+    "method": "SHA-256 comparison of PNG bytes, same frozen scenes / browser / viewport / quality",
+    "images": [
+      {
+        "path": "round3/after/render-atmosphere.png",
+        "baseline_sha256": "ebd761051f8cdc0cb661bec4f353a4939a9234429cf0fef3043aad0916e141fc",
+        "current_sha256": "ebd761051f8cdc0cb661bec4f353a4939a9234429cf0fef3043aad0916e141fc",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-cruise.png",
+        "baseline_sha256": "3fc1c47dfbb04d1ea0eaaa291f57c75bc75bd30d68d647e940c1d656cec7852b",
+        "current_sha256": "3fc1c47dfbb04d1ea0eaaa291f57c75bc75bd30d68d647e940c1d656cec7852b",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-desert.png",
+        "baseline_sha256": "0d4185241bcf4c971f6bdd759cd4dc9b5e50594c847b8613d887255b50935e20",
+        "current_sha256": "0d4185241bcf4c971f6bdd759cd4dc9b5e50594c847b8613d887255b50935e20",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-near.png",
+        "baseline_sha256": "9e054eb824cc858bce4dd5f6d6c4774368bf6151d90330af4fda0871084bdbb2",
+        "current_sha256": "9e054eb824cc858bce4dd5f6d6c4774368bf6151d90330af4fda0871084bdbb2",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-night.png",
+        "baseline_sha256": "6865f250d7e7fcee3869a4a698da6797d0fdeb79714b970be993031b6731cf7e",
+        "current_sha256": "6865f250d7e7fcee3869a4a698da6797d0fdeb79714b970be993031b6731cf7e",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-orbit.png",
+        "baseline_sha256": "af829b1f51ec8156468fb6675c03fd2c9daa1a185f6c20964800788dfab1b371",
+        "current_sha256": "af829b1f51ec8156468fb6675c03fd2c9daa1a185f6c20964800788dfab1b371",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-surface.png",
+        "baseline_sha256": "64d72cf8ec55683c9c419c3c20089225900a0a22d4a5d1fe4b1113e1ded9e6d0",
+        "current_sha256": "64d72cf8ec55683c9c419c3c20089225900a0a22d4a5d1fe4b1113e1ded9e6d0",
+        "equal": true
+      },
+      {
+        "path": "round3/after/render-terminator.png",
+        "baseline_sha256": "558ff2c6d86e30578f8ed6068ffe7a49a19d038849190bfbde8dc830a980b351",
+        "current_sha256": "558ff2c6d86e30578f8ed6068ffe7a49a19d038849190bfbde8dc830a980b351",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-air-in.png",
+        "baseline_sha256": "7b96dbd05d8c0145ddb888762f95e99f71ef2108d50ce119cf6f3a92f5a30b1a",
+        "current_sha256": "7b96dbd05d8c0145ddb888762f95e99f71ef2108d50ce119cf6f3a92f5a30b1a",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-air-out.png",
+        "baseline_sha256": "413fb8630d511b54cfcc6b2ae99472112772742b31e588149b2ba694ff790b8e",
+        "current_sha256": "413fb8630d511b54cfcc6b2ae99472112772742b31e588149b2ba694ff790b8e",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-cloud-in.png",
+        "baseline_sha256": "431f2507954acd3e997a9eed18a2082310e778233f668d6443d85fd0d3a21adf",
+        "current_sha256": "431f2507954acd3e997a9eed18a2082310e778233f668d6443d85fd0d3a21adf",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-cloud-out.png",
+        "baseline_sha256": "c784a0e376030b8d9575761cb06f6ba9cb18bef78f0cffb7eae257928c9469f4",
+        "current_sha256": "c784a0e376030b8d9575761cb06f6ba9cb18bef78f0cffb7eae257928c9469f4",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-coast.png",
+        "baseline_sha256": "1adc8aaef533b960d0063512f795ea1d8417a76b317ae6208a47807fa167f550",
+        "current_sha256": "1adc8aaef533b960d0063512f795ea1d8417a76b317ae6208a47807fa167f550",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-dry.png",
+        "baseline_sha256": "f9485f863cccbf6329b938e080c0fca988b4a27e1712666fa60524849cfcc53e",
+        "current_sha256": "f9485f863cccbf6329b938e080c0fca988b4a27e1712666fa60524849cfcc53e",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-ground.png",
+        "baseline_sha256": "c74e2edb23f3e87480206ea295356e8af21c8522bed557079e87500da7a3db51",
+        "current_sha256": "c74e2edb23f3e87480206ea295356e8af21c8522bed557079e87500da7a3db51",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-night.png",
+        "baseline_sha256": "c671c734d2057821cb8f968ddd3d62e0d7edc3857a11aa178b632e3c950ca9ff",
+        "current_sha256": "c671c734d2057821cb8f968ddd3d62e0d7edc3857a11aa178b632e3c950ca9ff",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-orbit.png",
+        "baseline_sha256": "56d208b98c25f3279fd966ea3c4d35f4f8b769931a4db3f6f5216269f36ac19c",
+        "current_sha256": "56d208b98c25f3279fd966ea3c4d35f4f8b769931a4db3f6f5216269f36ac19c",
+        "equal": true
+      },
+      {
+        "path": "coherence/after/coherence-water.png",
+        "baseline_sha256": "2c3e05f6ff2faaf8196f5f55521ad2937e9302a5b246b3d110636f81c4b7f71f",
+        "current_sha256": "2c3e05f6ff2faaf8196f5f55521ad2937e9302a5b246b3d110636f81c4b7f71f",
+        "equal": true
+      }
+    ]
+  },
+  "boundary_delta": {
+    "region": [70, 555, 930, 95],
+    "meanAbsoluteRgb": 2.76032069420864,
+    "scale": 255
+  },
+  "journey": {
+    "trace_frames": 67,
+    "all_ready": true,
+    "all_player": true,
+    "errors": []
+  },
+  "limits": [
+    "未测真实 GPU、Firefox、Safari 或长期显存曲线",
+    "释放路径事件测试不能证明显存泄漏已消除",
+    "未部署；未处理 EO-05～EO-07"
+  ]
+}
